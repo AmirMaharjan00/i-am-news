@@ -6,12 +6,15 @@
      * @see IAN\Customizer\Base
      * @since 1.0.0
      */
-    use IAN\Customizer;
-    if( ! class_exists( 'Box_Shadow' ) ) :
+    namespace IAN\Customizer\Controls;
+
+    use IAN\Customizer\Base as Base;
+    
+    if( ! class_exists( __NAMESPACE__. '\\Box_Shadow' ) ) :
         /**
          * Box Shadow Class
          */
-        class Box_Shadow extends IAN\Customizer\Base {
+        class Box_Shadow extends Base {
             /**
              * Type of control
              * 

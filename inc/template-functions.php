@@ -45,9 +45,14 @@ add_action( 'customize_controls_enqueue_scripts', function(){
 	$directory = get_template_directory_uri();
 	wp_enqueue_script( 
 		'i-am-news-customizer-controls',
-		$directory . '/inc/customizer/controller/index.js',
-		[ 'customize-controls', 'wp-element', 'wp-components' ],
+		$directory . '/inc/customizer/controller/build/index.js',
+		[ 'customize-controls', 'wp-element', 'wp-components', 'jquery' ],
 		_S_VERSION,
 		true
 	);
 });
+
+/**
+ * Customizer Defaults
+ */
+require_once get_template_directory() . '/inc/customizer/theme-starter.php';

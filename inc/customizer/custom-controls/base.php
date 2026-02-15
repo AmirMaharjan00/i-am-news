@@ -8,6 +8,7 @@
      * @since 1.0.0
      */
     namespace IAN\Customizer;
+    
     if( ! class_exists( __NAMESPACE__ . '\\Base' ) ) :
         /**
          * Base Class
