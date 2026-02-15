@@ -14,7 +14,7 @@ export const IanControlHead = ( props ) => {
     return <div className="control-head">
         { label && <h2 className="title">{ label }</h2> }
         { 
-            description && <Tooltip className="description" text={ description } delay={ 300 }>
+            description && <Tooltip className="description" text={ description } delay={ 300 } placement="top">
                 <Dashicon icon = "editor-help" className = "desc-icon" />
             </Tooltip>
         }

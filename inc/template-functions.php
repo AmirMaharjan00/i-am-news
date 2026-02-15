@@ -43,6 +43,17 @@ add_action( 'wp_head', 'i_am_news_pingback_header' );
  */
 add_action( 'customize_controls_enqueue_scripts', function(){
 	$directory = get_template_directory_uri();
+
+	// Enqueue css
+	wp_enqueue_style(
+		'i-am-news-customizer-controls',
+		$directory . '/inc/customizer/assets/customizer-controls.css',
+		[],
+		_S_VERSION,
+		false
+	);
+
+	// Enqueue js
 	wp_enqueue_script( 
 		'i-am-news-customizer-controls',
 		$directory . '/inc/customizer/controller/build/index.js',

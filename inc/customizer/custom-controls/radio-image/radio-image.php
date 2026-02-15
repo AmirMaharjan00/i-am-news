@@ -20,5 +20,22 @@
              * @since 1.0.0
              */
             public $type = 'radio-image';
+
+            /**
+             * Control fields
+             * 
+             * @since 1.0.0
+             */
+            public $fields = [];
+
+            /**
+             * json
+             * 
+             * @since 1.0.0
+             */
+            public function to_json() {
+                parent::to_json();
+                $this->json[ 'fields' ] = $this->fields;
+            }
         }
     endif;

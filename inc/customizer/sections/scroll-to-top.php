@@ -61,7 +61,19 @@
                     'scroll_to_top_layouts' =>  [
                         'label' =>  esc_html__( 'Layouts', 'i-am-news' ),
                         'type'  =>  'radio-image',
-                        'section'   =>  $this->section
+                        'section'   =>  $this->section,
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'Layout 1', 'i-am-news' ),
+                                'url'   =>  get_template_directory_uri() . '/inc/customizer/assets/images/scroll-to-top-one.png',
+                                'value' =>  'one'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Layout 2', 'i-am-news' ),
+                                'url'   =>  get_template_directory_uri() . '/inc/customizer/assets/images/scroll-to-top-one.png',
+                                'value' =>  'two'
+                            ]
+                        ]
                     ],
                     'scroll_to_top_box_shadow' =>  [
                         'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),

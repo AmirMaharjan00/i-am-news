@@ -1,0 +1,17 @@
+/*
+    1.0 Radio Image
+*/
+
+/*
+=========================
+MARK: 1.0 Radio Image
+=========================
+*/
+    .customize-control-radio-image .control-content .components-radio-control__group-wrapper {
+        display: grid;
+        grid-template-columns: repeat( 2, 1fr );
+        gap: 15px;
+    }
+    .customize-control-radio-image .control-content .components-radio-control__group-wrapper input[type="radio"]{
+        display: none;
+    }
