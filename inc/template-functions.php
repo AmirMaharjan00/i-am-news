@@ -35,3 +35,19 @@ function i_am_news_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'i_am_news_pingback_header' );
+
+/**
+ * Customizer controls enqueue scripts
+ * 
+ * @since 1.0.0
+ */
+add_action( 'customize_controls_enqueue_scripts', function(){
+	$directory = get_template_directory_uri();
+	wp_enqueue_script( 
+		'i-am-news-customizer-controls',
+		$directory . '/inc/customizer/controller/index.js',
+		[ 'customize-controls', 'wp-element', 'wp-components' ],
+		_S_VERSION,
+		true
+	);
+});
