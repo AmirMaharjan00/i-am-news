@@ -11,7 +11,7 @@ const { useState, useEffect } = wp.element,
 export const IanControlHead = ( props ) => {
     const { label, description } = props
 
-    return <div className="control-head">
+    return ( label || description ) && <div className="control-head">
         { label && <h2 className="title">{ label }</h2> }
         { 
             description && <Tooltip className="description" text={ description } delay={ 300 } placement="top">

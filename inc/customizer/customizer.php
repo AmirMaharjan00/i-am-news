@@ -30,6 +30,11 @@ function i_am_news_customize_register( $wp_customize ) {
 	 * Box Shadow Control
 	*/
 	require_once get_template_directory() . '/inc/customizer/custom-controls/box-shadow/box-shadow.php';
+	
+	/**
+	 * Section Tab Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/section-tab/section-tab.php';
 
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(

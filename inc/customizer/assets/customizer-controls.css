@@ -1,5 +1,6 @@
 /*
     1.0 Radio Image
+    2.0 Section Tab
 */
 
 /*
@@ -12,6 +13,30 @@ MARK: 1.0 Radio Image
         grid-template-columns: repeat( 2, 1fr );
         gap: 15px;
     }
-    .customize-control-radio-image .control-content .components-radio-control__group-wrapper input[type="radio"]{
+
+    .customize-control-radio-image .control-content .components-radio-control__group-wrapper input[type="radio"] {
         display: none;
+    }
+
+/*
+=========================
+MARK: 2.0 Section Tab
+=========================
+*/
+    .customize-control-section-tab .control-content .components-radio-control__group-wrapper {
+        display: grid;
+        grid-template-columns: repeat( 2, 1fr );
+        background: #fff;
+    }
+    
+    .customize-control-section-tab .control-content .components-radio-control__group-wrapper input[type="radio"] {
+        display: none;
+    }
+
+    .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab {
+        text-align: center;
+        padding: 10px;
+    }
+    .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab.active {
+        background: #7171711a;
     }

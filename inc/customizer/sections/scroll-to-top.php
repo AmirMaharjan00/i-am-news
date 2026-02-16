@@ -43,7 +43,9 @@
              */
             public function register_controls() {
                 $this->add_section( 'scroll_to_top_section' );
+                $this->add_control( 'scroll_to_top_section_tab' );
                 $this->add_control( 'scroll_to_top_layouts' );
+                $this->add_control( 'scroll_to_top_label' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
             }
 
@@ -55,9 +57,19 @@
              */
             public function get_settings( $id = '' ) {
                 $settings = [
+                    'scroll_to_top_section_tab' =>  [
+                        'sanitize_function' =>  'sanitize_text_field',
+                        'postMessage'   =>  'refresh',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
                     'scroll_to_top_layouts' =>  [
                         'sanitize_function' =>  'sanitize_text_field',
                         'postMessage'   =>  'refresh',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_label' =>  [
+                        'sanitize_function' =>  'sanitize_text_field',
+                        'postMessage'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_box_shadow' =>  [
@@ -103,6 +115,25 @@
                         'type'  =>  'box-shadow',
                         'section'   =>  $this->section
                     ],
+                    'scroll_to_top_section_tab' =>  [
+                        'type'  =>  'section-tab',
+                        'section'   =>  $this->section,
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'General', 'i-am-news' ),
+                                'value' =>  'general'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Design', 'i-am-news' ),
+                                'value' =>  'design'
+                            ]
+                        ]
+                    ],
+                    'scroll_to_top_label' =>  [
+                        'label' =>  esc_html__( 'Label', 'i-am-news' ),
+                        'type'  =>  'text',
+                        'section'   =>  $this->section
+                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -115,7 +146,9 @@
              */
             public function set_defaults() {
                 $this->defaults = [
+                    'scroll_to_top_section_tab' =>  'general',
                     'scroll_to_top_layouts' =>  'one',
+                    'scroll_to_top_label' =>  esc_html__( 'Go to Top', 'i-am-news' ),
                     'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
                         'offsetx'   =>  10,
                         'offsety'   =>  10

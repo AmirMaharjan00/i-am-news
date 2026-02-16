@@ -6,6 +6,7 @@ const { controlConstructor, Control, section } = wp.customize,
 
 import { BoxShadowComponent } from './components/box-shadow'
 import { RadioImageComponent } from './components/radio-image'
+import { SectionTabComponent } from './components/section-tab'
 
 /**
  * MARK: Box Shadow
@@ -95,6 +96,58 @@ controlConstructor[ 'radio-image' ] = Control.extend({
         } else {
             renderRadioImage()
         }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Section Tab
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'section-tab' ] = Control.extend({
+
+    ready: function () {
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root )
+
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderSectionTab = ( instance ) => {
+            if ( rendered ) return;
+            rendered = true;
+            const props = { 
+                ...params,
+                setting,
+                controls: instance.controls()
+            }
+            reactRoot.render( <SectionTabComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        section( _thisSection(), function( instance ){
+            if( _thisSection ) {
+                section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                    if( isExpanded ) renderSectionTab( instance )
+                } );
+            } else {
+                renderSectionTab( instance )
+            }
+        } )
 
         /**
          * Unbind if the controls container <li> tag is remoed

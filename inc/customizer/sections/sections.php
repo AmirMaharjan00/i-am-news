@@ -9,6 +9,7 @@
 
     use IAN\Customizer\Controls\Box_Shadow as Box_Shadow;
     use IAN\Customizer\Controls\Radio_Image as Radio_Image;
+    use IAN\Customizer\Controls\Section_Tab as Section_Tab;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
 
     interface Section_Interface {        
@@ -133,7 +134,8 @@
             public function set_custom_controls() {
                 $this->custom_controls = [
                     'box-shadow'    =>  [ $this, 'add_box_shadow' ],
-                    'radio-image'    =>  [ $this, 'add_radio_image' ]
+                    'radio-image'    =>  [ $this, 'add_radio_image' ],
+                    'section-tab'    =>  [ $this, 'add_section_tab' ],
                 ];
             }
 
@@ -225,6 +227,15 @@
              */
             public function add_radio_image( $id, $control ) {
                 $this->manager->add_control( new Radio_Image( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add section tab
+             * 
+             * @since 1.0.0
+             */
+            public function add_section_tab( $id, $control ) {
+                $this->manager->add_control( new Section_Tab( $this->manager, $id, $control ) );
             }
 
             /**
