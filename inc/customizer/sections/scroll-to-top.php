@@ -7,12 +7,34 @@
      */
     namespace IAN\Customizer\Section;
     use IAN\Customizer as Customizer_Defaults;
+    use function esc_html__;
+    use function get_template_directory_uri;
 
     if( ! class_exists( __NAMESPACE__ . '\\Scroll_To_Top' ) ) :
         /**
          * Scroll to top
          */
         class Scroll_To_Top extends Section {
+            /**
+             * Instance of class
+             * 
+             * @since 1.0.0
+             * @var IAN\Customizer\Section\Scroll_To_Top
+             */
+            private static $instance = null;
+
+            /**
+             * Get instance of class
+             * 
+             * @since 1.0.0
+             * @return IAN\Customizer\Section\Scroll_To_Top
+             */
+            public static function get_instance() {
+                if( self::$instance === null ) self::$instance = new self();
+
+                return self::$instance;
+            }
+
             /**
              * Register controls
              * 
@@ -101,5 +123,5 @@
                 ];
             }
         }
-        new Scroll_To_Top();
+        Scroll_To_Top::get_instance();
     endif;
