@@ -117,7 +117,6 @@ controlConstructor[ 'section-tab' ] = Control.extend({
             { params, container, section: _thisSection, setting } = control,
             root = container.find( '.root' )[ 0 ],
             reactRoot = createRoot( root )
-
         
         let rendered = false; // ensure we render only once
 
@@ -130,6 +129,7 @@ controlConstructor[ 'section-tab' ] = Control.extend({
             const props = { 
                 ...params,
                 setting,
+                id: control.id,
                 controls: instance.controls()
             }
             reactRoot.render( <SectionTabComponent { ...props } /> )

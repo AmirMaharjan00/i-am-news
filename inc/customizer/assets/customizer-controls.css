@@ -1,11 +1,25 @@
 /*
-    1.0 Radio Image
-    2.0 Section Tab
+    1.0 Normalize
+    2.0 Radio Image
+    3.0 Section Tab
 */
 
 /*
 =========================
-MARK: 1.0 Radio Image
+MARK: 1.0 Normalize
+=========================
+*/
+    .customize-control.ian-show {
+        display: block;
+    }
+
+    .customize-control.ian-hide {
+        display: none;
+    }
+
+/*
+=========================
+MARK: 2.0 Radio Image
 =========================
 */
     .customize-control-radio-image .control-content .components-radio-control__group-wrapper {
@@ -20,7 +34,7 @@ MARK: 1.0 Radio Image
 
 /*
 =========================
-MARK: 2.0 Section Tab
+MARK: 3.0 Section Tab
 =========================
 */
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper {

@@ -59,7 +59,7 @@
                 $settings = [
                     'scroll_to_top_section_tab' =>  [
                         'sanitize_function' =>  'sanitize_text_field',
-                        'postMessage'   =>  'refresh',
+                        'postMessage'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_layouts' =>  [
@@ -95,6 +95,7 @@
                     'scroll_to_top_layouts' =>  [
                         'label' =>  esc_html__( 'Layouts', 'i-am-news' ),
                         'type'  =>  'radio-image',
+                        'tab'   =>  'general',
                         'section'   =>  $this->section,
                         'fields'    =>  [
                             [
@@ -113,6 +114,7 @@
                         'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
                         'description'   =>  esc_html__( 'This is description', 'i-am-news' ),
                         'type'  =>  'box-shadow',
+                        'tab'   =>  'design',
                         'section'   =>  $this->section
                     ],
                     'scroll_to_top_section_tab' =>  [
@@ -133,7 +135,7 @@
                         'label' =>  esc_html__( 'Label', 'i-am-news' ),
                         'type'  =>  'text',
                         'section'   =>  $this->section
-                    ],
+                    ]
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
