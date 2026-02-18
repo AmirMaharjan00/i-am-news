@@ -1,12 +1,10 @@
 const { controlConstructor, Control, section } = wp.customize,
-    { createElement, createRoot, useState, useEffect, unmountComponentAtNode } = wp.element,
-    { ToggleControl } = wp.components,
-    { __ } = wp.i18n,
-    { escapeHTML } = wp.escapeHtml
+    { createRoot } = wp.element
 
 import { BoxShadowComponent } from './components/box-shadow'
 import { RadioImageComponent } from './components/radio-image'
 import { SectionTabComponent } from './components/section-tab'
+import { IconPickerComponent } from './components/icon-picker'
 
 /**
  * MARK: Box Shadow
@@ -148,6 +146,54 @@ controlConstructor[ 'section-tab' ] = Control.extend({
                 renderSectionTab( instance )
             }
         } )
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Icon Picker
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'icon-picker' ] = Control.extend({
+
+    ready: function () {
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderIconPicker = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <IconPickerComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderIconPicker()
+            } );
+        } else {
+            renderIconPicker()
+        }
 
         /**
          * Unbind if the controls container <li> tag is remoed

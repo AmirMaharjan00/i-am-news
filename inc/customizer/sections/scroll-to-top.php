@@ -46,6 +46,7 @@
                 $this->add_control( 'scroll_to_top_section_tab' );
                 $this->add_control( 'scroll_to_top_layouts' );
                 $this->add_control( 'scroll_to_top_label' );
+                $this->add_control( 'scroll_to_top_icon_picker' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
             }
 
@@ -73,6 +74,11 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_box_shadow' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'postMessage'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_icon_picker' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
                         'postMessage'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
@@ -135,6 +141,11 @@
                         'label' =>  esc_html__( 'Label', 'i-am-news' ),
                         'type'  =>  'text',
                         'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_icon_picker' =>  [
+                        'label' =>  esc_html__( 'Icon', 'i-am-news' ),
+                        'type'  =>  'icon-picker',
+                        'section'   =>  $this->section
                     ]
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
@@ -155,6 +166,10 @@
                         'offsetx'   =>  10,
                         'offsety'   =>  10
                     ]),
+                    'scroll_to_top_icon_picker' =>  [
+                        'type'  =>  'icon',
+                        'value'  =>  'fa-solid fa-jet-fighter-up'
+                    ],
                 ];
             }
         }

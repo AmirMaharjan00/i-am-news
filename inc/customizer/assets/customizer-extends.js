@@ -203,6 +203,141 @@ const IanControlHead = props => {
 
 /***/ },
 
+/***/ "./src/components/icon-picker.js"
+/*!***************************************!*\
+  !*** ./src/components/icon-picker.js ***!
+  \***************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   IconPickerComponent: () => (/* binding */ IconPickerComponent)
+/* harmony export */ });
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+const {
+    useState
+  } = wp.element,
+  {
+    Button
+  } = wp.components,
+  {
+    __
+  } = wp.i18n,
+  {
+    escapeHTML
+  } = wp.escapeHtml;
+
+// import fontAwesomeClass from'../font-awesome-classes.json'
+
+const IconPickerComponent = props => {
+  const {
+      label,
+      description,
+      setting,
+      exclude,
+      display_block: displayBlock
+    } = props,
+    [value, setValue] = useState(setting.get()),
+    {
+      type,
+      value: currentValue
+    } = value;
+
+  /**
+   * Handle Change
+   * 
+   * @since 1.0.0
+   * @param string    id  The id of the field
+   * @param string|int|bool   newValue    The new value of the field
+   * @return void 
+   */
+  const handleChange = (id, newValue) => {
+    let updatedValue = {
+      ...value,
+      [id]: newValue
+    };
+    setting.set(updatedValue);
+    setValue(updatedValue);
+  };
+
+  /**
+   * Handle Button click
+   * 
+   * @since 1.0.0
+   */
+  const handleButtonClick = newType => {
+    let newValue = {
+      type: newType
+    };
+    switch (newType) {
+      case 'icon':
+        newValue.value = '';
+        break;
+      case 'image':
+        newValue.value = 0;
+        break;
+      default:
+        newValue.value = '';
+    }
+    setValue(newValue);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "control-content",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
+      label: label,
+      description: description
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "content-wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "buttons-wrapper",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+          onClick: () => handleButtonClick('none'),
+          variant: type === 'none' ? 'primary' : 'secondary',
+          className: "button-item",
+          children: __(escapeHTML('None'), 'i-am-news')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+          onClick: () => handleButtonClick('image'),
+          variant: type === 'image' ? 'primary' : 'secondary',
+          className: "button-item",
+          children: __(escapeHTML('Image'), 'i-am-news')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+          onClick: () => handleButtonClick('icon'),
+          variant: type === 'icon' ? 'primary' : 'secondary',
+          className: "button-item",
+          children: __(escapeHTML('Icon'), 'i-am-news')
+        })]
+      }), type !== 'none' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "button-dropdown",
+        children: [type === 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "image-dropdown",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "preview-area"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "buttons-area",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+              className: "remove button-item",
+              variant: "secondary",
+              onClick: '',
+              children: __(escapeHTML('Remove'), 'i-am-news')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+              className: "remove button-item",
+              variant: "secondary",
+              onClick: '',
+              children: __(escapeHTML('Replace'), 'i-am-news')
+            })]
+          })]
+        }), type === 'icon' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "icon-dropdown"
+        })]
+      })]
+    })]
+  });
+};
+
+/***/ },
+
 /***/ "./src/components/radio-image.js"
 /*!***************************************!*\
   !*** ./src/components/radio-image.js ***!
@@ -482,29 +617,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_box_shadow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/box-shadow */ "./src/components/box-shadow.js");
 /* harmony import */ var _components_radio_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/radio-image */ "./src/components/radio-image.js");
 /* harmony import */ var _components_section_tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/section-tab */ "./src/components/section-tab.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/icon-picker */ "./src/components/icon-picker.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
 const {
     controlConstructor,
     Control,
     section
   } = wp.customize,
   {
-    createElement,
-    createRoot,
-    useState,
-    useEffect,
-    unmountComponentAtNode
-  } = wp.element,
-  {
-    ToggleControl
-  } = wp.components,
-  {
-    __
-  } = wp.i18n,
-  {
-    escapeHTML
-  } = wp.escapeHtml;
+    createRoot
+  } = wp.element;
+
 
 
 
@@ -539,7 +663,7 @@ controlConstructor['box-shadow'] = Control.extend({
     const renderBoxShadow = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
         ...props
       }));
     };
@@ -592,7 +716,7 @@ controlConstructor['radio-image'] = Control.extend({
     const renderRadioImage = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
         ...props
       }));
     };
@@ -647,7 +771,7 @@ controlConstructor['section-tab'] = Control.extend({
         id: control.id,
         controls: instance.controls()
       };
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
         ...props
       }));
     };
@@ -665,6 +789,59 @@ controlConstructor['section-tab'] = Control.extend({
         renderSectionTab(instance);
       }
     });
+
+    /**
+     * Unbind if the controls container <li> tag is remoed
+     */
+    container.on('remove', () => reactRoot.unmount());
+  }
+});
+
+/**
+ * MARK: Icon Picker
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor['icon-picker'] = Control.extend({
+  ready: function () {
+    const control = this,
+      {
+        params,
+        container,
+        section: _thisSection,
+        setting
+      } = control,
+      root = container.find('.root')[0],
+      reactRoot = createRoot(root),
+      props = {
+        ...params,
+        setting
+      };
+    let rendered = false; // ensure we render only once
+
+    /**
+     * Function to render your React toggle
+     */
+    const renderIconPicker = () => {
+      if (rendered) return;
+      rendered = true;
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_3__.IconPickerComponent, {
+        ...props
+      }));
+    };
+
+    /**
+     * Lazy load when the section expands
+     * Component will mount only when section is mounted
+     */
+    if (_thisSection) {
+      section(_thisSection()).expanded.bind('expanded', function (isExpanded) {
+        if (isExpanded) renderIconPicker();
+      });
+    } else {
+      renderIconPicker();
+    }
 
     /**
      * Unbind if the controls container <li> tag is remoed

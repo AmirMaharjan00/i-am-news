@@ -2,6 +2,8 @@
     1.0 Normalize
     2.0 Radio Image
     3.0 Section Tab
+    4.0 Icon Picker
+    5.0 Box Shadow
 */
 
 /*
@@ -53,4 +55,20 @@ MARK: 3.0 Section Tab
     }
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab.active {
         background: #7171711a;
+    }
+
+/*
+=========================
+MARK: 4.0 Icon Picker
+=========================
+*/
+    .customize-control-icon-picker .buttons-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0px;
+    }
+
+    .customize-control-icon-picker .buttons-wrapper .button-item {
+        flex: 1;
     }
