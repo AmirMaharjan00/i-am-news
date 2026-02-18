@@ -58,42 +58,42 @@ Tech / Framework Used
 i-am-news/
 ├── assets/
 │   ├── css/
-│   │   ├── theme.css               # Main CSS file
-│   │   ├── builder.css             # Builder CSS file
-│   │   └── responsive.css          # Responsive CSS file
-│   ├── images/                     # All theme images
+│   │   ├── theme.css                       # Main CSS file
+│   │   ├── builder.css                     # Builder CSS file
+│   │   └── responsive.css                  # Responsive CSS file
+│   ├── images/                             # All theme images
 │   └── js/
-│   │    ├── theme.js               # Main JS file
-│   └── libraries/                  # Third-party JS libraries
+│   │    ├── theme.js                       # Main JS file
+│   └── libraries/                          # Third-party JS libraries
 ├── inc/
 │   ├── customizer/
 │   │   ├── assets/
-│   │   │   ├── images/             # Customizer images
+│   │   │   ├── images/                     # Customizer images
 │   │   │   ├── customizer-controls.css
 │   │   │   ├── customizer-extends.js
 │   │   │   └── customizer-preview.js
-│   │   ├── controller/             # Controllers for customizer modules
-    │   │   └── src/
-    │   │      ├── components/
-    │   │      │   ├── box-shadow.js   # Box shadow control
-    │   │      │   ├── components.js   # Reusable JS components
-    │   │      │   └── icon-picker.js  # Icon picker control
-    │   │      ├── index.js            # Main React entry file
-    │   │      └── functions.js        # React helper functions
+│   │   ├── controller/                     # Controllers for customizer modules
+│   │   │   └── src/
+│   │   │      ├── components/
+│   │   │      │   ├── box-shadow.js        # Box shadow control
+│   │   │      │   ├── components.js        # Reusable JS components
+│   │   │      │   └── icon-picker.js       # Icon picker control
+│   │   │      ├── index.js                 # Main React entry file
+│   │   │      └── functions.js             # React helper functions
 │   │   ├── custom-controls/
-│   │   │   ├── base.php            # Base class for controls
-│   │   │   ├── box-shadow.php      # Extends base class
-│   │   │   └── icon-picker.php     # Extends base class
+│   │   │   ├── base.php                    # Base class for controls
+│   │   │   ├── box-shadow.php              # Extends base class
+│   │   │   └── icon-picker.php             # Extends base class
 │   │   ├── sections/
-│   │   │   ├── sections.php        # Base class for sections
-│   │   │   ├── scroll-to-top.php   # Extends sections
-│   │   │   └── main-banner.php     # Extends sections
-│   │   └── customizer.php          # Register all customizer controls
-│   ├── enqueue.php             # Enqueue CSS and JS files
-│   └── template-functions.php  # Customizer-related template functions
-├── functions.php                   # Theme functions
-├── style.css                       # Theme main stylesheet
-└── README.md                       # Project documentation
+│   │   │   ├── sections.php                # Base class for sections
+│   │   │   ├── scroll-to-top.php           # Extends sections
+│   │   │   └── main-banner.php             # Extends sections
+│   │   └── customizer.php                  # Register all customizer controls
+│   ├── enqueue.php                         # Enqueue CSS and JS files
+│   └── template-functions.php              # Customizer-related template functions
+├── functions.php                           # Theme functions
+├── style.css                               # Theme main stylesheet
+└── README.md                               # Project documentation
 ```
 
 Features
