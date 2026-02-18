@@ -52,62 +52,49 @@ Tech / Framework Used
 * React
 * CSS
 
-File / Structure
-===
+## File Structure
+
+```plaintext
 i-am-news/
-|
-|___ assets/
-|     |___css/
-|     |     |__ theme.css               # Main css file
-|     |     |__ builder.css             # Builder css file
-|     |     |__ responsive.css          # Responsive css file
-|     |
-|     |___image/
-|     |
-|     |___js/
-|     |     |__ theme.js                # Main Js file
-|     |
-|     |___libraries/
-|
-|___ inc/
-|       |___ customizer/
-|       |       |___ assets/
-|       |       |       |___ image/                         # Add customizer images
-|       |       |       |___ customizer-controls.css        # Add customizer images
-|       |       |       |___ customizer-extends.js          # Add customizer images
-|       |       |       |___ customizer-preview.js          # Add customizer images
-|       |       |
-|       |       |___ controller/
-|       |       |           |___ src/
-|       |       |           |       |___ components/
-|       |       |           |                  |___ box-shadow.js       # Box shadow control
-|       |       |           |                  |___ components.js       # Holds resuable components
-|       |       |           |                  |___ icon-picker.js      # Icon Picker control
-|       |       |           |
-|       |       |           |___ index.js                   # Main react file
-|       |       |           |___ functions.js               # Holds react functions
-|       |       |
-|       |       |___ custom-controls/
-|       |       |           |___ base.php                   # Base class
-|       |       |           |___ box-shadow.php             # Extends base
-|       |       |           |___ icon-picker.php            # Extends base
-|       |       |
-|       |       |___ sections/
-|       |       |           |___ sections.php               # Base class
-|       |       |           |___ scroll-to-top.php          # Extends sections
-|       |       |           |___ main-banner.php            # Extends sections
-|       |       |
-|       |       |___ customizer.php                         # Register customizer controls
-|       |
-|       |___ enqueue.php     # Enqueue files
-|       |
-|       |___ template-functions.php     # theme template functions
-|
-|___ functions.php          # Theme functions
-|
-|___ style.css              # Theme main stylesheet
-|
-|___ README.md              # Project documentation
+├── assets/
+│   ├── css/
+│   │   ├── theme.css               # Main CSS file
+│   │   ├── builder.css             # Builder CSS file
+│   │   └── responsive.css          # Responsive CSS file
+│   ├── images/                      # All theme images
+│   └── js/
+│       ├── theme.js                 # Main JS file
+│       └── libraries/               # Third-party JS libraries
+├── inc/
+│   ├── customizer/
+│   │   ├── assets/
+│   │   │   ├── images/             # Customizer images
+│   │   │   ├── customizer-controls.css
+│   │   │   ├── customizer-extends.js
+│   │   │   └── customizer-preview.js
+│   │   ├── controller/             # Controllers for customizer modules
+│   │   ├── src/
+│   │   │   ├── components/
+│   │   │   │   ├── box-shadow.js   # Box shadow control
+│   │   │   │   ├── components.js   # Reusable JS components
+│   │   │   │   └── icon-picker.js  # Icon picker control
+│   │   │   ├── index.js            # Main React entry file
+│   │   │   └── functions.js        # React helper functions
+│   │   ├── custom-controls/
+│   │   │   ├── base.php            # Base class for controls
+│   │   │   ├── box-shadow.php      # Extends base class
+│   │   │   └── icon-picker.php     # Extends base class
+│   │   ├── sections/
+│   │   │   ├── sections.php        # Base class for sections
+│   │   │   ├── scroll-to-top.php   # Extends sections
+│   │   │   └── main-banner.php     # Extends sections
+│   │   ├── customizer.php          # Register all customizer controls
+│   │   ├── enqueue.php             # Enqueue CSS and JS files
+│   │   └── template-functions.php  # Customizer-related template functions
+├── functions.php                   # Theme functions
+├── style.css                        # Theme main stylesheet
+└── README.md                        # Project documentation
+
 
 Features
 ===
