@@ -145,7 +145,7 @@ MIT © YourName
 
 This project is licensed under the MIT License — feel free to use, modify, and distribute it in accordance with the license terms.
 
-
+===
 Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
 
 Good luck!
