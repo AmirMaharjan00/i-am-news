@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "@wordpress/scripts": "^31.4.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0"
   }
 }

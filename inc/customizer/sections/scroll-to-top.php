@@ -60,27 +60,27 @@
                 $settings = [
                     'scroll_to_top_section_tab' =>  [
                         'sanitize_function' =>  'sanitize_text_field',
-                        'postMessage'   =>  'postMessage',
+                        'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_layouts' =>  [
                         'sanitize_function' =>  'sanitize_text_field',
-                        'postMessage'   =>  'refresh',
+                        'transport'   =>  'refresh',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_label' =>  [
                         'sanitize_function' =>  'sanitize_text_field',
-                        'postMessage'   =>  'postMessage',
+                        'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_box_shadow' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
-                        'postMessage'   =>  'postMessage',
+                        'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_icon_picker' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
-                        'postMessage'   =>  'postMessage',
+                        'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ]
                 ];

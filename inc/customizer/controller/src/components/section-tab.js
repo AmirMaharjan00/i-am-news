@@ -22,12 +22,11 @@ export const SectionTabComponent = ( props ) => {
     }, [ value ])
 
     /**
-     * Handle Change
+     * Handle change
      * 
      * @since 1.0.0
      */
     const handleChange = ( newValue ) => {
-        setting.set( newValue )
         setValue( newValue )
     }
 

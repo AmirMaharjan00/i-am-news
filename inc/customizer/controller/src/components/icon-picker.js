@@ -4,7 +4,7 @@ const { useState } = wp.element,
     { escapeHTML } = wp.escapeHtml
 
 import { IanControlHead } from './components'
-// import fontAwesomeClass from'../font-awesome-classes.json'
+// import fontAwesomeIcons from '@fortawesome/fontawesome-free/metadata/icon-families.json'
 
 export const IconPickerComponent = ( props ) => {
     const { label, description, setting, exclude, display_block: displayBlock } = props,
@@ -110,9 +110,9 @@ export const IconPickerComponent = ( props ) => {
 
                 { ( type === 'icon' ) && <div className="icon-dropdown">
                     {
-                        // fontAwesomeClass.map(( item, index ) => {
+                        // Object.keys( fontAwesomeIcons ).map(( item, index ) => {
                         //     return <Button variant="secondary">
-                        //         <span>{ index }</span>
+                        //         <i className={ `fa${ item }` }>{ index }</i>
                         //     </Button>
                         // })
                     }
