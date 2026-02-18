@@ -94,7 +94,7 @@ i-am-news/
 ├── functions.php                   # Theme functions
 ├── style.css                        # Theme main stylesheet
 └── README.md                        # Project documentation
-
+```
 
 Features
 ===
