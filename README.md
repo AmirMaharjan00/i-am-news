@@ -108,7 +108,43 @@ Features
 Code Example
 ===
 Example: Adding a customizer setting
+
 Example: Adding a customizer setting
+
+Installation
+===
+### Method 1: WordPress Admin
+1. Download the theme .zip file
+2. Go to WordPress Dashboard → Appearance → Themes
+3. Click Add New → Upload Theme
+4. Upload the zip file
+5. Click Install and then Activate
+
+### Method 2: Manual Installation
+1. Extract the theme folder
+2. Upload it to: /wp-content/themes/
+3. Activate the theme from the WordPress dashboard
+
+How to Use?
+===
+1. Install and activate the theme
+2. Go to Appearance → Customize
+3. Configure:
+    * Header layouts
+    * Colors & typography
+    * Frontpage sections
+    * News ticker
+    * Main banner
+4. Create categories and posts
+5. Assign categories to homepage sections
+6. Publish and enjoy your news website
+
+License
+===
+MIT © YourName
+
+This project is licensed under the MIT License — feel free to use, modify, and distribute it in accordance with the license terms.
+
 
 Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
 
