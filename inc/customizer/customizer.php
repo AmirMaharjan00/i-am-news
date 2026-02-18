@@ -82,7 +82,7 @@ function i_am_news_customize_partial_blogdescription() {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function i_am_news_customize_preview_js() {
-	wp_enqueue_script( 'i-am-news-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), _S_VERSION, true );
+	wp_enqueue_script( 'i-am-news-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), I_AM_NEWS_VERSION, true );
 }
 add_action( 'customize_preview_init', 'i_am_news_customize_preview_js' );
 

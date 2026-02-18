@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
 
-_s
+Welcome to I am News Wordpress Theme
 ===
 
 Hi. I'm a starter theme called `_s`, or `underscores`, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
@@ -38,7 +38,7 @@ Clone or download this repository, change its name to something else (like, say,
 3. Search for `Text Domain: _s` in `style.css` and replace with: `Text Domain: megatherium-is-awesome`.
 4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks and replace with: <code>&nbsp;Megatherium_is_Awesome</code>.
 5. Search for `_s-` to capture prefixed handles and replace with: `megatherium-is-awesome-`.
-6. Search for `_S_` (in uppercase) to capture constants and replace with: `MEGATHERIUM_IS_AWESOME_`.
+6. Search for `I_AM_NEWS_` (in uppercase) to capture constants and replace with: `MEGATHERIUM_IS_AWESOME_`.
 
 Then, update the stylesheet header in `style.css`, the links in `footer.php` with your own information and rename `_s.pot` from `languages` folder to use the theme's slug. Next, update or delete this readme.
 

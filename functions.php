@@ -7,9 +7,9 @@
  * @package i_am_news
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
+if ( ! defined( 'I_AM_NEWS_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define( 'I_AM_NEWS_VERSION', '1.0.0' );
 }
 
 /**
