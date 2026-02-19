@@ -160,3 +160,13 @@ if( is_customize_preview() ) require get_template_directory() . '/inc/customizer
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+/**
+ * Section Class
+ */
+require_once get_template_directory() . '/inc/customizer/sections/sections.php';
+
+/**
+ * Scroll to top section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/scroll-to-top.php';

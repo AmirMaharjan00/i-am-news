@@ -85,13 +85,3 @@ function i_am_news_customize_preview_js() {
 	wp_enqueue_script( 'i-am-news-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), I_AM_NEWS_VERSION, true );
 }
 add_action( 'customize_preview_init', 'i_am_news_customize_preview_js' );
-
-/**
- * Section Class
- */
-require_once get_template_directory() . '/inc/customizer/sections/sections.php';
-
-/**
- * Scroll to top section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/scroll-to-top.php';

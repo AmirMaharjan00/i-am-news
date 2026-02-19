@@ -8,9 +8,10 @@
  *
  * @package i_am_news
  */
+	use IAN\Customizer\Section\Scroll_To_Top;
 
+	Scroll_To_Top::get_instance()->render_html();
 ?>
-
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
 			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'i-am-news' ) ); ?>">

@@ -13,55 +13,29 @@
     use IAN\Customizer\Controls\Icon_Picker as Icon_Picker;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
 
+    use function get_theme_mod;
+
     interface Section_Interface {
-        /**
-         * Adding Section
-         * 
-         * @since 1.0.0
-         */
-        public function add_section( $id );
-
-        /**
-         * Get control settings
-         * 
-         * @since 1.0.0
-         */
-        public function get_settings( $id = '' );
-
-        /**
-         * Adding Control
-         * 
-         * @since 1.0.0
-         */
-        public function add_control( $id );
-
-        /**
-         * Get controls
-         * 
-         * @since 1.0.0
-         */
-        public function get_controls( $id = '' );
-
-        /**
-         * Register controls
-         * 
-         * @since 1.0.0
-         */
-        public function register_controls();
-
-        /**
-         * Set defaults
-         * 
-         * @since 1.0.0
-         */
-        public function set_defaults();
-
         /**
          * Get defaults
          * 
          * @since 1.0.0
          */
         public function get_defaults( $id = '' );
+
+        /**
+         * Render html
+         * 
+         * @since 1.0.0
+         */
+        public function render_html();
+
+        /**
+         * Dynamic css
+         * 
+         * @since 1.0.0
+         */
+        public function render_dynamic_css();
     }
 
     if( ! class_exists( __NAMESPACE__ . '\\Section' ) ) :
@@ -112,6 +86,7 @@
              * @since 1.0.0
              */
             public function __construct() {
+                add_action( 'init', [ $this, 'set_defaults' ] );
                 add_action( 'customize_register', [ $this, 'init' ] );
             }
 
@@ -122,7 +97,6 @@
              */
             public function init( $wp_customize ) {
                 $this->manager = $wp_customize;
-                $this->set_defaults();
                 $this->set_custom_controls();
                 $this->register_controls();
             }
@@ -146,21 +120,21 @@
              * 
              * @since 1.0.0
              */
-            abstract public function register_controls();
+            abstract protected function register_controls();
 
             /**
              * Get settings
              * 
              * @since 1.0.0
              */
-            abstract public function get_settings( $id = '' );
+            abstract protected function get_settings( $id = '' );
 
             /**
              * Get controls
              * 
              * @since 1.0.0
              */
-            abstract public function get_controls( $id = '' );
+            abstract protected function get_controls( $id = '' );
 
             /**
              * Get controls
@@ -170,11 +144,25 @@
             abstract public function set_defaults();
 
             /**
+             * Get controls
+             * 
+             * @since 1.0.0
+             */
+            abstract public function render_html();
+
+            /**
+             * Get controls
+             * 
+             * @since 1.0.0
+             */
+            abstract public function render_dynamic_css();
+
+            /**
              * Add setting
              * 
              * @since 1.0.0
              */
-            public function add_section( $id ) {
+            protected function add_section( $id ) {
                 $this->section = $id;
                 $section = $this->get_controls( $id );
                 $this->manager->add_section( $id, $section );
@@ -185,7 +173,7 @@
              * 
              * @since 1.0.0
              */
-            public function add_control( $id ) {
+            protected function add_control( $id ) {
                 $setting = $this->get_settings( $id );
                 $control = $this->get_controls( $id );
                 $default_types = [ 'text', 'checkbox', 'textarea', 'radio', 'select', 'dropdown-pages', 'email', 'url', 'number', 'hidden', 'date' ];
@@ -204,7 +192,7 @@
              * 
              * @since 1.0.0
              */
-            public function get_custom_control( $id, $control ) {
+            protected function get_custom_control( $id, $control ) {
                 if( isset( $this->custom_controls[ $control[ 'type' ] ] ) ) :
                     call_user_func( $this->custom_controls[ $control[ 'type' ] ], $id, $control );
                 else:
@@ -218,7 +206,7 @@
              * 
              * @since 1.0.0
              */
-            public function add_box_shadow( $id, $control ) {
+            private function add_box_shadow( $id, $control ) {
                 $this->manager->add_control( new Box_Shadow( $this->manager, $id, $control ) );
             }
 
@@ -227,7 +215,7 @@
              * 
              * @since 1.0.0
              */
-            public function add_radio_image( $id, $control ) {
+            private function add_radio_image( $id, $control ) {
                 $this->manager->add_control( new Radio_Image( $this->manager, $id, $control ) );
             }
 
@@ -236,7 +224,7 @@
              * 
              * @since 1.0.0
              */
-            public function add_section_tab( $id, $control ) {
+            private function add_section_tab( $id, $control ) {
                 $this->manager->add_control( new Section_Tab( $this->manager, $id, $control ) );
             }
 
@@ -245,7 +233,7 @@
              * 
              * @since 1.0.0
              */
-            public function add_icon_picker( $id, $control ) {
+            private function add_icon_picker( $id, $control ) {
                 $this->manager->add_control( new Icon_Picker( $this->manager, $id, $control ) );
             }
 
@@ -257,6 +245,16 @@
              */
             public function get_defaults( $id = '' ) {
                 return $id ? $this->defaults[ $id ] : $this->defaults;
+            }
+
+            /**
+             * Get updated customizer value
+             * 
+             * @since 1.0.0
+             */
+            public function get_customizer_value( $id = '' ) {
+                if( ! $id ) return;
+                return get_theme_mod( $id, $this->get_defaults( $id ) );
             }
         }
     endif;

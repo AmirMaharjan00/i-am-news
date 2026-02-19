@@ -8,6 +8,7 @@
     namespace IAN\Customizer\Section;
     use IAN\Customizer as Customizer_Defaults;
     use function esc_html__;
+    use function esc_attr;
     use function get_template_directory_uri;
 
     if( ! class_exists( __NAMESPACE__ . '\\Scroll_To_Top' ) ) :
@@ -41,7 +42,7 @@
              * @since 1.0.0
              * @override
              */
-            public function register_controls() {
+            protected function register_controls() {
                 $this->add_section( 'scroll_to_top_section' );
                 $this->add_control( 'scroll_to_top_section_tab' );
                 $this->add_control( 'scroll_to_top_layouts' );
@@ -56,7 +57,7 @@
              * @since 1.0.0
              * @override
              */
-            public function get_settings( $id = '' ) {
+            protected function get_settings( $id = '' ) {
                 $settings = [
                     'scroll_to_top_section_tab' =>  [
                         'sanitize_function' =>  'sanitize_text_field',
@@ -93,7 +94,7 @@
              * @since 1.0.0
              * @override
              */
-            public function get_controls( $id = '' ) {
+            protected function get_controls( $id = '' ) {
                 $controls = [
                     'scroll_to_top_section' =>  [
                         'title' =>  esc_html__( 'Scroll to Top', 'i-am-news' )
@@ -171,6 +172,33 @@
                         'value'  =>  'fa-solid fa-jet-fighter-up'
                     ],
                 ];
+            }
+
+            /**
+             * Render dynamic css
+             * 
+             * @return css
+             * @since 1.0.0
+             */
+            public function render_dynamic_css() {
+                
+            }
+
+            /**
+             * Render html
+             * 
+             * @return html
+             * @since 1.0.0
+             */
+            public function render_html() {
+                $block_class[] = 'scroll-to-top';
+                $block_class[] = 'layout--' . $this->get_customizer_value( 'scroll_to_top_layouts' );
+                ?>
+                    <div id="scroll-to-top" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
+                        <span class="label"><?php echo esc_html( $this->get_customizer_value( 'scroll_to_top_label' ) ); ?></span>
+                        <span class="icon"></span>
+                    </div>
+                <?php
             }
         }
         Scroll_To_Top::get_instance();
