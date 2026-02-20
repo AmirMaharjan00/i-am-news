@@ -49,3 +49,10 @@ require_once get_template_directory() . '/inc/enqueue.php';
  * @since 1.0.0
  */
 require_once get_template_directory() . '/inc/customizer/theme-starter.php';
+
+/**
+ * Customizer Sanitize Function
+ * 
+ * @since 1.0.0
+ */
+require_once get_template_directory() . '/inc/customizer/sanitize-functions.php';

@@ -40,6 +40,7 @@ const BoxShadowComponent = props => {
     } = props,
     [value, setValue] = useState(setting.get()),
     {
+      enable,
       offsetx,
       offsety,
       inset,
@@ -86,13 +87,15 @@ const BoxShadowComponent = props => {
             className: "highlight",
             onClick: onToggle,
             "aria-expanded": isOpen,
-            children: `x: ${offsetx}, y: ${offsety}, blue: ${blur}`
+            children: `${enable ? 'Enabled' : 'Disabled'}, x: ${offsetx}, y: ${offsety}, blur: ${blur}`
           });
         },
         renderContent: () => {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ToggleControl, {
               label: __(escapeHTML('Enable'), 'i-am-news'),
+              onChange: newValue => handleChange('enable', newValue),
+              checked: enable,
               __nextHasNoMarginBottom: true
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
               label: __(escapeHTML('Horizontal Offset (X)'), 'i-am-news'),
@@ -229,7 +232,7 @@ const {
     escapeHTML
   } = wp.escapeHtml;
 
-// import fontAwesomeClass from'../font-awesome-classes.json'
+// import fontAwesomeIcons from '@fortawesome/fontawesome-free/metadata/icon-families.json'
 
 const IconPickerComponent = props => {
   const {
@@ -475,12 +478,11 @@ const SectionTabComponent = props => {
   }, [value]);
 
   /**
-   * Handle Change
+   * Handle change
    * 
    * @since 1.0.0
    */
   const handleChange = newValue => {
-    setting.set(newValue);
     setValue(newValue);
   };
 

@@ -8,7 +8,7 @@ import { IanControlHead } from './components'
 export const BoxShadowComponent = ( props ) => {
     const { label, description, setting } = props,
         [ value, setValue ] = useState( setting.get() ),
-        { offsetx, offsety, inset, color, blur, spread } = value
+        { enable, offsetx, offsety, inset, color, blur, spread } = value
 
     /**
      * Handle Change
@@ -43,13 +43,15 @@ export const BoxShadowComponent = ( props ) => {
                 } }
                 renderToggle = { ( { isOpen, onToggle } ) => {
                     return <div className='highlight' onClick={ onToggle } aria-expanded={ isOpen }>
-                        { `x: ${ offsetx }, y: ${ offsety }, blue: ${ blur }` }
+                        { `${ ( enable ? 'Enabled': 'Disabled' ) }, x: ${ offsetx }, y: ${ offsety }, blur: ${ blur }` }
                     </div>
                 } }
                 renderContent = { () => {
                     return <>
                         <ToggleControl 
                             label = { __( escapeHTML( 'Enable' ), 'i-am-news' ) }
+                            onChange = { ( newValue ) => handleChange( 'enable', newValue ) }
+                            checked = { enable }
                             __nextHasNoMarginBottom = { true }
                         />
 

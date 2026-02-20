@@ -6,7 +6,6 @@
      * @since 1.0.0
      */
     namespace IAN\Customizer\Section;
-    use IAN\Customizer as Customizer_Defaults;
     use function esc_html__;
     use function esc_attr;
     use function get_template_directory_uri;
@@ -75,7 +74,7 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_box_shadow' =>  [
-                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],

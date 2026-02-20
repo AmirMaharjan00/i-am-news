@@ -31,6 +31,7 @@
              */
             protected function get_box_shadow( $box_shadow = [] ) {
                 $default = [
+                    'enable'    =>  true,
                     'offsetx'   =>  0,
                     'offsety'   =>  0,
                     'inset' =>  false,

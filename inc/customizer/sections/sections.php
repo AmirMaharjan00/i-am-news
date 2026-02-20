@@ -12,6 +12,7 @@
     use IAN\Customizer\Controls\Section_Tab as Section_Tab;
     use IAN\Customizer\Controls\Icon_Picker as Icon_Picker;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
+    use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
 
     use function get_theme_mod;
 
@@ -47,6 +48,7 @@
              * Using trait 
              */
             use Customizer_Defaults;
+            use Sanitize_Functions;
 
             /**
              * Manager instance
