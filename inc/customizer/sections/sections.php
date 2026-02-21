@@ -13,6 +13,7 @@
     use IAN\Customizer\Controls\Icon_Picker as Icon_Picker;
     use IAN\Customizer\Controls\Toggle_Button as Toggle_Button;
     use IAN\Customizer\Controls\Typography as Typography;
+    use IAN\Customizer\Controls\Radio_Tab as Radio_Tab;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
 
@@ -118,6 +119,7 @@
                     'icon-picker'    =>  [ $this, 'add_icon_picker' ],
                     'toggle-button'    =>  [ $this, 'add_Toggle_Button' ],
                     'typography'    =>  [ $this, 'add_typography' ],
+                    'radio-tab'    =>  [ $this, 'add_radio_tab' ],
                 ];
             }
 
@@ -259,6 +261,15 @@
              */
             private function add_typography( $id, $control ) {
                 $this->manager->add_control( new Typography( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Radio Tab
+             * 
+             * @since 1.0.0
+             */
+            private function add_radio_tab( $id, $control ) {
+                $this->manager->add_control( new Radio_Tab( $this->manager, $id, $control ) );
             }
 
             /**

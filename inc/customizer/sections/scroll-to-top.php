@@ -50,6 +50,7 @@
                 $this->add_control( 'scroll_to_top_box_shadow' );
                 $this->add_control( 'test' );
                 $this->add_control( 'typography_test' );
+                $this->add_control( 'radio_tab_test' );
             }
 
             /**
@@ -91,6 +92,11 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'typography_test' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'radio_tab_test' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
@@ -171,6 +177,21 @@
                         'tab'  =>  'design',
                         'section'   =>  $this->section
                     ],
+                    'radio_tab_test' =>  [
+                        'label' =>  esc_html__( 'Radio Tab', 'i-am-news' ),
+                        'type'  =>  'radio-tab',
+                        'section'   =>  $this->section,
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( '1', 'i-am-news' ),
+                                'value' =>  'one'
+                            ],
+                            [
+                                'label' =>  esc_html__( '2', 'i-am-news' ),
+                                'value' =>  'two'
+                            ]
+                        ]
+                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -216,7 +237,8 @@
                         'text_transform'    => 'unset',
                         'text_decoration'    => 'none',
                         'preset'    =>  '-1'
-                    ]
+                    ],
+                    'radio_tab_test'    =>  'one'
                 ];
             }
 
