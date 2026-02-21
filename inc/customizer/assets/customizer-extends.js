@@ -491,6 +491,46 @@ const IconCollection = props => {
 
 /***/ },
 
+/***/ "./src/components/radio-button.js"
+/*!****************************************!*\
+  !*** ./src/components/radio-button.js ***!
+  \****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   MyFormToggle: () => (/* binding */ MyFormToggle)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+    useState
+  } = wp.element,
+  {
+    RadioControl,
+    Tooltip
+  } = wp.components;
+const {
+  FormToggle
+} = wp.compoenents;
+const MyFormToggle = () => {
+  const [isChecked, setChecked] = useState(true);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(FormToggle, {
+    checked: isChecked,
+    onChange: () => setChecked(state => !state)
+  });
+};
+
+/**
+ * TOD0: change file name to just toggle-button.js
+ * TODO: used wp.components twice, use de-constructing (i already explained this to you, it's easy) 
+ * TODO: Component name should be ToggleButtonComponent
+ * TODO: Maintain spacing before and after "="
+ */
+
+/***/ },
+
 /***/ "./src/components/radio-image.js"
 /*!***************************************!*\
   !*** ./src/components/radio-image.js ***!
@@ -4238,8 +4278,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_radio_image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/radio-image */ "./src/components/radio-image.js");
 /* harmony import */ var _components_section_tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/section-tab */ "./src/components/section-tab.js");
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/icon-picker */ "./src/components/icon-picker.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_radio_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/radio-button */ "./src/components/radio-button.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 const {
     controlConstructor,
     Control,
@@ -4248,6 +4289,7 @@ const {
   {
     createRoot
   } = wp.element;
+
 
 
 
@@ -4283,7 +4325,7 @@ controlConstructor['box-shadow'] = Control.extend({
     const renderBoxShadow = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
         ...props
       }));
     };
@@ -4336,7 +4378,7 @@ controlConstructor['radio-image'] = Control.extend({
     const renderRadioImage = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
         ...props
       }));
     };
@@ -4391,7 +4433,7 @@ controlConstructor['section-tab'] = Control.extend({
         id: control.id,
         controls: instance.controls()
       };
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
         ...props
       }));
     };
@@ -4446,7 +4488,7 @@ controlConstructor['icon-picker'] = Control.extend({
     const renderIconPicker = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_3__.IconPickerComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_3__.IconPickerComponent, {
         ...props
       }));
     };
@@ -4461,6 +4503,60 @@ controlConstructor['icon-picker'] = Control.extend({
       });
     } else {
       renderIconPicker();
+    }
+
+    /**
+     * Unbind if the controls container <li> tag is remoed
+     */
+    container.on('remove', () => reactRoot.unmount());
+  }
+});
+
+/**
+ * MARK: Toggle Button
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor['toggle-button'] = Control.extend({
+  ready: function () {
+    const control = this,
+      {
+        params,
+        container,
+        section: _thisSection,
+        setting
+      } = control,
+      root = container.find('.root')[0],
+      reactRoot = createRoot(root),
+      props = {
+        ...params,
+        setting
+      };
+    console.log('testing outside');
+    let rendered = false; // ensure we render only once
+
+    /**
+     * Function to render your React toggle
+     */
+    const renderToggleButton = () => {
+      if (rendered) return;
+      rendered = true;
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_radio_button__WEBPACK_IMPORTED_MODULE_4__.ToggleButtonComponent, {
+        ...props
+      }));
+    };
+
+    /**
+     * Lazy load when the section expands
+     * Component will mount only when section is mounted
+     */
+    if (_thisSection) {
+      section(_thisSection()).expanded.bind('expanded', function (isExpanded) {
+        if (isExpanded) renderToggleButton();
+      });
+    } else {
+      renderToggleButton();
     }
 
     /**

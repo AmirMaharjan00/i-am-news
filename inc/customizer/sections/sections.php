@@ -11,6 +11,7 @@
     use IAN\Customizer\Controls\Radio_Image as Radio_Image;
     use IAN\Customizer\Controls\Section_Tab as Section_Tab;
     use IAN\Customizer\Controls\Icon_Picker as Icon_Picker;
+    use IAN\Customizer\Controls\Toggle_Button as Toggle_Button;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
 
@@ -114,6 +115,7 @@
                     'radio-image'    =>  [ $this, 'add_radio_image' ],
                     'section-tab'    =>  [ $this, 'add_section_tab' ],
                     'icon-picker'    =>  [ $this, 'add_icon_picker' ],
+                    'toggle-button'    =>  [ $this, 'add_Toggle_Button' ],
                 ];
             }
 
@@ -237,6 +239,15 @@
              */
             private function add_icon_picker( $id, $control ) {
                 $this->manager->add_control( new Icon_Picker( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Toggle Button
+             * 
+             * @since 1.0.0
+             */
+            private function add_Toggle_Button( $id, $control ) {
+                $this->manager->add_control( new Toggle_Button( $this->manager, $id, $control ) );
             }
 
             /**
