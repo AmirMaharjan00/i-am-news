@@ -5,7 +5,7 @@ import { BoxShadowComponent } from './components/box-shadow'
 import { RadioImageComponent } from './components/radio-image'
 import { SectionTabComponent } from './components/section-tab'
 import { IconPickerComponent } from './components/icon-picker'
-import { ToggleButtonComponent } from './components/radio-button'
+import { ToggleButtonComponent } from './components/toggle-button'
 
 /**
  * MARK: Box Shadow

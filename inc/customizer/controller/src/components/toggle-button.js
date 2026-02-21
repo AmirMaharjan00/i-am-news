@@ -1,12 +1,11 @@
 const { useState } = wp.element,
-    { RadioControl, Tooltip } = wp.components
-const { FormToggle } = wp.compoenents
+    { RadioControl, Tooltip, ToggleButtonComponent } = wp.components
 
-export const MyFormToggle  = () => {
+export const ToggleButton = () => {
     const [ isChecked, setChecked ] = useState( true );
 
     return (
-        <FormToggle
+        <ToggleButtonComponent
             checked={ isChecked }
             onChange={ () => setChecked( ( state ) => ! state ) }
         />
