@@ -12,9 +12,9 @@ export const IanControlHead = ( props ) => {
     const { label, description } = props
 
     return ( label || description ) && <div className="control-head">
-        { label && <h2 className="title">{ label }</h2> }
+        { label && <label className="customizer-control-title">{ label }</label> }
         { 
-            description && <Tooltip className="description" text={ description } delay={ 300 } placement="top">
+            description && <Tooltip className="description customize-control-description" text={ description } delay={ 300 } placement="top">
                 <Dashicon icon = "editor-help" className = "desc-icon" />
             </Tooltip>
         }

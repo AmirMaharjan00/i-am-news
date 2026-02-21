@@ -4,6 +4,7 @@
     3.0 Section Tab
     4.0 Icon Picker
     5.0 Box Shadow
+    6.0 Text
 */
 
 /*
@@ -17,6 +18,14 @@ MARK: 1.0 Normalize
 
     .customize-control.ian-hide {
         display: none;
+    }
+
+    .customize-control-radio-image,
+    .customize-control-section-tab,
+    .customize-control-icon-picker,
+    .customize-control-text,
+    .customize-control-box-shadow {
+
     }
 
 /*
@@ -71,4 +80,72 @@ MARK: 4.0 Icon Picker
 
     .customize-control-icon-picker .buttons-wrapper .button-item {
         flex: 1;
+        display: block;
+        text-align: center;
+    }
+
+    .customize-control-icon-picker .image-dropdown .preview-area {
+        width: 100%;
+        height: 130px;
+        border: 2px dashed #000;
+        margin: 10px 0;
+        position: relative;
+    }
+
+    .customize-control-icon-picker .image-dropdown .preview-area .overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 9;
+        background: #8080805a;
+        display: none;
+    }
+
+    .customize-control-icon-picker .image-dropdown .preview-area:hover .overlay {
+        display: block;
+    }
+
+    .customize-control-icon-picker .image-dropdown .preview-area .image-preview {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+    .customize-control-icon-picker .image-dropdown .preview-area .label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 500;
+        font-size: 22px;
+    }
+
+    .customize-control-icon-picker .image-dropdown .buttons-area {
+        display: flex;
+        gap: 10px;
+    }
+
+    .customize-control-icon-picker .image-dropdown .buttons-area .button-item {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+
+    .customize-control-icon-picker .image-dropdown .buttons-area .button-item.remove {
+        color: #ff0000;
+        box-shadow: inset 0 0 0 1px #ff0000;
+    }
+
+/*
+=========================
+MARK: 6.0 Text
+=========================
+*/
+    .customize-control-text .buttons-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0px;
     }

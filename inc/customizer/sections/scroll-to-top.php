@@ -139,6 +139,7 @@
                     ],
                     'scroll_to_top_label' =>  [
                         'label' =>  esc_html__( 'Label', 'i-am-news' ),
+                        'description' =>  esc_html__( 'Testing', 'i-am-news' ),
                         'type'  =>  'text',
                         'section'   =>  $this->section
                     ],
