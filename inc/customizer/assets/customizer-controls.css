@@ -5,6 +5,7 @@
     4.0 Icon Picker
     5.0 Box Shadow
     6.0 Text
+    7.0 Typography
 */
 
 /*
@@ -173,4 +174,17 @@ MARK: 6.0 Text
         justify-content: space-between;
         align-items: center;
         gap: 0px;
+    }
+
+/*
+=========================
+MARK: 7.0 Typography
+=========================
+*/
+    .customize-control-typography .ian-menu-list {
+        padding: 0;
+    }
+
+    .customize-control-typography .family-collection {
+        width: 100%;
     }

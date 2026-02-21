@@ -1,4 +1,4 @@
-const { useState, useRef, useEffect, useMemo } = wp.element,
+const { useState, useRef, useEffect } = wp.element,
     { Button } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
@@ -6,7 +6,7 @@ const { useState, useRef, useEffect, useMemo } = wp.element,
 
 import { IanControlHead } from './components'
 import fontAwesomeIcons from '../font-awesome-classes.json'
-import { VirtuosoGrid  } from "react-virtuoso";
+import { VirtuosoGrid } from "react-virtuoso";
 
 export const IconPickerComponent = ( props ) => {
     const { label, description, setting, exclude, display_block: displayBlock } = props,

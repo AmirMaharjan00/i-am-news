@@ -49,6 +49,7 @@
                 $this->add_control( 'scroll_to_top_icon_picker' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
                 $this->add_control( 'test' );
+                $this->add_control( 'typography_test' );
             }
 
             /**
@@ -88,7 +89,12 @@
                         // 'sanitize_function' =>  'sanitize_text_field',
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
-                    ]
+                    ],
+                    'typography_test' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
                 ];
                 return ( $id ) ? $settings[ $id ] : $settings;
             }
@@ -158,7 +164,13 @@
                         'label' =>  esc_html__( 'Testing', 'i-am-news' ),
                         'type'  =>  'toggle-button',
                         'section'   =>  $this->section
-                    ]
+                    ],
+                    'typography_test' =>  [
+                        'label' =>  esc_html__( 'Typography', 'i-am-news' ),
+                        'type'  =>  'typography',
+                        'tab'  =>  'design',
+                        'section'   =>  $this->section
+                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -182,7 +194,29 @@
                         'type'  =>  'icon',
                         'value'  =>  'fa-solid fa-jet-fighter-up'
                     ],
-                    'test' =>   false
+                    'test' =>   false,
+                    'typography_test'   =>  [
+                        'font_family'   => [ 'value' => 'Jost', 'label' => 'Jost' ],
+                        'font_weight'   =>  '500italic',
+                        'font_size'   => [
+                            'desktop'   =>  13,
+                            'tablet'   =>  13,
+                            'smartphone'   =>  13
+                        ],
+                        'line_height'   => [
+                            'desktop'   =>  21,
+                            'tablet'   =>  21,
+                            'smartphone'   =>  21
+                        ],
+                        'letter_spacing'   => [
+                            'desktop'   =>  0,
+                            'tablet'   =>  0,
+                            'smartphone'   =>  0
+                        ],
+                        'text_transform'    => 'unset',
+                        'text_decoration'    => 'none',
+                        'preset'    =>  '-1'
+                    ]
                 ];
             }
 
