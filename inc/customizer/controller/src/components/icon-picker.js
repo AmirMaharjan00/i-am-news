@@ -1,4 +1,4 @@
-const { useState, useRef, useEffect } = wp.element,
+const { useState, useRef, useEffect, useMemo } = wp.element,
     { Button } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
@@ -6,8 +6,8 @@ const { useState, useRef, useEffect } = wp.element,
 
 import { IanControlHead } from './components'
 import fontAwesomeIcons from '../font-awesome-classes.json'
+import { VirtuosoGrid  } from "react-virtuoso";
 
-console.log( fontAwesomeIcons )
 export const IconPickerComponent = ( props ) => {
     const { label, description, setting, exclude, display_block: displayBlock } = props,
         [ value, setValue ] = useState( setting.get() ),
@@ -15,7 +15,8 @@ export const IconPickerComponent = ( props ) => {
         mediaFrame = useRef( null ),
         [ imageUrl, setImageUrl ] = useState( '' ),
         [ imageId, setImageId ] = useState( 0 ),
-        [ icon, setIcon ] = useState( '' )
+        [ icon, setIcon ] = useState( '' ),
+        [ filteredIcons, setFilteredIcons ] = useState( fontAwesomeIcons )
 
     useEffect( () => {
         let { type, value: _thisVal } = value
@@ -27,6 +28,9 @@ export const IconPickerComponent = ( props ) => {
             } )
             setImageId( _thisVal )
         }
+        if( type === 'icon' ) {
+            setIcon( value.value )
+        }
         setting.set( value )
     }, [ value ] )
 
@@ -34,14 +38,14 @@ export const IconPickerComponent = ( props ) => {
      * Handle Change
      * 
      * @since 1.0.0
-     * @param string    id  The id of the field
-     * @param string|int|bool   newValue    The new value of the field
+     * @param string clickedIcon icon class
      * @return void 
      */
-    const handleChange = ( id, newValue ) => {
+    const handleIconClick = ( clickedIcon ) => {
+        setIcon( clickedIcon )
         setValue( {
-            ...value,
-            [ id ]: newValue
+            type: 'icon',
+            value: clickedIcon
         } )
     }
 
@@ -116,6 +120,20 @@ export const IconPickerComponent = ( props ) => {
         setImageUrl( '' )
     }
 
+    /**
+     * handle search change
+     * 
+     * @since 1.0.0
+     * @param object event object
+     */
+    const handleSearch = ( event ) => {
+        let searched = event.target.value
+
+        if( searched === '' ) setFilteredIcons( fontAwesomeIcons )
+        let filtered = fontAwesomeIcons.filter( ( icon ) => icon.includes( searched.toLowerCase() ) )
+        setFilteredIcons( filtered )
+    }
+
     return <div className="control-content">
         <IanControlHead 
             label = { label }
@@ -181,18 +199,44 @@ export const IconPickerComponent = ( props ) => {
             </div> }
 
             { ( type === 'icon' ) && <div className="icon-dropdown">
-                <input type="search" placeholder='Search...' />
-                <div className="icon-collection">
-                    {
-                        Object.keys( fontAwesomeIcons ).map(( item, index ) => {
-                            return <Button variant="secondary">
-                                <i className={ item }></i>
-                            </Button>
-                        })
-                    }
-                </div>
+                <input type="search" placeholder='Search...' onChange={ handleSearch }/>
+                <IconCollection
+                    filteredIcons = { filteredIcons }
+                    icon = { value.value }
+                    handleIconClick = { handleIconClick }
+                />
             </div> }
 
         </div>
     </div>
+}
+
+/**
+ * Icon Collection
+ * 
+ * @since 1.0.0
+ */
+const IconCollection = ( props ) => {
+    const { icon, handleIconClick, filteredIcons } = props
+
+    return <VirtuosoGrid
+        totalCount = { filteredIcons.length }
+        className = "icon-collection"
+        components = { {
+            List: React.forwardRef( ( { style, children }, ref ) => (
+                <div ref={ ref } className='container' style={ { ...style } }>
+                    { children }
+                </div>
+            ) ),
+            Item: ( { children } ) => (
+                <>{ children }</>
+            ),
+        }}
+        itemContent = { ( index ) => {
+            const variant = ( icon === filteredIcons[ index ] ) ? 'primary' : 'secondary'
+            return <Button variant={ variant } className="icon-btn" onClick={ () => handleIconClick( filteredIcons[ index ] ) }>
+                <i className={ filteredIcons[ index ] }></i>
+            </Button> 
+        } }
+    />
 }
