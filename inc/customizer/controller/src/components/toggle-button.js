@@ -16,6 +16,7 @@ export const ToggleButtonComponent = ( props ) => {
         setValue( ! value ) // this only change the currently state doesn't save the new value in database
         setting.set( ! value )
     }
+    
     return <div className="control-content">
         <IanControlHead 
             label = { label }
