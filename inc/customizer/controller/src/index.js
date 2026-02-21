@@ -6,6 +6,7 @@ import { RadioImageComponent } from './components/radio-image'
 import { SectionTabComponent } from './components/section-tab'
 import { IconPickerComponent } from './components/icon-picker'
 import { ToggleButtonComponent } from './components/toggle-button'
+import { Example } from './components/alignment'
 
 /**
  * MARK: Box Shadow
@@ -243,6 +244,55 @@ controlConstructor[ 'toggle-button' ] = Control.extend({
             } );
         } else {
             renderToggleButton()
+        }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Alignment
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'alignment' ] = Control.extend({
+
+    ready: function () {
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+        console.log( 'testing outside' )
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderAlignment = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <Example { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderAlignment()
+            } );
+        } else {
+            renderAlignment()
         }
 
         /**
