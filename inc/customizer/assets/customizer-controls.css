@@ -12,7 +12,53 @@
 =========================
 MARK: 1.0 Normalize
 =========================
-*/
+*/  
+    :root {
+        --customizer-color: #007cba;
+        --customizer-light-grey: #f0f0f0;
+        --customizer-dark-grey: #939393;
+    }
+
+    .wp-full-overlay-sidebar-content {
+        background: #fff;
+    }
+
+    #customize-theme-controls .customize-pane-child.accordion-section-content > .customize-control:first-child {
+        padding-top: 0;
+    }
+
+    .customize-pane-child.control-section .customize-control {
+        padding: 16px 0;
+        margin: 0;
+        border-bottom: 1px solid var(--customizer-light-grey);
+    }
+
+    .customize-pane-child.control-section .customize-control:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .customize-control .control-head {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .customize-control .customizer-control-title {
+        font-size: 13px;
+        color: hsl(0, 0%, 0%);
+    }
+
+    .customize-control .desc-icon {
+        color: var(--customizer-dark-grey);
+    }
+
+    .customize-control .control-head .desc-icon:hover {
+        color: var(--customizer-color);
+    }
+
     .customize-control.ian-show {
         display: block;
     }
@@ -40,6 +86,29 @@ MARK: 2.0 Radio Image
         gap: 15px;
     }
 
+    .customize-control-radio-image .control-content .components-radio-control__option {
+        display: block;
+        position: relative;
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__label {
+        display: block;
+        height: 100%;
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__input:checked + .components-radio-control__label::after,
+    .customize-control-radio-image .control-content .components-radio-control__label:hover::after {
+        content: '\f147';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 500;
+        font-family: "Dashicons";
+        font-size: 30px;
+        color: var(--customizer-color);
+    }
+
     .customize-control-radio-image .control-content .components-radio-control__group-wrapper input[type="radio"] {
         display: none;
     }
@@ -49,6 +118,19 @@ MARK: 2.0 Radio Image
 MARK: 3.0 Section Tab
 =========================
 */
+    .customize-control-section-tab {
+        margin-inline: -12px;
+        width: calc(100% + 24px);
+    }
+
+    .customize-control-section-tab .components-radio-control__option {
+        display: block;
+    }
+
+    .customize-control-section-tab .content-wrapper .components-radio-control__group-wrapper {
+        gap: 0;
+    }
+
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper {
         display: grid;
         grid-template-columns: repeat( 2, 1fr );
@@ -62,9 +144,11 @@ MARK: 3.0 Section Tab
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab {
         text-align: center;
         padding: 10px;
+        font-weight: 600;
     }
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab.active {
-        background: #7171711a;
+        background: var(--customizer-dark-grey);
+        color: #fff;
     }
 
 /*

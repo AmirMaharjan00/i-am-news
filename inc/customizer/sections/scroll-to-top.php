@@ -118,6 +118,7 @@
                     ],
                     'scroll_to_top_layouts' =>  [
                         'label' =>  esc_html__( 'Layouts', 'i-am-news' ),
+                        'description' =>  esc_html__( 'Pick your desired layout.', 'i-am-news' ),
                         'type'  =>  'radio-image',
                         'tab'   =>  'general',
                         'section'   =>  $this->section,
@@ -129,7 +130,7 @@
                             ],
                             [
                                 'label' =>  esc_html__( 'Layout 2', 'i-am-news' ),
-                                'url'   =>  get_template_directory_uri() . '/inc/customizer/assets/images/scroll-to-top-one.png',
+                                'url'   =>  get_template_directory_uri() . '/inc/customizer/assets/images/scroll-to-top-two.png',
                                 'value' =>  'two'
                             ]
                         ]
