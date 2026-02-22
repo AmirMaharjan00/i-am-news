@@ -145,10 +145,6 @@ MARK: 4.0 Icon Picker
         background: #fff;
     }
 
-    .customize-control-icon-picker .icon-dropdown input[type="search"] {
-        margin-bottom: 10px;
-    }
-
     .customize-control-icon-picker .icon-dropdown .icon-collection {
         height: 200px !important;
     }

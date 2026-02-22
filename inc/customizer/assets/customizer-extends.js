@@ -2357,15 +2357,18 @@ const {
 
 const Example = () => {
   const [alignment, setAlignment] = useState('center center');
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "control-content",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
+      label: label,
+      description: description
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "content-wrapper",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(AlignmentMatrixControl, {
         value: alignment,
         onChange: setAlignment
       })
-    })
+    })]
   });
 };
 
@@ -2525,7 +2528,8 @@ const BoxShadowComponent = props => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   IanControlHead: () => (/* binding */ IanControlHead)
+/* harmony export */   IanControlHead: () => (/* binding */ IanControlHead),
+/* harmony export */   IanResponsiveIcons: () => (/* binding */ IanResponsiveIcons)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
@@ -2573,6 +2577,24 @@ const IanControlHead = props => {
   });
 };
 
+/**
+ * Responsive Icons
+ * 
+ * @since 1.0.0
+ */
+const IanResponsiveIcons = () => {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+    classname: "responsive-icons",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+      icon: "desktop"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+      icon: "tablet"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+      icon: "smartphone"
+    })]
+  });
+};
+
 /***/ },
 
 /***/ "./src/components/icon-picker.js"
@@ -2596,7 +2618,8 @@ const {
     useEffect
   } = wp.element,
   {
-    Button
+    Button,
+    SearchControl
   } = wp.components,
   {
     __
@@ -2736,8 +2759,7 @@ const IconPickerComponent = props => {
    * @since 1.0.0
    * @param object event object
    */
-  const handleSearch = event => {
-    let searched = event.target.value;
+  const handleSearch = searched => {
     if (searched === '') setFilteredIcons(_font_awesome_classes_json__WEBPACK_IMPORTED_MODULE_1__);
     let filtered = _font_awesome_classes_json__WEBPACK_IMPORTED_MODULE_1__.filter(icon => icon.includes(searched.toLowerCase()));
     setFilteredIcons(filtered);
@@ -2797,9 +2819,8 @@ const IconPickerComponent = props => {
         })]
       }), type === 'icon' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "icon-dropdown",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-          type: "search",
-          placeholder: "Search...",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SearchControl, {
+          placeholder: __('Search...', 'i-am-news'),
           onChange: handleSearch
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(IconCollection, {
           filteredIcons: filteredIcons,
@@ -3206,7 +3227,9 @@ const {
   } = wp.components,
   {
     useState,
-    useEffect
+    useEffect,
+    useContext,
+    createContext
   } = wp.element,
   {
     __
@@ -3220,12 +3243,13 @@ const {
 
 
 
+const TypographyContext = createContext(null);
+
 /**
  * MARK: Get font label
  * 
  * @since 1.0.0
  */
-
 const getWeightLabel = weight => {
   let isItalic = weight.includes('italic'),
     weightOnly = weight;
@@ -3315,12 +3339,13 @@ const fontFamilies = _google_fonts_min_json__WEBPACK_IMPORTED_MODULE_1__.reduce(
  * 
  * @since 1.0.0
  */
-const loadGoogleFonts = (group, range) => {
+const loadGoogleFonts = (group, range, extras = []) => {
   const {
       startIndex = 0,
       endIndex = 8
     } = range,
     fonts = group.filter((_, index) => index >= startIndex && index <= endIndex).map(font => `family=${font.replaceAll(' ', '+')}`).join('&');
+  if (extras.length > 0) fonts.concat('&' + extras.map(font => `family=${font.replaceAll(' ', '+')}`).join('&'));
   let link = null;
   if (document.getElementById('ian-google-fonts')) {
     link = document.getElementById('ian-google-fonts');
@@ -3357,23 +3382,52 @@ const TypographComponent = props => {
       text_decoration,
       preset
     } = value,
-    [fontsToLoad, setFontsToLoad] = useState(0);
-  useEffect(() => {}, []);
+    [range, setRange] = useState({
+      startIndex: 0,
+      endIndex: 8
+    });
+  useEffect(() => {
+    let families = fontFamilies.map(font => font.value);
+    loadGoogleFonts(families, range, [font_family.value]);
+  }, [range]);
+
+  /**
+   * Update Value
+   * 
+   * @since 1.0.0
+   */
+  const updateValue = (id, newValue) => {
+    let newTypoValue = {
+      ...value,
+      [id]: newValue
+    };
+    setValue(newTypoValue);
+    setting.set(newTypoValue);
+  };
+  const contextObject = {
+    updateValue,
+    fontFamily: font_family,
+    fontWeight: font_weight,
+    fontSize: font_size,
+    lineHeight: line_height,
+    letterSpacing: letter_spacing,
+    textTransform: text_transform,
+    textDecoration: text_decoration,
+    preset,
+    range,
+    setRange
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "control-content",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
       label: label,
       description: description
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "content-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontFamily, {
-        fontFamily: font_family
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontWeight, {
-        fontWeight: font_weight,
-        fontFamily: font_family
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontSize, {
-        fontSize: font_size
-      })]
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(TypographyContext.Provider, {
+        value: contextObject,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontFamily, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontWeight, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontSize, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LineHeight, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LetterSpacing, {})]
+      })
     })]
   });
 };
@@ -3383,10 +3437,11 @@ const TypographComponent = props => {
  * 
  * @since 1.0.0
  */
-const FontFamily = props => {
+const FontFamily = () => {
   const {
-    fontFamily
-  } = props;
+    fontFamily,
+    updateValue
+  } = useContext(TypographyContext);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "font-family-block",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
@@ -3394,6 +3449,7 @@ const FontFamily = props => {
       children: __('Font Family', 'i-am-news')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
       defaultValue: fontFamily,
+      onChange: newValue => updateValue('font_family', newValue),
       options: fontFamilies,
       components: {
         MenuList: FontFamilyList
@@ -3420,17 +3476,18 @@ const FontFamily = props => {
 const FontFamilyList = props => {
   const {
       children,
-      maxHeight
+      maxHeight,
+      selectProps
     } = props,
     calculatedHeight = Math.min(maxHeight, children.length * 38),
-    [range, setRange] = useState({
-      startIndex: 0,
-      endIndex: 8
-    });
+    {
+      setRange,
+      range
+    } = useContext(TypographyContext);
   useEffect(() => {
     if (!children.length) return;
     let fontFamiles = children.map(child => child.props.value);
-    loadGoogleFonts(fontFamiles, range);
+    loadGoogleFonts(fontFamiles, range, [selectProps.value.value]);
   }, [children]);
 
   // If children.length === 0, search returned nothing
@@ -3475,11 +3532,11 @@ const FontFamilyList = props => {
  * 
  * @since 1.0.0
  */
-const FontWeight = props => {
+const FontWeight = () => {
   const {
       fontWeight,
       fontFamily
-    } = props,
+    } = useContext(TypographyContext),
     activeFontWeights = fontWeights[fontFamily.label],
     {
       normal = [],
@@ -3502,10 +3559,11 @@ const FontWeight = props => {
     let label = getWeightLabel(weight.value),
       style = {
         fontWeight: label.split(' ')[1],
-        fontStyle: label.includes('italic') ? 'italic' : 'normal'
+        fontStyle: label.includes('italic') ? 'italic' : 'normal',
+        fontFamily: fontFamily.value
       };
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-      className: `weight-label ${weight}`,
+      className: `weight-label ${weight.value}`,
       style: style,
       children: label
     });
@@ -3517,8 +3575,7 @@ const FontWeight = props => {
    * @since 1.0.0
    */
   const handleWeightChange = newValue => {
-    console.log(options);
-    console.log(newValue);
+    updateValue('font_weight', newValue.value);
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "font-weight-block",
@@ -3553,9 +3610,54 @@ const FontWeight = props => {
 const FontSize = () => {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "font-size-block",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-      className: "label",
-      children: __('Font Size', 'i-am-news')
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "block-head",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        className: "label",
+        children: __('Font Size', 'i-am-news')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanResponsiveIcons, {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "range-control",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_range__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {})
+    })]
+  });
+};
+
+/**
+ * MARK: Line Height
+ * 
+ * @since 1.0.0
+ */
+const LineHeight = () => {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "line-height-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "block-head",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        className: "label",
+        children: __('Line Height', 'i-am-news')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanResponsiveIcons, {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "range-control",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_range__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {})
+    })]
+  });
+};
+
+/**
+ * MARK: Letter Spacing
+ * 
+ * @since 1.0.0
+ */
+const LetterSpacing = () => {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "line-height-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      className: "block-head",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        className: "label",
+        children: __('Letter Spacing', 'i-am-news')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanResponsiveIcons, {})]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "range-control",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_range__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {})

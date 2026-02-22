@@ -20,3 +20,16 @@ export const IanControlHead = ( props ) => {
         }
     </div>
 }
+
+/**
+ * Responsive Icons
+ * 
+ * @since 1.0.0
+ */
+export const IanResponsiveIcons = () => {
+    return <div classname="responsive-icons">
+        <Dashicon icon="desktop" />
+        <Dashicon icon="tablet" />
+        <Dashicon icon="smartphone" />
+    </div>
+}

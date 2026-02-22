@@ -1,5 +1,5 @@
 const { useState, useRef, useEffect } = wp.element,
-    { Button } = wp.components,
+    { Button, SearchControl } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
     { attachment: mediaAttachment } = wp.media
@@ -126,9 +126,7 @@ export const IconPickerComponent = ( props ) => {
      * @since 1.0.0
      * @param object event object
      */
-    const handleSearch = ( event ) => {
-        let searched = event.target.value
-
+    const handleSearch = ( searched ) => {
         if( searched === '' ) setFilteredIcons( fontAwesomeIcons )
         let filtered = fontAwesomeIcons.filter( ( icon ) => icon.includes( searched.toLowerCase() ) )
         setFilteredIcons( filtered )
@@ -199,7 +197,10 @@ export const IconPickerComponent = ( props ) => {
             </div> }
 
             { ( type === 'icon' ) && <div className="icon-dropdown">
-                <input type="search" placeholder='Search...' onChange={ handleSearch }/>
+                <SearchControl
+                    placeholder = { __( 'Search...', 'i-am-news' ) }
+                    onChange = { handleSearch }
+                />
                 <IconCollection
                     filteredIcons = { filteredIcons }
                     icon = { value.value }

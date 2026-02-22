@@ -1,13 +1,15 @@
 const { Dropdown } = wp.components,
-    { useState, useEffect } = wp.element,
+    { useState, useEffect, useContext, createContext } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml
 
-import { IanControlHead } from "./components"
+import { IanControlHead, IanResponsiveIcons } from "./components"
 import googleFonts from '../google-fonts.min.json'
 import { Virtuoso } from "react-virtuoso";
 import Select from 'react-select'
 import { IanRangeControl } from './range'
+
+const TypographyContext = createContext( null )
 
 /**
  * MARK: Get font label
@@ -98,10 +100,13 @@ const fontFamilies = googleFonts.reduce( ( _thisVal, _thisFamily ) => {
  * 
  * @since 1.0.0
  */
-const loadGoogleFonts = ( group, range ) => {
+const loadGoogleFonts = ( group, range, extras = [] ) => {
     const { startIndex = 0, endIndex = 8 } = range,
-        fonts = group.filter( ( _, index ) => index >= startIndex && index <= endIndex ).map( font => `family=${ font.replaceAll( ' ', '+' ) }` ).join( '&' );
+        fonts = group.filter( ( _, index ) => index >= startIndex && index <= endIndex )
+            .map( font => `family=${ font.replaceAll( ' ', '+' ) }` )
+            .join( '&' )
 
+    if( extras.length > 0 ) fonts.concat( '&' + extras.map( font => `family=${ font.replaceAll( ' ', '+' ) }` ).join( '&' ) )
     let link = null
 
     if( document.getElementById( 'ian-google-fonts' ) ) {
@@ -127,11 +132,39 @@ export const TypographComponent = ( props ) => {
     const { label, description, setting } = props,
         [ value, setValue ] = useState( setting.get() ),
         { font_family, font_weight, font_size, line_height, letter_spacing, text_transform, text_decoration, preset } = value,
-        [ fontsToLoad, setFontsToLoad ] = useState( 0 ) 
+        [ range, setRange ] = useState( { startIndex: 0, endIndex: 8 } )
 
     useEffect( () => {
-        
-    }, [] )
+        let families = fontFamilies.map( font => font.value )
+        loadGoogleFonts( families, range, [ font_family.value ] )
+    }, [ range ] )
+
+    /**
+     * Update Value
+     * 
+     * @since 1.0.0
+     */
+    const updateValue = ( id, newValue ) => {
+        let newTypoValue = {
+            ...value,
+            [ id ]: newValue
+        }
+        setValue( newTypoValue )
+        setting.set( newTypoValue )
+    }
+
+    const contextObject = {
+        updateValue,
+        fontFamily: font_family,
+        fontWeight: font_weight,
+        fontSize: font_size,
+        lineHeight: line_height,
+        letterSpacing: letter_spacing,
+        textTransform: text_transform,
+        textDecoration: text_decoration,
+        preset,
+        range, setRange
+    }
 
     return <div className="control-content">
         <IanControlHead
@@ -158,16 +191,16 @@ export const TypographComponent = ( props ) => {
                     </>
                 } }
             /> */}
-            <FontFamily 
-                fontFamily = { font_family }
-            />
-            <FontWeight 
-                fontWeight = { font_weight }
-                fontFamily = { font_family }
-            />
-            <FontSize 
-                fontSize = { font_size }
-            />
+
+            <TypographyContext.Provider value={ contextObject }>
+
+                <FontFamily />
+                <FontWeight />
+                <FontSize />
+                <LineHeight />
+                <LetterSpacing />
+
+            </TypographyContext.Provider>
         </div>
     </div>
 }
@@ -177,13 +210,14 @@ export const TypographComponent = ( props ) => {
  * 
  * @since 1.0.0
  */
-const FontFamily = ( props ) => {
-    const { fontFamily } = props
+const FontFamily = () => {
+    const { fontFamily, updateValue } = useContext( TypographyContext )
 
     return <div className="font-family-block">
         <span className="label">{ __( 'Font Family' , 'i-am-news') }</span>
         <Select
             defaultValue = { fontFamily }
+            onChange = { ( newValue ) => updateValue( 'font_family', newValue ) }   
             options = { fontFamilies }
             components = { { MenuList: FontFamilyList } }
             placeholder = { __( escapeHTML( "Select an option" ), 'i-am-news' ) }
@@ -203,14 +237,14 @@ const FontFamily = ( props ) => {
  * @since 1.0.0
  */
 const FontFamilyList = ( props ) => {
-    const { children, maxHeight } = props,
+    const { children, maxHeight, selectProps } = props,
         calculatedHeight = Math.min( maxHeight, children.length * 38 ),
-        [ range, setRange ] = useState( { startIndex: 0, endIndex: 8 } )
-
+        { setRange, range } = useContext( TypographyContext )
+    
     useEffect(() => {
         if( ! children.length ) return
         let fontFamiles = children.map( child => child.props.value )
-        loadGoogleFonts( fontFamiles, range )
+        loadGoogleFonts( fontFamiles, range, [ selectProps.value.value ] )
     }, [ children ]);
 
     // If children.length === 0, search returned nothing
@@ -239,8 +273,8 @@ const FontFamilyList = ( props ) => {
  * 
  * @since 1.0.0
  */
-const FontWeight = ( props ) => {
-    const { fontWeight, fontFamily } = props,
+const FontWeight = () => {
+    const { fontWeight, fontFamily } = useContext( TypographyContext ),
         activeFontWeights = fontWeights[ fontFamily.label ],
         { normal = [], italic = [] } = activeFontWeights,
         options = [
@@ -263,9 +297,10 @@ const FontWeight = ( props ) => {
         let label = getWeightLabel( weight.value ),
             style = {
                 fontWeight: label.split( ' ' )[ 1 ],
-                fontStyle: label.includes( 'italic' ) ? 'italic' : 'normal'
+                fontStyle: label.includes( 'italic' ) ? 'italic' : 'normal',
+                fontFamily: fontFamily.value
             }
-        return <span className={ `weight-label ${ weight }` } style={ style }>{ label }</span>
+        return <span className={ `weight-label ${ weight.value }` } style={ style }>{ label }</span>
     }
 
     /**
@@ -274,8 +309,7 @@ const FontWeight = ( props ) => {
      * @since 1.0.0
      */
     const handleWeightChange = ( newValue ) => {
-        console.log( options )
-        console.log( newValue )
+        updateValue( 'font_weight', newValue.value )
     }
 
     return <div className="font-weight-block">
@@ -301,7 +335,44 @@ const FontWeight = ( props ) => {
  */
 const FontSize = () => {
     return <div className="font-size-block">
-        <span className="label">{ __( 'Font Size' , 'i-am-news') }</span>
+        <div className="block-head">
+            <span className="label">{ __( 'Font Size' , 'i-am-news') }</span>
+            <IanResponsiveIcons />
+        </div>
+        <div className="range-control">
+            <IanRangeControl />
+        </div>
+    </div>
+}
+
+/**
+ * MARK: Line Height
+ * 
+ * @since 1.0.0
+ */
+const LineHeight = () => {
+    return <div className="line-height-block">
+        <div className="block-head">
+            <span className="label">{ __( 'Line Height' , 'i-am-news') }</span>
+            <IanResponsiveIcons />
+        </div>
+        <div className="range-control">
+            <IanRangeControl />
+        </div>
+    </div>
+}
+
+/**
+ * MARK: Letter Spacing
+ * 
+ * @since 1.0.0
+ */
+const LetterSpacing = () => {
+    return <div className="line-height-block">
+        <div className="block-head">
+            <span className="label">{ __( 'Letter Spacing' , 'i-am-news') }</span>
+            <IanResponsiveIcons />
+        </div>
         <div className="range-control">
             <IanRangeControl />
         </div>
