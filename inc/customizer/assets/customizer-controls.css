@@ -29,7 +29,7 @@ MARK: 1.0 Normalize
 
     .customize-pane-child.control-section .customize-control {
         padding: 16px 0;
-        margin: 0;
+        /* margin: 0; */
         border-bottom: 1px solid var(--customizer-light-grey);
     }
 
@@ -94,6 +94,24 @@ MARK: 2.0 Radio Image
     .customize-control-radio-image .control-content .components-radio-control__label {
         display: block;
         height: 100%;
+        padding: 4px;
+        border-radius: 5px;
+        outline: 1px solid var(--customizer-light-grey);
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__label img {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+        display: block;
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__label:hover {
+        outline: 1px solid var(--customizer-color);
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__input:checked + .components-radio-control__label {
+        outline-color: var(--customizer-color);
     }
 
     .customize-control-radio-image .control-content .components-radio-control__input:checked + .components-radio-control__label::after,
@@ -118,9 +136,15 @@ MARK: 2.0 Radio Image
 MARK: 3.0 Section Tab
 =========================
 */
-    .customize-control-section-tab {
+    .customize-pane-child.control-section .customize-control.customize-control-section-tab {
         margin-inline: -12px;
         width: calc(100% + 24px);
+        padding: 0;
+        border-bottom: none;
+    }
+
+    .customize-control-section-tab .control-content .components-base-control__label {
+        margin-bottom: 0;
     }
 
     .customize-control-section-tab .components-radio-control__option {
@@ -143,12 +167,20 @@ MARK: 3.0 Section Tab
 
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab {
         text-align: center;
-        padding: 10px;
+        padding: 15px;
         font-weight: 600;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
     }
+
+    .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab:hover {
+        color: var(--customizer-color);
+    }
+
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab.active {
-        background: var(--customizer-dark-grey);
-        color: #fff;
+        background: var(--customizer-light-grey);
+        color: var(--customizer-color);
     }
 
 /*
