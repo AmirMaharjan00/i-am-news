@@ -75,6 +75,32 @@ MARK: 1.0 Normalize
 
     }
 
+    /* Chrome, Edge, Safari */
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar-track {
+        background: var(--customizer-light-grey);
+        /* border-radius: 6px; */
+    }
+
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar-thumb {
+        background: #888;
+        /* border-radius: 6px; */
+        /* border: 3px solid #f1f1f1; */
+    }
+
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* Firefox */
+    .wp-full-overlay-sidebar-content {
+        scrollbar-width: thin;
+        scrollbar-color: var(--customizer-dark-grey) #00000000;
+    }
+
 /*
 =========================
 MARK: 2.0 Radio Image
