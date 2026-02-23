@@ -204,6 +204,7 @@ MARK: 3.0 Section Tab
         font-size: 16px;
         text-transform: uppercase;
         letter-spacing: 3px;
+        background: var(--customizer-light-grey);
     }
 
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab:hover {
@@ -211,7 +212,7 @@ MARK: 3.0 Section Tab
     }
 
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab.active {
-        background: var(--customizer-light-grey);
+        background: #fff;
         color: var(--customizer-color);
     }
 
