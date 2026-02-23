@@ -4,7 +4,9 @@ const { useState } = wp.element,
 import { IanControlHead } from "./components";
 
 export const Example = () => {
-    const [ alignment, setAlignment ] = useState( 'center center' );
+    const { label, description, setting } = props,
+        [ value, setValue ] = useState( setting.get() )
+    // const [ alignment, setAlignment ] = useState( 'center center' );
 
     return <div className="control-content">
         <IanControlHead
@@ -13,10 +15,10 @@ export const Example = () => {
         />
 
         <div className="content-wrapper">
-            <AlignmentMatrixControl
+            {/* <AlignmentMatrixControl
                 value = { alignment }
                 onChange = { setAlignment }
-            />
+            /> */}
         </div>
     </div>
 };

@@ -14,6 +14,7 @@
     use IAN\Customizer\Controls\Toggle_Button as Toggle_Button;
     use IAN\Customizer\Controls\Typography as Typography;
     use IAN\Customizer\Controls\Radio_Tab as Radio_Tab;
+    use IAN\Customizer\Controls\Text as Text;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
 
@@ -120,6 +121,7 @@
                     'toggle-button'    =>  [ $this, 'add_Toggle_Button' ],
                     'typography'    =>  [ $this, 'add_typography' ],
                     'radio-tab'    =>  [ $this, 'add_radio_tab' ],
+                    'ian-text'    =>  [ $this, 'add_text' ],
                 ];
             }
 
@@ -270,6 +272,15 @@
              */
             private function add_radio_tab( $id, $control ) {
                 $this->manager->add_control( new Radio_Tab( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Text
+             * 
+             * @since 1.0.0
+             */
+            private function add_text( $id, $control ) {
+                $this->manager->add_control( new Text( $this->manager, $id, $control ) );
             }
 
             /**
