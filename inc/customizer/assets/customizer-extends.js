@@ -2618,11 +2618,15 @@ __webpack_require__.r(__webpack_exports__);
 const {
     useState,
     useRef,
-    useEffect
+    useEffect,
+    useContext,
+    createContext
   } = wp.element,
   {
     Button,
-    SearchControl
+    SearchControl,
+    Dashicon,
+    Dropdown
   } = wp.components,
   {
     __
@@ -2632,7 +2636,8 @@ const {
   } = wp.escapeHtml,
   {
     attachment: mediaAttachment
-  } = wp.media;
+  } = wp.media,
+  IconPickerContext = createContext();
 
 
 
@@ -2695,6 +2700,7 @@ const IconPickerComponent = props => {
    * @since 1.0.0
    */
   const handleButtonClick = newType => {
+    if (newType === type) return;
     let newValue = {
       type: newType
     };
@@ -2767,70 +2773,43 @@ const IconPickerComponent = props => {
     let filtered = _font_awesome_classes_json__WEBPACK_IMPORTED_MODULE_1__.filter(icon => icon.includes(searched.toLowerCase()));
     setFilteredIcons(filtered);
   };
+
+  /**
+   * context object
+   * 
+   * @since 1.0.0
+   */
+  const iconPickerContextObject = {
+    handleRemoveImage,
+    handleSearch,
+    openMediaLibrary,
+    handleButtonClick,
+    handleIconClick,
+    type,
+    currentValue,
+    icon,
+    imageUrl,
+    filteredIcons
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "control-content",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
       label: label,
       description: description
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "content-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "buttons-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
-          onClick: () => handleButtonClick('none'),
-          variant: type === 'none' ? 'primary' : 'secondary',
-          className: "button-item",
-          children: __(escapeHTML('None'), 'i-am-news')
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
-          onClick: () => handleButtonClick('image'),
-          variant: type === 'image' ? 'primary' : 'secondary',
-          className: "button-item",
-          children: __(escapeHTML('Image'), 'i-am-news')
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
-          onClick: () => handleButtonClick('icon'),
-          variant: type === 'icon' ? 'primary' : 'secondary',
-          className: "button-item",
-          children: __(escapeHTML('Icon'), 'i-am-news')
-        })]
-      }), type === 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "image-dropdown",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "preview-area",
-          onClick: openMediaLibrary,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "overlay"
-          }), imageUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-            src: imageUrl,
-            className: "image-preview"
-          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            className: "label",
-            children: __('Add Image', 'i-am-news')
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "buttons-area",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(IconPickerContext.Provider, {
+          value: iconPickerContextObject,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
-            className: "remove button-item",
-            variant: "secondary",
-            onClick: handleRemoveImage,
-            children: __(escapeHTML('Remove'), 'i-am-news')
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
-            className: "replace button-item",
-            variant: "secondary",
-            onClick: openMediaLibrary,
-            children: __(escapeHTML('Replace'), 'i-am-news')
-          })]
-        })]
-      }), type === 'icon' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "icon-dropdown",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SearchControl, {
-          placeholder: __('Search...', 'i-am-news'),
-          onChange: handleSearch
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(IconCollection, {
-          filteredIcons: filteredIcons,
-          icon: value.value,
-          handleIconClick: handleIconClick
-        })]
-      })]
+            onClick: () => handleButtonClick('none'),
+            variant: type === 'none' ? 'primary' : 'secondary',
+            className: "button-item",
+            children: __(escapeHTML('None'), 'i-am-news')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Image, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Icon, {})]
+        })
+      })
     })]
   });
 };
@@ -2840,12 +2819,12 @@ const IconPickerComponent = props => {
  * 
  * @since 1.0.0
  */
-const IconCollection = props => {
+const IconCollection = () => {
   const {
     icon,
     handleIconClick,
     filteredIcons
-  } = props;
+  } = useContext(IconPickerContext);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_virtuoso__WEBPACK_IMPORTED_MODULE_2__.VirtuosoGrid, {
     totalCount: filteredIcons.length,
     className: "icon-collection",
@@ -2876,6 +2855,140 @@ const IconCollection = props => {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
           className: filteredIcons[index]
         })
+      });
+    }
+  });
+};
+
+/**
+ * MARK: Image Component
+ * 
+ * @since 1.0.0
+ */
+const Image = () => {
+  const {
+    openMediaLibrary,
+    imageUrl,
+    handleRemoveImage,
+    type,
+    handleButtonClick
+  } = useContext(IconPickerContext);
+
+  /**
+   * Handle Button click
+   * 
+   * @since 1.0.0
+   */
+  const handleDropdown = onToggle => {
+    handleButtonClick('image');
+    onToggle();
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dropdown, {
+    className: "button-item",
+    contentClassName: "icon-picker-popover",
+    popoverProps: {
+      placement: 'bottom-start',
+      shift: true
+    },
+    renderToggle: ({
+      isOpen,
+      onToggle
+    }) => {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(Button, {
+        onClick: () => handleDropdown(onToggle),
+        variant: type === 'image' ? 'primary' : 'secondary',
+        className: "button-item",
+        children: [__(escapeHTML('Image'), 'i-am-news'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
+          icon: `arrow-${isOpen ? 'down' : 'up'}-alt2`
+        })]
+      });
+    },
+    renderContent: () => {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "image-dropdown",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "preview-area",
+          onClick: openMediaLibrary,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "overlay"
+          }), imageUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: imageUrl,
+            className: "image-preview"
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "label",
+            children: __('Add Image', 'i-am-news')
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "buttons-area",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
+            className: "remove button-item",
+            variant: "secondary",
+            onClick: handleRemoveImage,
+            children: __(escapeHTML('Remove'), 'i-am-news')
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
+            className: "replace button-item",
+            variant: "secondary",
+            onClick: openMediaLibrary,
+            children: __(escapeHTML('Replace'), 'i-am-news')
+          })]
+        })]
+      });
+    }
+  });
+};
+
+/**
+ * MARK: Icon Component
+ * 
+ * @since 1.0.0
+ */
+const Icon = () => {
+  const {
+    handleSearch,
+    type,
+    handleButtonClick
+  } = useContext(IconPickerContext);
+
+  /**
+  * Handle Button click
+  * 
+  * @since 1.0.0
+  */
+  const handleDropdown = onToggle => {
+
+    // onToggle()
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dropdown, {
+    className: "button-item",
+    contentClassName: "icon-picker-popover icon",
+    popoverProps: {
+      placement: 'bottom-start',
+      shift: true
+    },
+    onToggle: willOpen => {
+      console.log(willOpen);
+      handleButtonClick('icon');
+    },
+    renderToggle: ({
+      isOpen,
+      onToggle
+    }) => {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(Button, {
+        onClick: onToggle,
+        variant: type === 'icon' ? 'primary' : 'secondary',
+        className: "button-item",
+        children: [__(escapeHTML('Icon'), 'i-am-news'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
+          icon: `arrow-${isOpen ? 'down' : 'up'}-alt2`
+        })]
+      });
+    },
+    renderContent: () => {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "icon-dropdown",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SearchControl, {
+          placeholder: __('Search...', 'i-am-news'),
+          onChange: handleSearch
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(IconCollection, {})]
       });
     }
   });
@@ -3188,6 +3301,7 @@ const TextComponent = props => {
       label: label,
       description: description
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "content-wrapper",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextControl, {
         __next40pxDefaultSize: true,
         value: value,

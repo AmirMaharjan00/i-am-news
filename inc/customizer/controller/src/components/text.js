@@ -22,7 +22,7 @@ export const TextComponent = ( props ) => {
             description = { description }
         />
 
-        <div>
+        <div className="content-wrapper">
             <TextControl
                 __next40pxDefaultSize
                 value = { value }

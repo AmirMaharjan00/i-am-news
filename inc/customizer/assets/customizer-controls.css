@@ -123,6 +123,10 @@ MARK: 2.0 Radio Image
         position: relative;
     }
 
+    .customize-control-radio-image .control-content .components-base-control__label {
+        margin-bottom: 0;
+    }
+
     .customize-control-radio-image .control-content .components-radio-control__label {
         display: block;
         height: 100%;
@@ -229,41 +233,49 @@ MARK: 4.0 Icon Picker
     }
 
     .customize-control-icon-picker .buttons-wrapper .button-item {
-        flex: 1;
+        width: 100%;
         display: block;
         text-align: center;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area {
+    .customize-control-icon-picker .buttons-wrapper .components-button.button-item {
+        padding: 0;
+    }
+
+    .icon-picker-popover .components-popover__content{
+        width: 300px;
+    }
+
+    .icon-picker-popover .image-dropdown .preview-area {
         width: 100%;
         height: 130px;
-        border: 2px dashed #000;
-        margin: 10px 0;
+        outline: 2px dashed var(--customizer-dark-grey);
+        margin-bottom: 10px;
         position: relative;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area .overlay {
+    .icon-picker-popover .image-dropdown .preview-area .overlay {
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 9;
-        background: #8080805a;
+        background: #f0f0f094;
         display: none;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area:hover .overlay {
+    .icon-picker-popover .image-dropdown .preview-area:hover .overlay {
         display: block;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area .image-preview {
+    .icon-picker-popover .image-dropdown .preview-area .image-preview {
         object-fit: cover;
         height: 100%;
         width: 100%;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area .label {
+    .icon-picker-popover .image-dropdown .preview-area .label {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -272,40 +284,44 @@ MARK: 4.0 Icon Picker
         font-size: 22px;
     }
 
-    .customize-control-icon-picker .image-dropdown .buttons-area {
+    .icon-picker-popover .image-dropdown .buttons-area {
         display: flex;
         gap: 10px;
     }
 
-    .customize-control-icon-picker .image-dropdown .buttons-area .button-item {
+    .icon-picker-popover .image-dropdown .buttons-area .button-item {
         display: block;
         text-align: center;
         width: 100%;
     }
 
-    .customize-control-icon-picker .image-dropdown .buttons-area .button-item.remove {
+    .icon-picker-popover .image-dropdown .buttons-area .button-item.remove {
         color: #ff0000;
         box-shadow: inset 0 0 0 1px #ff0000;
     }
 
-    .customize-control-icon-picker .icon-dropdown {
-        margin-top: 10px;
+    .icon-picker-popover .icon-dropdown {
         padding: 10px;
         background: #fff;
+        outline: 1px solid var(--customizer-light-grey);
     }
 
-    .customize-control-icon-picker .icon-dropdown .icon-collection {
+    .icon-picker-popover .icon-dropdown .icon-collection {
         height: 200px !important;
     }
 
-    .customize-control-icon-picker .icon-dropdown .icon-collection .container {
+    .icon-picker-popover .icon-dropdown .icon-collection .container {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: 10px;
     }
 
-    .customize-control-icon-picker .icon-dropdown .icon-btn {
+    .icon-picker-popover .icon-dropdown .icon-btn {
         display: block;
+        padding: 0;
+    }
+
+    .icon-picker-popover.icon .components-popover__content {
         padding: 0;
     }
 
