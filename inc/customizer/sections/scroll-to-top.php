@@ -6,15 +6,26 @@
      * @since 1.0.0
      */
     namespace IAN\Customizer\Section;
+
     use function esc_html__;
     use function esc_attr;
     use function get_template_directory_uri;
+
+    use IAN\Helpers;
 
     if( ! class_exists( __NAMESPACE__ . '\\Scroll_To_Top' ) ) :
         /**
          * Scroll to top
          */
         class Scroll_To_Top extends Section {
+            /**
+             * Id of section
+             * 
+             * @since 1.0.0
+             * @var string
+             */
+            public $id = 'ian-scroll-to-top';
+
             /**
              * Instance of class
              * 
@@ -47,10 +58,8 @@
                 $this->add_control( 'scroll_to_top_layouts' );
                 $this->add_control( 'scroll_to_top_label' );
                 $this->add_control( 'scroll_to_top_icon_picker' );
+                $this->add_control( 'scroll_to_top_typography' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
-                $this->add_control( 'test' );
-                $this->add_control( 'typography_test' );
-                $this->add_control( 'radio_tab_test' );
             }
 
             /**
@@ -83,15 +92,9 @@
                     ],
                     'scroll_to_top_icon_picker' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
-                        'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
-                    'test' =>  [
-                        // 'sanitize_function' =>  'sanitize_text_field',
-                        'transport'   =>  'postMessage',
-                        'default'   =>  $this->get_defaults( $id )
-                    ],
-                    'typography_test' =>  [
+                    'scroll_to_top_typography' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
@@ -116,6 +119,20 @@
                     'scroll_to_top_section' =>  [
                         'title' =>  esc_html__( 'Scroll to Top', 'i-am-news' )
                     ],
+                    'scroll_to_top_section_tab' =>  [
+                        'type'  =>  'section-tab',
+                        'section'   =>  $this->section,
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'General', 'i-am-news' ),
+                                'value' =>  'general'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Design', 'i-am-news' ),
+                                'value' =>  'design'
+                            ]
+                        ]
+                    ],
                     'scroll_to_top_layouts' =>  [
                         'label' =>  esc_html__( 'Layouts', 'i-am-news' ),
                         'description' =>  esc_html__( 'Pick your desired layout.', 'i-am-news' ),
@@ -135,30 +152,8 @@
                             ]
                         ]
                     ],
-                    'scroll_to_top_box_shadow' =>  [
-                        'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
-                        'description'   =>  esc_html__( 'This is description', 'i-am-news' ),
-                        'type'  =>  'box-shadow',
-                        'tab'   =>  'design',
-                        'section'   =>  $this->section
-                    ],
-                    'scroll_to_top_section_tab' =>  [
-                        'type'  =>  'section-tab',
-                        'section'   =>  $this->section,
-                        'fields'    =>  [
-                            [
-                                'label' =>  esc_html__( 'General', 'i-am-news' ),
-                                'value' =>  'general'
-                            ],
-                            [
-                                'label' =>  esc_html__( 'Design', 'i-am-news' ),
-                                'value' =>  'design'
-                            ]
-                        ]
-                    ],
                     'scroll_to_top_label' =>  [
                         'label' =>  esc_html__( 'Label', 'i-am-news' ),
-                        'description' =>  esc_html__( 'Testing', 'i-am-news' ),
                         'type'  =>  'ian-text',
                         'section'   =>  $this->section
                     ],
@@ -167,15 +162,17 @@
                         'type'  =>  'icon-picker',
                         'section'   =>  $this->section
                     ],
-                    'test' =>  [
-                        'label' =>  esc_html__( 'Testing', 'i-am-news' ),
-                        'type'  =>  'toggle-button',
-                        'section'   =>  $this->section
-                    ],
-                    'typography_test' =>  [
+                    'scroll_to_top_typography' =>  [
                         'label' =>  esc_html__( 'Typography', 'i-am-news' ),
                         'type'  =>  'typography',
                         'tab'  =>  'design',
+                        'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_box_shadow' =>  [
+                        'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
+                        'description'   =>  esc_html__( 'This is description', 'i-am-news' ),
+                        'type'  =>  'box-shadow',
+                        'tab'   =>  'design',
                         'section'   =>  $this->section
                     ],
                     'radio_tab_test' =>  [
@@ -216,8 +213,7 @@
                         'type'  =>  'icon',
                         'value'  =>  'fa-solid fa-jet-fighter-up'
                     ],
-                    'test' =>   false,
-                    'typography_test'   =>  [
+                    'scroll_to_top_typography'   =>  [
                         'font_family'   => [ 'value' => 'Jost', 'label' => 'Jost' ],
                         'font_weight'   =>  '500italic',
                         'font_size'   => [
@@ -260,12 +256,15 @@
              * @since 1.0.0
              */
             public function render_html() {
-                $block_class[] = 'scroll-to-top';
+                $block_class[] = $this->id;
                 $block_class[] = 'layout--' . $this->get_customizer_value( 'scroll_to_top_layouts' );
                 ?>
-                    <div id="scroll-to-top" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
+                    <div id="<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
+
                         <span class="label"><?php echo esc_html( $this->get_customizer_value( 'scroll_to_top_label' ) ); ?></span>
-                        <span class="icon"></span>
+
+                        <?php echo Helpers::get_icon_html( $this->get_customizer_value( 'scroll_to_top_icon_picker' ) ); ?>
+
                     </div>
                 <?php
             }

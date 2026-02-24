@@ -56,3 +56,10 @@ require_once get_template_directory() . '/inc/customizer/theme-starter.php';
  * @since 1.0.0
  */
 require_once get_template_directory() . '/inc/customizer/sanitize-functions.php';
+
+/**
+ * Helper Functions
+ * 
+ * @since 1.0.0
+ */
+require_once get_template_directory() . '/inc/helpers.php';
