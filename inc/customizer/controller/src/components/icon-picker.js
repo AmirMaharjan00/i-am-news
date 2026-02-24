@@ -245,7 +245,7 @@ const Image = () => {
                 className = "button-item"
             >
                 { __( escapeHTML( 'Image' ), 'i-am-news' ) }
-                <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } />
+                <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } className="icon-picker-dashicon" />
             </Button>
         } }
         renderContent = { () => {
@@ -307,7 +307,7 @@ const Icon = () => {
                 className = "button-item"
             >
                 { __( escapeHTML( 'Icon' ), 'i-am-news' ) }
-                <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } />
+                <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } className="icon-picker-dashicon" />
             </Button>
         } }
         renderContent = { ( { onClose } ) => {

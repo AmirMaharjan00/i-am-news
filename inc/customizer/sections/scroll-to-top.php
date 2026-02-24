@@ -51,7 +51,6 @@
                 $this->add_control( 'test' );
                 $this->add_control( 'typography_test' );
                 $this->add_control( 'radio_tab_test' );
-                $this->add_control( 'text_test' );
             }
 
             /**
@@ -98,11 +97,6 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'radio_tab_test' =>  [
-                        // 'sanitize_function' =>  'sanitize_text_field',
-                        'transport'   =>  'postMessage',
-                        'default'   =>  $this->get_defaults( $id )
-                    ],
-                    'text_test' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
@@ -199,11 +193,6 @@
                             ]
                         ]
                     ],
-                    'text_test' =>  [
-                        'label' =>  esc_html__( 'Text Test', 'i-am-news' ),
-                        'type'  =>  'ian-text',
-                        'section'   =>  $this->section
-                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -251,7 +240,6 @@
                         'preset'    =>  '-1'
                     ],
                     'radio_tab_test'    =>  'one',
-                    'text_test'    =>  esc_html__( 'Testing', 'i-am-news' )
                 ];
             }
 
