@@ -173,34 +173,33 @@ export const TypographComponent = ( props ) => {
         />
 
         <div className="content-wrapper">
-            {/* <Dropdown
-                className = 'typography-container'
-                contentClassName = 'typography-popover'
+            <Dropdown
+                className = 'ian-dropdown-container typography-container'
+                contentClassName = 'ian-dropdown-popover typography-popover'
                 popoverProps = { {
-                    placement: 'bottom-start',
+                    placement: 'right-start',
                     shift: true
                 } }
                 renderToggle = { ( { isOpen, onToggle } ) => {
                     return <div className='highlight' onClick={ onToggle } aria-expanded={ isOpen }>
-                        { `Font Family: ${ font_family.value }; Font Weight: ${ font_weight }` }
+                        <span>{ `Family: ${ font_family.value } /` }</span>
+                        <span>{ `Weight: ${ font_weight } /` }</span>
+                        <span>{ `Size: ${ font_size.desktop }px` }</span>
                     </div>
                 } }
                 renderContent = { () => {
-                    return <>
-                        
-                    </>
+                    return <TypographyContext.Provider value={ contextObject }>
+
+                        <FontFamily />
+                        <FontWeight />
+                        <FontSize />
+                        <LineHeight />
+                        <LetterSpacing />
+
+                    </TypographyContext.Provider>
                 } }
-            /> */}
+            />
 
-            <TypographyContext.Provider value={ contextObject }>
-
-                <FontFamily />
-                <FontWeight />
-                <FontSize />
-                <LineHeight />
-                <LetterSpacing />
-
-            </TypographyContext.Provider>
         </div>
     </div>
 }
@@ -213,7 +212,7 @@ export const TypographComponent = ( props ) => {
 const FontFamily = () => {
     const { fontFamily, updateValue } = useContext( TypographyContext )
 
-    return <div className="font-family-block">
+    return <div className="typography-block font-family-block">
         <span className="label">{ __( 'Font Family' , 'i-am-news') }</span>
         <Select
             defaultValue = { fontFamily }
@@ -312,7 +311,7 @@ const FontWeight = () => {
         updateValue( 'font_weight', newValue.value )
     }
 
-    return <div className="font-weight-block">
+    return <div className="typography-block font-weight-block">
         <span className="label">{ __( 'Font Weight' , 'i-am-news') }</span>
         <Select
             defaultValue = { { label: fontWeight, value: fontWeight } }
@@ -334,7 +333,7 @@ const FontWeight = () => {
  * @since 1.0.0
  */
 const FontSize = () => {
-    return <div className="font-size-block">
+    return <div className="typography-block font-size-block">
         <div className="block-head">
             <span className="label">{ __( 'Font Size' , 'i-am-news') }</span>
             <IanResponsiveIcons />
@@ -351,7 +350,7 @@ const FontSize = () => {
  * @since 1.0.0
  */
 const LineHeight = () => {
-    return <div className="line-height-block">
+    return <div className="typography-block line-height-block">
         <div className="block-head">
             <span className="label">{ __( 'Line Height' , 'i-am-news') }</span>
             <IanResponsiveIcons />
@@ -368,7 +367,7 @@ const LineHeight = () => {
  * @since 1.0.0
  */
 const LetterSpacing = () => {
-    return <div className="line-height-block">
+    return <div className="typography-block letter-spacing-block">
         <div className="block-head">
             <span className="label">{ __( 'Letter Spacing' , 'i-am-news') }</span>
             <IanResponsiveIcons />

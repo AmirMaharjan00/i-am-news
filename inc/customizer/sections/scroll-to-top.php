@@ -135,7 +135,6 @@
                     ],
                     'scroll_to_top_layouts' =>  [
                         'label' =>  esc_html__( 'Layouts', 'i-am-news' ),
-                        'description' =>  esc_html__( 'Pick your desired layout.', 'i-am-news' ),
                         'type'  =>  'radio-image',
                         'tab'   =>  'general',
                         'section'   =>  $this->section,
@@ -170,7 +169,6 @@
                     ],
                     'scroll_to_top_box_shadow' =>  [
                         'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
-                        'description'   =>  esc_html__( 'This is description', 'i-am-news' ),
                         'type'  =>  'box-shadow',
                         'tab'   =>  'design',
                         'section'   =>  $this->section
@@ -219,17 +217,17 @@
                         'font_size'   => [
                             'desktop'   =>  13,
                             'tablet'   =>  13,
-                            'smartphone'   =>  13
+                            'mobile'   =>  13
                         ],
                         'line_height'   => [
                             'desktop'   =>  21,
                             'tablet'   =>  21,
-                            'smartphone'   =>  21
+                            'mobile'   =>  21
                         ],
                         'letter_spacing'   => [
                             'desktop'   =>  0,
                             'tablet'   =>  0,
-                            'smartphone'   =>  0
+                            'mobile'   =>  0
                         ],
                         'text_transform'    => 'unset',
                         'text_decoration'    => 'none',

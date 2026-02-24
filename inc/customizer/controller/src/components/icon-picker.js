@@ -231,8 +231,8 @@ const Image = () => {
     const { openMediaLibrary, imageUrl, handleRemoveImage, type, handleButtonClick } = useContext( IconPickerContext )
 
     return <Dropdown
-        className = 'button-item'
-        contentClassName = 'icon-picker-popover'
+        className = 'ian-dropdown-container button-item'
+        contentClassName = 'ian-dropdown-popover icon-picker-popover'
         popoverProps = { {
             placement: 'bottom-start',
             shift: true
@@ -293,8 +293,8 @@ const Icon = () => {
     const { handleSearch, type, handleButtonClick } = useContext( IconPickerContext )
 
     return <Dropdown
-        className = 'button-item'
-        contentClassName = 'icon-picker-popover icon'
+        className = 'ian-dropdown-container button-item'
+        contentClassName = 'ian-dropdown-popover icon-picker-popover icon'
         popoverProps = { {
             placement: 'bottom-start',
             shift: true

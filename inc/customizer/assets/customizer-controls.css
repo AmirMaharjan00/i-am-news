@@ -106,6 +106,29 @@ MARK: 1.0 Normalize
         margin: 0;
     }
 
+    .components-popover.ian-dropdown-popover .components-popover__content {
+        width: 300px;
+    }
+
+    .customize-control .ian-dropdown-container {
+        width: 100%;
+    }
+
+    .customize-control .ian-dropdown-container .highlight {
+        background-color: #fff;
+        color: #1e1e1e;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        outline: 1px solid #8c8f94;
+        gap: 4px;
+    }
+
+    .customize-control .ian-dropdown-container .highlight:hover {
+        outline: 1px solid var(--customizer-color);
+    }
+
 /*
 =========================
 MARK: 2.0 Radio Image
@@ -253,10 +276,6 @@ MARK: 4.0 Icon Picker
         width: unset;
     }
 
-    .icon-picker-popover .components-popover__content{
-        width: 300px;
-    }
-
     .icon-picker-popover .image-dropdown .preview-area {
         width: 100%;
         height: 130px;
@@ -359,6 +378,67 @@ MARK: 7.0 Typography
 
     .customize-control-typography .family-collection {
         width: 100%;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block:not(:last-child) {
+        margin-bottom: 15px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .label {
+        display: block;
+        color: #000;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block > .label {
+        margin-bottom: 5px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .block-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .block-head .responsive-icon {
+        font-size: 13px;
+        line-height: unset;
+        height: unset;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .block-head .responsive-icon:hover {
+        color: var(--customizer-color);
+    }
+    
+    .ian-dropdown-popover.typography-popover .typography-block .range-control {
+        display: flex;
+        align-items: center;
+    }
+    
+    .ian-dropdown-popover.typography-popover .typography-block .components-range-control.ian-range-item .reset-button .dashicon {
+        font-size: 15px;
+    }
+    
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control {
+        width: 80%;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control {
+        flex: 1;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-number-control {
+        margin-left: 5px !important;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-input-control__container {
+        width: calc(60px);
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-input-control__backdrop,
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control .components-input-control__backdrop {
+        outline: 1px solid #cccccc;
+        border: unset;
     }
 
 /*

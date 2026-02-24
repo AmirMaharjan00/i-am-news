@@ -16,13 +16,14 @@ export const IanRangeControl = ( props ) => {
         <RangeControl
             __next40pxDefaultSize
             value = { 3 }
-            afterIcon = { <Button variant = 'secondary'><Dashicon icon="image-rotate" /></Button> }
+            className = 'ian-range-item'
             // onChange = { ( value ) => setColumns( value ) }
             min = { 2 }
             max = { 10 }
         />
         <SelectControl
             value = { 'px' }
+            className = 'ian-range-item'
             options = { [
                 { label: 'Px', value: 'px' },
                 { label: 'Em', value: 'em' },

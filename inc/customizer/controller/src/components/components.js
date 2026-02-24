@@ -28,8 +28,14 @@ export const IanControlHead = ( props ) => {
  */
 export const IanResponsiveIcons = () => {
     return <div classname="responsive-icons">
-        <Dashicon icon="desktop" />
-        <Dashicon icon="tablet" />
-        <Dashicon icon="smartphone" />
+        <Tooltip text={ __( 'Desktop', 'i-am-news' ) }>
+            <Dashicon className="responsive-icon" icon="desktop" placement="top" delay={ 200 }/>
+        </Tooltip>
+        <Tooltip text={ __( 'Tablet', 'i-am-news' ) }>
+            <Dashicon className="responsive-icon" icon="tablet" placement="top" delay={ 200 }/>
+        </Tooltip>
+        <Tooltip text={ __( 'Smartphone', 'i-am-news' ) }>
+            <Dashicon className="responsive-icon" icon="smartphone" placement="top" delay={ 200 }/>
+        </Tooltip>
     </div>
 }

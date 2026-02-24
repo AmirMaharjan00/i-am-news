@@ -35,10 +35,10 @@ export const BoxShadowComponent = ( props ) => {
         <div className="content-wrapper">
 
             <Dropdown
-                className = 'box-shadow-container'
-                contentClassName = 'box-shadow-popover'
+                className = 'ian-dropdown-container box-shadow-container'
+                contentClassName = 'ian-dropdown-popover box-shadow-popover'
                 popoverProps = { {
-                    placement: 'bottom-start',
+                    placement: 'right-start',
                     shift: true
                 } }
                 renderToggle = { ( { isOpen, onToggle } ) => {
