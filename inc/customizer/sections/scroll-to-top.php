@@ -229,7 +229,7 @@
                             'tablet'   =>  0,
                             'mobile'   =>  0
                         ],
-                        'text_transform'    => 'unset',
+                        'text_transform'    => 'none',
                         'text_decoration'    => 'none',
                         'preset'    =>  '-1'
                     ],

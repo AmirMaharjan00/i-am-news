@@ -107,7 +107,8 @@ MARK: 1.0 Normalize
     }
 
     .components-popover.ian-dropdown-popover .components-popover__content {
-        width: 300px;
+        width: 350px;
+        padding: 15px;
     }
 
     .customize-control .ian-dropdown-container {
@@ -123,10 +124,45 @@ MARK: 1.0 Normalize
         padding: 0 12px;
         outline: 1px solid #8c8f94;
         gap: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .customize-control .ian-dropdown-container .highlight:hover {
         outline: 1px solid var(--customizer-color);
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker,
+    .components-popover.ian-dropdown-popover .components-color-picker .react-colorful,
+    .components-popover.ian-dropdown-popover .components-color-picker .react-colorful > * {
+        width: 100%;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex.components-h-stack:first-child {
+        outline: 1px solid #cccccc;
+        height: 40px;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex:last-child {
+        padding-inline: 0;
+        padding-bottom: 0;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex .components-input-control__container {
+        width: 100%;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex:first-child .components-select-control .components-input-control__backdrop{
+        outline: unset;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex .components-input-control__container {
+        width: 100%;
+    }
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex .components-input-control__container .components-input-control__backdrop {
+        outline: 1px solid #cccccc;
+        border: unset;
     }
 
 /*
@@ -338,6 +374,7 @@ MARK: 4.0 Icon Picker
 
     .icon-picker-popover .icon-dropdown .icon-collection {
         height: 200px !important;
+        margin-top: 10px;
     }
 
     .icon-picker-popover .icon-dropdown .icon-collection .container {
@@ -353,6 +390,73 @@ MARK: 4.0 Icon Picker
 
     .icon-picker-popover.icon .components-popover__content {
         padding: 0;
+    }
+
+    .components-popover.ian-dropdown-popover.icon-picker-popover .components-popover__content {
+        width: 300px
+    }
+
+/*
+=========================
+MARK: 5.0 Box Shadow
+=========================
+*/
+    .components-popover.box-shadow-popover .components-popover__content > .box-shadow-block {
+        margin-bottom: 15px;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.flex-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block:last-child {
+        margin-bottom: unset !important;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .block-head {
+        margin-bottom: 5px;
+        display: block;
+        color: #000;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block,
+    .components-popover.box-shadow-popover .box-shadow-block.toggle-block {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: left;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block {
+        justify-content: space-between;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block .component-color-indicator {
+        border-radius: 5px;
+        height: 32px;
+        width: 60px;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block .block-head,
+    .components-popover.box-shadow-popover .box-shadow-block.toggle-block .block-head {
+        margin-bottom: unset;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .components-range-control .components-input-control__container {
+        width: calc(60px);
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .components-range-control .components-input-control__backdrop {
+        outline: 1px solid #cccccc;
+        inset: 0px;
+        border: unset;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .components-range-control .components-input-control__input {
+        height: 32px;
+        min-height: 32px;
     }
 
 /*
@@ -420,7 +524,7 @@ MARK: 7.0 Typography
     }
     
     .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control {
-        width: 80%;
+        width: 90%;
     }
 
     .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control {
@@ -431,6 +535,12 @@ MARK: 7.0 Typography
         margin-left: 5px !important;
     }
 
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-input-control__input,
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control .components-select-control__input {
+        height: 32px;
+        min-height: 32px;
+    }
+
     .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-input-control__container {
         width: calc(60px);
     }
@@ -439,6 +549,16 @@ MARK: 7.0 Typography
     .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control .components-input-control__backdrop {
         outline: 1px solid #cccccc;
         border: unset;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .typography-select {
+        width: 100%;
+        outline: 1px solid #cccccc;
+        border-radius: 4px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .ian-select-wrapper__menu {
+        z-index: 9;
     }
 
 /*

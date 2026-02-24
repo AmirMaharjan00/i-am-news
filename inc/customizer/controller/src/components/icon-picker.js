@@ -313,6 +313,7 @@ const Icon = () => {
         renderContent = { ( { onClose } ) => {
             return <div className="icon-dropdown">
                 <SearchControl
+                    __nextHasNoMarginBottom
                     placeholder = { __( 'Search...', 'i-am-news' ) }
                     onChange = { handleSearch }
                 />

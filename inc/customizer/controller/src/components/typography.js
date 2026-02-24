@@ -1,4 +1,4 @@
-const { Dropdown } = wp.components,
+const { Dropdown, SelectControl } = wp.components,
     { useState, useEffect, useContext, createContext } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml
@@ -195,6 +195,8 @@ export const TypographComponent = ( props ) => {
                         <FontSize />
                         <LineHeight />
                         <LetterSpacing />
+                        <TextDecoration />
+                        <TextTransform />
 
                     </TypographyContext.Provider>
                 } }
@@ -221,8 +223,8 @@ const FontFamily = () => {
             components = { { MenuList: FontFamilyList } }
             placeholder = { __( escapeHTML( "Select an option" ), 'i-am-news' ) }
             classNamePrefix = "ian-select-wrapper"
-            menuPortalTarget = { document.body }
-            menuPosition = "fixed"
+            menuPortalTarget = { null }
+            menuPosition = "absolute"
             styles = { {
                 menuPortal: base => ( { ...base, zIndex: 999999 } )
             } }
@@ -315,11 +317,12 @@ const FontWeight = () => {
         <span className="label">{ __( 'Font Weight' , 'i-am-news') }</span>
         <Select
             defaultValue = { { label: fontWeight, value: fontWeight } }
+            classNamePrefix = "ian-select-wrapper"
             options = { options }
             formatOptionLabel = { formatOptionLabel }
             onChange = { handleWeightChange }
-            menuPortalTarget = { document.body }
-            menuPosition = "fixed"
+            menuPortalTarget = { null }
+            menuPosition = "absolute"
             styles = { {
                 menuPortal: base => ( { ...base, zIndex: 999999 } )
             } }
@@ -375,5 +378,103 @@ const LetterSpacing = () => {
         <div className="range-control">
             <IanRangeControl />
         </div>
+    </div>
+}
+
+/**
+ * MARK: Text Decoration
+ * 
+ * @since 1.0.0
+ */
+const TextDecoration = () => {
+    const { textDecoration } = useContext( TypographyContext )
+
+    /**
+     * Get options
+     * 
+     * @since 1.0.0
+     */
+    const getOptions = () => {
+        let options = {
+            'none': __( 'None', 'i-am-news'),
+            'capitalize': __( 'Capitalize', 'i-am-news'),
+            'uppercase': __( 'UPPERCASE', 'i-am-news'),
+            'lowercase': __( 'lowercase', 'i-am-news'),
+            'initial': __( 'Initial', 'i-am-news'),
+            'inherit': __( 'Inherit', 'i-am-news'),
+        }
+
+        return Object.entries( options ).map( ( item ) => {
+            let [ value, label ] = item
+
+            return {
+                label: <span className={ `select-item ${ value }` }>{ label }</span>,
+                value
+            }
+        } )
+    }
+
+    return <div className="typography-block text-decoration-block">
+        <div className="block-head">
+            <span className="label">{ __( 'Text Decoration' , 'i-am-news') }</span>
+        </div>
+        <SelectControl
+            __nextHasNoMarginBottom
+            __next40pxDefaultSize
+            value = { textDecoration }
+            className = 'typography-select'
+            options = { getOptions() }
+            variant = "minimal"
+            // onChange = { ( newSize ) => setSize( newSize ) }
+        />
+    </div>
+}
+
+/**
+ * MARK: Text Transform
+ * 
+ * @since 1.0.0
+ */
+const TextTransform = () => {
+    const { textTransform } = useContext( TypographyContext )
+
+    /**
+     * Get options
+     * 
+     * @since 1.0.0
+     */
+    const getOptions = () => {
+        let options = {
+            'none': __( 'None', 'i-am-news'),
+            'underline': __( 'Underline', 'i-am-news'),
+            'overline': __( 'Overline', 'i-am-news'),
+            'line-through': __( 'Line Through', 'i-am-news'),
+            'initial': __( 'Initial', 'i-am-news'),
+            'inherit': __( 'Inherit', 'i-am-news'),
+        }
+
+        return Object.entries( options ).map( ( item ) => {
+            let [ value, label ] = item
+
+            return {
+                label: <span className={ `select-item ${ value }` }>{ label }</span>,
+                value
+            }
+        } )
+    }
+
+    return <div className="typography-block text-transform-block">
+        <div className="block-head">
+            <span className="label">{ __( 'Text Transform' , 'i-am-news') }</span>
+        </div>
+        <SelectControl
+            __nextHasNoMarginBottom
+            __next40pxDefaultSize
+            value = { textTransform }
+            className = 'typography-select'
+            options = { getOptions() }
+            variant = "minimal"
+            // onChange = { ( newSize ) => setSize( newSize ) }
+        />
     </div>
 }
