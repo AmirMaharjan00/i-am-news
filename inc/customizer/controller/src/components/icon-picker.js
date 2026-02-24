@@ -187,8 +187,18 @@ export const IconPickerComponent = ( props ) => {
  * 
  * @since 1.0.0
  */
-const IconCollection = () => {
+const IconCollection = ( props ) => {
     const { icon, handleIconClick, filteredIcons } = useContext( IconPickerContext )
+
+    /**
+     * Handle icon click
+     * 
+     * @since 1.0.0
+     */
+    const handleItemClick = ( index ) => {
+        handleIconClick( filteredIcons[ index ] )
+        props.onClose()
+    }
 
     return <VirtuosoGrid
         totalCount = { filteredIcons.length }
@@ -205,7 +215,7 @@ const IconCollection = () => {
         }}
         itemContent = { ( index ) => {
             const variant = ( icon === filteredIcons[ index ] ) ? 'primary' : 'secondary'
-            return <Button variant={ variant } className="icon-btn" onClick={ () => handleIconClick( filteredIcons[ index ] ) }>
+            return <Button variant={ variant } className="icon-btn" onClick={ () => handleItemClick( index ) }>
                 <i className={ filteredIcons[ index ] }></i>
             </Button> 
         } }
@@ -220,16 +230,6 @@ const IconCollection = () => {
 const Image = () => {
     const { openMediaLibrary, imageUrl, handleRemoveImage, type, handleButtonClick } = useContext( IconPickerContext )
 
-    /**
-     * Handle Button click
-     * 
-     * @since 1.0.0
-     */
-    const handleDropdown = ( onToggle ) => {
-        handleButtonClick( 'image' )
-        onToggle()
-    }
-
     return <Dropdown
         className = 'button-item'
         contentClassName = 'icon-picker-popover'
@@ -237,9 +237,10 @@ const Image = () => {
             placement: 'bottom-start',
             shift: true
         } }
+        onToggle = { () => handleButtonClick( 'image' ) }
         renderToggle = { ( { isOpen, onToggle } ) => {
             return <Button
-                onClick = { () => handleDropdown( onToggle ) }
+                onClick = { onToggle }
                 variant = { ( ( type === 'image' ) ? 'primary': 'secondary' ) }
                 className = "button-item"
             >
@@ -291,16 +292,6 @@ const Image = () => {
 const Icon = () => {
     const { handleSearch, type, handleButtonClick } = useContext( IconPickerContext )
 
-      /**
-     * Handle Button click
-     * 
-     * @since 1.0.0
-     */
-    const handleDropdown = ( onToggle ) => {
-        
-        // onToggle()
-    }
-
     return <Dropdown
         className = 'button-item'
         contentClassName = 'icon-picker-popover icon'
@@ -308,10 +299,7 @@ const Icon = () => {
             placement: 'bottom-start',
             shift: true
         } }
-        onToggle = { ( willOpen ) => {
-            console.log( willOpen )
-            handleButtonClick( 'icon' )
-        } }
+        onToggle = { () => handleButtonClick( 'icon' ) }
         renderToggle = { ( { isOpen, onToggle } ) => {
             return <Button
                 onClick = { onToggle }
@@ -322,13 +310,13 @@ const Icon = () => {
                 <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } />
             </Button>
         } }
-        renderContent = { () => {
+        renderContent = { ( { onClose } ) => {
             return <div className="icon-dropdown">
                 <SearchControl
                     placeholder = { __( 'Search...', 'i-am-news' ) }
                     onChange = { handleSearch }
                 />
-                <IconCollection />
+                <IconCollection onClose={ onClose }/>
             </div>
         } }
     />

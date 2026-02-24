@@ -2819,12 +2819,22 @@ const IconPickerComponent = props => {
  * 
  * @since 1.0.0
  */
-const IconCollection = () => {
+const IconCollection = props => {
   const {
     icon,
     handleIconClick,
     filteredIcons
   } = useContext(IconPickerContext);
+
+  /**
+   * Handle icon click
+   * 
+   * @since 1.0.0
+   */
+  const handleItemClick = index => {
+    handleIconClick(filteredIcons[index]);
+    props.onClose();
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_virtuoso__WEBPACK_IMPORTED_MODULE_2__.VirtuosoGrid, {
     totalCount: filteredIcons.length,
     className: "icon-collection",
@@ -2851,7 +2861,7 @@ const IconCollection = () => {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
         variant: variant,
         className: "icon-btn",
-        onClick: () => handleIconClick(filteredIcons[index]),
+        onClick: () => handleItemClick(index),
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
           className: filteredIcons[index]
         })
@@ -2873,16 +2883,6 @@ const Image = () => {
     type,
     handleButtonClick
   } = useContext(IconPickerContext);
-
-  /**
-   * Handle Button click
-   * 
-   * @since 1.0.0
-   */
-  const handleDropdown = onToggle => {
-    handleButtonClick('image');
-    onToggle();
-  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dropdown, {
     className: "button-item",
     contentClassName: "icon-picker-popover",
@@ -2890,12 +2890,13 @@ const Image = () => {
       placement: 'bottom-start',
       shift: true
     },
+    onToggle: () => handleButtonClick('image'),
     renderToggle: ({
       isOpen,
       onToggle
     }) => {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(Button, {
-        onClick: () => handleDropdown(onToggle),
+        onClick: onToggle,
         variant: type === 'image' ? 'primary' : 'secondary',
         className: "button-item",
         children: [__(escapeHTML('Image'), 'i-am-news'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
@@ -2948,16 +2949,6 @@ const Icon = () => {
     type,
     handleButtonClick
   } = useContext(IconPickerContext);
-
-  /**
-  * Handle Button click
-  * 
-  * @since 1.0.0
-  */
-  const handleDropdown = onToggle => {
-
-    // onToggle()
-  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dropdown, {
     className: "button-item",
     contentClassName: "icon-picker-popover icon",
@@ -2965,10 +2956,7 @@ const Icon = () => {
       placement: 'bottom-start',
       shift: true
     },
-    onToggle: willOpen => {
-      console.log(willOpen);
-      handleButtonClick('icon');
-    },
+    onToggle: () => handleButtonClick('icon'),
     renderToggle: ({
       isOpen,
       onToggle
@@ -2982,13 +2970,17 @@ const Icon = () => {
         })]
       });
     },
-    renderContent: () => {
+    renderContent: ({
+      onClose
+    }) => {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "icon-dropdown",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SearchControl, {
           placeholder: __('Search...', 'i-am-news'),
           onChange: handleSearch
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(IconCollection, {})]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(IconCollection, {
+          onClose: onClose
+        })]
       });
     }
   });
