@@ -1,12 +1,13 @@
 const { useState } = wp.element,
-    { AlignmentMatrixControl } = wp.components
+    { ButtonGroup, Button } = wp.components
 
 import { IanControlHead } from "./components";
 
-export const Example = () => {
+export const AlignmentComponent = ( props ) => {
     const { label, description, setting } = props,
-        [ value, setValue ] = useState( setting.get() )
-    // const [ alignment, setAlignment ] = useState( 'center center' );
+        [ alignment, setAlignment ] = useState( 'left' );
+
+    const alignments = [ 'left', 'center', 'right' ];
 
     return <div className="control-content">
         <IanControlHead
@@ -15,10 +16,17 @@ export const Example = () => {
         />
 
         <div className="content-wrapper">
-            {/* <AlignmentMatrixControl
-                value = { alignment }
-                onChange = { setAlignment }
-            /> */}
+            <ButtonGroup>
+                {alignments.map( (item) => (
+                    <Button
+                        key = {item}
+                        isPrimary = { alignment === item }
+                        onClick = { () => setAlignment(item) }
+                    >
+                        {item}
+                    </Button>
+                ))}
+            </ButtonGroup>
         </div>
     </div>
 };

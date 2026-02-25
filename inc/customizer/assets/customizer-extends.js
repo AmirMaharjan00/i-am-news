@@ -2342,7 +2342,7 @@ var weakMemoize = function weakMemoize(func) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Example: () => (/* binding */ Example)
+/* harmony export */   AlignmentComponent: () => (/* binding */ AlignmentComponent)
 /* harmony export */ });
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
@@ -2351,26 +2351,33 @@ const {
     useState
   } = wp.element,
   {
-    AlignmentMatrixControl
+    ButtonGroup,
+    Button
   } = wp.components;
 
 
-const Example = () => {
+const AlignmentComponent = props => {
   const {
       label,
       description,
       setting
     } = props,
-    [value, setValue] = useState(setting.get());
-  // const [ alignment, setAlignment ] = useState( 'center center' );
-
+    [alignment, setAlignment] = useState('left');
+  const alignments = ['left', 'center', 'right'];
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "control-content",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
       label: label,
       description: description
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "content-wrapper"
+      className: "content-wrapper",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ButtonGroup, {
+        children: alignments.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+          isPrimary: alignment === item,
+          onClick: () => setAlignment(item),
+          children: item
+        }, item))
+      })
     })]
   });
 };
@@ -16461,7 +16468,7 @@ controlConstructor['radio-tab'] = Control.extend({
     const renderRadioTab = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_alignment__WEBPACK_IMPORTED_MODULE_6__.Example, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Example, {
         ...props
       }));
     };
@@ -16582,6 +16589,59 @@ controlConstructor['ian-text'] = Control.extend({
       });
     } else {
       renderText();
+    }
+
+    /**
+     * Unbind if the controls container <li> tag is remoed
+     */
+    container.on('remove', () => reactRoot.unmount());
+  }
+});
+
+/**
+ * MARK: Alignment
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor['alignment'] = Control.extend({
+  ready: function () {
+    const control = this,
+      {
+        params,
+        container,
+        section: _thisSection,
+        setting
+      } = control,
+      root = container.find('.root')[0],
+      reactRoot = createRoot(root),
+      props = {
+        ...params,
+        setting
+      };
+    let rendered = false; // ensure we render only once
+
+    /**
+     * Function to render your React toggle
+     */
+    const renderAlignment = () => {
+      if (rendered) return;
+      rendered = true;
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_alignment__WEBPACK_IMPORTED_MODULE_6__.AlignmentComponent, {
+        ...props
+      }));
+    };
+
+    /**
+     * Lazy load when the section expands
+     * Component will mount only when section is mounted
+     */
+    if (_thisSection) {
+      section(_thisSection()).expanded.bind('expanded', function (isExpanded) {
+        if (isExpanded) renderAlignment();
+      });
+    } else {
+      renderAlignment();
     }
 
     /**

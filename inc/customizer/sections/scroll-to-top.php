@@ -188,6 +188,12 @@
                             ]
                         ]
                     ],
+                    'scroll_to_top_alignment' =>  [
+                        'label' =>  esc_html__( 'Alignment', 'i-am-news' ),
+                        'type'  =>  'alignment',
+                        'tab'   =>  'general',
+                        'section'   =>  $this->section
+                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
