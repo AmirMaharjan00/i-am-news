@@ -15,7 +15,6 @@
     use IAN\Customizer\Controls\Typography as Typography;
     use IAN\Customizer\Controls\Radio_Tab as Radio_Tab;
     use IAN\Customizer\Controls\Text as Text;
-    use IAN\Customizer\Controls\Alignment as Alignment;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
 
@@ -123,7 +122,6 @@
                     'typography'    =>  [ $this, 'add_typography' ],
                     'radio-tab'    =>  [ $this, 'add_radio_tab' ],
                     'ian-text'    =>  [ $this, 'add_text' ],
-                    'alignment'    =>  [ $this, 'add_alignment' ],
                 ];
             }
 
@@ -282,15 +280,6 @@
              * @since 1.0.0
              */
             private function add_text( $id, $control ) {
-                $this->manager->add_control( new Text( $this->manager, $id, $control ) );
-            }
-
-            /**
-             * Add Alignment
-             * 
-             * @since 1.0.0
-             */
-            private function add_alignment( $id, $control ) {
                 $this->manager->add_control( new Text( $this->manager, $id, $control ) );
             }
 

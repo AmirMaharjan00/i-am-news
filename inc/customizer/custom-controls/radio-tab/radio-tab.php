@@ -1,6 +1,6 @@
 <?php
     /**
-     * Radio Tab customzer custom control
+     * Radio tab customzer custom control
      * 
      * @package I am News
      * @since 1.0.0
@@ -22,20 +22,28 @@
             public $type = 'radio-tab';
 
             /**
-             * Control fields
+             * Fields
              * 
              * @since 1.0.0
              */
             public $fields = [];
 
             /**
-             * json
+             * Show label and control in single line
+             * 
+             * @since 1.0.0
+             */
+            public $display_block = false;
+
+            /**
+             * To json
              * 
              * @since 1.0.0
              */
             public function to_json() {
                 parent::to_json();
                 $this->json[ 'fields' ] = $this->fields;
+                $this->json[ 'display_block' ] = $this->display_block;
             }
         }
     endif;

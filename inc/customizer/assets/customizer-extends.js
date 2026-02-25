@@ -2334,56 +2334,6 @@ var weakMemoize = function weakMemoize(func) {
 
 /***/ },
 
-/***/ "./src/components/alignment.js"
-/*!*************************************!*\
-  !*** ./src/components/alignment.js ***!
-  \*************************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   AlignmentComponent: () => (/* binding */ AlignmentComponent)
-/* harmony export */ });
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
-const {
-    useState
-  } = wp.element,
-  {
-    ButtonGroup,
-    Button
-  } = wp.components;
-
-
-const AlignmentComponent = props => {
-  const {
-      label,
-      description,
-      setting
-    } = props,
-    [alignment, setAlignment] = useState('left');
-  const alignments = ['left', 'center', 'right'];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "control-content",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
-      label: label,
-      description: description
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "content-wrapper",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ButtonGroup, {
-        children: alignments.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
-          isPrimary: alignment === item,
-          onClick: () => setAlignment(item),
-          children: item
-        }, item))
-      })
-    })]
-  });
-};
-
-/***/ },
-
 /***/ "./src/components/box-shadow.js"
 /*!**************************************!*\
   !*** ./src/components/box-shadow.js ***!
@@ -3279,6 +3229,72 @@ const RadioImageComponent = props => {
         selected: value,
         onChange: newValue => handleChange(newValue),
         options: filterOptions()
+      })
+    })]
+  });
+};
+
+/***/ },
+
+/***/ "./src/components/radio-tab.js"
+/*!*************************************!*\
+  !*** ./src/components/radio-tab.js ***!
+  \*************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   RadioTabComponent: () => (/* binding */ RadioTabComponent)
+/* harmony export */ });
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+const {
+    useState
+  } = wp.element,
+  {
+    Button
+  } = wp.components;
+
+
+const RadioTabComponent = props => {
+  const {
+      label,
+      description,
+      setting,
+      fields,
+      display_block: displayBlock
+    } = props,
+    [tab, setTab] = useState(setting.get());
+  let mainClass = 'control-content';
+  if (displayBlock) mainClass += ' is-block';
+
+  /**
+   * Handle Click
+   * 
+   * @since 1.0.0
+   */
+  const handleClick = newValue => {
+    setTab(newValue);
+    setting.set(newValue);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: mainClass,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
+      label: label,
+      description: description
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "content-wrapper",
+      children: fields.map(item => {
+        let {
+          label: _thisLabel,
+          value
+        } = item;
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+          variant: value === tab ? 'primary' : 'secondary',
+          onClick: () => handleClick(value),
+          children: _thisLabel
+        });
       })
     })]
   });
@@ -16448,7 +16464,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_icon_picker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/icon-picker */ "./src/components/icon-picker.js");
 /* harmony import */ var _components_toggle_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/toggle-button */ "./src/components/toggle-button.js");
 /* harmony import */ var _components_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/text */ "./src/components/text.js");
-/* harmony import */ var _components_alignment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/alignment */ "./src/components/alignment.js");
+/* harmony import */ var _components_radio_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/radio-tab */ "./src/components/radio-tab.js");
 /* harmony import */ var _components_typography__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/typography */ "./src/components/typography.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
@@ -16899,12 +16915,12 @@ controlConstructor['ian-text'] = Control.extend({
 });
 
 /**
- * MARK: Alignment
+ * MARK: Radio tab
  * 
  * @package I am News
  * @since 1.0.0
  */
-controlConstructor['alignment'] = Control.extend({
+controlConstructor['radio-tab'] = Control.extend({
   ready: function () {
     const control = this,
       {
@@ -16924,10 +16940,10 @@ controlConstructor['alignment'] = Control.extend({
     /**
      * Function to render your React toggle
      */
-    const renderAlignment = () => {
+    const renderRadioTab = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_alignment__WEBPACK_IMPORTED_MODULE_6__.AlignmentComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_radio_tab__WEBPACK_IMPORTED_MODULE_6__.RadioTabComponent, {
         ...props
       }));
     };
@@ -16938,10 +16954,10 @@ controlConstructor['alignment'] = Control.extend({
      */
     if (_thisSection) {
       section(_thisSection()).expanded.bind('expanded', function (isExpanded) {
-        if (isExpanded) renderAlignment();
+        if (isExpanded) renderRadioTab();
       });
     } else {
-      renderAlignment();
+      renderRadioTab();
     }
 
     /**

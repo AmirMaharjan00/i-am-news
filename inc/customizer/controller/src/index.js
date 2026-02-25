@@ -7,7 +7,7 @@ import { SectionTabComponent } from './components/section-tab'
 import { IconPickerComponent } from './components/icon-picker'
 import { ToggleButtonComponent } from './components/toggle-button'
 import { TextComponent } from './components/text'
-import { AlignmentComponent } from './components/alignment'
+import { RadioTabComponent } from './components/radio-tab'
 import { TypographComponent } from './components/typography'
 
 /**
@@ -401,12 +401,12 @@ controlConstructor[ 'ian-text' ] = Control.extend({
 });
 
 /**
- * MARK: Alignment
+ * MARK: Radio tab
  * 
  * @package I am News
  * @since 1.0.0
  */
-controlConstructor[ 'alignment' ] = Control.extend({
+controlConstructor[ 'radio-tab' ] = Control.extend({
 
     ready: function () {
         const control = this,
@@ -423,10 +423,10 @@ controlConstructor[ 'alignment' ] = Control.extend({
         /**
          * Function to render your React toggle
          */
-        const renderAlignment = () => {
+        const renderRadioTab = () => {
             if ( rendered ) return;
             rendered = true;
-            reactRoot.render( <AlignmentComponent { ...props } /> )
+            reactRoot.render( <RadioTabComponent { ...props } /> )
         };
 
         /**
@@ -435,10 +435,10 @@ controlConstructor[ 'alignment' ] = Control.extend({
          */
         if( _thisSection ) {
             section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
-                if( isExpanded ) renderAlignment()
+                if( isExpanded ) renderRadioTab()
             } );
         } else {
-            renderAlignment()
+            renderRadioTab()
         }
 
         /**

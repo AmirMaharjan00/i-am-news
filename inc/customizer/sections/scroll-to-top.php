@@ -58,6 +58,8 @@
                 $this->add_control( 'scroll_to_top_layouts' );
                 $this->add_control( 'scroll_to_top_label' );
                 $this->add_control( 'scroll_to_top_icon_picker' );
+                $this->add_control( 'scroll_to_top_is_fixed' );
+                $this->add_control( 'scroll_to_top_position' );
                 $this->add_control( 'scroll_to_top_typography' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
             }
@@ -85,17 +87,25 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
-                    'scroll_to_top_box_shadow' =>  [
-                        'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
-                        'transport'   =>  'postMessage',
+                    'scroll_to_top_icon_picker' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
                         'default'   =>  $this->get_defaults( $id )
                     ],
-                    'scroll_to_top_icon_picker' =>  [
+                    'scroll_to_top_is_fixed' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_position' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_typography' =>  [
                         // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_box_shadow' =>  [
+                        'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -153,6 +163,7 @@
                     ],
                     'scroll_to_top_label' =>  [
                         'label' =>  esc_html__( 'Label', 'i-am-news' ),
+                        'description'   =>  esc_html__( 'Leave the field empty to hide the label.', 'i-am-news' ),
                         'type'  =>  'ian-text',
                         'section'   =>  $this->section
                     ],
@@ -160,6 +171,35 @@
                         'label' =>  esc_html__( 'Icon', 'i-am-news' ),
                         'type'  =>  'icon-picker',
                         'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_is_fixed' =>  [
+                        'label' =>  esc_html__( 'Fixed', 'i-am-news' ),
+                        'description'   =>  esc_html__( 'Enable to make it fixed.', 'i-am-news' ),
+                        'type'  =>  'toggle-button',
+                        'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_position' =>  [
+                        'label' =>  esc_html__( 'Position', 'i-am-news' ),
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'Left', 'i-am-news' ),
+                                'value' =>  'left'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Center', 'i-am-news' ),
+                                'value' =>  'center'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Right', 'i-am-news' ),
+                                'value' =>  'right'
+                            ],
+                        ],
+                        'type'  =>  'radio-tab',
+                        'section'   =>  $this->section,
+                        'display_block' =>  true,
+                        'active_callback'   =>  function( $setting ) {
+                            return $setting->manager->get_setting( 'scroll_to_top_is_fixed' )->value();
+                        }
                     ],
                     'scroll_to_top_typography' =>  [
                         'label' =>  esc_html__( 'Typography', 'i-am-news' ),
@@ -188,12 +228,6 @@
                             ]
                         ]
                     ],
-                    'scroll_to_top_alignment' =>  [
-                        'label' =>  esc_html__( 'Alignment', 'i-am-news' ),
-                        'type'  =>  'alignment',
-                        'tab'   =>  'general',
-                        'section'   =>  $this->section
-                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -217,6 +251,8 @@
                         'type'  =>  'icon',
                         'value'  =>  'fa-solid fa-jet-fighter-up'
                     ],
+                    'scroll_to_top_is_fixed' =>  false,
+                    'scroll_to_top_position' =>  'right',
                     'scroll_to_top_typography'   =>  [
                         'font_family'   => [ 'value' => 'Jost', 'label' => 'Jost' ],
                         'font_weight'   =>  '500italic',
@@ -262,6 +298,11 @@
             public function render_html() {
                 $block_class[] = $this->id;
                 $block_class[] = 'layout--' . $this->get_customizer_value( 'scroll_to_top_layouts' );
+
+                if( $this->get_customizer_value( 'scroll_to_top_is_fixed' ) ) {
+                    $block_class[] = 'position--' . $this->get_customizer_value( 'scroll_to_top_position' );
+                }
+
                 ?>
                     <div id="<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
 

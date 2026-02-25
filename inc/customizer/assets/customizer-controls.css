@@ -40,7 +40,13 @@ MARK: 1.0 Normalize
         border-bottom: none;
     }
 
-    .customize-control .control-head {
+    .customize-control .control-content.is-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .customize-control .control-content:not(.is-block) .control-head {
         margin-bottom: 10px;
         display: flex;
         justify-content: left;
