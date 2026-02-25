@@ -48,6 +48,9 @@ MARK: 1.0 Normalize
 
     .customize-control .control-content:not(.is-block) .control-head {
         margin-bottom: 10px;
+    }
+
+    .customize-control .control-content .control-head {
         display: flex;
         justify-content: left;
         align-items: center;

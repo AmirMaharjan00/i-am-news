@@ -17,7 +17,7 @@ export const ToggleButtonComponent = ( props ) => {
         setting.set( ! value )
     }
     
-    return <div className="control-content">
+    return <div className="control-content is-block">
         <IanControlHead 
             label = { label }
             description = { description }
