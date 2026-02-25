@@ -7,6 +7,7 @@
     6.0 Text
     7.0 Typography
     8.0 Toggle Control
+    9.0 Number
 */
 
 /*
@@ -69,6 +70,26 @@ MARK: 1.0 Normalize
     .customize-control .control-head .desc-icon:hover {
         color: var(--customizer-color);
     }
+
+    .customize-control .control-content .control-head-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .components-popover.ian-dropdown-popover .components-popover__content .ian-responsive-icons .responsive-icon,
+    .customize-control .control-content .control-head-wrapper .ian-responsive-icons .responsive-icon {
+        font-size: 13px;
+        line-height: unset;
+        height: unset;
+    }
+
+    .components-popover.ian-dropdown-popover .components-popover__content .ian-responsive-icons .responsive-icon:hover,
+    .customize-control .control-content .control-head-wrapper .ian-responsive-icons .responsive-icon:hover {
+        color: var(--customizer-color);
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .block-head .responsive-icon
 
     .customize-control.ian-show {
         display: block;
@@ -138,6 +159,7 @@ MARK: 1.0 Normalize
         text-overflow: ellipsis;
         white-space: nowrap;
         cursor: default;
+        field-sizing: content;
     }
 
     .customize-control .ian-dropdown-container .highlight:hover {
@@ -529,16 +551,6 @@ MARK: 7.0 Typography
         align-items: center;
         margin-bottom: 5px;
     }
-
-    .ian-dropdown-popover.typography-popover .typography-block .block-head .responsive-icon {
-        font-size: 13px;
-        line-height: unset;
-        height: unset;
-    }
-
-    .ian-dropdown-popover.typography-popover .typography-block .block-head .responsive-icon:hover {
-        color: var(--customizer-color);
-    }
     
     .ian-dropdown-popover.typography-popover .typography-block .range-control {
         display: flex;
@@ -596,4 +608,40 @@ MARK: 8.0 Toggle Control
         display: flex;
         justify-content: space-between;
         align-self: center;
+    }
+
+/*
+=========================
+MARK: 9.0 Number
+=========================
+*/
+    .customize-control-ian-number .control-content .content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-select-control.ian-range-item {
+        flex: 1;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control.ian-range-item {
+        width: 90%;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container {
+        width: calc(60px);
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container .components-input-control__input,
+    .customize-control-ian-number .content-wrapper .components-select-control .components-input-control__container .components-select-control__input {
+        height: 32px;
+        min-height: 32px;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container .components-input-control__backdrop,
+    .customize-control-ian-number .content-wrapper .components-select-control .components-input-control__container .components-input-control__backdrop {
+        outline: 1px solid #8c8f94;
+        border: unset;
+        border-radius: unset;
     }

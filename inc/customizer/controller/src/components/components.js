@@ -27,7 +27,7 @@ export const IanControlHead = ( props ) => {
  * @since 1.0.0
  */
 export const IanResponsiveIcons = () => {
-    return <div classname="responsive-icons">
+    return <div className="ian-responsive-icons">
         <Tooltip text={ __( 'Desktop', 'i-am-news' ) } placement="top" delay={ 200 }>
             <Dashicon className="responsive-icon" icon="desktop" />
         </Tooltip>

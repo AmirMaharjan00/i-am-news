@@ -9,6 +9,9 @@ import { ToggleButtonComponent } from './components/toggle-button'
 import { TextComponent } from './components/text'
 import { RadioTabComponent } from './components/radio-tab'
 import { TypographComponent } from './components/typography'
+import { NumberComponent } from './components/number'
+import { BorderComponent } from './components/border'
+import { DimensionComponent } from './components/dimension'
 
 /**
  * MARK: Box Shadow
@@ -439,6 +442,150 @@ controlConstructor[ 'radio-tab' ] = Control.extend({
             } );
         } else {
             renderRadioTab()
+        }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Number
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'ian-number' ] = Control.extend({
+
+    ready: function () {
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderNumber = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <NumberComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderNumber()
+            } );
+        } else {
+            renderNumber()
+        }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Border
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'border' ] = Control.extend({
+
+    ready: function () {
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderBorder = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <BorderComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderBorder()
+            } );
+        } else {
+            renderBorder()
+        }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Dimension
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'dimension' ] = Control.extend({
+
+    ready: function () {
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderDimension = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <DimensionComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderDimension()
+            } );
+        } else {
+            renderDimension()
         }
 
         /**

@@ -61,7 +61,10 @@
                 $this->add_control( 'scroll_to_top_is_fixed' );
                 $this->add_control( 'scroll_to_top_position' );
                 $this->add_control( 'scroll_to_top_typography' );
+                $this->add_control( 'scroll_to_top_border' );
+                $this->add_control( 'scroll_to_top_border_radius' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
+                $this->add_control( 'scroll_to_top_padding' );
             }
 
             /**
@@ -104,8 +107,23 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
+                    'scroll_to_top_border' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_border_radius' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
                     'scroll_to_top_box_shadow' =>  [
                         'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_padding' =>  [
+                        // 'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -207,9 +225,28 @@
                         'tab'  =>  'design',
                         'section'   =>  $this->section
                     ],
+                    'scroll_to_top_border' =>  [
+                        'label' =>  esc_html__( 'Border', 'i-am-news' ),
+                        'type'  =>  'border',
+                        'tab'  =>  'design',
+                        'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_border_radius' =>  [
+                        'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),
+                        'type'  =>  'ian-number',
+                        'tab'   =>  'design',
+                        'section'   =>  $this->section,
+                        'responsive'    =>  true
+                    ],
                     'scroll_to_top_box_shadow' =>  [
                         'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
                         'type'  =>  'box-shadow',
+                        'tab'   =>  'design',
+                        'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_padding' =>  [
+                        'label' =>  esc_html__( 'Padding', 'i-am-news' ),
+                        'type'  =>  'dimension',
                         'tab'   =>  'design',
                         'section'   =>  $this->section
                     ],
@@ -243,10 +280,6 @@
                     'scroll_to_top_section_tab' =>  'general',
                     'scroll_to_top_layouts' =>  'one',
                     'scroll_to_top_label' =>  esc_html__( 'Go to Top', 'i-am-news' ),
-                    'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
-                        'offsetx'   =>  10,
-                        'offsety'   =>  10
-                    ]),
                     'scroll_to_top_icon_picker' =>  [
                         'type'  =>  'icon',
                         'value'  =>  'fa-solid fa-jet-fighter-up'
@@ -275,6 +308,13 @@
                         'text_decoration'    => 'none',
                         'preset'    =>  '-1'
                     ],
+                    'scroll_to_top_border' =>  '',
+                    'scroll_to_top_border_radius'   =>  5,
+                    'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
+                        'offsetx'   =>  10,
+                        'offsety'   =>  10
+                    ]),
+                    'scroll_to_top_padding' => '',
                     'radio_tab_test'    =>  'one',
                 ];
             }

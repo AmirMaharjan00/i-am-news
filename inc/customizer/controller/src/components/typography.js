@@ -7,7 +7,7 @@ import { IanControlHead, IanResponsiveIcons } from "./components"
 import googleFonts from '../google-fonts.min.json'
 import { Virtuoso } from "react-virtuoso";
 import Select from 'react-select'
-import { IanRangeControl } from './range'
+import { IanRangeControl } from './number'
 
 const TypographyContext = createContext( null )
 
