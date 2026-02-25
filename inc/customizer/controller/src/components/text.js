@@ -25,6 +25,7 @@ export const TextComponent = ( props ) => {
         <div className="content-wrapper">
             <TextControl
                 __next40pxDefaultSize
+                __nextHasNoMarginBottom
                 value = { value }
                 onChange = { ( newValue ) => setClassName( newValue ) }
             />

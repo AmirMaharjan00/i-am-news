@@ -2398,20 +2398,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
 const {
-    useState
+    useState,
+    useContext,
+    createContext
   } = wp.element,
   {
     ToggleControl,
     RangeControl,
     ColorPicker,
-    Dropdown
+    Dropdown,
+    ColorIndicator
   } = wp.components,
   {
     __
   } = wp.i18n,
   {
     escapeHTML
-  } = wp.escapeHtml;
+  } = wp.escapeHtml,
+  BoxShadowContext = createContext();
 
 
 const BoxShadowComponent = props => {
@@ -2440,12 +2444,17 @@ const BoxShadowComponent = props => {
    * @return void 
    */
   const handleChange = (id, newValue) => {
+    console.log(newValue);
     let updatedValue = {
       ...value,
       [id]: newValue
     };
     setting.set(updatedValue);
     setValue(updatedValue);
+  };
+  const contextObject = {
+    ...value,
+    handleChange
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
     className: "control-content",
@@ -2469,61 +2478,232 @@ const BoxShadowComponent = props => {
             className: "highlight",
             onClick: onToggle,
             "aria-expanded": isOpen,
-            children: `${enable ? 'Enabled' : 'Disabled'}, x: ${offsetx}, y: ${offsety}, blur: ${blur}`
+            children: `${enable ? 'Enabled' : 'Disabled'}, x: ${offsetx}, y: ${offsety}, blur: ${blur}, spread: ${spread}, color: ${color}`
           });
         },
         renderContent: () => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ToggleControl, {
-              label: __(escapeHTML('Enable'), 'i-am-news'),
-              onChange: newValue => handleChange('enable', newValue),
-              checked: enable,
-              __nextHasNoMarginBottom: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
-              label: __(escapeHTML('Horizontal Offset (X)'), 'i-am-news'),
-              value: offsetx,
-              onChange: newValue => handleChange('offsetx', newValue),
-              min: -50,
-              max: 50,
-              __next40pxDefaultSize: true,
-              __nextHasNoMarginBottom: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
-              label: __(escapeHTML('Vertical Offset (Y)'), 'i-am-news'),
-              value: offsety,
-              onChange: newValue => handleChange('offsety', newValue),
-              min: -50,
-              max: 50,
-              __next40pxDefaultSize: true,
-              __nextHasNoMarginBottom: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
-              label: __(escapeHTML('Blur Radius'), 'i-am-news'),
-              value: blur,
-              onChange: newValue => handleChange('blur', newValue),
-              min: 0,
-              max: 100,
-              __next40pxDefaultSize: true,
-              __nextHasNoMarginBottom: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
-              label: __(escapeHTML('Spread Radius'), 'i-am-news'),
-              value: spread,
-              onChange: newValue => handleChange('spread', newValue),
-              min: -50,
-              max: 50,
-              __next40pxDefaultSize: true,
-              __nextHasNoMarginBottom: true
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ColorPicker, {
-              color: color,
-              onChangeComplete: newValue => handleChange('color', newValue),
-              disableAlpha: false
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ToggleControl, {
-              label: __(escapeHTML('Inset Shadow'), 'i-am-news'),
-              checked: inset,
-              onChange: newValue => handleChange('inset', newValue),
-              __nextHasNoMarginBottom: true
-            })]
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(BoxShadowContext.Provider, {
+            value: contextObject,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "box-shadow-block flex-block",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Enable, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Inset, {})]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(HorizontalOffset, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(VerticalOffset, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Blur, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Spread, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Color, {})]
           });
         }
       })
+    })]
+  });
+};
+
+/**
+ * MARK: Enable
+ * 
+ * @since 1.0.0
+ */
+const Enable = () => {
+  const {
+    enable,
+    handleChange
+  } = useContext(BoxShadowContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "box-shadow-block enable-block toggle-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "label",
+        children: __(escapeHTML('Enable'), 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ToggleControl, {
+      onChange: newValue => handleChange('enable', newValue),
+      checked: enable,
+      __nextHasNoMarginBottom: true
+    })]
+  });
+};
+
+/**
+ * MARK: Horizontal Offset
+ * 
+ * @since 1.0.0
+ */
+const HorizontalOffset = () => {
+  const {
+    offsetx,
+    handleChange
+  } = useContext(BoxShadowContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "box-shadow-block offsetx-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "label",
+        children: __(escapeHTML('Horizontal Offset (X)'), 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
+      value: offsetx,
+      onChange: newValue => handleChange('offsetx', newValue),
+      min: -50,
+      max: 50,
+      __next40pxDefaultSize: true,
+      __nextHasNoMarginBottom: true
+    })]
+  });
+};
+
+/**
+ * MARK: Vertical Offset
+ * 
+ * @since 1.0.0
+ */
+const VerticalOffset = () => {
+  const {
+    offsety,
+    handleChange
+  } = useContext(BoxShadowContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "box-shadow-block offsety-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "label",
+        children: __(escapeHTML('Vertical Offset (Y)'), 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
+      value: offsety,
+      onChange: newValue => handleChange('offsety', newValue),
+      min: -50,
+      max: 50,
+      __next40pxDefaultSize: true,
+      __nextHasNoMarginBottom: true
+    })]
+  });
+};
+
+/**
+ * MARK: Blur
+ * 
+ * @since 1.0.0
+ */
+const Blur = () => {
+  const {
+    blur,
+    handleChange
+  } = useContext(BoxShadowContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "box-shadow-block blur-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "label",
+        children: __(escapeHTML('Blur'), 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
+      value: blur,
+      onChange: newValue => handleChange('blur', newValue),
+      min: 0,
+      max: 100,
+      __next40pxDefaultSize: true,
+      __nextHasNoMarginBottom: true
+    })]
+  });
+};
+
+/**
+ * MARK: Spread
+ * 
+ * @since 1.0.0
+ */
+const Spread = () => {
+  const {
+    spread,
+    handleChange
+  } = useContext(BoxShadowContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "box-shadow-block spread-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "label",
+        children: __(escapeHTML('Spread'), 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
+      value: spread,
+      onChange: newValue => handleChange('spread', newValue),
+      min: -50,
+      max: 50,
+      __next40pxDefaultSize: true,
+      __nextHasNoMarginBottom: true
+    })]
+  });
+};
+
+/**
+ * MARK: Color
+ * 
+ * @since 1.0.0
+ */
+const Color = () => {
+  const {
+    color,
+    handleChange
+  } = useContext(BoxShadowContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "box-shadow-block color-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "label",
+        children: __(escapeHTML('Color'), 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Dropdown, {
+      className: "ian-dropdown-container",
+      contentClassName: "ian-dropdown-popover",
+      popoverProps: {
+        placement: 'right-start',
+        shift: true
+      },
+      renderToggle: ({
+        isOpen,
+        onToggle
+      }) => {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ColorIndicator, {
+          colorValue: color,
+          onClick: onToggle
+        });
+      },
+      renderContent: () => {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ColorPicker, {
+          color: color,
+          onChangeComplete: newValue => handleChange('color', newValue.hex || ''),
+          enableAlpha: true
+        });
+      }
+    })]
+  });
+};
+
+/**
+ * MARK: Inset
+ * 
+ * @since 1.0.0
+ */
+const Inset = () => {
+  const {
+    inset,
+    handleChange
+  } = useContext(BoxShadowContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "box-shadow-block inset-block toggle-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "label",
+        children: __(escapeHTML('Inset'), 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ToggleControl, {
+      checked: inset,
+      onChange: newValue => handleChange('inset', newValue),
+      __nextHasNoMarginBottom: true
     })]
   });
 };
@@ -2597,27 +2777,27 @@ const IanResponsiveIcons = () => {
     classname: "responsive-icons",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Tooltip, {
       text: __('Desktop', 'i-am-news'),
+      placement: "top",
+      delay: 200,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
         className: "responsive-icon",
-        icon: "desktop",
-        placement: "top",
-        delay: 200
+        icon: "desktop"
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Tooltip, {
       text: __('Tablet', 'i-am-news'),
+      placement: "top",
+      delay: 200,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
         className: "responsive-icon",
-        icon: "tablet",
-        placement: "top",
-        delay: 200
+        icon: "tablet"
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Tooltip, {
       text: __('Smartphone', 'i-am-news'),
+      placement: "top",
+      delay: 200,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
         className: "responsive-icon",
-        icon: "smartphone",
-        placement: "top",
-        delay: 200
+        icon: "smartphone"
       })
     })]
   });
@@ -3003,6 +3183,7 @@ const Icon = () => {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "icon-dropdown",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SearchControl, {
+          __nextHasNoMarginBottom: true,
           placeholder: __('Search...', 'i-am-news'),
           onChange: handleSearch
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(IconCollection, {
@@ -3138,6 +3319,7 @@ const IanRangeControl = props => {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(RangeControl, {
       __next40pxDefaultSize: true,
+      __nextHasNoMarginBottom: true,
       value: 3,
       className: "ian-range-item"
       // onChange = { ( value ) => setColumns( value ) }
@@ -3145,6 +3327,7 @@ const IanRangeControl = props => {
       min: 2,
       max: 10
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(SelectControl, {
+      __nextHasNoMarginBottom: true,
       value: 'px',
       className: "ian-range-item",
       options: [{
@@ -3319,6 +3502,7 @@ const TextComponent = props => {
       className: "content-wrapper",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextControl, {
         __next40pxDefaultSize: true,
+        __nextHasNoMarginBottom: true,
         value: value,
         onChange: newValue => setClassName(newValue)
       })
@@ -3414,7 +3598,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__);
 const {
-    Dropdown
+    Dropdown,
+    SelectControl
   } = wp.components,
   {
     useState,
@@ -3642,7 +3827,7 @@ const TypographComponent = props => {
         renderContent: () => {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(TypographyContext.Provider, {
             value: contextObject,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontFamily, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontWeight, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontSize, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LineHeight, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LetterSpacing, {})]
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontFamily, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontWeight, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(FontSize, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LineHeight, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LetterSpacing, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(TextDecoration, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(TextTransform, {})]
           });
         }
       })
@@ -3674,8 +3859,8 @@ const FontFamily = () => {
       },
       placeholder: __(escapeHTML("Select an option"), 'i-am-news'),
       classNamePrefix: "ian-select-wrapper",
-      menuPortalTarget: document.body,
-      menuPosition: "fixed",
+      menuPortalTarget: null,
+      menuPosition: "absolute",
       styles: {
         menuPortal: base => ({
           ...base,
@@ -3805,11 +3990,12 @@ const FontWeight = () => {
         label: fontWeight,
         value: fontWeight
       },
+      classNamePrefix: "ian-select-wrapper",
       options: options,
       formatOptionLabel: formatOptionLabel,
       onChange: handleWeightChange,
-      menuPortalTarget: document.body,
-      menuPosition: "fixed",
+      menuPortalTarget: null,
+      menuPosition: "absolute",
       styles: {
         menuPortal: base => ({
           ...base,
@@ -3879,6 +4065,116 @@ const LetterSpacing = () => {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "range-control",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_range__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {})
+    })]
+  });
+};
+
+/**
+ * MARK: Text Decoration
+ * 
+ * @since 1.0.0
+ */
+const TextDecoration = () => {
+  const {
+    textDecoration
+  } = useContext(TypographyContext);
+
+  /**
+   * Get options
+   * 
+   * @since 1.0.0
+   */
+  const getOptions = () => {
+    let options = {
+      'none': __('None', 'i-am-news'),
+      'capitalize': __('Capitalize', 'i-am-news'),
+      'uppercase': __('UPPERCASE', 'i-am-news'),
+      'lowercase': __('lowercase', 'i-am-news'),
+      'initial': __('Initial', 'i-am-news'),
+      'inherit': __('Inherit', 'i-am-news')
+    };
+    return Object.entries(options).map(item => {
+      let [value, label] = item;
+      return {
+        label: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: `select-item ${value}`,
+          children: label
+        }),
+        value
+      };
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "typography-block text-decoration-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        className: "label",
+        children: __('Text Decoration', 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(SelectControl, {
+      __nextHasNoMarginBottom: true,
+      __next40pxDefaultSize: true,
+      value: textDecoration,
+      className: "typography-select",
+      options: getOptions(),
+      variant: "minimal"
+      // onChange = { ( newSize ) => setSize( newSize ) }
+    })]
+  });
+};
+
+/**
+ * MARK: Text Transform
+ * 
+ * @since 1.0.0
+ */
+const TextTransform = () => {
+  const {
+    textTransform
+  } = useContext(TypographyContext);
+
+  /**
+   * Get options
+   * 
+   * @since 1.0.0
+   */
+  const getOptions = () => {
+    let options = {
+      'none': __('None', 'i-am-news'),
+      'underline': __('Underline', 'i-am-news'),
+      'overline': __('Overline', 'i-am-news'),
+      'line-through': __('Line Through', 'i-am-news'),
+      'initial': __('Initial', 'i-am-news'),
+      'inherit': __('Inherit', 'i-am-news')
+    };
+    return Object.entries(options).map(item => {
+      let [value, label] = item;
+      return {
+        label: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: `select-item ${value}`,
+          children: label
+        }),
+        value
+      };
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "typography-block text-transform-block",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "block-head",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+        className: "label",
+        children: __('Text Transform', 'i-am-news')
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(SelectControl, {
+      __nextHasNoMarginBottom: true,
+      __next40pxDefaultSize: true,
+      value: textTransform,
+      className: "typography-select",
+      options: getOptions(),
+      variant: "minimal"
+      // onChange = { ( newSize ) => setSize( newSize ) }
     })]
   });
 };

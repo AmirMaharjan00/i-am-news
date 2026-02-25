@@ -15,6 +15,7 @@ export const IanRangeControl = ( props ) => {
     return <>
         <RangeControl
             __next40pxDefaultSize
+            __nextHasNoMarginBottom
             value = { 3 }
             className = 'ian-range-item'
             // onChange = { ( value ) => setColumns( value ) }
@@ -22,6 +23,7 @@ export const IanRangeControl = ( props ) => {
             max = { 10 }
         />
         <SelectControl
+            __nextHasNoMarginBottom
             value = { 'px' }
             className = 'ian-range-item'
             options = { [
