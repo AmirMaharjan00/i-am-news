@@ -48,6 +48,7 @@
 
             /**
              * Register controls
+             * Render
              * 
              * @since 1.0.0
              * @override
@@ -65,6 +66,7 @@
                 $this->add_control( 'scroll_to_top_border_radius' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
                 $this->add_control( 'scroll_to_top_padding' );
+                $this->add_control( 'scroll_to_top_heading_toggle' );
             }
 
             /**
@@ -132,12 +134,19 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
+                    'scroll_to_top_heading_toggle' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
                 ];
                 return ( $id ) ? $settings[ $id ] : $settings;
             }
 
             /**
              * Get controls
+             * 
+             * Helpers
              * 
              * @since 1.0.0
              * @override
@@ -265,12 +274,19 @@
                             ]
                         ]
                     ],
+                    'scroll_to_top_heading_toggle' =>  [
+                        'label' =>  esc_html__( 'Heading Toggle', 'i-am-news' ),
+                        'type'  =>  'heading-toggle',
+                        'tab'   =>  'design',
+                        'section'   =>  $this->section
+                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
 
             /**
              * Set defaults
+             * Theme Starter
              * 
              * @since 1.0.0
              * @var array
@@ -316,6 +332,7 @@
                     ]),
                     'scroll_to_top_padding' => '',
                     'radio_tab_test'    =>  'one',
+                    'scroll_to_top_heading_toggle'    =>  'one',
                 ];
             }
 

@@ -76,6 +76,11 @@ function i_am_news_customize_register( $wp_customize ) {
 	*/
 	require_once get_template_directory() . '/inc/customizer/custom-controls/dimension/dimension.php';
 
+	/**
+	 * Heading Toggle Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/heading-toggle/heading-toggle.php';
+
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(
 			'blogname',
