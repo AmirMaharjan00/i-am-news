@@ -16,6 +16,7 @@ MARK: 1.0 Normalize
 */  
     :root {
         --customizer-color: #007cba;
+        --customizer-hover: #f5fafc;
         --customizer-light-grey: #f0f0f0;
         --customizer-dark-grey: #939393;
     }
@@ -127,10 +128,12 @@ MARK: 1.0 Normalize
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        cursor: default;
     }
 
     .customize-control .ian-dropdown-container .highlight:hover {
         outline: 1px solid var(--customizer-color);
+        background: var(--customizer-hover);
     }
 
     .components-popover.ian-dropdown-popover .components-color-picker,
@@ -163,6 +166,12 @@ MARK: 1.0 Normalize
     .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex .components-input-control__container .components-input-control__backdrop {
         outline: 1px solid #cccccc;
         border: unset;
+    }
+
+    .components-popover.components-dropdown__content.ian-dropdown-popover .ian-select-wrapper__control:hover,
+    .components-popover.components-dropdown__content.ian-dropdown-popover .components-select-control__input:hover {
+        outline: 1px solid var(--customizer-color);
+        border-color: var(--customizer-color);
     }
 
 /*
@@ -204,10 +213,12 @@ MARK: 2.0 Radio Image
 
     .customize-control-radio-image .control-content .components-radio-control__label:hover {
         outline: 1px solid var(--customizer-color);
+        background: var(--customizer-hover);
     }
 
     .customize-control-radio-image .control-content .components-radio-control__input:checked + .components-radio-control__label {
         outline-color: var(--customizer-color);
+        background: var(--customizer-hover);
     }
 
     .customize-control-radio-image .control-content .components-radio-control__input:checked + .components-radio-control__label::after,
@@ -469,6 +480,12 @@ MARK: 6.0 Text
         justify-content: space-between;
         align-items: center;
         gap: 0px;
+    }
+
+    .customize-control-ian-text .content-wrapper .components-text-control__input:not(:focus):hover {
+        outline: 1px solid var(--customizer-color);
+        border: none;
+        box-shadow: unset;
     }
 
 /*

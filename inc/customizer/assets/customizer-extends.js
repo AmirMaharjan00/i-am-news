@@ -3037,6 +3037,7 @@ const IconCollection = props => {
    * @since 1.0.0
    */
   const handleItemClick = index => {
+    console.log(filteredIcons[index]);
     handleIconClick(filteredIcons[index]);
     props.onClose();
   };
@@ -3153,7 +3154,8 @@ const Icon = () => {
   const {
     handleSearch,
     type,
-    handleButtonClick
+    handleButtonClick,
+    currentValue
   } = useContext(IconPickerContext);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dropdown, {
     className: "ian-dropdown-container button-item",
@@ -3171,7 +3173,9 @@ const Icon = () => {
         onClick: onToggle,
         variant: type === 'icon' ? 'primary' : 'secondary',
         className: "button-item",
-        children: [__(escapeHTML('Icon'), 'i-am-news'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
+        children: [currentValue ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+          className: currentValue
+        }) : __(escapeHTML('Icon'), 'i-am-news'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
           icon: `arrow-${isOpen ? 'down' : 'up'}-alt2`,
           className: "icon-picker-dashicon"
         })]

@@ -196,6 +196,7 @@ const IconCollection = ( props ) => {
      * @since 1.0.0
      */
     const handleItemClick = ( index ) => {
+        console.log( filteredIcons[ index ] )
         handleIconClick( filteredIcons[ index ] )
         props.onClose()
     }
@@ -290,7 +291,7 @@ const Image = () => {
  * @since 1.0.0
  */
 const Icon = () => {
-    const { handleSearch, type, handleButtonClick } = useContext( IconPickerContext )
+    const { handleSearch, type, handleButtonClick, currentValue } = useContext( IconPickerContext )
 
     return <Dropdown
         className = 'ian-dropdown-container button-item'
@@ -306,7 +307,7 @@ const Icon = () => {
                 variant = { ( ( type === 'icon' ) ? 'primary': 'secondary' ) }
                 className = "button-item"
             >
-                { __( escapeHTML( 'Icon' ), 'i-am-news' ) }
+                { currentValue ? <i className={ currentValue }></i> : __( escapeHTML( 'Icon' ), 'i-am-news' ) }
                 <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } className="icon-picker-dashicon" />
             </Button>
         } }
