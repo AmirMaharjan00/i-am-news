@@ -1,17 +1,16 @@
-const { Button, Dashicon, Dropdown } = wp.components,
+const {  } = wp.components,
     { useState } = wp.element
 
 /**
- * MARK: Heading Toggle Component
+ * MARK: Checkbox Component
  * 
  * @since 1.0.0
  */
-export const HeadingToggleComponent = ( props ) => {
-    const { label, description } = props,
-        [ display, setDisplay ] = useState( true );
+export const CheckboxComponent = () => {
+    const [ display, setDisplay ] = useState( true );
 
     function value() {
-        setDisplay( display => ! display )
+        setDisplay( ! display )
     }
 
     return <div className="control-content">

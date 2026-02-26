@@ -19,6 +19,7 @@
     use IAN\Customizer\Controls\Border as Border;
     use IAN\Customizer\Controls\Dimension as Dimension;
     use IAN\Customizer\Controls\Heading_Toggle as Heading_Toggle;
+    use IAN\Customizer\Controls\Checkbox as Checkbox;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
 
@@ -130,6 +131,7 @@
                     'border'    =>  [ $this, 'add_border' ],
                     'dimension'    =>  [ $this, 'add_dimension' ],
                     'heading-toggle'    =>  [ $this, 'add_heading_toggle' ],
+                    'checkbox'    =>  [ $this, 'add_checkbox' ],
                 ];
             }
 
@@ -325,6 +327,15 @@
              */
             private function add_heading_toggle( $id, $control ) {
                 $this->manager->add_control( new Heading_Toggle( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Text
+             * 
+             * @since 1.0.0
+             */
+            private function add_checkbox( $id, $control ) {
+                $this->manager->add_control( new Checkbox( $this->manager, $id, $control ) );
             }
 
             /**

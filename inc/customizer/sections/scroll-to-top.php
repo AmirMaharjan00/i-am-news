@@ -67,6 +67,7 @@
                 $this->add_control( 'scroll_to_top_box_shadow' );
                 $this->add_control( 'scroll_to_top_padding' );
                 $this->add_control( 'scroll_to_top_heading_toggle' );
+                // $this->add_control( 'scroll_to_top_checkbox' );
             }
 
             /**
@@ -139,13 +140,17 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
+                    // 'scroll_to_top_checkbox' =>  [
+                    //     'sanitize_function' =>  'sanitize_text_field',
+                    //     'transport'   =>  'postMessage',
+                    //     'default'   =>  $this->get_defaults( $id )
+                    // ],
                 ];
                 return ( $id ) ? $settings[ $id ] : $settings;
             }
 
             /**
              * Get controls
-             * 
              * Helpers
              * 
              * @since 1.0.0
@@ -277,9 +282,15 @@
                     'scroll_to_top_heading_toggle' =>  [
                         'label' =>  esc_html__( 'Heading Toggle', 'i-am-news' ),
                         'type'  =>  'heading-toggle',
-                        'tab'   =>  'design',
+                        'tab'   =>  'general',
                         'section'   =>  $this->section
                     ],
+                    // 'scroll_to_top_checkbox' =>  [
+                    //     'label' =>  esc_html__( 'Checkbox', 'i-am-news' ),
+                    //     'type'  =>  'checkbox',
+                    //     'tab'   =>  'general',
+                    //     'section'   =>  $this->section
+                    // ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -333,6 +344,7 @@
                     'scroll_to_top_padding' => '',
                     'radio_tab_test'    =>  'one',
                     'scroll_to_top_heading_toggle'    =>  'one',
+                    // 'scroll_to_top_checkbox'    =>  'one',
                 ];
             }
 

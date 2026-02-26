@@ -1060,322 +1060,322 @@ __webpack_require__.r(__webpack_exports__);
 var isDevelopment = true;
 
 var pkg = {
-	name: "@emotion/react",
-	version: "11.14.0",
-	main: "dist/emotion-react.cjs.js",
-	module: "dist/emotion-react.esm.js",
-	types: "dist/emotion-react.cjs.d.ts",
-	exports: {
-		".": {
-			types: {
-				"import": "./dist/emotion-react.cjs.mjs",
-				"default": "./dist/emotion-react.cjs.js"
-			},
-			development: {
-				"edge-light": {
-					module: "./dist/emotion-react.development.edge-light.esm.js",
-					"import": "./dist/emotion-react.development.edge-light.cjs.mjs",
-					"default": "./dist/emotion-react.development.edge-light.cjs.js"
-				},
-				worker: {
-					module: "./dist/emotion-react.development.edge-light.esm.js",
-					"import": "./dist/emotion-react.development.edge-light.cjs.mjs",
-					"default": "./dist/emotion-react.development.edge-light.cjs.js"
-				},
-				workerd: {
-					module: "./dist/emotion-react.development.edge-light.esm.js",
-					"import": "./dist/emotion-react.development.edge-light.cjs.mjs",
-					"default": "./dist/emotion-react.development.edge-light.cjs.js"
-				},
-				browser: {
-					module: "./dist/emotion-react.browser.development.esm.js",
-					"import": "./dist/emotion-react.browser.development.cjs.mjs",
-					"default": "./dist/emotion-react.browser.development.cjs.js"
-				},
-				module: "./dist/emotion-react.development.esm.js",
-				"import": "./dist/emotion-react.development.cjs.mjs",
-				"default": "./dist/emotion-react.development.cjs.js"
-			},
-			"edge-light": {
-				module: "./dist/emotion-react.edge-light.esm.js",
-				"import": "./dist/emotion-react.edge-light.cjs.mjs",
-				"default": "./dist/emotion-react.edge-light.cjs.js"
-			},
-			worker: {
-				module: "./dist/emotion-react.edge-light.esm.js",
-				"import": "./dist/emotion-react.edge-light.cjs.mjs",
-				"default": "./dist/emotion-react.edge-light.cjs.js"
-			},
-			workerd: {
-				module: "./dist/emotion-react.edge-light.esm.js",
-				"import": "./dist/emotion-react.edge-light.cjs.mjs",
-				"default": "./dist/emotion-react.edge-light.cjs.js"
-			},
-			browser: {
-				module: "./dist/emotion-react.browser.esm.js",
-				"import": "./dist/emotion-react.browser.cjs.mjs",
-				"default": "./dist/emotion-react.browser.cjs.js"
-			},
-			module: "./dist/emotion-react.esm.js",
-			"import": "./dist/emotion-react.cjs.mjs",
-			"default": "./dist/emotion-react.cjs.js"
-		},
-		"./jsx-runtime": {
-			types: {
-				"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.mjs",
-				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.js"
-			},
-			development: {
-				"edge-light": {
-					module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.esm.js",
-					"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.mjs",
-					"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.js"
-				},
-				worker: {
-					module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.esm.js",
-					"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.mjs",
-					"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.js"
-				},
-				workerd: {
-					module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.esm.js",
-					"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.mjs",
-					"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.js"
-				},
-				browser: {
-					module: "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.development.esm.js",
-					"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.development.cjs.mjs",
-					"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.development.cjs.js"
-				},
-				module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.esm.js",
-				"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.cjs.mjs",
-				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.cjs.js"
-			},
-			"edge-light": {
-				module: "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.esm.js",
-				"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.mjs",
-				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.js"
-			},
-			worker: {
-				module: "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.esm.js",
-				"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.mjs",
-				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.js"
-			},
-			workerd: {
-				module: "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.esm.js",
-				"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.mjs",
-				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.js"
-			},
-			browser: {
-				module: "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js",
-				"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.cjs.mjs",
-				"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.cjs.js"
-			},
-			module: "./jsx-runtime/dist/emotion-react-jsx-runtime.esm.js",
-			"import": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.mjs",
-			"default": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.js"
-		},
-		"./_isolated-hnrs": {
-			types: {
-				"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.mjs",
-				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.js"
-			},
-			development: {
-				"edge-light": {
-					module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.esm.js",
-					"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.mjs",
-					"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.js"
-				},
-				worker: {
-					module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.esm.js",
-					"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.mjs",
-					"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.js"
-				},
-				workerd: {
-					module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.esm.js",
-					"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.mjs",
-					"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.js"
-				},
-				browser: {
-					module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.development.esm.js",
-					"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.development.cjs.mjs",
-					"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.development.cjs.js"
-				},
-				module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.esm.js",
-				"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.cjs.mjs",
-				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.cjs.js"
-			},
-			"edge-light": {
-				module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.esm.js",
-				"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.mjs",
-				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.js"
-			},
-			worker: {
-				module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.esm.js",
-				"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.mjs",
-				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.js"
-			},
-			workerd: {
-				module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.esm.js",
-				"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.mjs",
-				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.js"
-			},
-			browser: {
-				module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js",
-				"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.cjs.mjs",
-				"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.cjs.js"
-			},
-			module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.esm.js",
-			"import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.mjs",
-			"default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.js"
-		},
-		"./jsx-dev-runtime": {
-			types: {
-				"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.mjs",
-				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.js"
-			},
-			development: {
-				"edge-light": {
-					module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.esm.js",
-					"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.mjs",
-					"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.js"
-				},
-				worker: {
-					module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.esm.js",
-					"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.mjs",
-					"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.js"
-				},
-				workerd: {
-					module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.esm.js",
-					"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.mjs",
-					"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.js"
-				},
-				browser: {
-					module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.development.esm.js",
-					"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.development.cjs.mjs",
-					"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.development.cjs.js"
-				},
-				module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.esm.js",
-				"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.cjs.mjs",
-				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.cjs.js"
-			},
-			"edge-light": {
-				module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.esm.js",
-				"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.mjs",
-				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.js"
-			},
-			worker: {
-				module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.esm.js",
-				"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.mjs",
-				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.js"
-			},
-			workerd: {
-				module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.esm.js",
-				"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.mjs",
-				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.js"
-			},
-			browser: {
-				module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.esm.js",
-				"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.cjs.mjs",
-				"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.cjs.js"
-			},
-			module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.esm.js",
-			"import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.mjs",
-			"default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.js"
-		},
-		"./package.json": "./package.json",
-		"./types/css-prop": "./types/css-prop.d.ts",
-		"./macro": {
-			types: {
-				"import": "./macro.d.mts",
-				"default": "./macro.d.ts"
-			},
-			"default": "./macro.js"
-		}
-	},
-	imports: {
-		"#is-development": {
-			development: "./src/conditions/true.ts",
-			"default": "./src/conditions/false.ts"
-		},
-		"#is-browser": {
-			"edge-light": "./src/conditions/false.ts",
-			workerd: "./src/conditions/false.ts",
-			worker: "./src/conditions/false.ts",
-			browser: "./src/conditions/true.ts",
-			"default": "./src/conditions/is-browser.ts"
-		}
-	},
-	files: [
-		"src",
-		"dist",
-		"jsx-runtime",
-		"jsx-dev-runtime",
-		"_isolated-hnrs",
-		"types/css-prop.d.ts",
-		"macro.*"
-	],
-	sideEffects: false,
-	author: "Emotion Contributors",
-	license: "MIT",
-	scripts: {
-		"test:typescript": "dtslint types"
-	},
-	dependencies: {
-		"@babel/runtime": "^7.18.3",
-		"@emotion/babel-plugin": "^11.13.5",
-		"@emotion/cache": "^11.14.0",
-		"@emotion/serialize": "^1.3.3",
-		"@emotion/use-insertion-effect-with-fallbacks": "^1.2.0",
-		"@emotion/utils": "^1.4.2",
-		"@emotion/weak-memoize": "^0.4.0",
-		"hoist-non-react-statics": "^3.3.1"
-	},
-	peerDependencies: {
-		react: ">=16.8.0"
-	},
-	peerDependenciesMeta: {
-		"@types/react": {
-			optional: true
-		}
-	},
-	devDependencies: {
-		"@definitelytyped/dtslint": "0.0.112",
-		"@emotion/css": "11.13.5",
-		"@emotion/css-prettifier": "1.2.0",
-		"@emotion/server": "11.11.0",
-		"@emotion/styled": "11.14.0",
-		"@types/hoist-non-react-statics": "^3.3.5",
-		"html-tag-names": "^1.1.2",
-		react: "16.14.0",
-		"svg-tag-names": "^1.1.1",
-		typescript: "^5.4.5"
-	},
-	repository: "https://github.com/emotion-js/emotion/tree/main/packages/react",
-	publishConfig: {
-		access: "public"
-	},
-	"umd:main": "dist/emotion-react.umd.min.js",
-	preconstruct: {
-		entrypoints: [
-			"./index.ts",
-			"./jsx-runtime.ts",
-			"./jsx-dev-runtime.ts",
-			"./_isolated-hnrs.ts"
-		],
-		umdName: "emotionReact",
-		exports: {
-			extra: {
-				"./types/css-prop": "./types/css-prop.d.ts",
-				"./macro": {
-					types: {
-						"import": "./macro.d.mts",
-						"default": "./macro.d.ts"
-					},
-					"default": "./macro.js"
-				}
-			}
-		}
-	}
+  name: "@emotion/react",
+  version: "11.14.0",
+  main: "dist/emotion-react.cjs.js",
+  module: "dist/emotion-react.esm.js",
+  types: "dist/emotion-react.cjs.d.ts",
+  exports: {
+    ".": {
+      types: {
+        "import": "./dist/emotion-react.cjs.mjs",
+        "default": "./dist/emotion-react.cjs.js"
+      },
+      development: {
+        "edge-light": {
+          module: "./dist/emotion-react.development.edge-light.esm.js",
+          "import": "./dist/emotion-react.development.edge-light.cjs.mjs",
+          "default": "./dist/emotion-react.development.edge-light.cjs.js"
+        },
+        worker: {
+          module: "./dist/emotion-react.development.edge-light.esm.js",
+          "import": "./dist/emotion-react.development.edge-light.cjs.mjs",
+          "default": "./dist/emotion-react.development.edge-light.cjs.js"
+        },
+        workerd: {
+          module: "./dist/emotion-react.development.edge-light.esm.js",
+          "import": "./dist/emotion-react.development.edge-light.cjs.mjs",
+          "default": "./dist/emotion-react.development.edge-light.cjs.js"
+        },
+        browser: {
+          module: "./dist/emotion-react.browser.development.esm.js",
+          "import": "./dist/emotion-react.browser.development.cjs.mjs",
+          "default": "./dist/emotion-react.browser.development.cjs.js"
+        },
+        module: "./dist/emotion-react.development.esm.js",
+        "import": "./dist/emotion-react.development.cjs.mjs",
+        "default": "./dist/emotion-react.development.cjs.js"
+      },
+      "edge-light": {
+        module: "./dist/emotion-react.edge-light.esm.js",
+        "import": "./dist/emotion-react.edge-light.cjs.mjs",
+        "default": "./dist/emotion-react.edge-light.cjs.js"
+      },
+      worker: {
+        module: "./dist/emotion-react.edge-light.esm.js",
+        "import": "./dist/emotion-react.edge-light.cjs.mjs",
+        "default": "./dist/emotion-react.edge-light.cjs.js"
+      },
+      workerd: {
+        module: "./dist/emotion-react.edge-light.esm.js",
+        "import": "./dist/emotion-react.edge-light.cjs.mjs",
+        "default": "./dist/emotion-react.edge-light.cjs.js"
+      },
+      browser: {
+        module: "./dist/emotion-react.browser.esm.js",
+        "import": "./dist/emotion-react.browser.cjs.mjs",
+        "default": "./dist/emotion-react.browser.cjs.js"
+      },
+      module: "./dist/emotion-react.esm.js",
+      "import": "./dist/emotion-react.cjs.mjs",
+      "default": "./dist/emotion-react.cjs.js"
+    },
+    "./jsx-runtime": {
+      types: {
+        "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.mjs",
+        "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.js"
+      },
+      development: {
+        "edge-light": {
+          module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.esm.js",
+          "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.mjs",
+          "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.js"
+        },
+        worker: {
+          module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.esm.js",
+          "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.mjs",
+          "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.js"
+        },
+        workerd: {
+          module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.esm.js",
+          "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.mjs",
+          "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.edge-light.cjs.js"
+        },
+        browser: {
+          module: "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.development.esm.js",
+          "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.development.cjs.mjs",
+          "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.development.cjs.js"
+        },
+        module: "./jsx-runtime/dist/emotion-react-jsx-runtime.development.esm.js",
+        "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.cjs.mjs",
+        "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.development.cjs.js"
+      },
+      "edge-light": {
+        module: "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.esm.js",
+        "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.mjs",
+        "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.js"
+      },
+      worker: {
+        module: "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.esm.js",
+        "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.mjs",
+        "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.js"
+      },
+      workerd: {
+        module: "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.esm.js",
+        "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.mjs",
+        "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.edge-light.cjs.js"
+      },
+      browser: {
+        module: "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js",
+        "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.cjs.mjs",
+        "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.browser.cjs.js"
+      },
+      module: "./jsx-runtime/dist/emotion-react-jsx-runtime.esm.js",
+      "import": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.mjs",
+      "default": "./jsx-runtime/dist/emotion-react-jsx-runtime.cjs.js"
+    },
+    "./_isolated-hnrs": {
+      types: {
+        "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.mjs",
+        "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.js"
+      },
+      development: {
+        "edge-light": {
+          module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.esm.js",
+          "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.mjs",
+          "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.js"
+        },
+        worker: {
+          module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.esm.js",
+          "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.mjs",
+          "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.js"
+        },
+        workerd: {
+          module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.esm.js",
+          "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.mjs",
+          "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.edge-light.cjs.js"
+        },
+        browser: {
+          module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.development.esm.js",
+          "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.development.cjs.mjs",
+          "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.development.cjs.js"
+        },
+        module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.esm.js",
+        "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.cjs.mjs",
+        "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.development.cjs.js"
+      },
+      "edge-light": {
+        module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.esm.js",
+        "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.mjs",
+        "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.js"
+      },
+      worker: {
+        module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.esm.js",
+        "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.mjs",
+        "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.js"
+      },
+      workerd: {
+        module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.esm.js",
+        "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.mjs",
+        "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.edge-light.cjs.js"
+      },
+      browser: {
+        module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.esm.js",
+        "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.cjs.mjs",
+        "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.browser.cjs.js"
+      },
+      module: "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.esm.js",
+      "import": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.mjs",
+      "default": "./_isolated-hnrs/dist/emotion-react-_isolated-hnrs.cjs.js"
+    },
+    "./jsx-dev-runtime": {
+      types: {
+        "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.mjs",
+        "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.js"
+      },
+      development: {
+        "edge-light": {
+          module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.esm.js",
+          "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.mjs",
+          "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.js"
+        },
+        worker: {
+          module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.esm.js",
+          "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.mjs",
+          "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.js"
+        },
+        workerd: {
+          module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.esm.js",
+          "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.mjs",
+          "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.edge-light.cjs.js"
+        },
+        browser: {
+          module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.development.esm.js",
+          "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.development.cjs.mjs",
+          "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.development.cjs.js"
+        },
+        module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.esm.js",
+        "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.cjs.mjs",
+        "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.development.cjs.js"
+      },
+      "edge-light": {
+        module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.esm.js",
+        "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.mjs",
+        "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.js"
+      },
+      worker: {
+        module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.esm.js",
+        "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.mjs",
+        "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.js"
+      },
+      workerd: {
+        module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.esm.js",
+        "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.mjs",
+        "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.edge-light.cjs.js"
+      },
+      browser: {
+        module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.esm.js",
+        "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.cjs.mjs",
+        "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.browser.cjs.js"
+      },
+      module: "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.esm.js",
+      "import": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.mjs",
+      "default": "./jsx-dev-runtime/dist/emotion-react-jsx-dev-runtime.cjs.js"
+    },
+    "./package.json": "./package.json",
+    "./types/css-prop": "./types/css-prop.d.ts",
+    "./macro": {
+      types: {
+        "import": "./macro.d.mts",
+        "default": "./macro.d.ts"
+      },
+      "default": "./macro.js"
+    }
+  },
+  imports: {
+    "#is-development": {
+      development: "./src/conditions/true.ts",
+      "default": "./src/conditions/false.ts"
+    },
+    "#is-browser": {
+      "edge-light": "./src/conditions/false.ts",
+      workerd: "./src/conditions/false.ts",
+      worker: "./src/conditions/false.ts",
+      browser: "./src/conditions/true.ts",
+      "default": "./src/conditions/is-browser.ts"
+    }
+  },
+  files: [
+    "src",
+    "dist",
+    "jsx-runtime",
+    "jsx-dev-runtime",
+    "_isolated-hnrs",
+    "types/css-prop.d.ts",
+    "macro.*"
+  ],
+  sideEffects: false,
+  author: "Emotion Contributors",
+  license: "MIT",
+  scripts: {
+    "test:typescript": "dtslint types"
+  },
+  dependencies: {
+    "@babel/runtime": "^7.18.3",
+    "@emotion/babel-plugin": "^11.13.5",
+    "@emotion/cache": "^11.14.0",
+    "@emotion/serialize": "^1.3.3",
+    "@emotion/use-insertion-effect-with-fallbacks": "^1.2.0",
+    "@emotion/utils": "^1.4.2",
+    "@emotion/weak-memoize": "^0.4.0",
+    "hoist-non-react-statics": "^3.3.1"
+  },
+  peerDependencies: {
+    react: ">=16.8.0"
+  },
+  peerDependenciesMeta: {
+    "@types/react": {
+      optional: true
+    }
+  },
+  devDependencies: {
+    "@definitelytyped/dtslint": "0.0.112",
+    "@emotion/css": "11.13.5",
+    "@emotion/css-prettifier": "1.2.0",
+    "@emotion/server": "11.11.0",
+    "@emotion/styled": "11.14.0",
+    "@types/hoist-non-react-statics": "^3.3.5",
+    "html-tag-names": "^1.1.2",
+    react: "16.14.0",
+    "svg-tag-names": "^1.1.1",
+    typescript: "^5.4.5"
+  },
+  repository: "https://github.com/emotion-js/emotion/tree/main/packages/react",
+  publishConfig: {
+    access: "public"
+  },
+  "umd:main": "dist/emotion-react.umd.min.js",
+  preconstruct: {
+    entrypoints: [
+      "./index.ts",
+      "./jsx-runtime.ts",
+      "./jsx-dev-runtime.ts",
+      "./_isolated-hnrs.ts"
+    ],
+    umdName: "emotionReact",
+    exports: {
+      extra: {
+        "./types/css-prop": "./types/css-prop.d.ts",
+        "./macro": {
+          types: {
+            "import": "./macro.d.mts",
+            "default": "./macro.d.ts"
+          },
+          "default": "./macro.js"
+        }
+      }
+    }
+  }
 };
 
 var jsx = function jsx(type, props) {
@@ -2712,6 +2712,57 @@ const Inset = () => {
 
 /***/ },
 
+/***/ "./src/components/checkbox.js"
+/*!************************************!*\
+  !*** ./src/components/checkbox.js ***!
+  \************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CheckboxComponent: () => (/* binding */ CheckboxComponent)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const {} = wp.components,
+  {
+    useState
+  } = wp.element;
+
+/**
+ * MARK: Checkbox Component
+ * 
+ * @since 1.0.0
+ */
+const CheckboxComponent = () => {
+  const [display, setDisplay] = useState(true);
+  function value() {
+    setDisplay(!display);
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: "control-content",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "content-wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+          onClick: value,
+          children: "Heading"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+            icon: "dashicon-arrow-down-alt2",
+            className: "icon-picker-dashicon"
+          })
+        })]
+      }), display && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        children: "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+      })]
+    })
+  });
+};
+
+/***/ },
+
 /***/ "./src/components/components.js"
 /*!**************************************!*\
   !*** ./src/components/components.js ***!
@@ -2922,40 +2973,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HeadingToggleComponent: () => (/* binding */ HeadingToggleComponent)
 /* harmony export */ });
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
-const {} = wp.components,
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+    Button,
+    Dashicon,
+    Dropdown
+  } = wp.components,
   {
-    useState,
-    useEffect
+    useState
   } = wp.element;
 
-
-// total of 1932 fonts
-
 /**
- * MARK: Typography Component
+ * MARK: Heading Toggle Component
  * 
  * @since 1.0.0
  */
-
 const HeadingToggleComponent = props => {
   const {
       label,
       description
     } = props,
-    [desplay, setDisplay] = useState(true);
-  function test() {
-    setDisplay(!desplay);
+    [display, setDisplay] = useState(true);
+  function value() {
+    setDisplay(display => !display);
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
-      onClick: test,
-      children: "Heading"
-    }), desplay && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-      children: "Welcome to My site Sites. This is your first post. Edit or delete it, then start writing!"
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: "control-content",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "content-wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+          onClick: value,
+          children: "Heading"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+            icon: "dashicon-arrow-down-alt2",
+            className: "icon-picker-dashicon"
+          })
+        })]
+      }), display && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        children: "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+      })]
+    })
   });
 };
 
@@ -15635,16 +15696,16 @@ __webpack_require__.r(__webpack_exports__);
  * @return {function}
  */
 function middleware (collection) {
-	var length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(collection)
+  var length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(collection)
 
-	return function (element, index, children, callback) {
-		var output = ''
+  return function (element, index, children, callback) {
+    var output = ''
 
-		for (var i = 0; i < length; i++)
-			output += collection[i](element, index, children, callback) || ''
+    for (var i = 0; i < length; i++)
+      output += collection[i](element, index, children, callback) || ''
 
-		return output
-	}
+    return output
+  }
 }
 
 /**
@@ -15652,11 +15713,11 @@ function middleware (collection) {
  * @return {function}
  */
 function rulesheet (callback) {
-	return function (element) {
-		if (!element.root)
-			if (element = element.return)
-				callback(element)
-	}
+  return function (element) {
+    if (!element.root)
+      if (element = element.return)
+        callback(element)
+  }
 }
 
 /**
@@ -15666,32 +15727,32 @@ function rulesheet (callback) {
  * @param {function} callback
  */
 function prefixer (element, index, children, callback) {
-	if (element.length > -1)
-		if (!element.return)
-			switch (element.type) {
-				case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.DECLARATION: element.return = (0,_Prefixer_js__WEBPACK_IMPORTED_MODULE_4__.prefix)(element.value, element.length, children)
-					return
-				case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.KEYFRAMES:
-					return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {value: (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(element.value, '@', '@' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT)})], callback)
-				case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET:
-					if (element.length)
-						return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.combine)(element.props, function (value) {
-							switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /(::plac\w+|:read-\w+)/)) {
-								// :read-(only|write)
-								case ':read-only': case ':read-write':
-									return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(read-\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + '$1')]})], callback)
-								// :placeholder
-								case '::placeholder':
-									return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([
-										(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'input-$1')]}),
-										(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + '$1')]}),
-										(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(plac\w+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'input-$1')]})
-									], callback)
-							}
+  if (element.length > -1)
+    if (!element.return)
+      switch (element.type) {
+        case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.DECLARATION: element.return = (0,_Prefixer_js__WEBPACK_IMPORTED_MODULE_4__.prefix)(element.value, element.length, children)
+          return
+        case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.KEYFRAMES:
+          return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {value: (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(element.value, '@', '@' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT)})], callback)
+        case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET:
+          if (element.length)
+            return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.combine)(element.props, function (value) {
+              switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /(::plac\w+|:read-\w+)/)) {
+                // :read-(only|write)
+                case ':read-only': case ':read-write':
+                  return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([(0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(read-\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + '$1')]})], callback)
+                // :placeholder
+                case '::placeholder':
+                  return (0,_Serializer_js__WEBPACK_IMPORTED_MODULE_3__.serialize)([
+                    (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'input-$1')]}),
+                    (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(plac\w+)/, ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + '$1')]}),
+                    (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.copy)(element, {props: [(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /:(plac\w+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'input-$1')]})
+                  ], callback)
+              }
 
-							return ''
-						})
-			}
+              return ''
+            })
+      }
 }
 
 /**
@@ -15700,37 +15761,37 @@ function prefixer (element, index, children, callback) {
  * @param {object[]} children
  */
 function namespace (element) {
-	switch (element.type) {
-		case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET:
-			element.props = element.props.map(function (value) {
-				return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.combine)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.tokenize)(value), function (value, index, children) {
-					switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, 0)) {
-						// \f
-						case 12:
-							return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, 1, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(value))
-						// \0 ( + > ~
-						case 0: case 40: case 43: case 62: case 126:
-							return value
-						// :
-						case 58:
-							if (children[++index] === 'global')
-								children[index] = '', children[++index] = '\f' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(children[index], index = 1, -1)
-						// \s
-						case 32:
-							return index === 1 ? '' : value
-						default:
-							switch (index) {
-								case 0: element = value
-									return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(children) > 1 ? '' : value
-								case index = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(children) - 1: case 2:
-									return index === 2 ? value + element + element : value + element
-								default:
-									return value
-							}
-					}
-				})
-			})
-	}
+  switch (element.type) {
+    case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET:
+      element.props = element.props.map(function (value) {
+        return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.combine)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.tokenize)(value), function (value, index, children) {
+          switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, 0)) {
+            // \f
+            case 12:
+              return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, 1, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(value))
+            // \0 ( + > ~
+            case 0: case 40: case 43: case 62: case 126:
+              return value
+            // :
+            case 58:
+              if (children[++index] === 'global')
+                children[index] = '', children[++index] = '\f' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(children[index], index = 1, -1)
+            // \s
+            case 32:
+              return index === 1 ? '' : value
+            default:
+              switch (index) {
+                case 0: element = value
+                  return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(children) > 1 ? '' : value
+                case index = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(children) - 1: case 2:
+                  return index === 2 ? value + element + element : value + element
+                default:
+                  return value
+              }
+          }
+        })
+      })
+  }
 }
 
 
@@ -15762,7 +15823,7 @@ __webpack_require__.r(__webpack_exports__);
  * @return {object[]}
  */
 function compile (value) {
-	return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.dealloc)(parse('', null, null, null, [''], value = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.alloc)(value), 0, [0], value))
+  return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.dealloc)(parse('', null, null, null, [''], value = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.alloc)(value), 0, [0], value))
 }
 
 /**
@@ -15778,123 +15839,123 @@ function compile (value) {
  * @return {object}
  */
 function parse (value, root, parent, rule, rules, rulesets, pseudo, points, declarations) {
-	var index = 0
-	var offset = 0
-	var length = pseudo
-	var atrule = 0
-	var property = 0
-	var previous = 0
-	var variable = 1
-	var scanning = 1
-	var ampersand = 1
-	var character = 0
-	var type = ''
-	var props = rules
-	var children = rulesets
-	var reference = rule
-	var characters = type
+  var index = 0
+  var offset = 0
+  var length = pseudo
+  var atrule = 0
+  var property = 0
+  var previous = 0
+  var variable = 1
+  var scanning = 1
+  var ampersand = 1
+  var character = 0
+  var type = ''
+  var props = rules
+  var children = rulesets
+  var reference = rule
+  var characters = type
 
-	while (scanning)
-		switch (previous = character, character = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.next)()) {
-			// (
-			case 40:
-				if (previous != 108 && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(characters, length - 1) == 58) {
-					if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(characters += (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.delimit)(character), '&', '&\f'), '&\f') != -1)
-						ampersand = -1
-					break
-				}
-			// " ' [
-			case 34: case 39: case 91:
-				characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.delimit)(character)
-				break
-			// \t \n \r \s
-			case 9: case 10: case 13: case 32:
-				characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.whitespace)(previous)
-				break
-			// \
-			case 92:
-				characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.escaping)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.caret)() - 1, 7)
-				continue
-			// /
-			case 47:
-				switch ((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.peek)()) {
-					case 42: case 47:
-						;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(comment((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.commenter)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.next)(), (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.caret)()), root, parent), declarations)
-						break
-					default:
-						characters += '/'
-				}
-				break
-			// {
-			case 123 * variable:
-				points[index++] = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) * ampersand
-			// } ; \0
-			case 125 * variable: case 59: case 0:
-				switch (character) {
-					// \0 }
-					case 0: case 125: scanning = 0
-					// ;
-					case 59 + offset: if (ampersand == -1) characters = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(characters, /\f/g, '')
-						if (property > 0 && ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) - length))
-							(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(property > 32 ? declaration(characters + ';', rule, parent, length - 1) : declaration((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(characters, ' ', '') + ';', rule, parent, length - 2), declarations)
-						break
-					// @ ;
-					case 59: characters += ';'
-					// { rule/at-rule
-					default:
-						;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(reference = ruleset(characters, root, parent, index, offset, rules, points, type, props = [], children = [], length), rulesets)
+  while (scanning)
+    switch (previous = character, character = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.next)()) {
+      // (
+      case 40:
+        if (previous != 108 && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(characters, length - 1) == 58) {
+          if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(characters += (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.delimit)(character), '&', '&\f'), '&\f') != -1)
+            ampersand = -1
+          break
+        }
+      // " ' [
+      case 34: case 39: case 91:
+        characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.delimit)(character)
+        break
+      // \t \n \r \s
+      case 9: case 10: case 13: case 32:
+        characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.whitespace)(previous)
+        break
+      // \
+      case 92:
+        characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.escaping)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.caret)() - 1, 7)
+        continue
+      // /
+      case 47:
+        switch ((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.peek)()) {
+          case 42: case 47:
+            ;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(comment((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.commenter)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.next)(), (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.caret)()), root, parent), declarations)
+            break
+          default:
+            characters += '/'
+        }
+        break
+      // {
+      case 123 * variable:
+        points[index++] = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) * ampersand
+      // } ; \0
+      case 125 * variable: case 59: case 0:
+        switch (character) {
+          // \0 }
+          case 0: case 125: scanning = 0
+          // ;
+          case 59 + offset: if (ampersand == -1) characters = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(characters, /\f/g, '')
+            if (property > 0 && ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) - length))
+              (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(property > 32 ? declaration(characters + ';', rule, parent, length - 1) : declaration((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(characters, ' ', '') + ';', rule, parent, length - 2), declarations)
+            break
+          // @ ;
+          case 59: characters += ';'
+          // { rule/at-rule
+          default:
+            ;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(reference = ruleset(characters, root, parent, index, offset, rules, points, type, props = [], children = [], length), rulesets)
 
-						if (character === 123)
-							if (offset === 0)
-								parse(characters, root, reference, reference, props, rulesets, length, points, children)
-							else
-								switch (atrule === 99 && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(characters, 3) === 110 ? 100 : atrule) {
-									// d l m s
-									case 100: case 108: case 109: case 115:
-										parse(value, reference, reference, rule && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(ruleset(value, reference, reference, 0, 0, rules, points, type, rules, props = [], length), children), rules, children, length, points, rule ? props : children)
-										break
-									default:
-										parse(characters, reference, reference, reference, [''], children, 0, points, children)
-								}
-				}
+            if (character === 123)
+              if (offset === 0)
+                parse(characters, root, reference, reference, props, rulesets, length, points, children)
+              else
+                switch (atrule === 99 && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(characters, 3) === 110 ? 100 : atrule) {
+                  // d l m s
+                  case 100: case 108: case 109: case 115:
+                    parse(value, reference, reference, rule && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.append)(ruleset(value, reference, reference, 0, 0, rules, points, type, rules, props = [], length), children), rules, children, length, points, rule ? props : children)
+                    break
+                  default:
+                    parse(characters, reference, reference, reference, [''], children, 0, points, children)
+                }
+        }
 
-				index = offset = property = 0, variable = ampersand = 1, type = characters = '', length = pseudo
-				break
-			// :
-			case 58:
-				length = 1 + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters), property = previous
-			default:
-				if (variable < 1)
-					if (character == 123)
-						--variable
-					else if (character == 125 && variable++ == 0 && (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.prev)() == 125)
-						continue
+        index = offset = property = 0, variable = ampersand = 1, type = characters = '', length = pseudo
+        break
+      // :
+      case 58:
+        length = 1 + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters), property = previous
+      default:
+        if (variable < 1)
+          if (character == 123)
+            --variable
+          else if (character == 125 && variable++ == 0 && (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.prev)() == 125)
+            continue
 
-				switch (characters += (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.from)(character), character * variable) {
-					// &
-					case 38:
-						ampersand = offset > 0 ? 1 : (characters += '\f', -1)
-						break
-					// ,
-					case 44:
-						points[index++] = ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) - 1) * ampersand, ampersand = 1
-						break
-					// @
-					case 64:
-						// -
-						if ((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.peek)() === 45)
-							characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.delimit)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.next)())
+        switch (characters += (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.from)(character), character * variable) {
+          // &
+          case 38:
+            ampersand = offset > 0 ? 1 : (characters += '\f', -1)
+            break
+          // ,
+          case 44:
+            points[index++] = ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) - 1) * ampersand, ampersand = 1
+            break
+          // @
+          case 64:
+            // -
+            if ((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.peek)() === 45)
+              characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.delimit)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.next)())
 
-						atrule = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.peek)(), offset = length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(type = characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.identifier)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.caret)())), character++
-						break
-					// -
-					case 45:
-						if (previous === 45 && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) == 2)
-							variable = 0
-				}
-		}
+            atrule = (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.peek)(), offset = length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(type = characters += (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.identifier)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.caret)())), character++
+            break
+          // -
+          case 45:
+            if (previous === 45 && (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(characters) == 2)
+              variable = 0
+        }
+    }
 
-	return rulesets
+  return rulesets
 }
 
 /**
@@ -15912,16 +15973,16 @@ function parse (value, root, parent, rule, rules, rulesets, pseudo, points, decl
  * @return {object}
  */
 function ruleset (value, root, parent, index, offset, rules, points, type, props, children, length) {
-	var post = offset - 1
-	var rule = offset === 0 ? rules : ['']
-	var size = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(rule)
+  var post = offset - 1
+  var rule = offset === 0 ? rules : ['']
+  var size = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(rule)
 
-	for (var i = 0, j = 0, k = 0; i < index; ++i)
-		for (var x = 0, y = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, post + 1, post = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.abs)(j = points[i])), z = value; x < size; ++x)
-			if (z = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.trim)(j > 0 ? rule[x] + ' ' + y : (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(y, /&\f/g, rule[x])))
-				props[k++] = z
+  for (var i = 0, j = 0, k = 0; i < index; ++i)
+    for (var x = 0, y = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, post + 1, post = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.abs)(j = points[i])), z = value; x < size; ++x)
+      if (z = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.trim)(j > 0 ? rule[x] + ' ' + y : (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(y, /&\f/g, rule[x])))
+        props[k++] = z
 
-	return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.node)(value, root, parent, offset === 0 ? _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET : type, props, children, length)
+  return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.node)(value, root, parent, offset === 0 ? _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET : type, props, children, length)
 }
 
 /**
@@ -15931,7 +15992,7 @@ function ruleset (value, root, parent, index, offset, rules, points, type, props
  * @return {object}
  */
 function comment (value, root, parent) {
-	return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.node)(value, root, parent, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.COMMENT, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.from)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.char)()), (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, 2, -2), 0)
+  return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.node)(value, root, parent, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.COMMENT, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.from)((0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.char)()), (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, 2, -2), 0)
 }
 
 /**
@@ -15942,7 +16003,7 @@ function comment (value, root, parent) {
  * @return {object}
  */
 function declaration (value, root, parent, length) {
-	return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.node)(value, root, parent, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.DECLARATION, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, 0, length), (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, length + 1, -1), length)
+  return (0,_Tokenizer_js__WEBPACK_IMPORTED_MODULE_2__.node)(value, root, parent, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.DECLARATION, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, 0, length), (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, length + 1, -1), length)
 }
 
 
@@ -15970,140 +16031,140 @@ __webpack_require__.r(__webpack_exports__);
  * @return {string}
  */
 function prefix (value, length, children) {
-	switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.hash)(value, length)) {
-		// color-adjust
-		case 5103:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'print-' + value + value
-		// animation, animation-(delay|direction|duration|fill-mode|iteration-count|name|play-state|timing-function)
-		case 5737: case 4201: case 3177: case 3433: case 1641: case 4457: case 2921:
-		// text-decoration, filter, clip-path, backface-visibility, column, box-decoration-break
-		case 5572: case 6356: case 5844: case 3191: case 6645: case 3005:
-		// mask, mask-image, mask-(mode|clip|size), mask-(repeat|origin), mask-position, mask-composite,
-		case 6391: case 5879: case 5623: case 6135: case 4599: case 4855:
-		// background-clip, columns, column-(count|fill|gap|rule|rule-color|rule-style|rule-width|span|width)
-		case 4215: case 6389: case 5109: case 5365: case 5621: case 3829:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + value
-		// tab-size
-		case 4789:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + value + value
-		// appearance, user-select, transform, hyphens, text-size-adjust
-		case 5349: case 4246: case 4810: case 6968: case 2756:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + value + value
-		// writing-mode
-		case 5936:
-			switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 11)) {
-				// vertical-l(r)
-				case 114:
-					return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /[svh]\w+-[tblr]{2}/, 'tb') + value
-				// vertical-r(l)
-				case 108:
-					return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /[svh]\w+-[tblr]{2}/, 'tb-rl') + value
-				// horizontal(-)tb
-				case 45:
-					return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /[svh]\w+-[tblr]{2}/, 'lr') + value
-				// default: fallthrough to below
-			}
-		// flex, flex-direction, scroll-snap-type, writing-mode
-		case 6828: case 4268: case 2903:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + value + value
-		// order
-		case 6165:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-' + value + value
-		// align-items
-		case 5187:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(\w+).+(:[^]+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'box-$1$2' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-$1$2') + value
-		// align-self
-		case 5443:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-item-' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /flex-|-self/g, '') + (!(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /flex-|baseline/) ? _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'grid-row-' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /flex-|-self/g, '') : '') + value
-		// align-content
-		case 4675:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-line-pack' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /align-content|flex-|-self/g, '') + value
-		// flex-shrink
-		case 5548:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'shrink', 'negative') + value
-		// flex-basis
-		case 5292:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'basis', 'preferred-size') + value
-		// flex-grow
-		case 6060:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'box-' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-grow', '') + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'grow', 'positive') + value
-		// transition
-		case 4554:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /([^-])(transform)/g, '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$2') + value
-		// cursor
-		case 6187:
-			return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(zoom-|grab)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1'), /(image-set)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1'), value, '') + value
-		// background, background-image
-		case 5495: case 3959:
-			return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(image-set\([^]*)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1' + '$`$1')
-		// justify-content
-		case 4968:
-			return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+:)(flex-)?(.*)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'box-pack:$3' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-pack:$3'), /s.+-b[^;]+/, 'justify') + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + value
-		// justify-self
-		case 4200:
-			if (!(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /flex-|baseline/)) return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'grid-column-align' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, length) + value
-			break
-		// grid-template-(columns|rows)
-		case 2592: case 3360:
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'template-', '') + value
-		// grid-(row|column)-start
-		case 4384: case 3616:
-			if (children && children.some(function (element, index) { return length = index, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(element.props, /grid-\w+-end/) })) {
-				return ~(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(value + (children = children[length].value), 'span') ? value : (_Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-start', '') + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'grid-row-span:' + (~(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(children, 'span') ? (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(children, /\d+/) : +(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(children, /\d+/) - +(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /\d+/)) + ';')
-			}
-			return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-start', '') + value
-		// grid-(row|column)-end
-		case 4896: case 4128:
-			return (children && children.some(function (element) { return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(element.props, /grid-\w+-start/) })) ? value : _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-end', '-span'), 'span ', '') + value
-		// (margin|padding)-inline-(start|end)
-		case 4095: case 3583: case 4068: case 2532:
-			return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+)-inline(.+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1$2') + value
-		// (min|max)?(width|height|inline-size|block-size)
-		case 8116: case 7059: case 5753: case 5535:
-		case 5445: case 5701: case 4933: case 4677:
-		case 5533: case 5789: case 5021: case 4765:
-			// stretch, max-content, min-content, fill-available
-			if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(value) - 1 - length > 6)
-				switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 1)) {
-					// (m)ax-content, (m)in-content
-					case 109:
-						// -
-						if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 4) !== 45)
-							break
-					// (f)ill-available, (f)it-content
-					case 102:
-						return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+:)(.+)-([^]+)/, '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$2-$3' + '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 3) == 108 ? '$3' : '$2-$3')) + value
-					// (s)tretch
-					case 115:
-						return ~(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(value, 'stretch') ? prefix((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'stretch', 'fill-available'), length, children) + value : value
-				}
-			break
-		// grid-(column|row)
-		case 5152: case 5920:
-			return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+?):(\d+)(\s*\/\s*(span)?\s*(\d+))?(.*)/, function (_, a, b, c, d, e, f) { return (_Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + a + ':' + b + f) + (c ? (_Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + a + '-span:' + (d ? e : +e - +b)) + f : '') + value })
-		// position: sticky
-		case 4949:
-			// stick(y)?
-			if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 6) === 121)
-				return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, ':', ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT) + value
-			break
-		// display: (flex|inline-flex|grid|inline-grid)
-		case 6444:
-			switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, 14) === 45 ? 18 : 11)) {
-				// (inline-)?fle(x)
-				case 120:
-					return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+:)([^;\s!]+)(;|(\s+)?!.+)?/, '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, 14) === 45 ? 'inline-' : '') + 'box$3' + '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$2$3' + '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + '$2box$3') + value
-				// (inline-)?gri(d)
-				case 100:
-					return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, ':', ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS) + value
-			}
-			break
-		// scroll-margin, scroll-margin-(top|right|bottom|left)
-		case 5719: case 2647: case 2135: case 3927: case 2391:
-			return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'scroll-', 'scroll-snap-') + value
-	}
+  switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.hash)(value, length)) {
+    // color-adjust
+    case 5103:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'print-' + value + value
+    // animation, animation-(delay|direction|duration|fill-mode|iteration-count|name|play-state|timing-function)
+    case 5737: case 4201: case 3177: case 3433: case 1641: case 4457: case 2921:
+    // text-decoration, filter, clip-path, backface-visibility, column, box-decoration-break
+    case 5572: case 6356: case 5844: case 3191: case 6645: case 3005:
+    // mask, mask-image, mask-(mode|clip|size), mask-(repeat|origin), mask-position, mask-composite,
+    case 6391: case 5879: case 5623: case 6135: case 4599: case 4855:
+    // background-clip, columns, column-(count|fill|gap|rule|rule-color|rule-style|rule-width|span|width)
+    case 4215: case 6389: case 5109: case 5365: case 5621: case 3829:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + value
+    // tab-size
+    case 4789:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + value + value
+    // appearance, user-select, transform, hyphens, text-size-adjust
+    case 5349: case 4246: case 4810: case 6968: case 2756:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + value + value
+    // writing-mode
+    case 5936:
+      switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 11)) {
+        // vertical-l(r)
+        case 114:
+          return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /[svh]\w+-[tblr]{2}/, 'tb') + value
+        // vertical-r(l)
+        case 108:
+          return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /[svh]\w+-[tblr]{2}/, 'tb-rl') + value
+        // horizontal(-)tb
+        case 45:
+          return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /[svh]\w+-[tblr]{2}/, 'lr') + value
+        // default: fallthrough to below
+      }
+    // flex, flex-direction, scroll-snap-type, writing-mode
+    case 6828: case 4268: case 2903:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + value + value
+    // order
+    case 6165:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-' + value + value
+    // align-items
+    case 5187:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(\w+).+(:[^]+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'box-$1$2' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-$1$2') + value
+    // align-self
+    case 5443:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-item-' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /flex-|-self/g, '') + (!(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /flex-|baseline/) ? _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'grid-row-' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /flex-|-self/g, '') : '') + value
+    // align-content
+    case 4675:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-line-pack' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /align-content|flex-|-self/g, '') + value
+    // flex-shrink
+    case 5548:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'shrink', 'negative') + value
+    // flex-basis
+    case 5292:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'basis', 'preferred-size') + value
+    // flex-grow
+    case 6060:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'box-' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-grow', '') + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'grow', 'positive') + value
+    // transition
+    case 4554:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /([^-])(transform)/g, '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$2') + value
+    // cursor
+    case 6187:
+      return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(zoom-|grab)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1'), /(image-set)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1'), value, '') + value
+    // background, background-image
+    case 5495: case 3959:
+      return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(image-set\([^]*)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1' + '$`$1')
+    // justify-content
+    case 4968:
+      return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+:)(flex-)?(.*)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + 'box-pack:$3' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'flex-pack:$3'), /s.+-b[^;]+/, 'justify') + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + value + value
+    // justify-self
+    case 4200:
+      if (!(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /flex-|baseline/)) return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'grid-column-align' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.substr)(value, length) + value
+      break
+    // grid-template-(columns|rows)
+    case 2592: case 3360:
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'template-', '') + value
+    // grid-(row|column)-start
+    case 4384: case 3616:
+      if (children && children.some(function (element, index) { return length = index, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(element.props, /grid-\w+-end/) })) {
+        return ~(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(value + (children = children[length].value), 'span') ? value : (_Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-start', '') + value + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + 'grid-row-span:' + (~(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(children, 'span') ? (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(children, /\d+/) : +(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(children, /\d+/) - +(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(value, /\d+/)) + ';')
+      }
+      return _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-start', '') + value
+    // grid-(row|column)-end
+    case 4896: case 4128:
+      return (children && children.some(function (element) { return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.match)(element.props, /grid-\w+-start/) })) ? value : _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, '-end', '-span'), 'span ', '') + value
+    // (margin|padding)-inline-(start|end)
+    case 4095: case 3583: case 4068: case 2532:
+      return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+)-inline(.+)/, _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$1$2') + value
+    // (min|max)?(width|height|inline-size|block-size)
+    case 8116: case 7059: case 5753: case 5535:
+    case 5445: case 5701: case 4933: case 4677:
+    case 5533: case 5789: case 5021: case 4765:
+      // stretch, max-content, min-content, fill-available
+      if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(value) - 1 - length > 6)
+        switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 1)) {
+          // (m)ax-content, (m)in-content
+          case 109:
+            // -
+            if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 4) !== 45)
+              break
+          // (f)ill-available, (f)it-content
+          case 102:
+            return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+:)(.+)-([^]+)/, '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$2-$3' + '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MOZ + ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 3) == 108 ? '$3' : '$2-$3')) + value
+          // (s)tretch
+          case 115:
+            return ~(0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.indexof)(value, 'stretch') ? prefix((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'stretch', 'fill-available'), length, children) + value : value
+        }
+      break
+    // grid-(column|row)
+    case 5152: case 5920:
+      return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+?):(\d+)(\s*\/\s*(span)?\s*(\d+))?(.*)/, function (_, a, b, c, d, e, f) { return (_Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + a + ':' + b + f) + (c ? (_Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + a + '-span:' + (d ? e : +e - +b)) + f : '') + value })
+    // position: sticky
+    case 4949:
+      // stick(y)?
+      if ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, length + 6) === 121)
+        return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, ':', ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT) + value
+      break
+    // display: (flex|inline-flex|grid|inline-grid)
+    case 6444:
+      switch ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, 14) === 45 ? 18 : 11)) {
+        // (inline-)?fle(x)
+        case 120:
+          return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, /(.+:)([^;\s!]+)(;|(\s+)?!.+)?/, '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + ((0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.charat)(value, 14) === 45 ? 'inline-' : '') + 'box$3' + '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.WEBKIT + '$2$3' + '$1' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS + '$2box$3') + value
+        // (inline-)?gri(d)
+        case 100:
+          return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, ':', ':' + _Enum_js__WEBPACK_IMPORTED_MODULE_0__.MS) + value
+      }
+      break
+    // scroll-margin, scroll-margin-(top|right|bottom|left)
+    case 5719: case 2647: case 2135: case 3927: case 2391:
+      return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.replace)(value, 'scroll-', 'scroll-snap-') + value
+  }
 
-	return value
+  return value
 }
 
 
@@ -16131,13 +16192,13 @@ __webpack_require__.r(__webpack_exports__);
  * @return {string}
  */
 function serialize (children, callback) {
-	var output = ''
-	var length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(children)
+  var output = ''
+  var length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.sizeof)(children)
 
-	for (var i = 0; i < length; i++)
-		output += callback(children[i], i, children, callback) || ''
+  for (var i = 0; i < length; i++)
+    output += callback(children[i], i, children, callback) || ''
 
-	return output
+  return output
 }
 
 /**
@@ -16148,15 +16209,15 @@ function serialize (children, callback) {
  * @return {string}
  */
 function stringify (element, index, children, callback) {
-	switch (element.type) {
-		case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.LAYER: if (element.children.length) break
-		case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.IMPORT: case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.DECLARATION: return element.return = element.return || element.value
-		case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.COMMENT: return ''
-		case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.KEYFRAMES: return element.return = element.value + '{' + serialize(element.children, callback) + '}'
-		case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET: element.value = element.props.join(',')
-	}
+  switch (element.type) {
+    case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.LAYER: if (element.children.length) break
+    case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.IMPORT: case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.DECLARATION: return element.return = element.return || element.value
+    case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.COMMENT: return ''
+    case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.KEYFRAMES: return element.return = element.value + '{' + serialize(element.children, callback) + '}'
+    case _Enum_js__WEBPACK_IMPORTED_MODULE_0__.RULESET: element.value = element.props.join(',')
+  }
 
-	return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(children = serialize(element.children, callback)) ? element.return = element.value + '{' + children + '}' : ''
+  return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_1__.strlen)(children = serialize(element.children, callback)) ? element.return = element.value + '{' + children + '}' : ''
 }
 
 
@@ -16216,7 +16277,7 @@ var characters = ''
  * @param {number} length
  */
 function node (value, root, parent, type, props, children, length) {
-	return {value: value, root: root, parent: parent, type: type, props: props, children: children, line: line, column: column, length: length, return: ''}
+  return {value: value, root: root, parent: parent, type: type, props: props, children: children, line: line, column: column, length: length, return: ''}
 }
 
 /**
@@ -16225,52 +16286,52 @@ function node (value, root, parent, type, props, children, length) {
  * @return {object}
  */
 function copy (root, props) {
-	return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.assign)(node('', null, null, '', null, null, 0), root, {length: -root.length}, props)
+  return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.assign)(node('', null, null, '', null, null, 0), root, {length: -root.length}, props)
 }
 
 /**
  * @return {number}
  */
 function char () {
-	return character
+  return character
 }
 
 /**
  * @return {number}
  */
 function prev () {
-	character = position > 0 ? (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.charat)(characters, --position) : 0
+  character = position > 0 ? (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.charat)(characters, --position) : 0
 
-	if (column--, character === 10)
-		column = 1, line--
+  if (column--, character === 10)
+    column = 1, line--
 
-	return character
+  return character
 }
 
 /**
  * @return {number}
  */
 function next () {
-	character = position < length ? (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.charat)(characters, position++) : 0
+  character = position < length ? (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.charat)(characters, position++) : 0
 
-	if (column++, character === 10)
-		column = 1, line++
+  if (column++, character === 10)
+    column = 1, line++
 
-	return character
+  return character
 }
 
 /**
  * @return {number}
  */
 function peek () {
-	return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.charat)(characters, position)
+  return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.charat)(characters, position)
 }
 
 /**
  * @return {number}
  */
 function caret () {
-	return position
+  return position
 }
 
 /**
@@ -16279,7 +16340,7 @@ function caret () {
  * @return {string}
  */
 function slice (begin, end) {
-	return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.substr)(characters, begin, end)
+  return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.substr)(characters, begin, end)
 }
 
 /**
@@ -16287,27 +16348,27 @@ function slice (begin, end) {
  * @return {number}
  */
 function token (type) {
-	switch (type) {
-		// \0 \t \n \r \s whitespace token
-		case 0: case 9: case 10: case 13: case 32:
-			return 5
-		// ! + , / > @ ~ isolate token
-		case 33: case 43: case 44: case 47: case 62: case 64: case 126:
-		// ; { } breakpoint token
-		case 59: case 123: case 125:
-			return 4
-		// : accompanied token
-		case 58:
-			return 3
-		// " ' ( [ opening delimit token
-		case 34: case 39: case 40: case 91:
-			return 2
-		// ) ] closing delimit token
-		case 41: case 93:
-			return 1
-	}
+  switch (type) {
+    // \0 \t \n \r \s whitespace token
+    case 0: case 9: case 10: case 13: case 32:
+      return 5
+    // ! + , / > @ ~ isolate token
+    case 33: case 43: case 44: case 47: case 62: case 64: case 126:
+    // ; { } breakpoint token
+    case 59: case 123: case 125:
+      return 4
+    // : accompanied token
+    case 58:
+      return 3
+    // " ' ( [ opening delimit token
+    case 34: case 39: case 40: case 91:
+      return 2
+    // ) ] closing delimit token
+    case 41: case 93:
+      return 1
+  }
 
-	return 0
+  return 0
 }
 
 /**
@@ -16315,7 +16376,7 @@ function token (type) {
  * @return {any[]}
  */
 function alloc (value) {
-	return line = column = 1, length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.strlen)(characters = value), position = 0, []
+  return line = column = 1, length = (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.strlen)(characters = value), position = 0, []
 }
 
 /**
@@ -16323,7 +16384,7 @@ function alloc (value) {
  * @return {any}
  */
 function dealloc (value) {
-	return characters = '', value
+  return characters = '', value
 }
 
 /**
@@ -16331,7 +16392,7 @@ function dealloc (value) {
  * @return {string}
  */
 function delimit (type) {
-	return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.trim)(slice(position - 1, delimiter(type === 91 ? type + 2 : type === 40 ? type + 1 : type)))
+  return (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.trim)(slice(position - 1, delimiter(type === 91 ? type + 2 : type === 40 ? type + 1 : type)))
 }
 
 /**
@@ -16339,7 +16400,7 @@ function delimit (type) {
  * @return {string[]}
  */
 function tokenize (value) {
-	return dealloc(tokenizer(alloc(value)))
+  return dealloc(tokenizer(alloc(value)))
 }
 
 /**
@@ -16347,13 +16408,13 @@ function tokenize (value) {
  * @return {string}
  */
 function whitespace (type) {
-	while (character = peek())
-		if (character < 33)
-			next()
-		else
-			break
+  while (character = peek())
+    if (character < 33)
+      next()
+    else
+      break
 
-	return token(type) > 2 || token(character) > 3 ? '' : ' '
+  return token(type) > 2 || token(character) > 3 ? '' : ' '
 }
 
 /**
@@ -16361,16 +16422,16 @@ function whitespace (type) {
  * @return {string[]}
  */
 function tokenizer (children) {
-	while (next())
-		switch (token(character)) {
-			case 0: (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.append)(identifier(position - 1), children)
-				break
-			case 2: ;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.append)(delimit(character), children)
-				break
-			default: ;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.append)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.from)(character), children)
-		}
+  while (next())
+    switch (token(character)) {
+      case 0: (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.append)(identifier(position - 1), children)
+        break
+      case 2: ;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.append)(delimit(character), children)
+        break
+      default: ;(0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.append)((0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.from)(character), children)
+    }
 
-	return children
+  return children
 }
 
 /**
@@ -16379,12 +16440,12 @@ function tokenizer (children) {
  * @return {string}
  */
 function escaping (index, count) {
-	while (--count && next())
-		// not 0-9 A-F a-f
-		if (character < 48 || character > 102 || (character > 57 && character < 65) || (character > 70 && character < 97))
-			break
+  while (--count && next())
+    // not 0-9 A-F a-f
+    if (character < 48 || character > 102 || (character > 57 && character < 65) || (character > 70 && character < 97))
+      break
 
-	return slice(index, caret() + (count < 6 && peek() == 32 && next() == 32))
+  return slice(index, caret() + (count < 6 && peek() == 32 && next() == 32))
 }
 
 /**
@@ -16392,28 +16453,28 @@ function escaping (index, count) {
  * @return {number}
  */
 function delimiter (type) {
-	while (next())
-		switch (character) {
-			// ] ) " '
-			case type:
-				return position
-			// " '
-			case 34: case 39:
-				if (type !== 34 && type !== 39)
-					delimiter(character)
-				break
-			// (
-			case 40:
-				if (type === 41)
-					delimiter(type)
-				break
-			// \
-			case 92:
-				next()
-				break
-		}
+  while (next())
+    switch (character) {
+      // ] ) " '
+      case type:
+        return position
+      // " '
+      case 34: case 39:
+        if (type !== 34 && type !== 39)
+          delimiter(character)
+        break
+      // (
+      case 40:
+        if (type === 41)
+          delimiter(type)
+        break
+      // \
+      case 92:
+        next()
+        break
+    }
 
-	return position
+  return position
 }
 
 /**
@@ -16422,15 +16483,15 @@ function delimiter (type) {
  * @return {number}
  */
 function commenter (type, index) {
-	while (next())
-		// //
-		if (type + character === 47 + 10)
-			break
-		// /*
-		else if (type + character === 42 + 42 && peek() === 47)
-			break
+  while (next())
+    // //
+    if (type + character === 47 + 10)
+      break
+    // /*
+    else if (type + character === 42 + 42 && peek() === 47)
+      break
 
-	return '/*' + slice(index, position - 1) + '*' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.from)(type === 47 ? type : next())
+  return '/*' + slice(index, position - 1) + '*' + (0,_Utility_js__WEBPACK_IMPORTED_MODULE_0__.from)(type === 47 ? type : next())
 }
 
 /**
@@ -16438,10 +16499,10 @@ function commenter (type, index) {
  * @return {string}
  */
 function identifier (index) {
-	while (!token(peek()))
-		next()
+  while (!token(peek()))
+    next()
 
-	return slice(index, position)
+  return slice(index, position)
 }
 
 
@@ -16494,7 +16555,7 @@ var assign = Object.assign
  * @return {number}
  */
 function hash (value, length) {
-	return charat(value, 0) ^ 45 ? (((((((length << 2) ^ charat(value, 0)) << 2) ^ charat(value, 1)) << 2) ^ charat(value, 2)) << 2) ^ charat(value, 3) : 0
+  return charat(value, 0) ^ 45 ? (((((((length << 2) ^ charat(value, 0)) << 2) ^ charat(value, 1)) << 2) ^ charat(value, 2)) << 2) ^ charat(value, 3) : 0
 }
 
 /**
@@ -16502,7 +16563,7 @@ function hash (value, length) {
  * @return {string}
  */
 function trim (value) {
-	return value.trim()
+  return value.trim()
 }
 
 /**
@@ -16511,7 +16572,7 @@ function trim (value) {
  * @return {string?}
  */
 function match (value, pattern) {
-	return (value = pattern.exec(value)) ? value[0] : value
+  return (value = pattern.exec(value)) ? value[0] : value
 }
 
 /**
@@ -16521,7 +16582,7 @@ function match (value, pattern) {
  * @return {string}
  */
 function replace (value, pattern, replacement) {
-	return value.replace(pattern, replacement)
+  return value.replace(pattern, replacement)
 }
 
 /**
@@ -16530,7 +16591,7 @@ function replace (value, pattern, replacement) {
  * @return {number}
  */
 function indexof (value, search) {
-	return value.indexOf(search)
+  return value.indexOf(search)
 }
 
 /**
@@ -16539,7 +16600,7 @@ function indexof (value, search) {
  * @return {number}
  */
 function charat (value, index) {
-	return value.charCodeAt(index) | 0
+  return value.charCodeAt(index) | 0
 }
 
 /**
@@ -16549,7 +16610,7 @@ function charat (value, index) {
  * @return {string}
  */
 function substr (value, begin, end) {
-	return value.slice(begin, end)
+  return value.slice(begin, end)
 }
 
 /**
@@ -16557,7 +16618,7 @@ function substr (value, begin, end) {
  * @return {number}
  */
 function strlen (value) {
-	return value.length
+  return value.length
 }
 
 /**
@@ -16565,7 +16626,7 @@ function strlen (value) {
  * @return {number}
  */
 function sizeof (value) {
-	return value.length
+  return value.length
 }
 
 /**
@@ -16574,7 +16635,7 @@ function sizeof (value) {
  * @return {any}
  */
 function append (value, array) {
-	return array.push(value), value
+  return array.push(value), value
 }
 
 /**
@@ -16583,7 +16644,7 @@ function append (value, array) {
  * @return {string}
  */
 function combine (array, callback) {
-	return array.map(callback).join('')
+  return array.map(callback).join('')
 }
 
 
@@ -16702,8 +16763,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_border__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/border */ "./src/components/border.js");
 /* harmony import */ var _components_dimension__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/dimension */ "./src/components/dimension.js");
 /* harmony import */ var _components_heading_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/heading-toggle */ "./src/components/heading-toggle.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _components_checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/checkbox */ "./src/components/checkbox.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__);
 const {
     controlConstructor,
     Control,
@@ -16712,6 +16774,7 @@ const {
   {
     createRoot
   } = wp.element;
+
 
 
 
@@ -16755,7 +16818,7 @@ controlConstructor['box-shadow'] = Control.extend({
     const renderBoxShadow = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
         ...props
       }));
     };
@@ -16808,7 +16871,7 @@ controlConstructor['radio-image'] = Control.extend({
     const renderRadioImage = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
         ...props
       }));
     };
@@ -16863,7 +16926,7 @@ controlConstructor['section-tab'] = Control.extend({
         id: control.id,
         controls: instance.controls()
       };
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
         ...props
       }));
     };
@@ -16918,7 +16981,7 @@ controlConstructor['icon-picker'] = Control.extend({
     const renderIconPicker = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_3__.IconPickerComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_3__.IconPickerComponent, {
         ...props
       }));
     };
@@ -16971,7 +17034,7 @@ controlConstructor['toggle-button'] = Control.extend({
     const renderToggleButton = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_toggle_button__WEBPACK_IMPORTED_MODULE_4__.ToggleButtonComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_toggle_button__WEBPACK_IMPORTED_MODULE_4__.ToggleButtonComponent, {
         ...props
       }));
     };
@@ -17024,7 +17087,7 @@ controlConstructor['radio-tab'] = Control.extend({
     const renderRadioTab = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(Example, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(Example, {
         ...props
       }));
     };
@@ -17077,7 +17140,7 @@ controlConstructor['typography'] = Control.extend({
     const renderTypography = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_typography__WEBPACK_IMPORTED_MODULE_7__.TypographComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_typography__WEBPACK_IMPORTED_MODULE_7__.TypographComponent, {
         ...props
       }));
     };
@@ -17130,7 +17193,7 @@ controlConstructor['ian-text'] = Control.extend({
     const renderText = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_text__WEBPACK_IMPORTED_MODULE_5__.TextComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_text__WEBPACK_IMPORTED_MODULE_5__.TextComponent, {
         ...props
       }));
     };
@@ -17183,7 +17246,7 @@ controlConstructor['radio-tab'] = Control.extend({
     const renderRadioTab = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_radio_tab__WEBPACK_IMPORTED_MODULE_6__.RadioTabComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_radio_tab__WEBPACK_IMPORTED_MODULE_6__.RadioTabComponent, {
         ...props
       }));
     };
@@ -17236,7 +17299,7 @@ controlConstructor['ian-number'] = Control.extend({
     const renderNumber = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_number__WEBPACK_IMPORTED_MODULE_8__.NumberComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_number__WEBPACK_IMPORTED_MODULE_8__.NumberComponent, {
         ...props
       }));
     };
@@ -17289,7 +17352,7 @@ controlConstructor['border'] = Control.extend({
     const renderBorder = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_border__WEBPACK_IMPORTED_MODULE_9__.BorderComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_border__WEBPACK_IMPORTED_MODULE_9__.BorderComponent, {
         ...props
       }));
     };
@@ -17342,7 +17405,7 @@ controlConstructor['dimension'] = Control.extend({
     const renderDimension = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_dimension__WEBPACK_IMPORTED_MODULE_10__.DimensionComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_dimension__WEBPACK_IMPORTED_MODULE_10__.DimensionComponent, {
         ...props
       }));
     };
@@ -17395,7 +17458,7 @@ controlConstructor['heading-toggle'] = Control.extend({
     const renderHeadingToggle = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_heading_toggle__WEBPACK_IMPORTED_MODULE_11__.HeadingToggleComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_heading_toggle__WEBPACK_IMPORTED_MODULE_11__.HeadingToggleComponent, {
         ...props
       }));
     };
@@ -17418,6 +17481,54 @@ controlConstructor['heading-toggle'] = Control.extend({
     container.on('remove', () => reactRoot.unmount());
   }
 });
+
+// /**
+//  * MARK: Checkbox
+//  * 
+//  * @package I am News
+//  * @since 1.0.0
+//  */
+// controlConstructor[ 'checkbox' ] = Control.extend({
+
+//     ready: function () {
+//         const control = this,
+//             { params, container, section: _thisSection, setting } = control,
+//             root = container.find( '.root' )[ 0 ],
+//             reactRoot = createRoot( root ),
+//             props = { 
+//                 ...params,
+//                 setting
+//             }
+
+//         let rendered = false; // ensure we render only once
+
+//         /**
+//          * Function to render your React toggle
+//          */
+//         const renderCheckbox = () => {
+//             if ( rendered ) return;
+//             rendered = true;
+//             reactRoot.render( <CheckboxComponent { ...props } /> )
+//         };
+
+//         /**
+//          * Lazy load when the section expands
+//          * Component will mount only when section is mounted
+//          */
+//         if( _thisSection ) {
+//             section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+//                 if( isExpanded ) renderCheckbox()
+//             } );
+//         } else {
+//             renderCheckbox()
+//         }
+
+//         /**
+//          * Unbind if the controls container <li> tag is remoed
+//          */
+//         container.on( 'remove', () => reactRoot.unmount() );
+//     }
+// });
 })();
 
 /******/ })()
