@@ -12,8 +12,46 @@ import { IanControlHead } from "./components"
 export const DimensionComponent = ( props ) => {
     const { label, description, setting, responsive, exclude, input_attrs } = props,
         [ value, setValue ] = useState( setting.get() ),
-        dimensions = [ 'top', 'right', 'bottom', 'left' ]
+        dimensions = [ 'top', 'right', 'bottom', 'left' ].filter( side => ! exclude.includes( side ) ),
+        { link } = value
 
+    /**
+     * Handle Change
+     * 
+     * @since 1.0.0
+     */
+    const handleChange = ( event, side ) => {
+        let updatedValue = event.target.value,
+            newValue = {}
+        if( link ) {
+            newValue = {
+                top: updatedValue,
+                right: updatedValue,
+                bottom: updatedValue,
+                left: updatedValue,
+                link
+            }
+        } else {
+            newValue = {
+                ...value,
+                [ side ]: updatedValue
+            }
+        }
+        setting.set( newValue )
+        setValue( newValue )
+    }
+
+    /**
+     * Handle link
+     * 
+     * @since 1.0.0
+     */
+    const handleLink = () => {
+        setValue( {
+            ...value,
+            link: ! link
+        } )
+    }
 
     return <div className="control-content">
         <IanControlHead
@@ -28,16 +66,17 @@ export const DimensionComponent = ( props ) => {
                         label = { __( escapeHTML( side.slice( 0, 1 ).toUpperCase() + side.slice( 1 ) ), 'i-am-news' ) }
                         { ...input_attrs }
                         id = { setting.id }
-                        // onChange = {() => {}}
-                        // value = "0"
+                        onChange = { handleChange }
+                        value = { value[ side ] }
+                        side = { side }
                     />
                 } )
             }
             <Button
-                variant = { 'secondary' }
+                variant = { link ? 'primary' : 'secondary' }
+                onClick = { handleLink }
             >
-                {/* editor-unlink */}
-                <Dashicon icon="admin-links" />
+                <Dashicon icon={ link ? 'admin-links' : 'editor-unlink' } />
             </Button>
         </div>
     </div>
@@ -49,7 +88,7 @@ export const DimensionComponent = ( props ) => {
  * @since 1.0.0
  */
 const NumberControl = ( props ) => {
-    const { label, value = 0, min = 0, max = 100, step = 1, id } = props,
+    const { label, value = 0, min = 0, max = 100, step = 1, id, side } = props,
         uniqueId = `${ id }_${ label.toLowerCase() }`
 
     return <div className="ian-number-control-container">
@@ -63,6 +102,7 @@ const NumberControl = ( props ) => {
             max = { max }
             step = { step }
             className = "ian-input number"
+            onChange = { ( event ) => props.onChange( event, side ) }
         />
     </div>
 }

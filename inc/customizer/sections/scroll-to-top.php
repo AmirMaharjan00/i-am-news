@@ -224,9 +224,16 @@
                         'type'  =>  'radio-tab',
                         'section'   =>  $this->section,
                         'display_block' =>  true,
-                        'active_callback'   =>  function( $setting ) {
-                            return $setting->manager->get_setting( 'scroll_to_top_is_fixed' )->value();
-                        }
+                        'conditions'    =>  [
+                            'relation'  =>  'AND',
+                            'rules' =>  [
+                                [
+                                    'setting'   =>  'scroll_to_top_is_fixed',
+                                    'operator'  =>  '==',
+                                    'value' =>  true
+                                ]
+                            ]
+                        ]
                     ],
                     'scroll_to_top_typography' =>  [
                         'label' =>  esc_html__( 'Typography', 'i-am-news' ),
@@ -330,7 +337,13 @@
                         'offsetx'   =>  10,
                         'offsety'   =>  10
                     ]),
-                    'scroll_to_top_padding' => '',
+                    'scroll_to_top_padding' => [
+                        'top'   =>  10,
+                        'right' =>  10,
+                        'bottom' =>  10,
+                        'left' =>  10,
+                        'link' =>  true
+                    ],
                     'radio_tab_test'    =>  'one',
                     'scroll_to_top_heading_toggle'    =>  'one',
                 ];

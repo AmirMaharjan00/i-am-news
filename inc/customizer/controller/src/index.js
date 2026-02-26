@@ -1,4 +1,5 @@
-const { controlConstructor, Control, section } = wp.customize,
+const { customize } = wp,
+    { controlConstructor, Control, section } = customize,
     { createRoot } = wp.element
 
 import { BoxShadowComponent } from './components/box-shadow'
@@ -257,55 +258,6 @@ controlConstructor[ 'toggle-button' ] = Control.extend({
         container.on( 'remove', () => reactRoot.unmount() );
     }
 });
-
-/**
- * MARK: Radio Tab
- * 
- * @package I am News
- * @since 1.0.0
- */
-controlConstructor[ 'radio-tab' ] = Control.extend({
-
-    ready: function () {
-        const control = this,
-            { params, container, section: _thisSection, setting } = control,
-            root = container.find( '.root' )[ 0 ],
-            reactRoot = createRoot( root ),
-            props = { 
-                ...params,
-                setting
-            }
-        
-        let rendered = false; // ensure we render only once
-
-        /**
-         * Function to render your React toggle
-         */
-        const renderRadioTab = () => {
-            if ( rendered ) return;
-            rendered = true;
-            reactRoot.render( <Example { ...props } /> )
-        };
-
-        /**
-         * Lazy load when the section expands
-         * Component will mount only when section is mounted
-         */
-        if( _thisSection ) {
-            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
-                if( isExpanded ) renderRadioTab()
-            } );
-        } else {
-            renderRadioTab()
-        }
-
-        /**
-         * Unbind if the controls container <li> tag is remoed
-         */
-        container.on( 'remove', () => reactRoot.unmount() );
-    }
-});
-
 
 /**
  * MARK: Typography
@@ -643,3 +595,90 @@ controlConstructor[ 'heading-toggle' ] = Control.extend({
         container.on( 'remove', () => reactRoot.unmount() );
     }
 });
+
+/**
+ * Conditional rendering
+ * 
+ * @since 1.0.0
+ */
+const ConditionalRendering = {
+    controls: [],   // stores controls that has conditions
+    settingsMap : [],
+
+    init: function () {
+        let self = this
+        customize.control.each( function( control ) {
+            let { params, id } = control,
+                { conditions } = params
+
+            if( Array.isArray( conditions ) || conditions === undefined ) return    // return if condition doesn't exists or is array
+
+            self.controls.push( id )    // push controls that have conditions
+
+            conditions.rules.forEach( ( rule ) => {
+                let { setting } = rule
+                if( ! self.settingsMap[ setting ] ) {
+                    self.settingsMap[ setting ] = []
+                }
+                self.settingsMap[ setting ].push( control )     // push setting on which the control should show or hide
+            } )
+        } )
+        this.bindSettings()
+    },
+
+    bindSettings: function () {
+        let self = this
+
+        Object.keys( this.settingsMap ).forEach( ( settingId ) => {
+            let setting = customize( settingId )
+
+            if( ! setting ) return
+            
+            setting.bind( function( settingValue ) {
+                self.settingsMap[ settingId ].forEach( function( control ) {
+                    let test = self.evaluate( settingValue, control )
+                    if( test ) {
+                        control.container.show()
+                    } else {
+                        control.container.hide()
+                    }
+                } )
+            } )
+        } )
+    },
+
+    evaluate: function( settingValue, control ) {
+        let { params } = control,
+            { conditions } = params,
+            { relation, rules } = conditions,
+            match = false,
+            results = []
+            
+        rules.forEach( function( rule ) {
+            let { operator, value } = rule
+
+            switch( operator ) {
+                case '!=' :
+                        match = settingValue != value
+                    break;
+                case 'in' :
+                        match = value.includes( settingValue )
+                    break;
+                default:
+                        match = value === settingValue
+                    break;
+            }
+            results.push( match )
+        } )
+
+        if( relation === 'OR' ) return results.some( Boolean )
+        return results.every( Boolean )
+    },
+    
+}
+
+customize.bind( 'ready', function() {
+    ConditionalRendering.init()
+
+    // console.log( ConditionalRendering )
+} )

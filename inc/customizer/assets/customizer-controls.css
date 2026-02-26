@@ -8,6 +8,9 @@
     7.0 Typography
     8.0 Toggle Control
     9.0 Number
+    10.0 Border
+    11.0 Dimension
+    12.0 Radio Tab
 */
 
 /*
@@ -203,6 +206,10 @@ MARK: 1.0 Normalize
     .components-popover.components-dropdown__content.ian-dropdown-popover .components-select-control__input:hover {
         outline: 1px solid var(--customizer-color);
         border-color: var(--customizer-color);
+    }
+
+    .customize-control.ian-show:last-child {
+        border-bottom: unset;
     }
 
 /*
@@ -634,6 +641,7 @@ MARK: 9.0 Number
     }
 
     .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container .components-input-control__input,
+    .customize-control-ian-number .content-wrapper .components-range-control .components-range-control__root,
     .customize-control-ian-number .content-wrapper .components-select-control .components-input-control__container .components-select-control__input {
         height: 32px;
         min-height: 32px;
@@ -644,4 +652,71 @@ MARK: 9.0 Number
         outline: 1px solid #8c8f94;
         border: unset;
         border-radius: unset;
+    }
+
+/*
+=========================
+MARK: 10.0 Border
+=========================
+*/
+    /* .customize-control-border .control-content .content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+    } */
+
+/*
+=========================
+MARK: 11.0 Dimension
+=========================
+*/
+    .customize-control-dimension .control-content .content-wrapper {
+        display: flex;
+        align-items: end;
+        gap: 5px;
+    }
+
+    .customize-control-dimension .content-wrapper .ian-number-control-container {
+        flex: 1;
+    }
+
+    .customize-control-dimension .content-wrapper .ian-number-control-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 11px;
+    }
+
+    .customize-control-dimension .content-wrapper .ian-number-control-container label ~ .ian-input.number {
+        outline: 1px solid #8c8f94;
+        border: unset;
+        border-radius: unset;
+    }
+
+    .customize-control-dimension .content-wrapper .components-button {
+        /* box-shadow: unset; */
+        /* outline: 1px solid black; */
+        padding: 5px;
+        height: 30px;
+        min-height: 30px;
+    }
+
+/*
+=========================
+MARK: 12.0 Radio Tab
+=========================
+*/
+    .customize-control-radio-tab .control-content.is-block .content-head {
+        flex: 1;
+    }
+
+    .customize-control-radio-tab .control-content.is-block .content-wrapper {
+        display: flex;
+        align-items: center;
+        width: 60%;
+    }
+
+    .customize-control-radio-tab .control-content.is-block .content-wrapper .components-button {
+        flex: 1;
+        display: block;
+        text-align: center;
     }
