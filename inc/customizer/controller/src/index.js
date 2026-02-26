@@ -606,6 +606,8 @@ controlConstructor[ 'heading-toggle' ] = Control.extend({
 controlConstructor[ 'ian-checkbox' ] = Control.extend({
 
     ready: function () {
+        console.log('ian-checkbox');
+        
         const control = this,
             { params, container, section: _thisSection, setting } = control,
             root = container.find( '.root' )[ 0 ],

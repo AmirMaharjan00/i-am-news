@@ -1,4 +1,4 @@
-const {  } = wp.components,
+const { Button, Dashicon } = wp.components,
     { useState } = wp.element
 
 /**

@@ -67,7 +67,7 @@
                 $this->add_control( 'scroll_to_top_box_shadow' );
                 $this->add_control( 'scroll_to_top_padding' );
                 $this->add_control( 'scroll_to_top_heading_toggle' );
-                // $this->add_control( 'scroll_to_top_checkbox' );
+                $this->add_control( 'scroll_to_top_checkbox' );
             }
 
             /**
@@ -140,11 +140,11 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
-                    // 'scroll_to_top_checkbox' =>  [
-                    //     'sanitize_function' =>  'sanitize_text_field',
-                    //     'transport'   =>  'postMessage',
-                    //     'default'   =>  $this->get_defaults( $id )
-                    // ],
+                    'scroll_to_top_checkbox' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
                 ];
                 return ( $id ) ? $settings[ $id ] : $settings;
             }
@@ -292,12 +292,12 @@
                         'tab'   =>  'general',
                         'section'   =>  $this->section
                     ],
-                    // 'scroll_to_top_checkbox' =>  [
-                    //     'label' =>  esc_html__( 'Checkbox', 'i-am-news' ),
-                    //     'type'  =>  'checkbox',
-                    //     'tab'   =>  'general',
-                    //     'section'   =>  $this->section
-                    // ],
+                    'scroll_to_top_checkbox' =>  [
+                        'label' =>  esc_html__( 'Checkbox', 'i-am-news' ),
+                        'type'  =>  'ian-checkbox',
+                        'tab'   =>  'general',
+                        'section'   =>  $this->section
+                    ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -357,7 +357,7 @@
                     ],
                     'radio_tab_test'    =>  'one',
                     'scroll_to_top_heading_toggle'    =>  'one',
-                    // 'scroll_to_top_checkbox'    =>  'one',
+                    'scroll_to_top_checkbox'    =>  'one',
                 ];
             }
 

@@ -131,7 +131,7 @@
                     'border'    =>  [ $this, 'add_border' ],
                     'dimension'    =>  [ $this, 'add_dimension' ],
                     'heading-toggle'    =>  [ $this, 'add_heading_toggle' ],
-                    'checkbox'    =>  [ $this, 'add_checkbox' ],
+                    'ian-checkbox'    =>  [ $this, 'add_checkbox' ],
                 ];
             }
 
