@@ -6,6 +6,11 @@
     5.0 Box Shadow
     6.0 Text
     7.0 Typography
+    8.0 Toggle Control
+    9.0 Number
+    10.0 Border
+    11.0 Dimension
+    12.0 Radio Tab
 */
 
 /*
@@ -15,6 +20,7 @@ MARK: 1.0 Normalize
 */  
     :root {
         --customizer-color: #007cba;
+        --customizer-hover: #f5fafc;
         --customizer-light-grey: #f0f0f0;
         --customizer-dark-grey: #939393;
     }
@@ -28,7 +34,7 @@ MARK: 1.0 Normalize
     }
 
     .customize-pane-child.control-section .customize-control {
-        padding: 16px 0;
+        padding: 20px 0;
         margin: 0;
         border-bottom: 1px solid var(--customizer-light-grey);
     }
@@ -38,8 +44,17 @@ MARK: 1.0 Normalize
         border-bottom: none;
     }
 
-    .customize-control .control-head {
+    .customize-control .control-content.is-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .customize-control .control-content:not(.is-block) .control-head {
         margin-bottom: 10px;
+    }
+
+    .customize-control .control-content .control-head {
         display: flex;
         justify-content: left;
         align-items: center;
@@ -59,6 +74,26 @@ MARK: 1.0 Normalize
         color: var(--customizer-color);
     }
 
+    .customize-control .control-content .control-head-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .components-popover.ian-dropdown-popover .components-popover__content .ian-responsive-icons .responsive-icon,
+    .customize-control .control-content .control-head-wrapper .ian-responsive-icons .responsive-icon {
+        font-size: 13px;
+        line-height: unset;
+        height: unset;
+    }
+
+    .components-popover.ian-dropdown-popover .components-popover__content .ian-responsive-icons .responsive-icon:hover,
+    .customize-control .control-content .control-head-wrapper .ian-responsive-icons .responsive-icon:hover {
+        color: var(--customizer-color);
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .block-head .responsive-icon
+
     .customize-control.ian-show {
         display: block;
     }
@@ -75,6 +110,108 @@ MARK: 1.0 Normalize
 
     }
 
+    /* Chrome, Edge, Safari */
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar-track {
+        background: var(--customizer-light-grey);
+        /* border-radius: 6px; */
+    }
+
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar-thumb {
+        background: #888;
+        /* border-radius: 6px; */
+        /* border: 3px solid #f1f1f1; */
+    }
+
+    .wp-full-overlay-sidebar-content::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* Firefox */
+    .wp-full-overlay-sidebar-content {
+        scrollbar-width: thin;
+        scrollbar-color: var(--customizer-dark-grey) #00000000;
+    }
+
+    .customize-section-description-container {
+        margin: 0;
+    }
+
+    .components-popover.ian-dropdown-popover .components-popover__content {
+        width: 350px;
+        padding: 15px;
+    }
+
+    .customize-control .ian-dropdown-container {
+        width: 100%;
+    }
+
+    .customize-control .ian-dropdown-container .highlight {
+        background-color: #fff;
+        color: #1e1e1e;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        outline: 1px solid #8c8f94;
+        gap: 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: default;
+        field-sizing: content;
+    }
+
+    .customize-control .ian-dropdown-container .highlight:hover {
+        outline: 1px solid var(--customizer-color);
+        background: var(--customizer-hover);
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker,
+    .components-popover.ian-dropdown-popover .components-color-picker .react-colorful,
+    .components-popover.ian-dropdown-popover .components-color-picker .react-colorful > * {
+        width: 100%;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex.components-h-stack:first-child {
+        outline: 1px solid #cccccc;
+        height: 40px;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex:last-child {
+        padding-inline: 0;
+        padding-bottom: 0;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex .components-input-control__container {
+        width: 100%;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex:first-child .components-select-control .components-input-control__backdrop{
+        outline: unset;
+    }
+
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex .components-input-control__container {
+        width: 100%;
+    }
+    .components-popover.ian-dropdown-popover .components-color-picker:last-child .components-flex .components-input-control__container .components-input-control__backdrop {
+        outline: 1px solid #cccccc;
+        border: unset;
+    }
+
+    .components-popover.components-dropdown__content.ian-dropdown-popover .ian-select-wrapper__control:hover,
+    .components-popover.components-dropdown__content.ian-dropdown-popover .components-select-control__input:hover {
+        outline: 1px solid var(--customizer-color);
+        border-color: var(--customizer-color);
+    }
+
+    .customize-control.ian-show:last-child {
+        border-bottom: unset;
+    }
+
 /*
 =========================
 MARK: 2.0 Radio Image
@@ -84,6 +221,8 @@ MARK: 2.0 Radio Image
         display: grid;
         grid-template-columns: repeat( 2, 1fr );
         gap: 15px;
+        align-items: center;
+        justify-content: center;
     }
 
     .customize-control-radio-image .control-content .components-radio-control__option {
@@ -91,9 +230,33 @@ MARK: 2.0 Radio Image
         position: relative;
     }
 
+    .customize-control-radio-image .control-content .components-base-control__label {
+        margin-bottom: 0;
+    }
+
     .customize-control-radio-image .control-content .components-radio-control__label {
         display: block;
         height: 100%;
+        padding: 4px;
+        border-radius: 5px;
+        outline: 1px solid var(--customizer-light-grey);
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__label img {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+        display: block;
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__label:hover {
+        outline: 1px solid var(--customizer-color);
+        background: var(--customizer-hover);
+    }
+
+    .customize-control-radio-image .control-content .components-radio-control__input:checked + .components-radio-control__label {
+        outline-color: var(--customizer-color);
+        background: var(--customizer-hover);
     }
 
     .customize-control-radio-image .control-content .components-radio-control__input:checked + .components-radio-control__label::after,
@@ -118,9 +281,15 @@ MARK: 2.0 Radio Image
 MARK: 3.0 Section Tab
 =========================
 */
-    .customize-control-section-tab {
+    .customize-pane-child.control-section .customize-control.customize-control-section-tab {
         margin-inline: -12px;
         width: calc(100% + 24px);
+        padding: 0;
+        border-bottom: none;
+    }
+
+    .customize-control-section-tab .control-content .components-base-control__label {
+        margin-bottom: 0;
     }
 
     .customize-control-section-tab .components-radio-control__option {
@@ -143,12 +312,21 @@ MARK: 3.0 Section Tab
 
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab {
         text-align: center;
-        padding: 10px;
+        padding: 15px;
         font-weight: 600;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        background: var(--customizer-light-grey);
     }
+
+    .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab:hover {
+        color: var(--customizer-color);
+    }
+
     .customize-control-section-tab .control-content .components-radio-control__group-wrapper .components-radio-control__option .tab.active {
-        background: var(--customizer-dark-grey);
-        color: #fff;
+        background: #fff;
+        color: var(--customizer-color);
     }
 
 /*
@@ -164,41 +342,55 @@ MARK: 4.0 Icon Picker
     }
 
     .customize-control-icon-picker .buttons-wrapper .button-item {
-        flex: 1;
+        width: 100%;
         display: block;
         text-align: center;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area {
+    .customize-control-icon-picker .buttons-wrapper .components-button.button-item {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+        align-items: center;
+    }
+
+    .customize-control-icon-picker .buttons-wrapper .components-button.button-item .icon-picker-dashicon {
+        font-size: 17px;
+        height: unset;
+        width: unset;
+    }
+
+    .icon-picker-popover .image-dropdown .preview-area {
         width: 100%;
         height: 130px;
-        border: 2px dashed #000;
-        margin: 10px 0;
+        outline: 2px dashed var(--customizer-dark-grey);
+        margin-bottom: 10px;
         position: relative;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area .overlay {
+    .icon-picker-popover .image-dropdown .preview-area .overlay {
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 9;
-        background: #8080805a;
+        background: #f0f0f094;
         display: none;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area:hover .overlay {
+    .icon-picker-popover .image-dropdown .preview-area:hover .overlay {
         display: block;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area .image-preview {
+    .icon-picker-popover .image-dropdown .preview-area .image-preview {
         object-fit: cover;
         height: 100%;
         width: 100%;
     }
 
-    .customize-control-icon-picker .image-dropdown .preview-area .label {
+    .icon-picker-popover .image-dropdown .preview-area .label {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -207,41 +399,113 @@ MARK: 4.0 Icon Picker
         font-size: 22px;
     }
 
-    .customize-control-icon-picker .image-dropdown .buttons-area {
+    .icon-picker-popover .image-dropdown .buttons-area {
         display: flex;
         gap: 10px;
     }
 
-    .customize-control-icon-picker .image-dropdown .buttons-area .button-item {
+    .icon-picker-popover .image-dropdown .buttons-area .button-item {
         display: block;
         text-align: center;
         width: 100%;
     }
 
-    .customize-control-icon-picker .image-dropdown .buttons-area .button-item.remove {
+    .icon-picker-popover .image-dropdown .buttons-area .button-item.remove {
         color: #ff0000;
         box-shadow: inset 0 0 0 1px #ff0000;
     }
 
-    .customize-control-icon-picker .icon-dropdown {
-        margin-top: 10px;
+    .icon-picker-popover .icon-dropdown {
         padding: 10px;
         background: #fff;
+        outline: 1px solid var(--customizer-light-grey);
     }
 
-    .customize-control-icon-picker .icon-dropdown .icon-collection {
+    .icon-picker-popover .icon-dropdown .icon-collection {
         height: 200px !important;
+        margin-top: 10px;
     }
 
-    .customize-control-icon-picker .icon-dropdown .icon-collection .container {
+    .icon-picker-popover .icon-dropdown .icon-collection .container {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
         gap: 10px;
     }
 
-    .customize-control-icon-picker .icon-dropdown .icon-btn {
+    .icon-picker-popover .icon-dropdown .icon-btn {
         display: block;
         padding: 0;
+    }
+
+    .icon-picker-popover.icon .components-popover__content {
+        padding: 0;
+    }
+
+    .components-popover.ian-dropdown-popover.icon-picker-popover .components-popover__content {
+        width: 300px
+    }
+
+/*
+=========================
+MARK: 5.0 Box Shadow
+=========================
+*/
+    .components-popover.box-shadow-popover .components-popover__content > .box-shadow-block {
+        margin-bottom: 15px;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.flex-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block:last-child {
+        margin-bottom: unset !important;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .block-head {
+        margin-bottom: 5px;
+        display: block;
+        color: #000;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block,
+    .components-popover.box-shadow-popover .box-shadow-block.toggle-block {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        justify-content: left;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block {
+        justify-content: space-between;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block .component-color-indicator {
+        border-radius: 5px;
+        height: 32px;
+        width: 60px;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block.color-block .block-head,
+    .components-popover.box-shadow-popover .box-shadow-block.toggle-block .block-head {
+        margin-bottom: unset;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .components-range-control .components-input-control__container {
+        width: calc(60px);
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .components-range-control .components-input-control__backdrop {
+        outline: 1px solid #cccccc;
+        inset: 0px;
+        border: unset;
+    }
+
+    .components-popover.box-shadow-popover .box-shadow-block .components-range-control .components-input-control__input {
+        height: 32px;
+        min-height: 32px;
     }
 
 /*
@@ -256,6 +520,12 @@ MARK: 6.0 Text
         gap: 0px;
     }
 
+    .customize-control-ian-text .content-wrapper .components-text-control__input:not(:focus):hover {
+        outline: 1px solid var(--customizer-color);
+        border: none;
+        box-shadow: unset;
+    }
+
 /*
 =========================
 MARK: 7.0 Typography
@@ -267,4 +537,191 @@ MARK: 7.0 Typography
 
     .customize-control-typography .family-collection {
         width: 100%;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block:not(:last-child) {
+        margin-bottom: 15px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .label {
+        display: block;
+        color: #000;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block > .label {
+        margin-bottom: 5px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .block-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    
+    .ian-dropdown-popover.typography-popover .typography-block .range-control {
+        display: flex;
+        align-items: center;
+    }
+    
+    .ian-dropdown-popover.typography-popover .typography-block .components-range-control.ian-range-item .reset-button .dashicon {
+        font-size: 15px;
+    }
+    
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control {
+        width: 90%;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control {
+        flex: 1;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-number-control {
+        margin-left: 5px !important;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-input-control__input,
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control .components-select-control__input {
+        height: 32px;
+        min-height: 32px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-input-control__container {
+        width: calc(60px);
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-input-control__backdrop,
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-select-control .components-input-control__backdrop {
+        outline: 1px solid #cccccc;
+        border: unset;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .typography-select {
+        width: 100%;
+        outline: 1px solid #cccccc;
+        border-radius: 4px;
+    }
+
+    .ian-dropdown-popover.typography-popover .typography-block .ian-select-wrapper__menu {
+        z-index: 9;
+    }
+
+/*
+=========================
+MARK: 8.0 Toggle Control
+=========================
+*/
+    .customize-control-toggle-button .control-content {
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+    }
+
+/*
+=========================
+MARK: 9.0 Number
+=========================
+*/
+    .customize-control-ian-number .control-content .content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-select-control.ian-range-item {
+        flex: 1;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control.ian-range-item {
+        width: 90%;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container {
+        width: calc(60px);
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container .components-input-control__input,
+    .customize-control-ian-number .content-wrapper .components-range-control .components-range-control__root,
+    .customize-control-ian-number .content-wrapper .components-select-control .components-input-control__container .components-select-control__input {
+        height: 32px;
+        min-height: 32px;
+    }
+
+    .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container .components-input-control__backdrop,
+    .customize-control-ian-number .content-wrapper .components-select-control .components-input-control__container .components-input-control__backdrop {
+        outline: 1px solid #8c8f94;
+        border: unset;
+        border-radius: unset;
+    }
+
+/*
+=========================
+MARK: 10.0 Border
+=========================
+*/
+    /* .customize-control-border .control-content .content-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+    } */
+
+/*
+=========================
+MARK: 11.0 Dimension
+=========================
+*/
+    .customize-control-dimension .control-content .content-wrapper {
+        display: flex;
+        align-items: end;
+        gap: 5px;
+    }
+
+    .customize-control-dimension .content-wrapper .ian-number-control-container {
+        flex: 1;
+    }
+
+    .customize-control-dimension .content-wrapper .ian-number-control-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 11px;
+    }
+
+    .customize-control-dimension .content-wrapper .ian-number-control-container label ~ .ian-input.number {
+        outline: 1px solid #8c8f94;
+        border: unset;
+        border-radius: unset;
+    }
+
+    .customize-control-dimension .content-wrapper .components-button {
+        /* box-shadow: unset; */
+        /* outline: 1px solid black; */
+        padding: 5px;
+        height: 30px;
+        min-height: 30px;
+    }
+
+/*
+=========================
+MARK: 12.0 Radio Tab
+=========================
+*/
+    .customize-control-radio-tab .control-content.is-block {
+        gap: 40px;
+    }
+
+    .customize-control-radio-tab .control-content.is-block .content-head {
+        flex: 1;
+    }
+
+    .customize-control-radio-tab .control-content.is-block .content-wrapper {
+        display: flex;
+        align-items: center;
+        /* width: 60%; */
+        flex: 1 1;
+    }
+
+    .customize-control-radio-tab .control-content.is-block .content-wrapper .components-button {
+        flex: 1;
+        display: block;
+        text-align: center;
     }

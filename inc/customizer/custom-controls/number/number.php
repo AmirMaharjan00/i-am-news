@@ -1,6 +1,6 @@
 <?php
     /**
-     * Radio tab customzer custom control
+     * Number customzer custom control
      * 
      * @package I am News
      * @since 1.0.0
@@ -9,31 +9,24 @@
 
     use IAN\Customizer\Base as Base;
     
-    if( ! class_exists( __NAMESPACE__ . '\\Radio_Tab' ) ) :
+    if( ! class_exists( __NAMESPACE__ . '\\Number' ) ) :
         /**
-         * Radio Tab Class
+         * Number Class
          */
-        class Radio_Tab extends Base {
+        class Number extends Base {
             /**
              * Type of control
              * 
              * @since 1.0.0
              */
-            public $type = 'radio-tab';
+            public $type = 'ian-number';
 
             /**
-             * Fields
+             * Is this control responsive
              * 
              * @since 1.0.0
              */
-            public $fields = [];
-
-            /**
-             * Show label and control in single line
-             * 
-             * @since 1.0.0
-             */
-            public $display_block = false;
+            public $responsive = false;
 
             /**
              * To json
@@ -42,8 +35,7 @@
              */
             public function to_json() {
                 parent::to_json();
-                $this->json[ 'fields' ] = $this->fields;
-                $this->json[ 'display_block' ] = $this->display_block;
+                $this->json[ 'responsive' ] = $this->responsive;
             }
         }
     endif;

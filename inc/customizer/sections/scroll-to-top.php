@@ -6,15 +6,26 @@
      * @since 1.0.0
      */
     namespace IAN\Customizer\Section;
+
     use function esc_html__;
     use function esc_attr;
     use function get_template_directory_uri;
+
+    use IAN\Helpers;
 
     if( ! class_exists( __NAMESPACE__ . '\\Scroll_To_Top' ) ) :
         /**
          * Scroll to top
          */
         class Scroll_To_Top extends Section {
+            /**
+             * Id of section
+             * 
+             * @since 1.0.0
+             * @var string
+             */
+            public $id = 'ian-scroll-to-top';
+
             /**
              * Instance of class
              * 
@@ -37,6 +48,7 @@
 
             /**
              * Register controls
+             * Render
              * 
              * @since 1.0.0
              * @override
@@ -47,10 +59,15 @@
                 $this->add_control( 'scroll_to_top_layouts' );
                 $this->add_control( 'scroll_to_top_label' );
                 $this->add_control( 'scroll_to_top_icon_picker' );
+                $this->add_control( 'scroll_to_top_is_fixed' );
+                $this->add_control( 'scroll_to_top_position' );
+                $this->add_control( 'scroll_to_top_typography' );
+                $this->add_control( 'scroll_to_top_border' );
+                $this->add_control( 'scroll_to_top_border_radius' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
-                $this->add_control( 'test' );
-                $this->add_control( 'typography_test' );
-                $this->add_control( 'radio_tab_test' );
+                $this->add_control( 'scroll_to_top_padding' );
+                $this->add_control( 'scroll_to_top_heading_toggle' );
+                // $this->add_control( 'scroll_to_top_checkbox' );
             }
 
             /**
@@ -76,23 +93,40 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
+                    'scroll_to_top_icon_picker' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_is_fixed' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_position' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_typography' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_border' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_border_radius' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
                     'scroll_to_top_box_shadow' =>  [
                         'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
-                    'scroll_to_top_icon_picker' =>  [
-                        // 'sanitize_function' =>  'sanitize_text_field',
-                        'transport'   =>  'postMessage',
-                        'default'   =>  $this->get_defaults( $id )
-                    ],
-                    'test' =>  [
-                        // 'sanitize_function' =>  'sanitize_text_field',
-                        'transport'   =>  'postMessage',
-                        'default'   =>  $this->get_defaults( $id )
-                    ],
-                    'typography_test' =>  [
-                        // 'sanitize_function' =>  'sanitize_text_field',
+                    'scroll_to_top_padding' =>  [
+                        // 'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -101,12 +135,23 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
+                    'scroll_to_top_heading_toggle' =>  [
+                        // 'sanitize_function' =>  'sanitize_text_field',
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    // 'scroll_to_top_checkbox' =>  [
+                    //     'sanitize_function' =>  'sanitize_text_field',
+                    //     'transport'   =>  'postMessage',
+                    //     'default'   =>  $this->get_defaults( $id )
+                    // ],
                 ];
                 return ( $id ) ? $settings[ $id ] : $settings;
             }
 
             /**
              * Get controls
+             * Helpers
              * 
              * @since 1.0.0
              * @override
@@ -116,9 +161,22 @@
                     'scroll_to_top_section' =>  [
                         'title' =>  esc_html__( 'Scroll to Top', 'i-am-news' )
                     ],
+                    'scroll_to_top_section_tab' =>  [
+                        'type'  =>  'section-tab',
+                        'section'   =>  $this->section,
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'General', 'i-am-news' ),
+                                'value' =>  'general'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Design', 'i-am-news' ),
+                                'value' =>  'design'
+                            ]
+                        ]
+                    ],
                     'scroll_to_top_layouts' =>  [
                         'label' =>  esc_html__( 'Layouts', 'i-am-news' ),
-                        'description' =>  esc_html__( 'Pick your desired layout.', 'i-am-news' ),
                         'type'  =>  'radio-image',
                         'tab'   =>  'general',
                         'section'   =>  $this->section,
@@ -135,31 +193,10 @@
                             ]
                         ]
                     ],
-                    'scroll_to_top_box_shadow' =>  [
-                        'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
-                        'description'   =>  esc_html__( 'This is description', 'i-am-news' ),
-                        'type'  =>  'box-shadow',
-                        'tab'   =>  'design',
-                        'section'   =>  $this->section
-                    ],
-                    'scroll_to_top_section_tab' =>  [
-                        'type'  =>  'section-tab',
-                        'section'   =>  $this->section,
-                        'fields'    =>  [
-                            [
-                                'label' =>  esc_html__( 'General', 'i-am-news' ),
-                                'value' =>  'general'
-                            ],
-                            [
-                                'label' =>  esc_html__( 'Design', 'i-am-news' ),
-                                'value' =>  'design'
-                            ]
-                        ]
-                    ],
                     'scroll_to_top_label' =>  [
                         'label' =>  esc_html__( 'Label', 'i-am-news' ),
-                        'description' =>  esc_html__( 'Testing', 'i-am-news' ),
-                        'type'  =>  'text',
+                        'description'   =>  esc_html__( 'Leave the field empty to hide the label.', 'i-am-news' ),
+                        'type'  =>  'ian-text',
                         'section'   =>  $this->section
                     ],
                     'scroll_to_top_icon_picker' =>  [
@@ -167,15 +204,71 @@
                         'type'  =>  'icon-picker',
                         'section'   =>  $this->section
                     ],
-                    'test' =>  [
-                        'label' =>  esc_html__( 'Testing', 'i-am-news' ),
+                    'scroll_to_top_is_fixed' =>  [
+                        'label' =>  esc_html__( 'Fixed', 'i-am-news' ),
+                        'description'   =>  esc_html__( 'Enable to make it fixed.', 'i-am-news' ),
                         'type'  =>  'toggle-button',
                         'section'   =>  $this->section
                     ],
-                    'typography_test' =>  [
+                    'scroll_to_top_position' =>  [
+                        'label' =>  esc_html__( 'Position', 'i-am-news' ),
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'Left', 'i-am-news' ),
+                                'value' =>  'left'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Center', 'i-am-news' ),
+                                'value' =>  'center'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Right', 'i-am-news' ),
+                                'value' =>  'right'
+                            ],
+                        ],
+                        'type'  =>  'radio-tab',
+                        'section'   =>  $this->section,
+                        'display_block' =>  true,
+                        'conditions'    =>  [
+                            'relation'  =>  'AND',
+                            'rules' =>  [
+                                [
+                                    'setting'   =>  'scroll_to_top_is_fixed',
+                                    'operator'  =>  '==',
+                                    'value' =>  true
+                                ]
+                            ]
+                        ]
+                    ],
+                    'scroll_to_top_typography' =>  [
                         'label' =>  esc_html__( 'Typography', 'i-am-news' ),
                         'type'  =>  'typography',
                         'tab'  =>  'design',
+                        'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_border' =>  [
+                        'label' =>  esc_html__( 'Border', 'i-am-news' ),
+                        'type'  =>  'border',
+                        'tab'  =>  'design',
+                        'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_border_radius' =>  [
+                        'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),
+                        'type'  =>  'ian-number',
+                        'tab'   =>  'design',
+                        'section'   =>  $this->section,
+                        'responsive'    =>  true
+                    ],
+                    'scroll_to_top_box_shadow' =>  [
+                        'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
+                        'type'  =>  'box-shadow',
+                        'tab'   =>  'design',
+                        'section'   =>  $this->section
+                    ],
+                    'scroll_to_top_padding' =>  [
+                        'label' =>  esc_html__( 'Padding', 'i-am-news' ),
+                        'type'  =>  'dimension',
+                        'tab'   =>  'design',
                         'section'   =>  $this->section
                     ],
                     'radio_tab_test' =>  [
@@ -193,12 +286,25 @@
                             ]
                         ]
                     ],
+                    'scroll_to_top_heading_toggle' =>  [
+                        'label' =>  esc_html__( 'Heading Toggle', 'i-am-news' ),
+                        'type'  =>  'heading-toggle',
+                        'tab'   =>  'general',
+                        'section'   =>  $this->section
+                    ],
+                    // 'scroll_to_top_checkbox' =>  [
+                    //     'label' =>  esc_html__( 'Checkbox', 'i-am-news' ),
+                    //     'type'  =>  'checkbox',
+                    //     'tab'   =>  'general',
+                    //     'section'   =>  $this->section
+                    // ],
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
 
             /**
              * Set defaults
+             * Theme Starter
              * 
              * @since 1.0.0
              * @var array
@@ -208,38 +314,50 @@
                     'scroll_to_top_section_tab' =>  'general',
                     'scroll_to_top_layouts' =>  'one',
                     'scroll_to_top_label' =>  esc_html__( 'Go to Top', 'i-am-news' ),
-                    'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
-                        'offsetx'   =>  10,
-                        'offsety'   =>  10
-                    ]),
                     'scroll_to_top_icon_picker' =>  [
                         'type'  =>  'icon',
                         'value'  =>  'fa-solid fa-jet-fighter-up'
                     ],
-                    'test' =>   false,
-                    'typography_test'   =>  [
+                    'scroll_to_top_is_fixed' =>  false,
+                    'scroll_to_top_position' =>  'right',
+                    'scroll_to_top_typography'   =>  [
                         'font_family'   => [ 'value' => 'Jost', 'label' => 'Jost' ],
                         'font_weight'   =>  '500italic',
                         'font_size'   => [
                             'desktop'   =>  13,
                             'tablet'   =>  13,
-                            'smartphone'   =>  13
+                            'mobile'   =>  13
                         ],
                         'line_height'   => [
                             'desktop'   =>  21,
                             'tablet'   =>  21,
-                            'smartphone'   =>  21
+                            'mobile'   =>  21
                         ],
                         'letter_spacing'   => [
                             'desktop'   =>  0,
                             'tablet'   =>  0,
-                            'smartphone'   =>  0
+                            'mobile'   =>  0
                         ],
-                        'text_transform'    => 'unset',
+                        'text_transform'    => 'none',
                         'text_decoration'    => 'none',
                         'preset'    =>  '-1'
                     ],
-                    'radio_tab_test'    =>  'one'
+                    'scroll_to_top_border' =>  '',
+                    'scroll_to_top_border_radius'   =>  5,
+                    'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
+                        'offsetx'   =>  10,
+                        'offsety'   =>  10
+                    ]),
+                    'scroll_to_top_padding' => [
+                        'top'   =>  10,
+                        'right' =>  10,
+                        'bottom' =>  10,
+                        'left' =>  10,
+                        'link' =>  true
+                    ],
+                    'radio_tab_test'    =>  'one',
+                    'scroll_to_top_heading_toggle'    =>  'one',
+                    // 'scroll_to_top_checkbox'    =>  'one',
                 ];
             }
 
@@ -260,12 +378,20 @@
              * @since 1.0.0
              */
             public function render_html() {
-                $block_class[] = 'scroll-to-top';
+                $block_class[] = $this->id;
                 $block_class[] = 'layout--' . $this->get_customizer_value( 'scroll_to_top_layouts' );
+
+                if( $this->get_customizer_value( 'scroll_to_top_is_fixed' ) ) {
+                    $block_class[] = 'position--' . $this->get_customizer_value( 'scroll_to_top_position' );
+                }
+
                 ?>
-                    <div id="scroll-to-top" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
+                    <div id="<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
+
                         <span class="label"><?php echo esc_html( $this->get_customizer_value( 'scroll_to_top_label' ) ); ?></span>
-                        <span class="icon"></span>
+
+                        <?php echo Helpers::get_icon_html( $this->get_customizer_value( 'scroll_to_top_icon_picker' ) ); ?>
+
                     </div>
                 <?php
             }

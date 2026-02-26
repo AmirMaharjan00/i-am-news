@@ -1,4 +1,4 @@
-const { Dropdown } = wp.components,
+const { Dropdown, SelectControl } = wp.components,
     { useState, useEffect, useContext, createContext } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml
@@ -7,7 +7,7 @@ import { IanControlHead, IanResponsiveIcons } from "./components"
 import googleFonts from '../google-fonts.min.json'
 import { Virtuoso } from "react-virtuoso";
 import Select from 'react-select'
-import { IanRangeControl } from './range'
+import { IanRangeControl } from './number'
 
 const TypographyContext = createContext( null )
 
@@ -173,34 +173,35 @@ export const TypographComponent = ( props ) => {
         />
 
         <div className="content-wrapper">
-            {/* <Dropdown
-                className = 'typography-container'
-                contentClassName = 'typography-popover'
+            <Dropdown
+                className = 'ian-dropdown-container typography-container'
+                contentClassName = 'ian-dropdown-popover typography-popover'
                 popoverProps = { {
-                    placement: 'bottom-start',
+                    placement: 'right-start',
                     shift: true
                 } }
                 renderToggle = { ( { isOpen, onToggle } ) => {
                     return <div className='highlight' onClick={ onToggle } aria-expanded={ isOpen }>
-                        { `Font Family: ${ font_family.value }; Font Weight: ${ font_weight }` }
+                        <span>{ `Family: ${ font_family.value } /` }</span>
+                        <span>{ `Weight: ${ font_weight } /` }</span>
+                        <span>{ `Size: ${ font_size.desktop }px` }</span>
                     </div>
                 } }
                 renderContent = { () => {
-                    return <>
-                        
-                    </>
+                    return <TypographyContext.Provider value={ contextObject }>
+
+                        <FontFamily />
+                        <FontWeight />
+                        <FontSize />
+                        <LineHeight />
+                        <LetterSpacing />
+                        <TextDecoration />
+                        <TextTransform />
+
+                    </TypographyContext.Provider>
                 } }
-            /> */}
+            />
 
-            <TypographyContext.Provider value={ contextObject }>
-
-                <FontFamily />
-                <FontWeight />
-                <FontSize />
-                <LineHeight />
-                <LetterSpacing />
-
-            </TypographyContext.Provider>
         </div>
     </div>
 }
@@ -213,7 +214,7 @@ export const TypographComponent = ( props ) => {
 const FontFamily = () => {
     const { fontFamily, updateValue } = useContext( TypographyContext )
 
-    return <div className="font-family-block">
+    return <div className="typography-block font-family-block">
         <span className="label">{ __( 'Font Family' , 'i-am-news') }</span>
         <Select
             defaultValue = { fontFamily }
@@ -222,8 +223,8 @@ const FontFamily = () => {
             components = { { MenuList: FontFamilyList } }
             placeholder = { __( escapeHTML( "Select an option" ), 'i-am-news' ) }
             classNamePrefix = "ian-select-wrapper"
-            menuPortalTarget = { document.body }
-            menuPosition = "fixed"
+            menuPortalTarget = { null }
+            menuPosition = "absolute"
             styles = { {
                 menuPortal: base => ( { ...base, zIndex: 999999 } )
             } }
@@ -312,15 +313,16 @@ const FontWeight = () => {
         updateValue( 'font_weight', newValue.value )
     }
 
-    return <div className="font-weight-block">
+    return <div className="typography-block font-weight-block">
         <span className="label">{ __( 'Font Weight' , 'i-am-news') }</span>
         <Select
             defaultValue = { { label: fontWeight, value: fontWeight } }
+            classNamePrefix = "ian-select-wrapper"
             options = { options }
             formatOptionLabel = { formatOptionLabel }
             onChange = { handleWeightChange }
-            menuPortalTarget = { document.body }
-            menuPosition = "fixed"
+            menuPortalTarget = { null }
+            menuPosition = "absolute"
             styles = { {
                 menuPortal: base => ( { ...base, zIndex: 999999 } )
             } }
@@ -334,7 +336,7 @@ const FontWeight = () => {
  * @since 1.0.0
  */
 const FontSize = () => {
-    return <div className="font-size-block">
+    return <div className="typography-block font-size-block">
         <div className="block-head">
             <span className="label">{ __( 'Font Size' , 'i-am-news') }</span>
             <IanResponsiveIcons />
@@ -351,7 +353,7 @@ const FontSize = () => {
  * @since 1.0.0
  */
 const LineHeight = () => {
-    return <div className="line-height-block">
+    return <div className="typography-block line-height-block">
         <div className="block-head">
             <span className="label">{ __( 'Line Height' , 'i-am-news') }</span>
             <IanResponsiveIcons />
@@ -368,7 +370,7 @@ const LineHeight = () => {
  * @since 1.0.0
  */
 const LetterSpacing = () => {
-    return <div className="line-height-block">
+    return <div className="typography-block letter-spacing-block">
         <div className="block-head">
             <span className="label">{ __( 'Letter Spacing' , 'i-am-news') }</span>
             <IanResponsiveIcons />
@@ -376,5 +378,103 @@ const LetterSpacing = () => {
         <div className="range-control">
             <IanRangeControl />
         </div>
+    </div>
+}
+
+/**
+ * MARK: Text Decoration
+ * 
+ * @since 1.0.0
+ */
+const TextDecoration = () => {
+    const { textDecoration } = useContext( TypographyContext )
+
+    /**
+     * Get options
+     * 
+     * @since 1.0.0
+     */
+    const getOptions = () => {
+        let options = {
+            'none': __( 'None', 'i-am-news'),
+            'capitalize': __( 'Capitalize', 'i-am-news'),
+            'uppercase': __( 'UPPERCASE', 'i-am-news'),
+            'lowercase': __( 'lowercase', 'i-am-news'),
+            'initial': __( 'Initial', 'i-am-news'),
+            'inherit': __( 'Inherit', 'i-am-news'),
+        }
+
+        return Object.entries( options ).map( ( item ) => {
+            let [ value, label ] = item
+
+            return {
+                label: <span className={ `select-item ${ value }` }>{ label }</span>,
+                value
+            }
+        } )
+    }
+
+    return <div className="typography-block text-decoration-block">
+        <div className="block-head">
+            <span className="label">{ __( 'Text Decoration' , 'i-am-news') }</span>
+        </div>
+        <SelectControl
+            __nextHasNoMarginBottom
+            __next40pxDefaultSize
+            value = { textDecoration }
+            className = 'typography-select'
+            options = { getOptions() }
+            variant = "minimal"
+            // onChange = { ( newSize ) => setSize( newSize ) }
+        />
+    </div>
+}
+
+/**
+ * MARK: Text Transform
+ * 
+ * @since 1.0.0
+ */
+const TextTransform = () => {
+    const { textTransform } = useContext( TypographyContext )
+
+    /**
+     * Get options
+     * 
+     * @since 1.0.0
+     */
+    const getOptions = () => {
+        let options = {
+            'none': __( 'None', 'i-am-news'),
+            'underline': __( 'Underline', 'i-am-news'),
+            'overline': __( 'Overline', 'i-am-news'),
+            'line-through': __( 'Line Through', 'i-am-news'),
+            'initial': __( 'Initial', 'i-am-news'),
+            'inherit': __( 'Inherit', 'i-am-news'),
+        }
+
+        return Object.entries( options ).map( ( item ) => {
+            let [ value, label ] = item
+
+            return {
+                label: <span className={ `select-item ${ value }` }>{ label }</span>,
+                value
+            }
+        } )
+    }
+
+    return <div className="typography-block text-transform-block">
+        <div className="block-head">
+            <span className="label">{ __( 'Text Transform' , 'i-am-news') }</span>
+        </div>
+        <SelectControl
+            __nextHasNoMarginBottom
+            __next40pxDefaultSize
+            value = { textTransform }
+            className = 'typography-select'
+            options = { getOptions() }
+            variant = "minimal"
+            // onChange = { ( newSize ) => setSize( newSize ) }
+        />
     </div>
 }

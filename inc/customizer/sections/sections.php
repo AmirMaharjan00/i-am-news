@@ -14,6 +14,12 @@
     use IAN\Customizer\Controls\Toggle_Button as Toggle_Button;
     use IAN\Customizer\Controls\Typography as Typography;
     use IAN\Customizer\Controls\Radio_Tab as Radio_Tab;
+    use IAN\Customizer\Controls\Text as Text;
+    use IAN\Customizer\Controls\Number as Number;
+    use IAN\Customizer\Controls\Border as Border;
+    use IAN\Customizer\Controls\Dimension as Dimension;
+    use IAN\Customizer\Controls\Heading_Toggle as Heading_Toggle;
+    use IAN\Customizer\Controls\Checkbox as Checkbox;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
 
@@ -120,6 +126,12 @@
                     'toggle-button'    =>  [ $this, 'add_Toggle_Button' ],
                     'typography'    =>  [ $this, 'add_typography' ],
                     'radio-tab'    =>  [ $this, 'add_radio_tab' ],
+                    'ian-text'    =>  [ $this, 'add_text' ],
+                    'ian-number'    =>  [ $this, 'add_number' ],
+                    'border'    =>  [ $this, 'add_border' ],
+                    'dimension'    =>  [ $this, 'add_dimension' ],
+                    'heading-toggle'    =>  [ $this, 'add_heading_toggle' ],
+                    'checkbox'    =>  [ $this, 'add_checkbox' ],
                 ];
             }
 
@@ -270,6 +282,60 @@
              */
             private function add_radio_tab( $id, $control ) {
                 $this->manager->add_control( new Radio_Tab( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Text
+             * 
+             * @since 1.0.0
+             */
+            private function add_text( $id, $control ) {
+                $this->manager->add_control( new Text( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Number
+             * 
+             * @since 1.0.0
+             */
+            private function add_number( $id, $control ) {
+                $this->manager->add_control( new Number( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Border
+             * 
+             * @since 1.0.0
+             */
+            private function add_border( $id, $control ) {
+                $this->manager->add_control( new Border( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Text
+             * 
+             * @since 1.0.0
+             */
+            private function add_dimension( $id, $control ) {
+                $this->manager->add_control( new Dimension( $this->manager, $id, $control ) );
+            }
+            
+            /**
+             * Add Text
+             * 
+             * @since 1.0.0
+             */
+            private function add_heading_toggle( $id, $control ) {
+                $this->manager->add_control( new Heading_Toggle( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Text
+             * 
+             * @since 1.0.0
+             */
+            private function add_checkbox( $id, $control ) {
+                $this->manager->add_control( new Checkbox( $this->manager, $id, $control ) );
             }
 
             /**

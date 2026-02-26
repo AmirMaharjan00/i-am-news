@@ -55,6 +55,31 @@ function i_am_news_customize_register( $wp_customize ) {
 	 * Radio Tab Control
 	*/
 	require_once get_template_directory() . '/inc/customizer/custom-controls/radio-tab/radio-tab.php';
+	
+	/**
+	 * Text Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/text/text.php';
+
+	/**
+	 * Number Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/number/number.php';
+
+	/**
+	 * Border Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/border/border.php';
+
+	/**
+	 * Dimension Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/dimension/dimension.php';
+
+	/**
+	 * Heading Toggle Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/heading-toggle/heading-toggle.php';
 
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(

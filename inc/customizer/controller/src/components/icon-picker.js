@@ -1,8 +1,9 @@
-const { useState, useRef, useEffect } = wp.element,
-    { Button, SearchControl } = wp.components,
+const { useState, useRef, useEffect, useContext, createContext } = wp.element,
+    { Button, SearchControl, Dashicon, Dropdown } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
-    { attachment: mediaAttachment } = wp.media
+    { attachment: mediaAttachment } = wp.media,
+    IconPickerContext = createContext()
 
 import { IanControlHead } from './components'
 import fontAwesomeIcons from '../font-awesome-classes.json'
@@ -55,6 +56,7 @@ export const IconPickerComponent = ( props ) => {
      * @since 1.0.0
      */
     const handleButtonClick = ( newType ) => {
+        if( newType === type ) return;
         let newValue = {
             type: newType
         }
@@ -132,6 +134,23 @@ export const IconPickerComponent = ( props ) => {
         setFilteredIcons( filtered )
     }
 
+    /**
+     * context object
+     * 
+     * @since 1.0.0
+     */
+    const iconPickerContextObject = {
+        handleRemoveImage,
+        handleSearch,
+        openMediaLibrary,
+        handleButtonClick,
+        handleIconClick,
+        type, currentValue,
+        icon,
+        imageUrl,
+        filteredIcons
+    }
+
     return <div className="control-content">
         <IanControlHead 
             label = { label }
@@ -140,32 +159,98 @@ export const IconPickerComponent = ( props ) => {
         <div className="content-wrapper">
 
             <div className="buttons-wrapper">
-                <Button
-                    onClick = { () => handleButtonClick( 'none' ) }
-                    variant = { ( ( type === 'none' ) ? 'primary': 'secondary' ) }
-                    className = "button-item"
-                >
-                    { __( escapeHTML( 'None' ), 'i-am-news' ) }
-                </Button>
 
-                <Button
-                    onClick = { () => handleButtonClick( 'image' ) }
-                    variant = { ( ( type === 'image' ) ? 'primary': 'secondary' ) }
-                    className = "button-item"
-                >
-                    { __( escapeHTML( 'Image' ), 'i-am-news' ) }
-                </Button>
+                <IconPickerContext.Provider value={ iconPickerContextObject }>
 
-                <Button
-                    onClick = { () => handleButtonClick( 'icon' ) }
-                    variant = { ( ( type === 'icon' ) ? 'primary': 'secondary' ) }
-                    className = "button-item"
-                >
-                    { __( escapeHTML( 'Icon' ), 'i-am-news' ) }
-                </Button>
+                    <Button
+                        onClick = { () => handleButtonClick( 'none' ) }
+                        variant = { ( ( type === 'none' ) ? 'primary': 'secondary' ) }
+                        className = "button-item"
+                    >
+                        { __( escapeHTML( 'None' ), 'i-am-news' ) }
+                    </Button>
+
+                    <Image />
+
+                    <Icon />
+
+                </IconPickerContext.Provider>
+
             </div>
-                
-            { ( type === 'image' ) && <div className="image-dropdown">
+
+        </div>
+    </div>
+}
+
+/**
+ * Icon Collection
+ * 
+ * @since 1.0.0
+ */
+const IconCollection = ( props ) => {
+    const { icon, handleIconClick, filteredIcons } = useContext( IconPickerContext )
+
+    /**
+     * Handle icon click
+     * 
+     * @since 1.0.0
+     */
+    const handleItemClick = ( index ) => {
+        console.log( filteredIcons[ index ] )
+        handleIconClick( filteredIcons[ index ] )
+        props.onClose()
+    }
+
+    return <VirtuosoGrid
+        totalCount = { filteredIcons.length }
+        className = "icon-collection"
+        components = { {
+            List: React.forwardRef( ( { style, children }, ref ) => (
+                <div ref={ ref } className='container' style={ { ...style } }>
+                    { children }
+                </div>
+            ) ),
+            Item: ( { children } ) => (
+                <>{ children }</>
+            ),
+        }}
+        itemContent = { ( index ) => {
+            const variant = ( icon === filteredIcons[ index ] ) ? 'primary' : 'secondary'
+            return <Button variant={ variant } className="icon-btn" onClick={ () => handleItemClick( index ) }>
+                <i className={ filteredIcons[ index ] }></i>
+            </Button> 
+        } }
+    />
+}
+
+/**
+ * MARK: Image Component
+ * 
+ * @since 1.0.0
+ */
+const Image = () => {
+    const { openMediaLibrary, imageUrl, handleRemoveImage, type, handleButtonClick } = useContext( IconPickerContext )
+
+    return <Dropdown
+        className = 'ian-dropdown-container button-item'
+        contentClassName = 'ian-dropdown-popover icon-picker-popover'
+        popoverProps = { {
+            placement: 'bottom-start',
+            shift: true
+        } }
+        onToggle = { () => handleButtonClick( 'image' ) }
+        renderToggle = { ( { isOpen, onToggle } ) => {
+            return <Button
+                onClick = { onToggle }
+                variant = { ( ( type === 'image' ) ? 'primary': 'secondary' ) }
+                className = "button-item"
+            >
+                { __( escapeHTML( 'Image' ), 'i-am-news' ) }
+                <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } className="icon-picker-dashicon" />
+            </Button>
+        } }
+        renderContent = { () => {
+            return <div className="image-dropdown">
 
                 <div className="preview-area" onClick={ openMediaLibrary }>
                     <div className="overlay"></div>
@@ -194,50 +279,47 @@ export const IconPickerComponent = ( props ) => {
                         { __( escapeHTML( 'Replace' ), 'i-am-news' ) }
                     </Button>
                 </div>
-            </div> }
 
-            { ( type === 'icon' ) && <div className="icon-dropdown">
-                <SearchControl
-                    placeholder = { __( 'Search...', 'i-am-news' ) }
-                    onChange = { handleSearch }
-                />
-                <IconCollection
-                    filteredIcons = { filteredIcons }
-                    icon = { value.value }
-                    handleIconClick = { handleIconClick }
-                />
-            </div> }
-
-        </div>
-    </div>
+            </div>
+        } }
+    />
 }
 
 /**
- * Icon Collection
+ * MARK: Icon Component
  * 
  * @since 1.0.0
  */
-const IconCollection = ( props ) => {
-    const { icon, handleIconClick, filteredIcons } = props
+const Icon = () => {
+    const { handleSearch, type, handleButtonClick, currentValue } = useContext( IconPickerContext )
 
-    return <VirtuosoGrid
-        totalCount = { filteredIcons.length }
-        className = "icon-collection"
-        components = { {
-            List: React.forwardRef( ( { style, children }, ref ) => (
-                <div ref={ ref } className='container' style={ { ...style } }>
-                    { children }
-                </div>
-            ) ),
-            Item: ( { children } ) => (
-                <>{ children }</>
-            ),
-        }}
-        itemContent = { ( index ) => {
-            const variant = ( icon === filteredIcons[ index ] ) ? 'primary' : 'secondary'
-            return <Button variant={ variant } className="icon-btn" onClick={ () => handleIconClick( filteredIcons[ index ] ) }>
-                <i className={ filteredIcons[ index ] }></i>
-            </Button> 
+    return <Dropdown
+        className = 'ian-dropdown-container button-item'
+        contentClassName = 'ian-dropdown-popover icon-picker-popover icon'
+        popoverProps = { {
+            placement: 'bottom-start',
+            shift: true
+        } }
+        onToggle = { () => handleButtonClick( 'icon' ) }
+        renderToggle = { ( { isOpen, onToggle } ) => {
+            return <Button
+                onClick = { onToggle }
+                variant = { ( ( type === 'icon' ) ? 'primary': 'secondary' ) }
+                className = "button-item"
+            >
+                { currentValue ? <i className={ currentValue }></i> : __( escapeHTML( 'Icon' ), 'i-am-news' ) }
+                <Dashicon icon={ `arrow-${ isOpen ? 'down' : 'up' }-alt2` } className="icon-picker-dashicon" />
+            </Button>
+        } }
+        renderContent = { ( { onClose } ) => {
+            return <div className="icon-dropdown">
+                <SearchControl
+                    __nextHasNoMarginBottom
+                    placeholder = { __( 'Search...', 'i-am-news' ) }
+                    onChange = { handleSearch }
+                />
+                <IconCollection onClose={ onClose }/>
+            </div>
         } }
     />
 }

@@ -23,6 +23,14 @@
             public $tab = 'general';
 
             /**
+             * Conditions
+             * 
+             * @var array
+             * @since 1.0.0
+             */
+            public $conditions = [];
+
+            /**
              * Parameters to send
              * 
              * @since 1.0.0
@@ -31,6 +39,7 @@
             public function to_json() {
                 parent::to_json();
                 $this->json[ 'tab' ] = $this->tab;
+                $this->json[ 'conditions' ] = $this->conditions;
             }
 
             /**
