@@ -19,6 +19,6 @@
              * 
              * @since 1.0.0
              */
-        public $type = 'checkbox';
+        public $type = 'ian-checkbox';
         }
     endif;

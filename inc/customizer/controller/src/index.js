@@ -603,7 +603,7 @@ controlConstructor[ 'heading-toggle' ] = Control.extend({
  * @package I am News
  * @since 1.0.0
  */
-controlConstructor[ 'checkbox' ] = Control.extend({
+controlConstructor[ 'ian-checkbox' ] = Control.extend({
 
     ready: function () {
         const control = this,
