@@ -2712,6 +2712,57 @@ const Inset = () => {
 
 /***/ },
 
+/***/ "./src/components/checkbox.js"
+/*!************************************!*\
+  !*** ./src/components/checkbox.js ***!
+  \************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   CheckboxComponent: () => (/* binding */ CheckboxComponent)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const {} = wp.components,
+  {
+    useState
+  } = wp.element;
+
+/**
+ * MARK: Checkbox Component
+ * 
+ * @since 1.0.0
+ */
+const CheckboxComponent = () => {
+  const [display, setDisplay] = useState(true);
+  function value() {
+    setDisplay(!display);
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: "control-content",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "content-wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+          onClick: value,
+          children: "Heading"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+            icon: "dashicon-arrow-down-alt2",
+            className: "icon-picker-dashicon"
+          })
+        })]
+      }), display && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        children: "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+      })]
+    })
+  });
+};
+
+/***/ },
+
 /***/ "./src/components/components.js"
 /*!**************************************!*\
   !*** ./src/components/components.js ***!
@@ -2967,40 +3018,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HeadingToggleComponent: () => (/* binding */ HeadingToggleComponent)
 /* harmony export */ });
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
-const {} = wp.components,
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+    Button,
+    Dashicon,
+    Dropdown
+  } = wp.components,
   {
-    useState,
-    useEffect
+    useState
   } = wp.element;
 
-
-// total of 1932 fonts
-
 /**
- * MARK: Typography Component
+ * MARK: Heading Toggle Component
  * 
  * @since 1.0.0
  */
-
 const HeadingToggleComponent = props => {
   const {
       label,
       description
     } = props,
-    [desplay, setDisplay] = useState(true);
-  function test() {
-    setDisplay(!desplay);
+    [display, setDisplay] = useState(true);
+  function value() {
+    setDisplay(display => !display);
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
-      onClick: test,
-      children: "Heading"
-    }), desplay && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-      children: "Welcome to My site Sites. This is your first post. Edit or delete it, then start writing!"
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: "control-content",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "content-wrapper",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+          onClick: value,
+          children: "Heading"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+            icon: "dashicon-arrow-down-alt2",
+            className: "icon-picker-dashicon"
+          })
+        })]
+      }), display && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        children: "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+      })]
+    })
   });
 };
 
@@ -16747,8 +16808,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_border__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/border */ "./src/components/border.js");
 /* harmony import */ var _components_dimension__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/dimension */ "./src/components/dimension.js");
 /* harmony import */ var _components_heading_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/heading-toggle */ "./src/components/heading-toggle.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _components_checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/checkbox */ "./src/components/checkbox.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__);
 const {
     customize
   } = wp,
@@ -16760,6 +16822,7 @@ const {
   {
     createRoot
   } = wp.element;
+
 
 
 
@@ -16803,7 +16866,7 @@ controlConstructor['box-shadow'] = Control.extend({
     const renderBoxShadow = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_box_shadow__WEBPACK_IMPORTED_MODULE_0__.BoxShadowComponent, {
         ...props
       }));
     };
@@ -16856,7 +16919,7 @@ controlConstructor['radio-image'] = Control.extend({
     const renderRadioImage = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_radio_image__WEBPACK_IMPORTED_MODULE_1__.RadioImageComponent, {
         ...props
       }));
     };
@@ -16911,7 +16974,7 @@ controlConstructor['section-tab'] = Control.extend({
         id: control.id,
         controls: instance.controls()
       };
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
         ...props
       }));
     };
@@ -16966,7 +17029,7 @@ controlConstructor['icon-picker'] = Control.extend({
     const renderIconPicker = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_3__.IconPickerComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_icon_picker__WEBPACK_IMPORTED_MODULE_3__.IconPickerComponent, {
         ...props
       }));
     };
@@ -17019,7 +17082,7 @@ controlConstructor['toggle-button'] = Control.extend({
     const renderToggleButton = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_toggle_button__WEBPACK_IMPORTED_MODULE_4__.ToggleButtonComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_toggle_button__WEBPACK_IMPORTED_MODULE_4__.ToggleButtonComponent, {
         ...props
       }));
     };
@@ -17072,7 +17135,7 @@ controlConstructor['typography'] = Control.extend({
     const renderTypography = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_typography__WEBPACK_IMPORTED_MODULE_7__.TypographComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_typography__WEBPACK_IMPORTED_MODULE_7__.TypographComponent, {
         ...props
       }));
     };
@@ -17125,7 +17188,7 @@ controlConstructor['ian-text'] = Control.extend({
     const renderText = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_text__WEBPACK_IMPORTED_MODULE_5__.TextComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_text__WEBPACK_IMPORTED_MODULE_5__.TextComponent, {
         ...props
       }));
     };
@@ -17178,7 +17241,7 @@ controlConstructor['radio-tab'] = Control.extend({
     const renderRadioTab = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_radio_tab__WEBPACK_IMPORTED_MODULE_6__.RadioTabComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_radio_tab__WEBPACK_IMPORTED_MODULE_6__.RadioTabComponent, {
         ...props
       }));
     };
@@ -17231,7 +17294,7 @@ controlConstructor['ian-number'] = Control.extend({
     const renderNumber = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_number__WEBPACK_IMPORTED_MODULE_8__.NumberComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_number__WEBPACK_IMPORTED_MODULE_8__.NumberComponent, {
         ...props
       }));
     };
@@ -17284,7 +17347,7 @@ controlConstructor['border'] = Control.extend({
     const renderBorder = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_border__WEBPACK_IMPORTED_MODULE_9__.BorderComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_border__WEBPACK_IMPORTED_MODULE_9__.BorderComponent, {
         ...props
       }));
     };
@@ -17337,7 +17400,7 @@ controlConstructor['dimension'] = Control.extend({
     const renderDimension = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_dimension__WEBPACK_IMPORTED_MODULE_10__.DimensionComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_dimension__WEBPACK_IMPORTED_MODULE_10__.DimensionComponent, {
         ...props
       }));
     };
@@ -17390,7 +17453,7 @@ controlConstructor['heading-toggle'] = Control.extend({
     const renderHeadingToggle = () => {
       if (rendered) return;
       rendered = true;
-      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_heading_toggle__WEBPACK_IMPORTED_MODULE_11__.HeadingToggleComponent, {
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_heading_toggle__WEBPACK_IMPORTED_MODULE_11__.HeadingToggleComponent, {
         ...props
       }));
     };
@@ -17405,6 +17468,59 @@ controlConstructor['heading-toggle'] = Control.extend({
       });
     } else {
       renderHeadingToggle();
+    }
+
+    /**
+     * Unbind if the controls container <li> tag is remoed
+     */
+    container.on('remove', () => reactRoot.unmount());
+  }
+});
+
+/**
+ * MARK: Checkbox
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor['checkbox'] = Control.extend({
+  ready: function () {
+    const control = this,
+      {
+        params,
+        container,
+        section: _thisSection,
+        setting
+      } = control,
+      root = container.find('.root')[0],
+      reactRoot = createRoot(root),
+      props = {
+        ...params,
+        setting
+      };
+    let rendered = false; // ensure we render only once
+
+    /**
+     * Function to render your React toggle
+     */
+    const renderCheckbox = () => {
+      if (rendered) return;
+      rendered = true;
+      reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components_checkbox__WEBPACK_IMPORTED_MODULE_12__.CheckboxComponent, {
+        ...props
+      }));
+    };
+
+    /**
+     * Lazy load when the section expands
+     * Component will mount only when section is mounted
+     */
+    if (_thisSection) {
+      section(_thisSection()).expanded.bind('expanded', function (isExpanded) {
+        if (isExpanded) renderCheckbox();
+      });
+    } else {
+      renderCheckbox();
     }
 
     /**

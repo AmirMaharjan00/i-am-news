@@ -14,6 +14,7 @@ import { NumberComponent } from './components/number'
 import { BorderComponent } from './components/border'
 import { DimensionComponent } from './components/dimension'
 import { HeadingToggleComponent } from './components/heading-toggle'
+import { CheckboxComponent } from './components/checkbox'
 
 /**
  * MARK: Box Shadow
@@ -587,6 +588,54 @@ controlConstructor[ 'heading-toggle' ] = Control.extend({
             } );
         } else {
             renderHeadingToggle()
+        }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Checkbox
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'checkbox' ] = Control.extend({
+
+    ready: function () {
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderCheckbox = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <CheckboxComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderCheckbox()
+            } );
+        } else {
+            renderCheckbox()
         }
 
         /**
