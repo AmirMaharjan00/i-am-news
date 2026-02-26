@@ -705,6 +705,10 @@ MARK: 11.0 Dimension
 MARK: 12.0 Radio Tab
 =========================
 */
+    .customize-control-radio-tab .control-content.is-block {
+        gap: 40px;
+    }
+
     .customize-control-radio-tab .control-content.is-block .content-head {
         flex: 1;
     }
@@ -712,7 +716,8 @@ MARK: 12.0 Radio Tab
     .customize-control-radio-tab .control-content.is-block .content-wrapper {
         display: flex;
         align-items: center;
-        width: 60%;
+        /* width: 60%; */
+        flex: 1 1;
     }
 
     .customize-control-radio-tab .control-content.is-block .content-wrapper .components-button {
