@@ -121,6 +121,34 @@ const loadGoogleFonts = ( group, range, extras = [] ) => {
     document.head.appendChild( link )
 }
 
+/**
+ * MARK: Get Unit
+ * 
+ * @since 1.0.0
+ */
+const getUnit = ( value ) => {
+    return value.match( /[a-z%]+$/i )?.[ 0 ] ?? "px";
+}
+
+/**
+ * MARK: Get Step
+ * 
+ * @since 1.0.0
+ */
+const getStep = ( unit ) => {
+    switch( unit ) {
+        case "em" :
+                return 0.1
+            break;
+        case "rem" :
+                return 0.1
+            break;
+        default : 
+                return 1
+            break;
+    }
+}
+
 // total of 1932 fonts
 
 /**
@@ -132,7 +160,8 @@ export const TypographComponent = ( props ) => {
     const { label, description, setting } = props,
         [ value, setValue ] = useState( setting.get() ),
         { font_family, font_weight, font_size, line_height, letter_spacing, text_transform, text_decoration, preset } = value,
-        [ range, setRange ] = useState( { startIndex: 0, endIndex: 8 } )
+        [ range, setRange ] = useState( { startIndex: 0, endIndex: 8 } ),
+        [ responsive, setResponsive ] = useState( 'desktop' )
 
     useEffect( () => {
         let families = fontFamilies.map( font => font.value )
@@ -157,13 +186,14 @@ export const TypographComponent = ( props ) => {
         updateValue,
         fontFamily: font_family,
         fontWeight: font_weight,
-        fontSize: font_size,
-        lineHeight: line_height,
-        letterSpacing: letter_spacing,
+        fontSize: font_size[ responsive ],
+        lineHeight: line_height[ responsive ],
+        letterSpacing: letter_spacing[ responsive ],
         textTransform: text_transform,
         textDecoration: text_decoration,
         preset,
-        range, setRange
+        range, setRange,
+        responsive, setResponsive
     }
 
     return <div className="control-content">
@@ -184,7 +214,7 @@ export const TypographComponent = ( props ) => {
                     return <div className='highlight' onClick={ onToggle } aria-expanded={ isOpen }>
                         <span>{ `Family: ${ font_family.value } /` }</span>
                         <span>{ `Weight: ${ font_weight } /` }</span>
-                        <span>{ `Size: ${ font_size.desktop }px` }</span>
+                        <span>{ `Size: ${ font_size.desktop }` }</span>
                     </div>
                 } }
                 renderContent = { () => {
@@ -336,13 +366,60 @@ const FontWeight = () => {
  * @since 1.0.0
  */
 const FontSize = () => {
+    const { fontSize } = useContext( TypographyContext ),
+        unit = getUnit( fontSize )
+
+    /**
+     * Get max
+     * 
+     * @since 1.0.0
+     */
+    const getMax = () => {
+        switch( unit ) {
+            case "%" :
+                    return 100
+                break;
+            case "px" :
+                    return 200
+                break;
+            default : 
+                    return 10
+                break;
+        }
+    }
+
+    /**
+     * Handle range change
+     * 
+     * @since 1.0.0
+     */
+    const handleRangeChange = () => {
+        
+    }
+
+    /**
+     * Handle select change
+     * 
+     * @since 1.0.0
+     */
+    const handleSelectChange = () => {
+        
+    }
+
     return <div className="typography-block font-size-block">
         <div className="block-head">
             <span className="label">{ __( 'Font Size' , 'i-am-news') }</span>
             <IanResponsiveIcons />
         </div>
         <div className="range-control">
-            <IanRangeControl />
+            <IanRangeControl 
+                min = { 0 }
+                max = { getMax() }
+                step = { getStep( unit ) }
+                selectValue = { unit }
+                handleRangeChange = { handleRangeChange }
+                handleSelectChange = { handleSelectChange }
+            />
         </div>
     </div>
 }
@@ -353,13 +430,35 @@ const FontSize = () => {
  * @since 1.0.0
  */
 const LineHeight = () => {
+    const { lineHeight } = useContext( TypographyContext ),
+        unit = getUnit( lineHeight )
+
+    const getMax = () => {
+        switch( unit ) {
+            case "%" :
+                    return 100
+                break;
+            case "px" :
+                    return 300
+                break;
+            default : 
+                    return 5
+                break;
+        }
+    }
+
     return <div className="typography-block line-height-block">
         <div className="block-head">
             <span className="label">{ __( 'Line Height' , 'i-am-news') }</span>
             <IanResponsiveIcons />
         </div>
         <div className="range-control">
-            <IanRangeControl />
+            <IanRangeControl
+                min = { 0 }
+                max = { getMax() }
+                step = { getStep( unit ) }
+                selectValue = { unit }
+            />
         </div>
     </div>
 }
@@ -370,13 +469,49 @@ const LineHeight = () => {
  * @since 1.0.0
  */
 const LetterSpacing = () => {
+    const { letterSpacing } = useContext( TypographyContext ),
+        unit = getUnit( letterSpacing )
+
+    const getMax = () => {
+        switch( unit ) {
+            case "%" :
+                    return 200
+                break;
+            case "px" :
+                    return 20
+                break;
+            default : 
+                    return 2
+                break;
+        }
+    }
+
+    const getMin = () => {
+        switch( unit ) {
+            case "%" :
+                    return 0
+                break;
+            case "px" :
+                    return -10
+                break;
+            default : 
+                    return -1
+                break;
+        }
+    }
+
     return <div className="typography-block letter-spacing-block">
         <div className="block-head">
             <span className="label">{ __( 'Letter Spacing' , 'i-am-news') }</span>
             <IanResponsiveIcons />
         </div>
         <div className="range-control">
-            <IanRangeControl />
+            <IanRangeControl
+                min = { getMin() }
+                max = { getMax() }
+                step = { getStep( unit ) } 
+                selectValue = { unit }
+            />
         </div>
     </div>
 }

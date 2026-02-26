@@ -1,11 +1,7 @@
 const { TextControl } = wp.components,
-    { useState } = wp.element,
-    { __ } = wp.i18n,
-    { escapeHTML } = wp.escapeHtml
+    { useState } = wp.element
 
 import { IanControlHead } from "./components"
-
-// total of 1932 fonts
 
 /**
  * MARK: Typography Component
@@ -27,7 +23,7 @@ export const TextComponent = ( props ) => {
                 __next40pxDefaultSize
                 __nextHasNoMarginBottom
                 value = { value }
-                onChange = { ( newValue ) => setClassName( newValue ) }
+                onChange = { ( newValue ) => setValue( newValue ) }
             />
         </div>
     </div>
