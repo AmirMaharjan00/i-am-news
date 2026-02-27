@@ -1,6 +1,8 @@
 const { Button, Dashicon, Dropdown } = wp.components,
     { useState } = wp.element
 
+import fontAwesomeIcons from '../font-awesome-classes.json'
+
 /**
  * MARK: Heading Toggle Component
  * 
@@ -21,9 +23,7 @@ export const HeadingToggleComponent = ( props ) => {
                 <h2 onClick={ value }>
                     Heading
                 </h2>
-                <Button>
-                    <Dashicon icon="dashicon-arrow-down-alt2" className="icon-picker-dashicon" />
-                </Button>
+                <Dashicon  className="icon-picker-dashicon" />
             </div>
             {
                 display &&
