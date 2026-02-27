@@ -1,7 +1,8 @@
 const { Button, Dashicon } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
-    { useState } = wp.element
+    { useState } = wp.element,
+    dimensions = [ 'top', 'right', 'bottom', 'left' ]
 
 import { IanControlHead } from "./components"
 /**
@@ -60,24 +61,13 @@ export const DimensionComponent = ( props ) => {
         />
 
         <div className="content-wrapper">
-            {
-                dimensions.map( ( side ) => {
-                    return <NumberControl
-                        label = { __( escapeHTML( side.slice( 0, 1 ).toUpperCase() + side.slice( 1 ) ), 'i-am-news' ) }
-                        { ...input_attrs }
-                        id = { setting.id }
-                        onChange = { handleChange }
-                        value = { value[ side ] }
-                        side = { side }
-                    />
-                } )
-            }
-            <Button
-                variant = { link ? 'primary' : 'secondary' }
-                onClick = { handleLink }
-            >
-                <Dashicon icon={ link ? 'admin-links' : 'editor-unlink' } />
-            </Button>
+            <Dimension
+                input_attrs = { input_attrs }
+                id = { setting.id }
+                handleChange = { handleChange }
+                value = { value }
+                handleLink = { handleLink }
+            />
         </div>
     </div>
 }
@@ -105,4 +95,35 @@ const NumberControl = ( props ) => {
             onChange = { ( event ) => props.onChange( event, side ) }
         />
     </div>
+}
+
+/**
+ * Dimension
+ * 
+ * @since 1.0.0
+ */
+export const Dimension = ( props ) => {
+    const { input_attrs, id, handleChange, value, handleLink } = props,
+        { link } = value
+
+    return <>
+        {
+            dimensions.map( ( side ) => {
+                return <NumberControl
+                    label = { __( escapeHTML( side.slice( 0, 1 ).toUpperCase() + side.slice( 1 ) ), 'i-am-news' ) }
+                    { ...input_attrs }
+                    id = { id }
+                    onChange = { handleChange }
+                    value = { value[ side ] }
+                    side = { side }
+                />
+            } )
+        }
+        <Button
+            variant = { link ? 'primary' : 'secondary' }
+            onClick = { handleLink }
+        >
+            <Dashicon icon={ link ? 'admin-links' : 'editor-unlink' } />
+        </Button>
+    </>
 }

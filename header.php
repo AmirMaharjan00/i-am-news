@@ -30,31 +30,6 @@
 			<div class="row">
 				<div class="site-branding">
 					<?php
-
-						function test( $value, $default, $args = [ 'min' => -10, 'max' => 300 ] ) {
-							if ( ! is_string( $value ) ) return $default;
-
-							if ( preg_match( '/^(-?\d*\.?\d+)([a-z%]+)$/i', $value, $matches ) ) {
-								$number = floatval( $matches[ 1 ] );
-								$unit = strtolower( $matches[ 2 ] );
-
-								$allowed_units = [ 'px', '%', 'em', 'rem' ];
-
-								$min = isset( $args[ 'min' ] ) ? $args[ 'min' ] : -10;
-								$max = isset( $args[ 'max' ] ) ? $args[ 'max' ] : 300;
-								if ( in_array( $unit, $allowed_units ) && $number >= $min && $number <= $max ) {
-									return $value;
-								} else {
-									return $default;
-								}
-							} else {
-								return $default;
-							}
-						}
-					$value = '24px';
-					echo '<pre>';
-					print_r( test( $value, '13px' ) );
-					echo '</pre>';
 					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
 						?>

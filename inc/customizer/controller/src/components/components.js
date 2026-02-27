@@ -9,9 +9,26 @@ const { useState, useEffect } = wp.element,
  * @since 1.0.0
  */
 export const IanControlHead = ( props ) => {
-    const { label, description } = props
+    const { label, description, responsive } = props
 
-    return ( label || description ) && <div className="control-head">
+    return responsive ? 
+    <div className="control-head-wrapper">
+        {
+            ( label || description ) && 
+            <>
+                <div className="control-head">
+                    { label && <label className="customizer-control-title">{ label }</label> }
+                    { 
+                        description && <Tooltip className="description customize-control-description" text={ description } delay={ 300 } placement="top">
+                            <Dashicon icon = "editor-help" className = "desc-icon" />
+                        </Tooltip>
+                    }
+                </div>
+                <IanResponsiveIcons />
+            </>
+        }
+    </div> :
+    ( label || description ) && <div className="control-head">
         { label && <label className="customizer-control-title">{ label }</label> }
         { 
             description && <Tooltip className="description customize-control-description" text={ description } delay={ 300 } placement="top">

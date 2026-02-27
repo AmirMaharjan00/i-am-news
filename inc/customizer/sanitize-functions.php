@@ -308,7 +308,7 @@
              * @param array $input      The current value saved in db
              * @param object $setting  An instance of WP_Customize_Setting
              */
-            public function sanitize_dimension( $input, $setting ): string {
+            public function sanitize_dimension( $input, $setting ): array {
                 if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
                 $control = $setting->manager->get_setting( $setting->id );
                 $responsive = $control->responsive;
@@ -369,7 +369,7 @@
              * @param array $input      The current value saved in db
              * @param object $setting  An instance of WP_Customize_Setting
              */
-            public function sanitize_border( $input, $setting ): string {
+            public function sanitize_border( $input, $setting ): array {
                 if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
                 $expected_border_keys = [ 'color', 'style', 'width' ];
                 $input_value_keys = array_keys( $input );

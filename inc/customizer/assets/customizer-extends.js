@@ -2345,9 +2345,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   BorderComponent: () => (/* binding */ BorderComponent)
 /* harmony export */ });
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
-const {} = wp.components,
+/* harmony import */ var _dimension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dimension */ "./src/components/dimension.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
+const {
+    ColorIndicator,
+    Dropdown,
+    ColorPicker,
+    Button
+  } = wp.components,
   {
     __
   } = wp.i18n,
@@ -2355,8 +2361,13 @@ const {} = wp.components,
     escapeHTML
   } = wp.escapeHtml,
   {
-    useState
-  } = wp.element;
+    useState,
+    useContext,
+    createContext
+  } = wp.element,
+  BorderContext = createContext(),
+  borderStyle = ['none', 'solid', 'dotted', 'dashed', 'double'];
+
 
 
 /**
@@ -2370,17 +2381,201 @@ const BorderComponent = props => {
       label,
       description,
       setting,
-      responsive
+      responsive,
+      input_attrs
     } = props,
     [value, setValue] = useState(setting.get());
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  const borderContextObject = {
+    ...value,
+    setValue,
+    input_attrs,
+    setting
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "control-content",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
       label: label,
-      description: description
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "content-wrapper"
+      description: description,
+      responsive: responsive
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "content-wrapper",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(BorderContext.Provider, {
+        value: borderContextObject,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Color, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Style, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Width, {})]
+      })
     })]
+  });
+};
+
+/**
+ * MARK: Color
+ * 
+ * @since 1.0.0
+ */
+const Color = () => {
+  const {
+    color,
+    setValue
+  } = useContext(BorderContext);
+
+  /**
+   * Handle color change
+   * 
+   * @since 1.0.0
+   */
+  const handleColorChange = () => {};
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "border-block color",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Dropdown, {
+      className: "ian-dropdown-container",
+      contentClassName: "ian-dropdown-popover",
+      popoverProps: {
+        placement: 'bottom-start',
+        shift: true
+      },
+      renderToggle: ({
+        isOpen,
+        onToggle
+      }) => {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ColorIndicator, {
+          colorValue: color,
+          onClick: onToggle
+        });
+      },
+      renderContent: () => {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ColorPicker, {
+          color: color,
+          onChangeComplete: handleColorChange,
+          enableAlpha: true
+        });
+      }
+    })
+  });
+};
+
+/**
+ * MARK: Style
+ * 
+ * @since 1.0.0
+ */
+const Style = () => {
+  const {
+    style,
+    setValue
+  } = useContext(BorderContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "border-block style",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Dropdown, {
+      className: "ian-dropdown-container",
+      contentClassName: "ian-dropdown-popover",
+      popoverProps: {
+        placement: 'bottom-start',
+        shift: true
+      },
+      renderToggle: ({
+        isOpen,
+        onToggle
+      }) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Button, {
+        variant: "primary",
+        onClick: onToggle,
+        "aria-expanded": isOpen,
+        className: "highlight",
+        children: `yo`
+      }),
+      renderContent: () => {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
+          className: "dropdown-content",
+          children: borderStyle.map((_this, index) => {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
+              className: "item",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                className: "label",
+                children: _this.slice(0, 1).toUpperCase() + _this.slice(1)
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                className: `style ${_this}`
+              })]
+            }, index);
+          })
+        });
+      }
+    })
+  });
+};
+
+/**
+ * MARK: Width
+ * 
+ * @since 1.0.0
+ */
+const Width = () => {
+  const {
+      width,
+      input_attrs,
+      setValue,
+      color,
+      style,
+      setting
+    } = useContext(BorderContext),
+    {
+      link
+    } = width;
+
+  /**
+   * Handle change
+   * 
+   * @since 1.0.0
+   * @param object    event   An object of onchange event
+   * @param string    side    The change side of the dimension control
+   */
+  const handleChange = (event, side) => {
+    let updatedValue = event.target.value,
+      newWidthValue = {};
+    if (link) {
+      newWidthValue = {
+        top: updatedValue,
+        right: updatedValue,
+        bottom: updatedValue,
+        left: updatedValue,
+        link
+      };
+    } else {
+      newWidthValue = {
+        ...value,
+        [side]: updatedValue
+      };
+    }
+    let newValue = {
+      color,
+      style,
+      width: newWidthValue
+    };
+    setting.set(newValue);
+    setValue(newValue);
+  };
+
+  /**
+   * Handle link
+   * 
+   * @since 1.0.0
+   */
+  const handleLink = () => {
+    setValue({
+      ...value,
+      width: {
+        ...value.width,
+        link: !link
+      }
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "border-block width",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_dimension__WEBPACK_IMPORTED_MODULE_1__.Dimension, {
+      input_attrs: input_attrs,
+      id: setting.id,
+      handleChange: handleChange,
+      value: width,
+      handleLink: handleLink
+    })
   });
 };
 
@@ -2803,9 +2998,30 @@ const {
 const IanControlHead = props => {
   const {
     label,
-    description
+    description,
+    responsive
   } = props;
-  return (label || description) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+  return responsive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    className: "control-head-wrapper",
+    children: (label || description) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: "control-head",
+        children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+          className: "customizer-control-title",
+          children: label
+        }), description && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Tooltip, {
+          className: "description customize-control-description",
+          text: description,
+          delay: 300,
+          placement: "top",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+            icon: "editor-help",
+            className: "desc-icon"
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(IanResponsiveIcons, {})]
+    })
+  }) : (label || description) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
     className: "control-head",
     children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
       className: "customizer-control-title",
@@ -2869,6 +3085,7 @@ const IanResponsiveIcons = () => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Dimension: () => (/* binding */ Dimension),
 /* harmony export */   DimensionComponent: () => (/* binding */ DimensionComponent)
 /* harmony export */ });
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components */ "./src/components/components.js");
@@ -2886,7 +3103,8 @@ const {
   } = wp.escapeHtml,
   {
     useState
-  } = wp.element;
+  } = wp.element,
+  dimensions = ['top', 'right', 'bottom', 'left'];
 
 /**
  * Number Control
@@ -2951,24 +3169,15 @@ const DimensionComponent = props => {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
       label: label,
       description: description
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "content-wrapper",
-      children: [dimensions.map(side => {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
-          label: __(escapeHTML(side.slice(0, 1).toUpperCase() + side.slice(1)), 'i-am-news'),
-          ...input_attrs,
-          id: setting.id,
-          onChange: handleChange,
-          value: value[side],
-          side: side
-        });
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
-        variant: link ? 'primary' : 'secondary',
-        onClick: handleLink,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Dashicon, {
-          icon: link ? 'admin-links' : 'editor-unlink'
-        })
-      })]
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Dimension, {
+        input_attrs: input_attrs,
+        id: setting.id,
+        handleChange: handleChange,
+        value: value,
+        handleLink: handleLink
+      })
     })]
   });
 };
@@ -3005,6 +3214,42 @@ const NumberControl = props => {
       step: step,
       className: "ian-input number",
       onChange: event => props.onChange(event, side)
+    })]
+  });
+};
+
+/**
+ * Dimension
+ * 
+ * @since 1.0.0
+ */
+const Dimension = props => {
+  const {
+      input_attrs,
+      id,
+      handleChange,
+      value,
+      handleLink
+    } = props,
+    {
+      link
+    } = value;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: [dimensions.map(side => {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(NumberControl, {
+        label: __(escapeHTML(side.slice(0, 1).toUpperCase() + side.slice(1)), 'i-am-news'),
+        ...input_attrs,
+        id: id,
+        onChange: handleChange,
+        value: value[side],
+        side: side
+      });
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      variant: link ? 'primary' : 'secondary',
+      onClick: handleLink,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Dashicon, {
+        icon: link ? 'admin-links' : 'editor-unlink'
+      })
     })]
   });
 };
@@ -3558,15 +3803,10 @@ const NumberComponent = props => {
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "control-content",
-    children: [responsive ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "control-head-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
-        label: label,
-        description: description
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanResponsiveIcons, {})]
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
       label: label,
-      description: description
+      description: description,
+      responsive: responsive
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "content-wrapper",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(IanRangeControl, {
@@ -17834,7 +18074,6 @@ controlConstructor['heading-toggle'] = Control.extend({
  */
 controlConstructor['ian-checkbox'] = Control.extend({
   ready: function () {
-    console.log('ian-checkbox');
     const control = this,
       {
         params,

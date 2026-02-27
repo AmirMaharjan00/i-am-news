@@ -58,20 +58,11 @@ export const NumberComponent = ( props ) => {
     }
 
     return <div className="control-content">
-        { 
-            responsive ? 
-            <div className="control-head-wrapper">
-                <IanControlHead
-                    label = { label }
-                    description = { description }
-                />
-                <IanResponsiveIcons />
-            </div> :
-            <IanControlHead
-                label = { label }
-                description = { description }
-            />
-        }
+        <IanControlHead
+            label = { label }
+            description = { description }
+            responsive = { responsive }
+        />
 
         <div className="content-wrapper">
             <IanRangeControl
