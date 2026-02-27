@@ -112,12 +112,12 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_border' =>  [
-                        // 'sanitize_callback' =>  'sanitize_text_field',
+                        'sanitize_callback' =>  [ $this, 'sanitize_border' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_border_radius' =>  [
-                        // 'sanitize_callback' =>  'sanitize_text_field',
+                        'sanitize_callback' =>  [ $this, 'sanitize_range' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -127,7 +127,7 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_padding' =>  [
-                        // 'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
+                        'sanitize_callback' =>  [ $this, 'sanitize_dimension' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -246,7 +246,12 @@
                         'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),
                         'type'  =>  'ian-number',
                         'tab'   =>  'design',
-                        'responsive'    =>  true
+                        'responsive'    =>  true,
+                        'input_attrs'   =>  [
+                            'min'   =>  0,
+                            'max'   =>  200,
+                            'step'  =>  1
+                        ]
                     ] ),
                     'scroll_to_top_box_shadow' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
@@ -303,7 +308,7 @@
                     'scroll_to_top_position' =>  'right',
                     'scroll_to_top_typography'   =>  $this->get_typography(),
                     'scroll_to_top_border' =>  $this->get_border(),
-                    'scroll_to_top_border_radius'   =>  5,
+                    'scroll_to_top_border_radius'   =>  $this->get_responsive( '5px', '5px', '5px' ),
                     'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
                         'offsetx'   =>  10,
                         'offsety'   =>  10

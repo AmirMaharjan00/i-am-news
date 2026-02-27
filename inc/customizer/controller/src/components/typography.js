@@ -8,6 +8,7 @@ import googleFonts from '../google-fonts.min.json'
 import { Virtuoso } from "react-virtuoso";
 import Select from 'react-select'
 import { IanRangeControl } from './number'
+import { getUnit, getValue } from '../functions'
 
 const TypographyContext = createContext( null )
 
@@ -122,15 +123,6 @@ const loadGoogleFonts = ( group, range, extras = [] ) => {
 }
 
 /**
- * MARK: Get Unit
- * 
- * @since 1.0.0
- */
-const getUnit = ( value ) => {
-    return value.match( /[a-z%]+$/i )?.[ 0 ] ?? "px";
-}
-
-/**
  * MARK: Get Step
  * 
  * @since 1.0.0
@@ -174,9 +166,20 @@ export const TypographComponent = ( props ) => {
      * @since 1.0.0
      */
     const updateValue = ( id, newValue ) => {
-        let newTypoValue = {
-            ...value,
-            [ id ]: newValue
+        let newTypoValue = {}
+        if( [ 'font_size', 'line_height', 'letter_spacing' ].includes( id ) ) {
+            newTypoValue = {
+                ...value,
+                [ id ]: {
+                    ...value[ id ],
+                    [ responsive ]: newValue
+                }
+            }
+        } else {
+            newTypoValue = {
+                ...value,
+                [ id ]: newValue
+            }
         }
         setValue( newTypoValue )
         setting.set( newTypoValue )
@@ -305,7 +308,7 @@ const FontFamilyList = ( props ) => {
  * @since 1.0.0
  */
 const FontWeight = () => {
-    const { fontWeight, fontFamily } = useContext( TypographyContext ),
+    const { fontWeight, fontFamily, updateValue  } = useContext( TypographyContext ),
         activeFontWeights = fontWeights[ fontFamily.label ],
         { normal = [], italic = [] } = activeFontWeights,
         options = [
@@ -366,8 +369,9 @@ const FontWeight = () => {
  * @since 1.0.0
  */
 const FontSize = () => {
-    const { fontSize } = useContext( TypographyContext ),
-        unit = getUnit( fontSize )
+    const { fontSize, updateValue } = useContext( TypographyContext ),
+        unit = getUnit( fontSize ),
+        value = getValue( fontSize )
 
     /**
      * Get max
@@ -393,8 +397,9 @@ const FontSize = () => {
      * 
      * @since 1.0.0
      */
-    const handleRangeChange = () => {
-        
+    const handleRangeChange = ( val ) => {
+        let newValue = `${ val }${ unit }`
+        updateValue( 'font_size', newValue )
     }
 
     /**
@@ -402,8 +407,9 @@ const FontSize = () => {
      * 
      * @since 1.0.0
      */
-    const handleSelectChange = () => {
-        
+    const handleSelectChange = ( val ) => {
+        let newValue = `${ value }${ val }`
+        updateValue( 'font_size', newValue )
     }
 
     return <div className="typography-block font-size-block">
@@ -417,6 +423,7 @@ const FontSize = () => {
                 max = { getMax() }
                 step = { getStep( unit ) }
                 selectValue = { unit }
+                rangeValue = { value }
                 handleRangeChange = { handleRangeChange }
                 handleSelectChange = { handleSelectChange }
             />
@@ -430,8 +437,9 @@ const FontSize = () => {
  * @since 1.0.0
  */
 const LineHeight = () => {
-    const { lineHeight } = useContext( TypographyContext ),
-        unit = getUnit( lineHeight )
+    const { lineHeight, updateValue } = useContext( TypographyContext ),
+        unit = getUnit( lineHeight ),
+        value = getValue( lineHeight )
 
     const getMax = () => {
         switch( unit ) {
@@ -447,6 +455,26 @@ const LineHeight = () => {
         }
     }
 
+    /**
+     * Handle range change
+     * 
+     * @since 1.0.0
+     */
+    const handleRangeChange = ( val ) => {
+        let newValue = `${ val }${ unit }`
+        updateValue( 'line_height', newValue )
+    }
+
+    /**
+     * Handle select change
+     * 
+     * @since 1.0.0
+     */
+    const handleSelectChange = ( val ) => {
+        let newValue = `${ value }${ val }`
+        updateValue( 'line_height', newValue )
+    }
+
     return <div className="typography-block line-height-block">
         <div className="block-head">
             <span className="label">{ __( 'Line Height' , 'i-am-news') }</span>
@@ -458,6 +486,9 @@ const LineHeight = () => {
                 max = { getMax() }
                 step = { getStep( unit ) }
                 selectValue = { unit }
+                rangeValue = { value }
+                handleRangeChange = { handleRangeChange }
+                handleSelectChange = { handleSelectChange }
             />
         </div>
     </div>
@@ -469,8 +500,9 @@ const LineHeight = () => {
  * @since 1.0.0
  */
 const LetterSpacing = () => {
-    const { letterSpacing } = useContext( TypographyContext ),
-        unit = getUnit( letterSpacing )
+    const { letterSpacing, updateValue } = useContext( TypographyContext ),
+        unit = getUnit( letterSpacing ),
+        value = getValue( letterSpacing )
 
     const getMax = () => {
         switch( unit ) {
@@ -500,6 +532,26 @@ const LetterSpacing = () => {
         }
     }
 
+    /**
+     * Handle range change
+     * 
+     * @since 1.0.0
+     */
+    const handleRangeChange = ( val ) => {
+        let newValue = `${ val }${ unit }`
+        updateValue( 'letter_spacing', newValue )
+    }
+
+    /**
+     * Handle select change
+     * 
+     * @since 1.0.0
+     */
+    const handleSelectChange = ( val ) => {
+        let newValue = `${ value }${ val }`
+        updateValue( 'letter_spacing', newValue )
+    }
+
     return <div className="typography-block letter-spacing-block">
         <div className="block-head">
             <span className="label">{ __( 'Letter Spacing' , 'i-am-news') }</span>
@@ -511,6 +563,9 @@ const LetterSpacing = () => {
                 max = { getMax() }
                 step = { getStep( unit ) } 
                 selectValue = { unit }
+                rangeValue = { value }
+                handleRangeChange = { handleRangeChange }
+                handleSelectChange = { handleSelectChange }
             />
         </div>
     </div>
@@ -522,56 +577,7 @@ const LetterSpacing = () => {
  * @since 1.0.0
  */
 const TextDecoration = () => {
-    const { textDecoration } = useContext( TypographyContext )
-
-    /**
-     * Get options
-     * 
-     * @since 1.0.0
-     */
-    const getOptions = () => {
-        let options = {
-            'none': __( 'None', 'i-am-news'),
-            'capitalize': __( 'Capitalize', 'i-am-news'),
-            'uppercase': __( 'UPPERCASE', 'i-am-news'),
-            'lowercase': __( 'lowercase', 'i-am-news'),
-            'initial': __( 'Initial', 'i-am-news'),
-            'inherit': __( 'Inherit', 'i-am-news'),
-        }
-
-        return Object.entries( options ).map( ( item ) => {
-            let [ value, label ] = item
-
-            return {
-                label: <span className={ `select-item ${ value }` }>{ label }</span>,
-                value
-            }
-        } )
-    }
-
-    return <div className="typography-block text-decoration-block">
-        <div className="block-head">
-            <span className="label">{ __( 'Text Decoration' , 'i-am-news') }</span>
-        </div>
-        <SelectControl
-            __nextHasNoMarginBottom
-            __next40pxDefaultSize
-            value = { textDecoration }
-            className = 'typography-select'
-            options = { getOptions() }
-            variant = "minimal"
-            // onChange = { ( newSize ) => setSize( newSize ) }
-        />
-    </div>
-}
-
-/**
- * MARK: Text Transform
- * 
- * @since 1.0.0
- */
-const TextTransform = () => {
-    const { textTransform } = useContext( TypographyContext )
+    const { textDecoration, updateValue } = useContext( TypographyContext )
 
     /**
      * Get options
@@ -598,6 +604,73 @@ const TextTransform = () => {
         } )
     }
 
+    /**
+     * Handle change
+     * 
+     * @since 1.0.0
+     */
+    const handleChange = ( val ) => {
+        updateValue( 'text_decoration', val )
+    }
+
+    return <div className="typography-block text-decoration-block">
+        <div className="block-head">
+            <span className="label">{ __( 'Text Decoration' , 'i-am-news') }</span>
+        </div>
+        <SelectControl
+            __nextHasNoMarginBottom
+            __next40pxDefaultSize
+            value = { textDecoration }
+            className = 'typography-select'
+            options = { getOptions() }
+            variant = "minimal"
+            onChange = { handleChange }
+        />
+    </div>
+}
+
+/**
+ * MARK: Text Transform
+ * 
+ * @since 1.0.0
+ */
+const TextTransform = () => {
+    const { textTransform, updateValue } = useContext( TypographyContext )
+
+    /**
+     * Get options
+     * 
+     * @since 1.0.0
+     */
+    const getOptions = () => {
+        let options = {
+            'none': __( 'None', 'i-am-news'),
+            'capitalize': __( 'Capitalize', 'i-am-news'),
+            'uppercase': __( 'UPPERCASE', 'i-am-news'),
+            'lowercase': __( 'lowercase', 'i-am-news'),
+            'initial': __( 'Initial', 'i-am-news'),
+            'inherit': __( 'Inherit', 'i-am-news'),
+        }
+
+        return Object.entries( options ).map( ( item ) => {
+            let [ value, label ] = item
+
+            return {
+                label: <span className={ `select-item ${ value }` }>{ label }</span>,
+                value
+            }
+        } )
+    }
+
+    /**
+     * Handle change
+     * 
+     * @since 1.0.0
+     */
+    const handleChange = ( val ) => {
+        updateValue( 'text_transform', val )
+    }
+
     return <div className="typography-block text-transform-block">
         <div className="block-head">
             <span className="label">{ __( 'Text Transform' , 'i-am-news') }</span>
@@ -609,7 +682,7 @@ const TextTransform = () => {
             className = 'typography-select'
             options = { getOptions() }
             variant = "minimal"
-            // onChange = { ( newSize ) => setSize( newSize ) }
+            onChange = { handleChange }
         />
     </div>
 }

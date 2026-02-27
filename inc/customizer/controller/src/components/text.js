@@ -12,6 +12,16 @@ export const TextComponent = ( props ) => {
     const { label, description, setting } = props,
         [ value, setValue ] = useState( setting.get() )
 
+    /**
+     * Handle change
+     * 
+     * @since 1.0.0
+     */
+    const handleChange = ( newValue ) => {
+        setting.set( newValue )
+        setValue( newValue )
+    }
+
     return <div className="control-content">
         <IanControlHead
             label = { label }
@@ -23,7 +33,7 @@ export const TextComponent = ( props ) => {
                 __next40pxDefaultSize
                 __nextHasNoMarginBottom
                 value = { value }
-                onChange = { ( newValue ) => setValue( newValue ) }
+                onChange = { ( newValue ) => handleChange( newValue ) }
             />
         </div>
     </div>

@@ -4,14 +4,58 @@ const { RangeControl, SelectControl } = wp.components,
     { useState } = wp.element
 
 import { IanControlHead, IanResponsiveIcons } from "./components"
+import { getUnit, getValue } from '../functions'
+
 /**
  * Number Control
  * 
  * @since 1.0.0
  */
 export const NumberComponent = ( props ) => {
-    const { label, description, setting, responsive } = props,
-        [ value, setValue ] = useState( setting.get() )
+    const { label, description, setting, responsive, input_attrs } = props,
+        [ value, setValue ] = useState( setting.get() ),
+        [ device, setDevice ] = useState( 'desktop' ),
+        currentValue = getValue( responsive ? value[ device ] : value ),
+        unit = getUnit( responsive ? value[ device ] : value ),
+        { min, max, step } = input_attrs
+
+    /**
+     * Handle range change
+     * 
+     * @since 1.0.0
+     */
+    const handleRangeChange = ( val ) => {
+        let newValue = {}
+        if( responsive ) {
+            newValue = {
+                ...value,
+                [ device ]: `${ val }${ unit }`
+            }
+        } else {
+            newValue = `${ val }${ unit }`
+        }
+        setValue( newValue )
+        setting.set( newValue )
+    }
+
+    /**
+     * Handle select change
+     * 
+     * @since 1.0.0
+     */
+    const handleSelectChange = ( val ) => {
+        let newValue = {}
+        if( responsive ) {
+            newValue = {
+                ...value,
+                [ device ]: `${ currentValue }${ val }`
+            }
+        } else {
+            newValue = `${ currentValue }${ val }`
+        }
+        setValue( newValue )
+        setting.set( newValue )
+    }
 
     return <div className="control-content">
         { 
@@ -30,7 +74,15 @@ export const NumberComponent = ( props ) => {
         }
 
         <div className="content-wrapper">
-            <IanRangeControl />
+            <IanRangeControl
+                min = { min }
+                max = { max }
+                step = { step }
+                selectValue = { unit }
+                rangeValue = { currentValue }
+                handleRangeChange = { handleRangeChange }
+                handleSelectChange = { handleSelectChange }
+            />
         </div>
     </div>
 }
@@ -55,8 +107,8 @@ export const IanRangeControl = ( props ) => {
      * 
      * @since 1.0.0
      */
-    const handleRangeChange = () => {
-        props.handleRangeChange()
+    const handleRangeChange = ( newValue ) => {
+        props.handleRangeChange( newValue )
     }
 
     /**
@@ -64,8 +116,8 @@ export const IanRangeControl = ( props ) => {
      * 
      * @since 1.0.0
      */
-    const handleSelectChange = () => {
-        props.handleSelectChange()
+    const handleSelectChange = ( newValue ) => {
+        props.handleSelectChange( newValue )
     }
 
     return <>

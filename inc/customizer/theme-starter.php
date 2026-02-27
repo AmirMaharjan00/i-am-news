@@ -86,7 +86,8 @@
                     'right' =>  0,
                     'bottom' =>  0,
                     'left' =>  0,
-                    'link' =>  true
+                    'link' =>  true,
+                    'unit'  =>  'px'
                 ];
                 return array_merge( $default, $dimension );
             }
@@ -115,13 +116,13 @@
              * 
              * @since 1.0.0
              */
-            protected function get_responsive( $responsive = [] ) {
+            protected function get_responsive( $desktop = 0, $tablet = 0, $mobile = 0 ) {
                 $default = [
-                    'desktop'   =>  0,
-                    'tablet'    =>  0,
-                    'mobile'    =>  0
+                    'desktop'   =>  $desktop,
+                    'tablet'    =>  $tablet,
+                    'mobile'    =>  $mobile
                 ];
-                return array_merge( $default, $responsive );
+                return $default;
             }
         }
     endif;

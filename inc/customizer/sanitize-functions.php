@@ -27,7 +27,7 @@
             }
 
             /**
-             * Sanitize positive and negetive 
+             * Sanitize positive and negetive number
              * 
              * @since 1.0.0
              * @param int|float $value      The current value
@@ -41,13 +41,28 @@
             }
 
             /**
+             * Sanitize unit
+             * 
+             * @since 1.0.0
+             * @param int|float $value      The current value
+             * @param int|float @default    The value to return in case of failure
+             */
+            public function sanitize_unit( $value, $default ) {
+                if ( ! is_string( $value ) ) return $default;
+                $allowed_units = [ 'px', '%', 'em', 'rem' ];
+                $sanitized_value = sanitize_text_field( $value );
+                if( ! in_array( $sanitized_value, $allowed_units ) ) return $default;
+                return $sanitized_value;
+            }
+
+            /**
              * Sanitize number unit 
              * 
              * @since 1.0.0
              * @param int|float $value      The current value
              * @param int|float @default    The value to return in case of failure
              */
-            public function sanitize_number_unit( $value, $default ) {
+            public function sanitize_number_unit( $value, $default, $args = [ 'min' => -10, 'max' => 300 ] ) {
                 if ( ! is_string( $value ) ) return $default;
 
                 if ( preg_match( '/^(-?\d*\.?\d+)([a-z%]+)$/i', $value, $matches ) ) {
@@ -56,7 +71,9 @@
 
                     $allowed_units = [ 'px', '%', 'em', 'rem' ];
 
-                    if ( in_array( $unit, $allowed_units ) && $number >= -10 && $number <= 300 ) {
+                    $min = isset( $args[ 'min' ] ) ? $args[ 'min' ] : -10;
+                    $max = isset( $args[ 'max' ] ) ? $args[ 'max' ] : 300;
+                    if ( in_array( $unit, $allowed_units ) && $number >= $min && $number <= $max ) {
                         return $value;
                     } else {
                         return $default;
@@ -174,10 +191,7 @@
              * @param object $setting  An instance of WP_Customize_Setting
              */
             public function sanitize_typography( $input, $setting ): array {
-                if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
-                $units = [ 'px', '%', 'em', 'rem' ];
-                $min_range = -10;
-                $max_range = 300;
+                if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
                 $expected_keys = [ 'font_family', 'font_weight', 'font_size', 'line_height', 'letter_spacing', 'text_transform', 'text_decoration', 'preset' ];
                 $responsive_keys = [ 'desktop', 'tablet', 'mobile' ];
                 $input_keys = array_keys( $input );
@@ -227,15 +241,15 @@
                     'mobile'   =>  $this->sanitize_number_unit( $letter_spacing[ 'mobile' ], $setting->default[ 'letter_spacing' ][ 'mobile' ] )
                 ];
 
-                // sanitize text decoration
-                $text_decoration_expected_values = [ 'none', 'capitalize', 'uppercase', 'lowercase', 'initial', 'inherit' ];
-                if( ! in_array( $text_decoration, $text_decoration_expected_values ) ) return $setting->default;
-                $sanitize_text_decoration = sanitize_text_field( $text_decoration );
+                // sanitize text transform
+                $text_transform_expected_values = [ 'none', 'capitalize', 'uppercase', 'lowercase', 'initial', 'inherit' ];
+                if( ! in_array( $text_transform, $text_transform_expected_values ) ) return $setting->default;
+                $sanitized_text_transform = sanitize_text_field( $text_transform );
 
                 // sanitize text transform
-                $text_transform_expected_values = [ 'none', 'underline', 'overline', 'line', 'initial', 'inherit' ];
-                if( ! in_array( $text_transform, $text_transform_expected_values ) ) return $setting->default;
-                $sanitize_text_transform = sanitize_text_field( $text_transform );
+                $text_decoration_expected_values = [ 'none', 'underline', 'overline', 'line', 'initial', 'inherit' ];
+                if( ! in_array( $text_decoration, $text_decoration_expected_values ) ) return $setting->default;
+                $sanitized_text_decoration = sanitize_text_field( $text_decoration );
 
                 // sanitize preset
                 $match_preset = preg_match( '/-?\d*\.?\d+/', $preset );
@@ -251,6 +265,141 @@
                     'text_transform'    =>  $sanitized_text_transform,
                     'text_decoration'   =>  $sanitized_text_decoration,
                     'preset'    =>  $sanitized_preset
+                ];
+            }
+
+            /**
+             * Sanitize range value
+             * 
+             * @since 1.0.0
+             * @param array $input      The current value saved in db
+             * @param object $setting  An instance of WP_Customize_Setting
+             */
+            public function sanitize_range( $input, $setting ) {
+                $control = $setting->manager->get_setting( $setting->id );
+                $input_attrs = $control->input_attrs;
+                $responsive = $control->responsive;
+                if( $responsive ) {
+                    if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
+                } else {
+                    if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
+                }
+                $min = isset( $input_attrs[ 'min' ] ) ? $input_attrs[ 'min' ] : 0;
+                $max = isset( $input_attrs[ 'max' ] ) ? $input_attrs[ 'max' ] : 100;
+                if( $responsive ) {
+                    $expected_input_keys = [ 'desktop', 'tablet', 'mobile' ];
+                    $input_keys = array_keys( $input );
+                    if( $expected_input_keys !== $input_keys) return $setting->default;
+                    extract( $input );
+                    return [
+                        'desktop'   =>  $this->sanitize_number_unit( $desktop, $setting->default[ 'desktop' ], [ 'min' => $min, 'max' => $max ] ),
+                        'tablet'   =>  $this->sanitize_number_unit( $tablet, $setting->default[ 'tablet' ], [ 'min' => $min, 'max' => $max ] ),
+                        'mobile'   =>  $this->sanitize_number_unit( $mobile, $setting->default[ 'mobile' ], [ 'min' => $min, 'max' => $max ] )
+                    ];
+                } else {
+                    return $this->sanitize_number_unit( $input, $setting->default, [ 'min' => $min, 'max' => $max ] );
+                }
+            }
+            
+            /**
+             * Sanitize dimension value
+             * 
+             * @since 1.0.0
+             * @param array $input      The current value saved in db
+             * @param object $setting  An instance of WP_Customize_Setting
+             */
+            public function sanitize_dimension( $input, $setting ): string {
+                if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
+                $control = $setting->manager->get_setting( $setting->id );
+                $responsive = $control->responsive;
+                $expected_dimension_keys = [ 'top', 'right', 'bottom', 'left', 'link', 'unit' ];
+                if( $responsive ) {
+                    $expected_input_keys = [ 'desktop', 'tablet', 'mobile' ];
+                    $input_keys = array_keys( $input );
+                    if( $expected_input_keys !== $input_keys) return $setting->default;
+                    extract( $input );
+                    if( array_keys( $desktop ) !== $expected_dimension_keys ) return $setting->default;
+                    if( array_keys( $tablet ) !== $expected_dimension_keys ) return $setting->default;
+                    if( array_keys( $mobile ) !== $expected_dimension_keys ) return $setting->default;
+                    return [
+                        'desktop'   =>  [
+                            'top'   =>  $this->sanitize_number( $desktop[ 'top' ], $setting->default[ 'desktop' ][ 'top' ] ),
+                            'right' =>  $this->sanitize_number( $desktop[ 'right' ], $setting->default[ 'desktop' ][ 'right' ] ),
+                            'bottom'    =>  $this->sanitize_number( $desktop[ 'bottom' ], $setting->default[ 'desktop' ][ 'bottom' ] ),
+                            'left'  =>  $this->sanitize_number( $desktop[ 'left' ], $setting->default[ 'desktop' ][ 'left' ] ),
+                            'link'  =>  $this->sanitize_boolean( $desktop[ 'link' ], $setting->default[ 'desktop' ][ 'link' ] ),
+                            'unit'  =>  $this->sanitize_unit( $desktop[ 'unit' ], $setting->default[ 'desktop' ][ 'unit' ] )
+                        ],
+                        'tablet'    =>   [
+                            'top'   =>  $this->sanitize_number( $tablet[ 'top' ], $setting->default[ 'tablet' ][ 'top' ] ),
+                            'right' =>  $this->sanitize_number( $tablet[ 'right' ], $setting->default[ 'tablet' ][ 'right' ] ),
+                            'bottom'    =>  $this->sanitize_number( $tablet[ 'bottom' ], $setting->default[ 'tablet' ][ 'bottom' ] ),
+                            'left'  =>  $this->sanitize_number( $tablet[ 'left' ], $setting->default[ 'tablet' ][ 'left' ] ),
+                            'link'  =>  $this->sanitize_boolean( $tablet[ 'link' ], $setting->default[ 'tablet' ][ 'link' ] ),
+                            'unit'  =>  $this->sanitize_unit( $tablet[ 'unit' ], $setting->default[ 'tablet' ][ 'unit' ] )
+                        ],
+                        'mobile'    =>   [
+                            'top'   =>  $this->sanitize_number( $mobile[ 'top' ], $setting->default[ 'mobile' ][ 'top' ] ),
+                            'right' =>  $this->sanitize_number( $mobile[ 'right' ], $setting->default[ 'mobile' ][ 'right' ] ),
+                            'bottom'    =>  $this->sanitize_number( $mobile[ 'bottom' ], $setting->default[ 'mobile' ][ 'bottom' ] ),
+                            'left'  =>  $this->sanitize_number( $mobile[ 'left' ], $setting->default[ 'mobile' ][ 'left' ] ),
+                            'link'  =>  $this->sanitize_boolean( $mobile[ 'link' ], $setting->default[ 'mobile' ][ 'link' ] ),
+                            'unit'  =>  $this->sanitize_unit( $mobile[ 'unit' ], $setting->default[ 'mobile' ][ 'unit' ] )
+                        ]
+                    ];
+                } else {
+                    $input_keys = array_keys( $input );
+                    if( $expected_dimension_keys !== $input_keys ) return $setting->default;
+                    extract( $input );
+                    return [
+                        'top'   =>  $this->sanitize_number( $top, $setting->default[ 'top' ] ),
+                        'right' =>  $this->sanitize_number( $right, $setting->default[ 'right' ] ),
+                        'bottom'    =>  $this->sanitize_number( $bottom, $setting->default[ 'bottom' ] ),
+                        'left'  =>  $this->sanitize_number( $left, $setting->default[ 'left' ] ),
+                        'link'  =>  $this->sanitize_boolean( $link, $setting->default[ 'link' ] ),
+                        'unit'  =>  $this->sanitize_unit( $unit, $setting->default[ 'unit' ] )
+                    ];
+                }
+            }
+            
+            /**
+             * Sanitize border value
+             * 
+             * @since 1.0.0
+             * @param array $input      The current value saved in db
+             * @param object $setting  An instance of WP_Customize_Setting
+             */
+            public function sanitize_border( $input, $setting ): string {
+                if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
+                $expected_border_keys = [ 'color', 'style', 'width' ];
+                $input_value_keys = array_keys( $input );
+                if( $expected_border_keys !== $input_value_keys ) return $setting->default;
+                extract( $input );
+
+                // sanitize style
+                $expected_style_values = [ 'solid', 'dotted', 'dashed', 'double', 'none' ];
+                if( ! in_array( $style, $expected_style_values ) ) return $setting->default;
+                $sanitized_style = sanitize_text_field( $style );
+
+                // sanitize color
+                $sanitized_color = sanitize_hex_color( $color );
+                if( ! $sanitized_color ) return $setting->default;
+
+                // sanitize width
+                $expected_width_keys = [ 'top', 'right', 'bottom', 'left' ];
+                $width_keys = array_keys( $width );
+                if( $expected_width_keys !== $width_keys ) return $setting->default;
+                $sanitized_width = [
+                    'top'   =>  $this->sanitize_number( $width[ 'top' ] ),
+                    'right'   =>  $this->sanitize_number( $width[ 'right' ] ),
+                    'bottom'   =>  $this->sanitize_number( $width[ 'bottom' ] ),
+                    'left'   =>  $this->sanitize_number( $width[ 'left' ] )
+                ];
+
+                return [
+                    'color' =>  $sanitized_color,
+                    'style' =>  $sanitized_style,
+                    'width' =>  $sanitized_width
                 ];
             }
         }
