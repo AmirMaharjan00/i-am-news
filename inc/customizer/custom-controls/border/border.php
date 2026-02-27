@@ -25,14 +25,6 @@
              * Is this control responsive
              * 
              * @since 1.0.0
-             * @var bool
-             */
-            public $responsive = false;
-
-            /**
-             * Is this control responsive
-             * 
-             * @since 1.0.0
              * @var array
              */
             public $input_attrs = [];
@@ -44,7 +36,6 @@
              */
             public function to_json() {
                 parent::to_json();
-                $this->json[ 'responsive' ] = $this->responsive;
                 $this->json[ 'input_attrs' ] = $this->input_attrs;
             }
         }

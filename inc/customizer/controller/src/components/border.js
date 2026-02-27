@@ -1,4 +1,4 @@
-const { ColorIndicator, Dropdown, ColorPicker, Button } = wp.components,
+const { ColorIndicator, Dropdown, ColorPicker, Button, Tooltip } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
     { useState, useContext, createContext } = wp.element,
@@ -14,7 +14,7 @@ import { Dimension } from './dimension'
  * @since 1.0.0
  */
 export const BorderComponent = ( props ) => {
-    const { label, description, setting, responsive, input_attrs } = props,
+    const { label, description, setting, input_attrs } = props,
         [ value, setValue ] = useState( setting.get() )
 
     const borderContextObject = {
@@ -28,7 +28,6 @@ export const BorderComponent = ( props ) => {
         <IanControlHead
             label = { label }
             description = { description }
-            responsive = { responsive }
         />
 
         <div className="content-wrapper">
@@ -47,15 +46,21 @@ export const BorderComponent = ( props ) => {
  * @since 1.0.0
  */
 const Color = () => {
-    const { color, setValue } = useContext( BorderContext )
+    const { color, setValue, width, style, setting } = useContext( BorderContext )
 
     /**
      * Handle color change
      * 
      * @since 1.0.0
      */
-    const handleColorChange = () => {
-
+    const handleColorChange = ( newColor ) => {
+        let newValue = {
+            color: newColor.hex,
+            width,
+            style
+        }
+        setValue( newValue )
+        setting.set( newValue )
     }
 
     return <div className="border-block color">
@@ -67,10 +72,13 @@ const Color = () => {
                 shift: true
             } }
             renderToggle = { ( { isOpen, onToggle } ) => {
-                return <ColorIndicator 
-                    colorValue = { color }
-                    onClick = { onToggle }
-                />
+                return <Tooltip text={ __( 'Color', 'i-am-news' ) } delay={ 300 } placement="top">
+                    <ColorIndicator 
+                        colorValue = { color }
+                        onClick = { onToggle }
+                        className = 'ian-color-indicator'
+                    />
+                </Tooltip>
             } }
             renderContent = { () => {
                 return <ColorPicker
@@ -89,37 +97,54 @@ const Color = () => {
  * @since 1.0.0
  */
 const Style = () => {
-    const { style, setValue } = useContext( BorderContext )
+    const { style, setValue, color, width, setting } = useContext( BorderContext )
+
+    /**
+     * Handle style
+     * 
+     * @since 1.0.0
+     */
+    const handleStyle = ( newStyle ) => {
+        let newValue = {
+            color,
+            width,
+            style: newStyle
+        }
+        setting.set( newValue )
+        setValue( newValue )
+    }
 
     return <div className="border-block style">
         <Dropdown
-            className = 'ian-dropdown-container'
-            contentClassName = 'ian-dropdown-popover'
+            className = 'ian-dropdown-container ian-border-container'
+            contentClassName = 'ian-dropdown-popover ian-border-popover'
             popoverProps = { {
-                placement: 'bottom-start',
-                shift: true
+                placement: 'bottom-start'
             } }
-            renderToggle = { ( { isOpen, onToggle } ) => (
-                 <Button
-                    variant = "primary"
-                    onClick = { onToggle }
+            renderToggle = { ( { isOpen, onToggle } ) => {
+                return <Button 
+                    className = { `highlight ${ style }` } 
+                    onClick = { onToggle } 
                     aria-expanded = { isOpen }
-                    className = 'highlight'
+                    showTooltip = { true }
+                    shortcut = { __( 'Style', 'i-am-news' ) }
+                    tooltipPosition = 'top'
                 >
-                    { `yo` }
+                    <span className="label">{ style.charAt(0).toUpperCase() + style.slice(1) }</span>
+                    <span className="style"></span>
                 </Button>
-            ) }
+            } }
             renderContent = { () => {
-                return <ul className="dropdown-content">
+                return <div className="dropdown-content">
                     {
                         borderStyle.map( ( _this, index ) => {
-                            return <li className="item" key={ index }>
+                            return <Button className={ `item${ _this === style ? ' active' : '' }` } key={ index } onClick={ () => handleStyle( _this ) }>
                                 <span className="label">{ _this.slice( 0, 1 ).toUpperCase() + _this.slice( 1 ) }</span>
                                 <span className={ `style ${ _this }` }></span>
-                            </li>
+                            </Button>
                         } )
                     }
-                </ul>
+                </div>
             } }
         />
     </div>
@@ -154,7 +179,7 @@ const Width = () => {
             }
         } else {
             newWidthValue = {
-                ...value,
+                ...width,
                 [ side ]: updatedValue
             }
         }
@@ -174,9 +199,10 @@ const Width = () => {
      */
     const handleLink = () => {
         setValue( {
-            ...value,
+            color,
+            style,
             width: {
-                ...value.width,
+                ...width,
                 link: ! link
             }
         } )

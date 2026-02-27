@@ -212,6 +212,12 @@ MARK: 1.0 Normalize
         border-bottom: unset;
     }
 
+    .customize-control .ian-color-indicator {
+        border-radius: unset;
+        height: 100%;
+        width: 100%;
+    }
+
 /*
 =========================
 MARK: 2.0 Radio Image
@@ -659,11 +665,124 @@ MARK: 9.0 Number
 MARK: 10.0 Border
 =========================
 */
-    /* .customize-control-border .control-content .content-wrapper {
+    .customize-control-border .control-content .content-wrapper {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .customize-control-border .control-content .content-wrapper .border-block.color {
+        width: 100%;
+        height: 100%;
+    }
+
+    .customize-control-border .control-content .content-wrapper .border-block.color > .ian-dropdown-container{
+        height: 100%;
+    }
+
+    .customize-control-border .control-content .content-wrapper .border-block.width {
         display: flex;
-        justify-content: space-between;
-        align-self: center;
-    } */
+        align-items: end;
+        gap: 5px;
+        grid-column: 1 / span 2;
+        margin-top: 5px;
+    }
+
+    .customize-control-border .control-content .content-wrapper .border-block.style .highlight {
+        width: 100%;
+        border-radius: unset;
+    }
+
+    .customize-control-border .content-wrapper .border-block.width .ian-number-control-container {
+        flex: 1;
+    }
+
+    .customize-control-border .content-wrapper .border-block.width .ian-number-control-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 11px;
+    }
+
+    .customize-control-border .content-wrapper .border-block.width .ian-number-control-container label ~ .ian-input.number {
+        outline: 1px solid #8c8f94;
+        border: unset;
+        border-radius: unset;
+    }
+
+    .customize-control-border .content-wrapper .border-block.width .components-button {
+        padding: 5px;
+        height: 30px;
+        min-height: 30px;
+    }
+
+    .components-popover.ian-dropdown-popover.ian-border-popover .components-popover__content {
+        width: 300px;
+        padding: 0;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content {
+        margin: 0;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item {
+        padding: 10px;
+        margin: 0;
+        display: flex;
+        gap: 10px;
+        justify-content: start;
+        align-items: center;
+        width: 100%;
+        box-shadow: unset;
+        border-radius: unset;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item .label,
+    .ian-border-container .highlight .label {
+        width: 30%;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item .style,
+    .ian-border-container .highlight .style {
+        flex: 1;
+        height: 20px;
+        width: 10px;
+    }
+
+    .ian-border-container .highlight.none .label {
+        justify-self: center;
+        flex: 1;
+    }
+
+    .ian-border-container .highlight.none .style {
+        display: none;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item .style.solid,
+    .ian-border-container .highlight.solid .style {
+        border: 1px solid black;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item .style.dashed,
+    .ian-border-container .highlight.dashed .style {
+        border: 1px dashed black;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item .style.dotted,
+    .ian-border-container .highlight.dotted .style {
+        border: 1px dotted black;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item .style.double,
+    .ian-border-container .highlight.double .style {
+        border: 4px double black;
+    }
+
+    .ian-border-popover .components-popover__content .dropdown-content .item.active,
+    .ian-border-popover .components-popover__content .dropdown-content .item:hover {
+        outline: 1px solid var(--customizer-color);
+        background: var(--customizer-hover);
+    }
 
 /*
 =========================
@@ -693,8 +812,6 @@ MARK: 11.0 Dimension
     }
 
     .customize-control-dimension .content-wrapper .components-button {
-        /* box-shadow: unset; */
-        /* outline: 1px solid black; */
         padding: 5px;
         height: 30px;
         min-height: 30px;

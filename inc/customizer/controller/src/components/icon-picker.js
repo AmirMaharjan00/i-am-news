@@ -196,7 +196,6 @@ const IconCollection = ( props ) => {
      * @since 1.0.0
      */
     const handleItemClick = ( index ) => {
-        console.log( filteredIcons[ index ] )
         handleIconClick( filteredIcons[ index ] )
         props.onClose()
     }

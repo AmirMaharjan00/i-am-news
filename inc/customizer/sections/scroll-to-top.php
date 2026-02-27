@@ -240,8 +240,7 @@
                     'scroll_to_top_border' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Border', 'i-am-news' ),
                         'type'  =>  'border',
-                        'tab'  =>  'design',
-                        'responsive'    =>  true
+                        'tab'  =>  'design'
                     ] ),
                     'scroll_to_top_border_radius' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),

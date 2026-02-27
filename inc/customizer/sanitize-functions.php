@@ -369,37 +369,40 @@
              * @param array $input      The current value saved in db
              * @param object $setting  An instance of WP_Customize_Setting
              */
-            public function sanitize_border( $input, $setting ): array {
-                if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
-                $expected_border_keys = [ 'color', 'style', 'width' ];
-                $input_value_keys = array_keys( $input );
-                if( $expected_border_keys !== $input_value_keys ) return $setting->default;
-                extract( $input );
+            public function sanitize_border($input, $setting): array {
+                if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
 
-                // sanitize style
-                $expected_style_values = [ 'solid', 'dotted', 'dashed', 'double', 'none' ];
-                if( ! in_array( $style, $expected_style_values ) ) return $setting->default;
+                $expected_keys = ['color','style','width'];
+                if( array_diff( $expected_keys, array_keys( $input ) ) ) return $setting->default;
+
+                $color = $input['color'];
+                $style = $input['style'];
+                $width = $input['width'];
+
+                // style
+                $allowed_styles = [ 'solid', 'dotted', 'dashed', 'double', 'none' ];
+                if( ! in_array( $style, $allowed_styles ) ) return $setting->default;
                 $sanitized_style = sanitize_text_field( $style );
 
-                // sanitize color
+                // color
                 $sanitized_color = sanitize_hex_color( $color );
                 if( ! $sanitized_color ) return $setting->default;
 
-                // sanitize width
-                $expected_width_keys = [ 'top', 'right', 'bottom', 'left' ];
-                $width_keys = array_keys( $width );
-                if( $expected_width_keys !== $width_keys ) return $setting->default;
+                // width
+                $required_width_keys = [ 'top', 'right', 'bottom', 'left', 'link' ];
+                if( array_diff( $required_width_keys, array_keys( $width ) ) ) return $setting->default;
                 $sanitized_width = [
-                    'top'   =>  $this->sanitize_number( $width[ 'top' ] ),
-                    'right'   =>  $this->sanitize_number( $width[ 'right' ] ),
-                    'bottom'   =>  $this->sanitize_number( $width[ 'bottom' ] ),
-                    'left'   =>  $this->sanitize_number( $width[ 'left' ] )
+                    'top'   =>  $this->sanitize_number( $width[ 'top' ], $setting->default[ 'width' ][ 'top' ] ),
+                    'right' =>  $this->sanitize_number( $width[ 'right' ], $setting->default[ 'width' ][ 'right' ] ),
+                    'bottom'    =>  $this->sanitize_number( $width[ 'bottom' ], $setting->default[ 'width' ][ 'bottom' ] ),
+                    'left'  =>  $this->sanitize_number( $width[ 'left' ], $setting->default[ 'width' ][ 'left' ] ),
+                    'link'  =>  $this->sanitize_boolean( $width[ 'link' ], $setting->default[ 'width' ][ 'link' ] )
                 ];
 
                 return [
-                    'color' =>  $sanitized_color,
-                    'style' =>  $sanitized_style,
-                    'width' =>  $sanitized_width
+                    'color' => $sanitized_color,
+                    'style' => $sanitized_style,
+                    'width' => $sanitized_width
                 ];
             }
         }
