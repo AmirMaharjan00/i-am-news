@@ -76,6 +76,22 @@
             public $section = '';
 
             /**
+             * Common control args
+             * 
+             * @var array
+             * @since 1.0.0
+             */
+            public $common = [];
+
+            /**
+             * Tab
+             * 
+             * @var string
+             * @since 1.0.0
+             */
+            public $tab = 'general';
+
+            /**
              * Custom Controls
              * 
              * @var array
@@ -186,6 +202,10 @@
                 $this->section = $id;
                 $section = $this->get_controls( $id );
                 $this->manager->add_section( $id, $section );
+                $this->common = [
+                    'section'   =>  $id,
+                    'tab'   =>  $this->tab
+                ];
             }
 
             /**

@@ -3524,36 +3524,61 @@ const NumberComponent = props => {
   });
 };
 const IanRangeControl = props => {
+  const {
+    min = 0,
+    max = 100,
+    step = 1,
+    options = [{
+      label: 'Px',
+      value: 'px'
+    }, {
+      label: 'Em',
+      value: 'em'
+    }, {
+      label: 'Rem',
+      value: 'rem'
+    }, {
+      label: '%',
+      value: '%'
+    }],
+    rangeValue = 0,
+    selectValue = 'px'
+  } = props;
+
+  /**
+   * Handle range change
+   * 
+   * @since 1.0.0
+   */
+  const handleRangeChange = () => {
+    props.handleRangeChange();
+  };
+
+  /**
+   * Handle select change
+   * 
+   * @since 1.0.0
+   */
+  const handleSelectChange = () => {
+    props.handleSelectChange();
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(RangeControl, {
       __next40pxDefaultSize: true,
       __nextHasNoMarginBottom: true,
-      value: 3,
-      className: "ian-range-item"
-      // onChange = { ( value ) => setColumns( value ) }
-      ,
-      min: 2,
-      max: 10
+      value: rangeValue,
+      className: "ian-range-item",
+      onChange: handleRangeChange,
+      min: min,
+      max: max,
+      step: step
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(SelectControl, {
       __nextHasNoMarginBottom: true,
-      value: 'px',
+      value: selectValue,
       className: "ian-range-item",
-      options: [{
-        label: 'Px',
-        value: 'px'
-      }, {
-        label: 'Em',
-        value: 'em'
-      }, {
-        label: 'Rem',
-        value: 'rem'
-      }, {
-        label: '%',
-        value: '%'
-      }],
-      variant: "minimal"
-      // onChange = { ( newSize ) => setSize( newSize ) }
-      ,
+      options: options,
+      variant: "minimal",
+      onChange: handleSelectChange,
       __next40pxDefaultSize: true
     })]
   });
@@ -3829,16 +3854,8 @@ const {
   } = wp.components,
   {
     useState
-  } = wp.element,
-  {
-    __
-  } = wp.i18n,
-  {
-    escapeHTML
-  } = wp.escapeHtml;
+  } = wp.element;
 
-
-// total of 1932 fonts
 
 /**
  * MARK: Typography Component
@@ -3864,7 +3881,7 @@ const TextComponent = props => {
         __next40pxDefaultSize: true,
         __nextHasNoMarginBottom: true,
         value: value,
-        onChange: newValue => setClassName(newValue)
+        onChange: newValue => setValue(newValue)
       })
     })]
   });
@@ -4094,6 +4111,37 @@ const loadGoogleFonts = (group, range, extras = []) => {
   document.head.appendChild(link);
 };
 
+/**
+ * MARK: Get Unit
+ * 
+ * @since 1.0.0
+ */
+const getUnit = value => {
+  return value.match(/[a-z%]+$/i)?.[0] ?? "px";
+};
+
+/**
+ * MARK: Get Step
+ * 
+ * @since 1.0.0
+ */
+const getStep = unit => {
+  switch (unit) {
+    case "em":
+      return 0.1;
+      // removed by dead control flow
+
+    case "rem":
+      return 0.1;
+      // removed by dead control flow
+
+    default:
+      return 1;
+      // removed by dead control flow
+
+  }
+};
+
 // total of 1932 fonts
 
 /**
@@ -4121,7 +4169,8 @@ const TypographComponent = props => {
     [range, setRange] = useState({
       startIndex: 0,
       endIndex: 8
-    });
+    }),
+    [responsive, setResponsive] = useState('desktop');
   useEffect(() => {
     let families = fontFamilies.map(font => font.value);
     loadGoogleFonts(families, range, [font_family.value]);
@@ -4144,14 +4193,16 @@ const TypographComponent = props => {
     updateValue,
     fontFamily: font_family,
     fontWeight: font_weight,
-    fontSize: font_size,
-    lineHeight: line_height,
-    letterSpacing: letter_spacing,
+    fontSize: font_size[responsive],
+    lineHeight: line_height[responsive],
+    letterSpacing: letter_spacing[responsive],
     textTransform: text_transform,
     textDecoration: text_decoration,
     preset,
     range,
-    setRange
+    setRange,
+    responsive,
+    setResponsive
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "control-content",
@@ -4180,7 +4231,7 @@ const TypographComponent = props => {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
               children: `Weight: ${font_weight} /`
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-              children: `Size: ${font_size.desktop}px`
+              children: `Size: ${font_size.desktop}`
             })]
           });
         },
@@ -4372,6 +4423,46 @@ const FontWeight = () => {
  * @since 1.0.0
  */
 const FontSize = () => {
+  const {
+      fontSize
+    } = useContext(TypographyContext),
+    unit = getUnit(fontSize);
+
+  /**
+   * Get max
+   * 
+   * @since 1.0.0
+   */
+  const getMax = () => {
+    switch (unit) {
+      case "%":
+        return 100;
+        // removed by dead control flow
+
+      case "px":
+        return 200;
+        // removed by dead control flow
+
+      default:
+        return 10;
+        // removed by dead control flow
+
+    }
+  };
+
+  /**
+   * Handle range change
+   * 
+   * @since 1.0.0
+   */
+  const handleRangeChange = () => {};
+
+  /**
+   * Handle select change
+   * 
+   * @since 1.0.0
+   */
+  const handleSelectChange = () => {};
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "typography-block font-size-block",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -4382,7 +4473,14 @@ const FontSize = () => {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanResponsiveIcons, {})]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "range-control",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_number__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_number__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {
+        min: 0,
+        max: getMax(),
+        step: getStep(unit),
+        selectValue: unit,
+        handleRangeChange: handleRangeChange,
+        handleSelectChange: handleSelectChange
+      })
     })]
   });
 };
@@ -4393,6 +4491,26 @@ const FontSize = () => {
  * @since 1.0.0
  */
 const LineHeight = () => {
+  const {
+      lineHeight
+    } = useContext(TypographyContext),
+    unit = getUnit(lineHeight);
+  const getMax = () => {
+    switch (unit) {
+      case "%":
+        return 100;
+        // removed by dead control flow
+
+      case "px":
+        return 300;
+        // removed by dead control flow
+
+      default:
+        return 5;
+        // removed by dead control flow
+
+    }
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "typography-block line-height-block",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -4403,7 +4521,12 @@ const LineHeight = () => {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanResponsiveIcons, {})]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "range-control",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_number__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_number__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {
+        min: 0,
+        max: getMax(),
+        step: getStep(unit),
+        selectValue: unit
+      })
     })]
   });
 };
@@ -4414,6 +4537,42 @@ const LineHeight = () => {
  * @since 1.0.0
  */
 const LetterSpacing = () => {
+  const {
+      letterSpacing
+    } = useContext(TypographyContext),
+    unit = getUnit(letterSpacing);
+  const getMax = () => {
+    switch (unit) {
+      case "%":
+        return 200;
+        // removed by dead control flow
+
+      case "px":
+        return 20;
+        // removed by dead control flow
+
+      default:
+        return 2;
+        // removed by dead control flow
+
+    }
+  };
+  const getMin = () => {
+    switch (unit) {
+      case "%":
+        return 0;
+        // removed by dead control flow
+
+      case "px":
+        return -10;
+        // removed by dead control flow
+
+      default:
+        return -1;
+        // removed by dead control flow
+
+    }
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "typography-block letter-spacing-block",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -4424,7 +4583,12 @@ const LetterSpacing = () => {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanResponsiveIcons, {})]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "range-control",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_number__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_number__WEBPACK_IMPORTED_MODULE_4__.IanRangeControl, {
+        min: getMin(),
+        max: getMax(),
+        step: getStep(unit),
+        selectValue: unit
+      })
     })]
   });
 };

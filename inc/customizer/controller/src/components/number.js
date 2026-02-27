@@ -36,28 +36,56 @@ export const NumberComponent = ( props ) => {
 }
 
 export const IanRangeControl = ( props ) => {
+    const { 
+        min = 0,
+        max = 100,
+        step = 1,
+        options = [
+            { label: 'Px', value: 'px' },
+            { label: 'Em', value: 'em' },
+            { label: 'Rem', value: 'rem' },
+            { label: '%', value: '%' },
+        ],
+        rangeValue = 0,
+        selectValue = 'px'
+    } = props
+
+    /**
+     * Handle range change
+     * 
+     * @since 1.0.0
+     */
+    const handleRangeChange = () => {
+        props.handleRangeChange()
+    }
+
+    /**
+     * Handle select change
+     * 
+     * @since 1.0.0
+     */
+    const handleSelectChange = () => {
+        props.handleSelectChange()
+    }
+
     return <>
         <RangeControl
             __next40pxDefaultSize
             __nextHasNoMarginBottom
-            value = { 3 }
+            value = { rangeValue }
             className = 'ian-range-item'
-            // onChange = { ( value ) => setColumns( value ) }
-            min = { 2 }
-            max = { 10 }
+            onChange = { handleRangeChange }
+            min = { min }
+            max = { max }
+            step = { step }
         />
         <SelectControl
             __nextHasNoMarginBottom
-            value = { 'px' }
+            value = { selectValue }
             className = 'ian-range-item'
-            options = { [
-                { label: 'Px', value: 'px' },
-                { label: 'Em', value: 'em' },
-                { label: 'Rem', value: 'rem' },
-                { label: '%', value: '%' },
-            ] }
+            options = { options }
             variant = "minimal"
-            // onChange = { ( newSize ) => setSize( newSize ) }
+            onChange = { handleSelectChange }
             __next40pxDefaultSize
         />
     </>
