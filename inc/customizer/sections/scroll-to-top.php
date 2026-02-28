@@ -301,43 +301,52 @@
             }
 
             /**
-             * Render dynamic css
+             * Dynamic css args
              * 
-             * @return css
              * @since 1.0.0
              */
-            public function render_dynamic_css() {
+            public function get_dynamic_css_args( $add_type = false ): array {
                 $dynamic_css_args = [
-                    'scroll_to_top_typography'  =>    $this->dynamic_typography( [
+                    'scroll_to_top_typography'  =>  [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_typography' ),
                         'selector'  =>  '.ian-scroll-to-top > span',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_typography' ),
                         'variable'  =>  false
-                    ] ),
-                    'scroll_to_top_border'  =>    $this->dynamic_border( [
+                    ],
+                    'scroll_to_top_border'  =>  [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_border' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_border' )
-                    ] ),
-                    'scroll_to_top_border_radius'  =>    $this->dynamic_number( [
+                    ],
+                    'scroll_to_top_border_radius'  =>   [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_border_radius' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_border_radius' ),
                         'property'  =>  'border-radius'
-                    ] ),
-                    'scroll_to_top_box_shadow'  =>    $this->dynamic_box_shadow( [
+                    ],
+                    'scroll_to_top_box_shadow'  =>  [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_box_shadow' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_box_shadow' )
-                    ] ),
-                    'scroll_to_top_padding'  =>    $this->dynamic_dimension( [
+                    ],
+                    'scroll_to_top_padding'  => [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_padding' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_padding' ),
                         'property'  =>  'padding'
-                    ] ),
+                    ],
                 ];
-                return apply_filters( 'ian_scroll_to_top_dynamic_css_filter', $dynamic_css_args );
+                if( $add_type ) {
+                    $configs = [];
+                    foreach( $dynamic_css_args as $id => $args ) {
+                        $control_args = $this->get_controls( $id );
+                        $args[ 'type' ] = $control_args[ 'type' ];
+                        $configs[ $id ] = $args;
+                    }
+                    return $configs;
+                } else {
+                    return $dynamic_css_args;
+                }
             }
 
             /**

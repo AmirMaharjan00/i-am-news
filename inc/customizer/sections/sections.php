@@ -102,6 +102,22 @@
             public $custom_controls = [];
 
             /**
+             * Dynamic css args
+             * 
+             * @var array
+             * @since 1.0.0
+             */
+            public $dynamic_css_args = [];
+
+            /**
+             * Dynamic styles
+             * 
+             * @var array
+             * @since 1.0.0
+             */
+            public $dynamic_styles = [];
+
+            /**
              * Default values
              * 
              * @var array
@@ -115,7 +131,10 @@
              * @since 1.0.0
              */
             public function __construct() {
-                add_action( 'init', [ $this, 'set_defaults' ] );
+                add_action( 'init', function(){
+                    $this->set_defaults();
+                    $this->set_dynamic_style_func();
+                } );
                 add_action( 'customize_register', [ $this, 'init' ] );
             }
 
@@ -150,6 +169,21 @@
                     'dimension'    =>  [ $this, 'add_dimension' ],
                     'heading-toggle'    =>  [ $this, 'add_heading_toggle' ],
                     'ian-checkbox'    =>  [ $this, 'add_checkbox' ],
+                ];
+            }
+
+            /**
+             * Get dynamic styles functions
+             * 
+             * @since 1.0.0
+             */
+            public function set_dynamic_style_func() {
+                $this->dynamic_styles = [
+                    'box-shadow'    =>  [ $this, 'dynamic_box_shadow' ],
+                    'typography'    =>  [ $this, 'dynamic_typography' ],
+                    'ian-number'    =>  [ $this, 'dynamic_number' ],
+                    'border'    =>  [ $this, 'dynamic_border' ],
+                    'dimension'    =>  [ $this, 'dynamic_dimension' ],
                 ];
             }
 
@@ -189,11 +223,11 @@
             abstract public function render_html();
 
             /**
-             * Get controls
+             * Dynamic css args
              * 
              * @since 1.0.0
              */
-            abstract public function render_dynamic_css();
+            abstract public function get_dynamic_css_args( $add_type = false );
 
             /**
              * Add setting
@@ -378,6 +412,23 @@
             public function get_customizer_value( $id = '' ) {
                 if( ! $id ) return;
                 return get_theme_mod( $id, $this->get_defaults( $id ) );
+            }
+
+            /**
+             * Render dynamic css
+             * 
+             * @return css
+             * @since 1.0.0
+             */
+            public function render_dynamic_css() {
+                $dynamic_css = [];
+                $dynamic_css_args = $this->get_dynamic_css_args();
+                foreach( $dynamic_css_args as $id => $args ) {
+                    $control_args = $this->get_controls( $id );
+                    $dynamic_css[ $id ] = call_user_func( $this->dynamic_styles[ $control_args[ 'type' ] ], $args );
+                }
+                $replaced_id = str_replace( '-', '_', $this->id );
+                return apply_filters( "{$replaced_id}_dynamic_css_filter", $dynamic_css );
             }
         }
     endif;

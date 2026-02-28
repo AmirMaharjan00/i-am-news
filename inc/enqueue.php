@@ -90,6 +90,8 @@
             public function customizer_preview() {
                 wp_enqueue_script( 'i-am-news-customizer', get_template_directory_uri() . '/assets/js/customizer.js', [ 'customize-preview' ], I_AM_NEWS_VERSION, true );
                 wp_enqueue_script( 'i-am-news-customizer-preview', get_template_directory_uri() . '/inc/customizer/assets/customizer-preview.js', [ 'jquery', 'customize-preview' ], I_AM_NEWS_VERSION, true );
+
+                wp_localize_script( 'i-am-news-customizer-preview', 'IanConfig', $this->get_preview_configs() );
             }
 
             /**
@@ -121,10 +123,25 @@
                 $dynamic_css = [
                     implode( "\n", $scroll_to_top )
                 ];
-                // echo '<pre>';
-                // print_r( implode( "\n", $scroll_to_top ) );
-                // echo '</pre>';
                 return implode( ' ', $dynamic_css );
+            }
+
+            /**
+             * Get preview configs
+             * 
+             * @since 1.0.0
+             */
+            private function get_preview_configs(): array {
+                $raw_configs = array_merge(
+                    Scroll_To_Top::get_instance()->get_dynamic_css_args( true )
+                );
+                $configs = [];
+                foreach( $raw_configs as $id => $args ) {
+                    unset( $args[ 'value' ] );
+                    unset( $args[ 'default' ] );
+                    $configs[ $id ] = $args;
+                }
+                return $configs;
             }
         }
         Enqueue::get_instance();

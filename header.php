@@ -9,6 +9,7 @@
  * @package i_am_news
  */
 use IAN\Customizer\Section\Scroll_To_Top;
+use IAN\Customizer\Section\Section;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -30,10 +31,6 @@ use IAN\Customizer\Section\Scroll_To_Top;
 			<div class="row">
 				<div class="site-branding">
 					<?php
-					// $scroll_to_top = Scroll_To_Top::get_instance()->render_dynamic_css();
-					// echo '<pre>';
-					// print_r( $scroll_to_top );
-					// echo '</pre>';
 					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
 						?>
