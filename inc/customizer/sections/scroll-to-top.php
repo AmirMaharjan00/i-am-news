@@ -131,11 +131,6 @@
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
-                    'radio_tab_test' =>  [
-                        // 'sanitize_callback' =>  'sanitize_text_field',
-                        'transport'   =>  'postMessage',
-                        'default'   =>  $this->get_defaults( $id )
-                    ],
                     'scroll_to_top_heading_toggle' =>  [
                         'sanitize_callback' =>  'sanitize_text_field',
                     ],
@@ -263,20 +258,6 @@
                         'type'  =>  'dimension',
                         'tab'   =>  'design',
                     ] ),
-                    'radio_tab_test' =>  array_merge( $this->common, [
-                        'label' =>  esc_html__( 'Radio Tab', 'i-am-news' ),
-                        'type'  =>  'radio-tab',
-                        'fields'    =>  [
-                            [
-                                'label' =>  esc_html__( '1', 'i-am-news' ),
-                                'value' =>  'one'
-                            ],
-                            [
-                                'label' =>  esc_html__( '2', 'i-am-news' ),
-                                'value' =>  'two'
-                            ]
-                        ]
-                    ] ),
                     'scroll_to_top_heading_toggle' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Heading Toggle', 'i-am-news' ),
                         'type'  =>  'heading-toggle',
@@ -314,7 +295,6 @@
                         'offsety'   =>  10
                     ]),
                     'scroll_to_top_padding' => $this->get_dimension(),
-                    'radio_tab_test'    =>  'one',
                     'scroll_to_top_heading_toggle'    =>  'one',
                     'scroll_to_top_checkbox'    =>  'one',
                 ];
@@ -327,7 +307,37 @@
              * @since 1.0.0
              */
             public function render_dynamic_css() {
-                
+                $dynamic_css_args = [
+                    'scroll_to_top_typography'  =>    $this->dynamic_typography( [
+                        'value' =>  $this->get_customizer_value( 'scroll_to_top_typography' ),
+                        'selector'  =>  '.ian-scroll-to-top > span',
+                        'default'   =>  $this->get_defaults( 'scroll_to_top_typography' ),
+                        'variable'  =>  false
+                    ] ),
+                    'scroll_to_top_border'  =>    $this->dynamic_border( [
+                        'value' =>  $this->get_customizer_value( 'scroll_to_top_border' ),
+                        'selector'  =>  '.ian-scroll-to-top',
+                        'default'   =>  $this->get_defaults( 'scroll_to_top_border' )
+                    ] ),
+                    'scroll_to_top_border_radius'  =>    $this->dynamic_number( [
+                        'value' =>  $this->get_customizer_value( 'scroll_to_top_border_radius' ),
+                        'selector'  =>  '.ian-scroll-to-top',
+                        'default'   =>  $this->get_defaults( 'scroll_to_top_border_radius' ),
+                        'property'  =>  'border-radius'
+                    ] ),
+                    'scroll_to_top_box_shadow'  =>    $this->dynamic_box_shadow( [
+                        'value' =>  $this->get_customizer_value( 'scroll_to_top_box_shadow' ),
+                        'selector'  =>  '.ian-scroll-to-top',
+                        'default'   =>  $this->get_defaults( 'scroll_to_top_box_shadow' )
+                    ] ),
+                    'scroll_to_top_padding'  =>    $this->dynamic_dimension( [
+                        'value' =>  $this->get_customizer_value( 'scroll_to_top_padding' ),
+                        'selector'  =>  '.ian-scroll-to-top',
+                        'default'   =>  $this->get_defaults( 'scroll_to_top_padding' ),
+                        'property'  =>  'padding'
+                    ] ),
+                ];
+                return apply_filters( 'ian_scroll_to_top_dynamic_css_filter', $dynamic_css_args );
             }
 
             /**

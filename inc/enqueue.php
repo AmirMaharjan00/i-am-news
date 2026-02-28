@@ -18,6 +18,8 @@
     use function get_option;
     use function comments_open;
 
+    use IAN\Customizer\Section\Scroll_To_Top as Scroll_To_Top;
+
     if( ! class_exists( __NAMESPACE__ . '\\Enqueue' ) ) :
         /**
          * Enqueue Class
@@ -101,11 +103,28 @@
                 wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/assets/libraries/fontawesome/css/all.min.css', [], '7.2.0' );
                 wp_enqueue_style( 'i-am-news-professional', get_template_directory_uri() . '/assets/css/main.css', [], I_AM_NEWS_VERSION );
                 wp_enqueue_style( 'i-am-news-main', get_template_directory_uri() . '/assets/css/theme.css', [], I_AM_NEWS_VERSION );
+                wp_add_inline_style( 'i-am-news-main', $this->generate_whole_site_dynamic_css() );
 
                 wp_enqueue_script( 'i-am-news-navigation', get_template_directory_uri() . '/assets/js/navigation.js', [], I_AM_NEWS_VERSION, true );
                 wp_enqueue_script( 'i-am-news-main', get_template_directory_uri() . '/assets/js/theme.js', [ 'jquery' ], I_AM_NEWS_VERSION, true );
 
                 if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' );
+            }
+
+            /**
+             * Generate whole site dynamic css
+             * 
+             * @since 1.0.0
+             */
+            private function generate_whole_site_dynamic_css() {
+                $scroll_to_top = Scroll_To_Top::get_instance()->render_dynamic_css();
+                $dynamic_css = [
+                    implode( "\n", $scroll_to_top )
+                ];
+                // echo '<pre>';
+                // print_r( implode( "\n", $scroll_to_top ) );
+                // echo '</pre>';
+                return implode( ' ', $dynamic_css );
             }
         }
         Enqueue::get_instance();

@@ -8,7 +8,7 @@
  *
  * @package i_am_news
  */
-
+use IAN\Customizer\Section\Scroll_To_Top;
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -30,42 +30,10 @@
 			<div class="row">
 				<div class="site-branding">
 					<?php
-
-					function sanitize_border( $input, $setting ): array {
-						if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
-						$expected_border_keys = [ 'color', 'style', 'width' ];
-						$input_value_keys = array_keys( $input );
-						if( $expected_border_keys !== $input_value_keys ) return $setting->default;
-						extract( $input );
-
-						// sanitize style
-						$expected_style_values = [ 'solid', 'dotted', 'dashed', 'double', 'none' ];
-						if( ! in_array( $style, $expected_style_values ) ) return $setting->default;
-						$sanitized_style = sanitize_text_field( $style );
-
-						// sanitize color
-						$sanitized_color = sanitize_hex_color( $color );
-						if( ! $sanitized_color ) return $setting->default;
-
-						// sanitize width
-						$expected_width_keys = [ 'top', 'right', 'bottom', 'left' ];
-						$width_keys = array_keys( $width );
-						if( $expected_width_keys !== $width_keys ) return $setting->default;
-						$sanitized_width = [
-							'top'   =>  $this->sanitize_number( $width[ 'top' ] ),
-							'right'   =>  $this->sanitize_number( $width[ 'right' ] ),
-							'bottom'   =>  $this->sanitize_number( $width[ 'bottom' ] ),
-							'left'   =>  $this->sanitize_number( $width[ 'left' ] )
-						];
-
-						return [
-							'color' =>  $sanitized_color,
-							'style' =>  $sanitized_style,
-							'width' =>  $sanitized_width
-						];
-					}
-
-					
+					// $scroll_to_top = Scroll_To_Top::get_instance()->render_dynamic_css();
+					// echo '<pre>';
+					// print_r( $scroll_to_top );
+					// echo '</pre>';
 					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
 						?>

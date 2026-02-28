@@ -131,7 +131,8 @@
             public function sanitize_icon_picker( $input, $setting ): array {
                 if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
                 if( ! isset( $input[ 'type' ] ) || ! isset( $input[ 'value' ] ) ) return $setting->default;
-                extract( $input );
+                $type = $input[ 'type' ];
+                $value = $input[ 'value' ];
                 if( ! in_array( $type, [ 'none', 'image', 'icon' ] ) ) return $setting->default;
                 $sanitized_value = [
                     'type'  =>  sanitize_text_field( $type )
@@ -194,15 +195,19 @@
                 if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
                 $expected_keys = [ 'font_family', 'font_weight', 'font_size', 'line_height', 'letter_spacing', 'text_transform', 'text_decoration', 'preset' ];
                 $responsive_keys = [ 'desktop', 'tablet', 'mobile' ];
-                $input_keys = array_keys( $input );
-                if( $expected_keys !== $input_keys ) return $setting->default;
-                extract( $input );
-                $sanitized_value = [];
+                if( array_diff( $expected_keys, array_keys( $input ) ) ) return $setting->default;
+                $font_family = $input[ 'font_family' ];
+                $font_weight = $input[ 'font_weight' ];
+                $font_size = $input[ 'font_size' ];
+                $line_height = $input[ 'line_height' ];
+                $letter_spacing = $input[ 'letter_spacing' ];
+                $text_transform = $input[ 'text_transform' ];
+                $text_decoration = $input[ 'text_decoration' ];
+                $preset = $input[ 'preset' ];
 
                 // sanitize font family
                 $font_family_expected_keys = [ 'label', 'value' ];
-                $font_family_input_keys = array_keys( $font_family );
-                if( $font_family_expected_keys !== $font_family_input_keys ) return $setting->default;
+                if( array_diff( $font_family_expected_keys, array_keys( $font_family ) ) ) return $setting->default;
                 $sanitized_font_family_value = sanitize_text_field( $font_family[ 'value' ] );
                 $sanitized_font_family = [
                     'label' =>  $sanitized_font_family_value,
@@ -215,8 +220,7 @@
                 $sanitized_font_weight = sanitize_text_field( $font_weight );
 
                 // sanitize font size
-                $font_size_input_keys = array_keys( $font_size );
-                if( $responsive_keys !== $font_size_input_keys ) return $setting->default;
+                if( array_diff( $responsive_keys, array_keys( $font_size ) ) ) return $setting->default;
                 $sanitized_font_size = [
                     'desktop'   =>  $this->sanitize_number_unit( $font_size[ 'desktop' ], $setting->default[ 'font_size' ][ 'desktop' ] ),
                     'tablet'   =>  $this->sanitize_number_unit( $font_size[ 'tablet' ], $setting->default[ 'font_size' ][ 'tablet' ] ),
@@ -224,8 +228,7 @@
                 ];
 
                 // sanitize line height
-                $line_height_input_keys = array_keys( $line_height );
-                if( $responsive_keys !== $line_height_input_keys ) return $setting->default;
+                if( array_diff( $responsive_keys, array_keys( $line_height ) ) ) return $setting->default;
                 $sanitized_line_height = [
                     'desktop'   =>  $this->sanitize_number_unit( $line_height[ 'desktop' ], $setting->default[ 'line_height' ][ 'desktop' ] ),
                     'tablet'   =>  $this->sanitize_number_unit( $line_height[ 'tablet' ], $setting->default[ 'line_height' ][ 'tablet' ] ),
@@ -233,8 +236,7 @@
                 ];
 
                 // sanitize letter spacing
-                $letter_spacing_input_keys = array_keys( $letter_spacing );
-                if( $responsive_keys !== $letter_spacing_input_keys ) return $setting->default;
+                if( array_diff( $responsive_keys, array_keys( $letter_spacing ) ) ) return $setting->default;
                 $sanitized_letter_spacing = [
                     'desktop'   =>  $this->sanitize_number_unit( $letter_spacing[ 'desktop' ], $setting->default[ 'letter_spacing' ][ 'desktop' ] ),
                     'tablet'   =>  $this->sanitize_number_unit( $letter_spacing[ 'tablet' ], $setting->default[ 'letter_spacing' ][ 'tablet' ] ),
@@ -276,7 +278,7 @@
              * @param object $setting  An instance of WP_Customize_Setting
              */
             public function sanitize_range( $input, $setting ) {
-                $control = $setting->manager->get_setting( $setting->id );
+                $control = $setting->manager->get_control( $setting->id );
                 $input_attrs = $control->input_attrs;
                 $responsive = $control->responsive;
                 if( $responsive ) {
@@ -288,9 +290,10 @@
                 $max = isset( $input_attrs[ 'max' ] ) ? $input_attrs[ 'max' ] : 100;
                 if( $responsive ) {
                     $expected_input_keys = [ 'desktop', 'tablet', 'mobile' ];
-                    $input_keys = array_keys( $input );
-                    if( $expected_input_keys !== $input_keys) return $setting->default;
-                    extract( $input );
+                    if( array_diff_key( $expected_input_keys, array_keys( $input ) ) ) return $setting->default;
+                    $desktop = $input[ 'desktop' ];
+                    $tablet = $input[ 'tablet' ];
+                    $mobile = $input[ 'mobile' ];
                     return [
                         'desktop'   =>  $this->sanitize_number_unit( $desktop, $setting->default[ 'desktop' ], [ 'min' => $min, 'max' => $max ] ),
                         'tablet'   =>  $this->sanitize_number_unit( $tablet, $setting->default[ 'tablet' ], [ 'min' => $min, 'max' => $max ] ),
@@ -309,15 +312,16 @@
              * @param object $setting  An instance of WP_Customize_Setting
              */
             public function sanitize_dimension( $input, $setting ): array {
-                if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
-                $control = $setting->manager->get_setting( $setting->id );
+                if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
+                $control = $setting->manager->get_control( $setting->id );
                 $responsive = $control->responsive;
-                $expected_dimension_keys = [ 'top', 'right', 'bottom', 'left', 'link', 'unit' ];
+                $expected_dimension_keys = [ 'top', 'right', 'bottom', 'left', 'link' ];
                 if( $responsive ) {
                     $expected_input_keys = [ 'desktop', 'tablet', 'mobile' ];
-                    $input_keys = array_keys( $input );
-                    if( $expected_input_keys !== $input_keys) return $setting->default;
-                    extract( $input );
+                    if( array_diff_key( $expected_input_keys, array_keys( $input ) ) ) return $setting->default;
+                    $desktop = $input[ 'desktop' ];
+                    $tablet = $input[ 'tablet' ];
+                    $mobile = $input[ 'mobile' ];
                     if( array_keys( $desktop ) !== $expected_dimension_keys ) return $setting->default;
                     if( array_keys( $tablet ) !== $expected_dimension_keys ) return $setting->default;
                     if( array_keys( $mobile ) !== $expected_dimension_keys ) return $setting->default;
@@ -328,7 +332,7 @@
                             'bottom'    =>  $this->sanitize_number( $desktop[ 'bottom' ], $setting->default[ 'desktop' ][ 'bottom' ] ),
                             'left'  =>  $this->sanitize_number( $desktop[ 'left' ], $setting->default[ 'desktop' ][ 'left' ] ),
                             'link'  =>  $this->sanitize_boolean( $desktop[ 'link' ], $setting->default[ 'desktop' ][ 'link' ] ),
-                            'unit'  =>  $this->sanitize_unit( $desktop[ 'unit' ], $setting->default[ 'desktop' ][ 'unit' ] )
+                            // 'unit'  =>  $this->sanitize_unit( $desktop[ 'unit' ], $setting->default[ 'desktop' ][ 'unit' ] )
                         ],
                         'tablet'    =>   [
                             'top'   =>  $this->sanitize_number( $tablet[ 'top' ], $setting->default[ 'tablet' ][ 'top' ] ),
@@ -336,7 +340,7 @@
                             'bottom'    =>  $this->sanitize_number( $tablet[ 'bottom' ], $setting->default[ 'tablet' ][ 'bottom' ] ),
                             'left'  =>  $this->sanitize_number( $tablet[ 'left' ], $setting->default[ 'tablet' ][ 'left' ] ),
                             'link'  =>  $this->sanitize_boolean( $tablet[ 'link' ], $setting->default[ 'tablet' ][ 'link' ] ),
-                            'unit'  =>  $this->sanitize_unit( $tablet[ 'unit' ], $setting->default[ 'tablet' ][ 'unit' ] )
+                            // 'unit'  =>  $this->sanitize_unit( $tablet[ 'unit' ], $setting->default[ 'tablet' ][ 'unit' ] )
                         ],
                         'mobile'    =>   [
                             'top'   =>  $this->sanitize_number( $mobile[ 'top' ], $setting->default[ 'mobile' ][ 'top' ] ),
@@ -344,20 +348,18 @@
                             'bottom'    =>  $this->sanitize_number( $mobile[ 'bottom' ], $setting->default[ 'mobile' ][ 'bottom' ] ),
                             'left'  =>  $this->sanitize_number( $mobile[ 'left' ], $setting->default[ 'mobile' ][ 'left' ] ),
                             'link'  =>  $this->sanitize_boolean( $mobile[ 'link' ], $setting->default[ 'mobile' ][ 'link' ] ),
-                            'unit'  =>  $this->sanitize_unit( $mobile[ 'unit' ], $setting->default[ 'mobile' ][ 'unit' ] )
+                            // 'unit'  =>  $this->sanitize_unit( $mobile[ 'unit' ], $setting->default[ 'mobile' ][ 'unit' ] )
                         ]
                     ];
                 } else {
-                    $input_keys = array_keys( $input );
-                    if( $expected_dimension_keys !== $input_keys ) return $setting->default;
-                    extract( $input );
+                    if( array_diff_key( $expected_dimension_keys, array_keys( $input ) ) ) return $setting->default;
                     return [
-                        'top'   =>  $this->sanitize_number( $top, $setting->default[ 'top' ] ),
-                        'right' =>  $this->sanitize_number( $right, $setting->default[ 'right' ] ),
-                        'bottom'    =>  $this->sanitize_number( $bottom, $setting->default[ 'bottom' ] ),
-                        'left'  =>  $this->sanitize_number( $left, $setting->default[ 'left' ] ),
-                        'link'  =>  $this->sanitize_boolean( $link, $setting->default[ 'link' ] ),
-                        'unit'  =>  $this->sanitize_unit( $unit, $setting->default[ 'unit' ] )
+                        'top'   =>  $this->sanitize_number( $input[ 'top' ], $setting->default[ 'top' ] ),
+                        'right' =>  $this->sanitize_number( $input[ 'right' ], $setting->default[ 'right' ] ),
+                        'bottom'    =>  $this->sanitize_number( $input[ 'bottom' ], $setting->default[ 'bottom' ] ),
+                        'left'  =>  $this->sanitize_number( $input[ 'left' ], $setting->default[ 'left' ] ),
+                        'link'  =>  $this->sanitize_boolean( $input[ 'link' ], $setting->default[ 'link' ] ),
+                        // 'unit'  =>  $this->sanitize_unit( $input[ 'unit' ], $setting->default[ 'unit' ] )
                     ];
                 }
             }

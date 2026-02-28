@@ -162,6 +162,11 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 /**
+ * Dynamic Css Class
+ */
+require_once get_template_directory() . '/inc/styles.php';
+
+/**
  * Section Class
  */
 require_once get_template_directory() . '/inc/customizer/sections/sections.php';

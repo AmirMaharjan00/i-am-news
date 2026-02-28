@@ -22,6 +22,7 @@
     use IAN\Customizer\Controls\Checkbox as Checkbox;
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
+    use IAN\Dynamic_Css as Dynamic_Css;
 
     use function get_theme_mod;
 
@@ -58,6 +59,7 @@
              */
             use Customizer_Defaults;
             use Sanitize_Functions;
+            use Dynamic_Css;
 
             /**
              * Manager instance

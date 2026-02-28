@@ -87,7 +87,7 @@
                     'bottom' =>  0,
                     'left' =>  0,
                     'link' =>  true,
-                    'unit'  =>  'px'
+                    // 'unit'  =>  'px'
                 ];
                 return array_merge( $default, $dimension );
             }
