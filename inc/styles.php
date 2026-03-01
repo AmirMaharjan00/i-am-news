@@ -294,6 +294,43 @@
             }
 
             /**
+             * Get background image css
+             * 
+             * @since 1.0.0
+             * @param array $image_args The arguments of image
+             */
+            private function get_color_css( $color_args, $property ) {
+                $value = $color_args[ 'value' ];
+                if( $color_args[ 'type' ] === 'image' ) {
+                    $image_url = wp_get_attachment_image_src( $value );
+                    $background_image_css = [
+                        'background-image'  =>  'url('. $image_url[ 0 ] .')'
+                    ];
+
+                    if( isset( $color_args[ 'image' ] ) ) {
+                        $image_properties = $color_args[ 'image' ];
+                        $blend_mode = $image_properties[ 'blend_mode' ];
+                        $position = $image_properties[ 'position' ];
+                        $repeat = $image_properties[ 'repeat' ];
+                        $size = $image_properties[ 'size' ];
+                        $background_properties = [
+                            'background-blend-mode' =>  $blend_mode,
+                            'background-position'   =>  $position,
+                            'background-repeat' =>  $repeat,
+                            'background-size'   =>  $size
+                        ];
+                        return array_merge( $background_image_css, $background_properties );
+                    }
+    
+                    return $background_image_css;
+                } else {
+                    return [
+                        $property   =>  $value
+                    ];
+                }
+            }
+
+            /**
              * Generate color dynamic css
              * 
              * @since 1.0.0
@@ -315,17 +352,11 @@
                     $initial = $value[ 'initial' ];
                     $hover = $value[ 'hover' ];
                     $color = [
-                        'initial'   =>  [
-                            $property   =>  $initial[ 'value' ]
-                        ],
-                        'hover'   =>  [
-                            $property   =>  $hover[ 'value' ]
-                        ]
+                        'initial'   =>  $this->get_color_css( $initial, $property ),
+                        'hover'   =>  $this->get_color_css( $hover, $property )
                     ];
                 } else {
-                    $color = [
-                        $property   =>  $value[ 'value' ]
-                    ];
+                    $color = $this->get_color_css( $value, $property );
                 }
 
                 $generate_css_args = [

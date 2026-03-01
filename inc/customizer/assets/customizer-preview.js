@@ -6,8 +6,6 @@
         mobileWidth = '@media(max-width: 768px)',
         googleFontsURL = 'https://fonts.googleapis.com/css2'
 
-    // <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
     console.log( IanConfig )
     /**
      * Utility functions
