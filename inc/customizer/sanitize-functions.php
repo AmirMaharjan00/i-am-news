@@ -407,5 +407,19 @@
                     'width' => $sanitized_width
                 ];
             }
+            
+            /**
+             * Sanitize color value
+             * 
+             * @since 1.0.0
+             * @param array $input      The current value saved in db
+             * @param object $setting  An instance of WP_Customize_Setting
+             */
+            // public function sanitize_color( $input, $setting ): array {
+            //     if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
+            //     $control = $setting->manager->get_control( $setting->id );
+            //     $color_types = $control[ 'color_types' ];
+            //     $include_hover = $control[ 'include_hover' ];
+            // }
         }
     }

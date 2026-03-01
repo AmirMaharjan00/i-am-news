@@ -123,6 +123,9 @@
                 $dynamic_css = [
                     implode( "\n", $scroll_to_top )
                 ];
+                echo '<pre>';
+                print_r( $scroll_to_top );
+                echo '</pre>';
                 return implode( ' ', $dynamic_css );
             }
 

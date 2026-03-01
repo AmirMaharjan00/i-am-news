@@ -133,9 +133,14 @@
                     $css .= $mobile_width . $opening_bracket . $selector . $opening_bracket . implode( ';', $mobile ) . $closing_bracket . $closing_bracket;
                     return $css;
                 } elseif( array_key_exists( 'initial', $value ) ) {
-                    // $css = array_map( fn( $property, $property_value ) => "$property: $property_value", array_keys( $value ), $value );
-                    // return $selector . $opening_bracket . implode( ';', $css ) . $closing_bracket;
-                    return '';
+                    $css = [];
+                    foreach( $value as $type => $color ) {
+                        $css[] = array_map( fn( $property, $property_value ) => "$property: $property_value", array_keys( $color ), $color );
+                    }
+                    echo '<pre>';
+                    print_r( $value );
+                    echo '</pre>';
+                    return $selector . $opening_bracket . implode( ';', $css ) . $closing_bracket;
                 } else {
                     $css = array_map( fn( $property, $property_value ) => "$property: $property_value", array_keys( $value ), $value );
                     return $selector . $opening_bracket . implode( ';', $css ) . $closing_bracket;
@@ -287,42 +292,34 @@
              * @param   array   $args   The arguments required to generate css
              */
             public function dynamic_color( $args ): string {
-                
                 // $expected_keys = [ 'value', 'selector', 'default', 'property' ];
                 // if( array_diff( $expected_keys, array_keys( $args ) ) ) return '';
                 
                 // $value = $args[ 'value' ];
                 // if( serialize( $args[ 'default' ] ) === serialize( $value ) ) return '';
                 // $property = $args[ 'property' ];
-                // if( array_key_exists( 'desktop', $value ) ) {
-                //     $desktop = $value[ 'desktop' ];
-                //     unset( $desktop[ 'link' ] );
-                //     $tablet = $value[ 'tablet' ];
-                //     unset( $tablet[ 'link' ] );
-                //     $mobile = $value[ 'mobile' ];
-                //     unset( $mobile[ 'link' ] );
-                //     $dimension = [
-                //         'desktop'   =>  [
-                //             $property   =>  implode( 'px ', $desktop ) . 'px'
+                // if( array_key_exists( 'initial', $value ) ) {
+                //     $initial = $value[ 'initial' ];
+                //     $hover = $value[ 'hover' ];
+                //     $color = [
+                //         'initial'   =>  [
+                //             $property   =>  $initial[ 'value' ]
                 //         ],
-                //         'tablet'   =>  [
-                //             $property   =>  implode( 'px ', $tablet ) . 'px'
-                //         ],
-                //         'mobile'   =>  [
-                //             $property   =>  implode( 'px ', $mobile ) . 'px'
-                //         ],
+                //         'hover'   =>  [
+                //             $property   =>  $value[ 'value' ]
+                //         ]
                 //     ];
                 // } else {
-                //     unset( $value[ 'link' ] );
-                //     $dimension = [
-                //         $property   =>  implode( 'px ', $value ) . 'px'
+                //     $color = [
+                //         $property   =>  $value[ 'value' ]
                 //     ];
                 // }
 
-                return $this->generate_css( [
-                    'selector'  =>  $args[ 'selector' ],
-                    'value' =>  $args[ 'value' ]
-                ] );
+                var_dump( $args );
+                // return $this->generate_css( [
+                //     'selector'  =>  $args[ 'selector' ],
+                //     'value' =>  $color
+                // ] );
             }
         }
     }
