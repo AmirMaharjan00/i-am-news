@@ -2685,7 +2685,6 @@ const BoxShadowComponent = props => {
    * @return void 
    */
   const handleChange = (id, newValue) => {
-    console.log(newValue);
     let updatedValue = {
       ...value,
       [id]: newValue
@@ -3024,7 +3023,13 @@ const {
     ColorIndicator,
     ColorPicker,
     Dropdown,
-    Tooltip
+    Tooltip,
+    GradientPicker,
+    Button,
+    Card,
+    CardHeader,
+    CardBody,
+    SelectControl
   } = wp.components,
   {
     __
@@ -3033,8 +3038,14 @@ const {
     escapeHTML
   } = wp.escapeHtml,
   {
-    useState
-  } = wp.element;
+    useState,
+    useRef,
+    useEffect
+  } = wp.element,
+  {
+    attachment: mediaAttachment
+  } = wp.media,
+  ColorTypes = ['solid', 'gradient', 'image'];
 
 
 
@@ -3060,42 +3071,109 @@ const ColorComponent = props => {
       initial,
       hover
     } = value;
-    initialColor = initial.value;
-    hoverColor = hover.value;
+    initialColor = initial;
+    hoverColor = hover;
   } else {
     initialColor = value;
   }
 
   /**
+   * Add missing image fields
+   * 
+   * @since 1.0.0
+   * @param  { object }  imageFields     image fields that already exists in the data that is to be saved
+   */
+  const addMissingImageValues = imageFields => {
+    let defaultFieldValues = {
+      blend_mode: 'normal',
+      position: 'left top',
+      repeat: 'repeat',
+      size: 'auto'
+    };
+    return {
+      ...defaultFieldValues,
+      ...imageFields
+    };
+  };
+
+  /**
    * Handle color change
    * 
    * @since 1.0.0
+   * @param   { string|int }  newColor    New Color if solid or gradient is changed, image id if image is changed
+   * @param   { string }      colorType   type of color Solid || Gradient || Image
+   * @param   { string }      type        If initial or hover
    */
-  const handleColorChange = newColor => {
+  const handleColorChange = (newColor, colorType, type) => {
     let newValue = {};
     if (include_hover) {
       newValue = {
         ...value,
-        initial: {
-          type: 'solid',
-          value: newColor.hex
+        [type]: {
+          type: colorType,
+          value: newColor
         }
       };
     } else {
       newValue = {
-        type: 'solid',
-        value: newColor.hex
+        type: colorType,
+        value: newColor
       };
     }
     setValue(newValue);
+    setting.set(newValue);
   };
 
   /**
-   * Handle hover color change
+   * Handle image changes
    * 
    * @since 1.0.0
+   * @param   { string }  newValue    The new value to save
+   * @param   { string }  newValue    The key of the new value to save as
+   * @param   { string }  type        If initial or hover
    */
-  const handleHoverChange = () => {};
+  const handleImageChange = (val, field, type) => {
+    let newValue = {
+        ...value
+      },
+      objectToCheck = include_hover ? value[type] : value;
+    if (!Object.hasOwn(objectToCheck, 'image')) {
+      if (include_hover) {
+        newValue[type].image = {
+          [field]: val
+        };
+        newValue[type].image = addMissingImageValues(newValue[type].image || {});
+      } else {
+        newValue.image = {
+          [field]: val
+        };
+        newValue.image = addMissingImageValues(newValue.image);
+      }
+    } else {
+      if (include_hover) {
+        newValue = {
+          ...value,
+          [type]: {
+            ...value[type],
+            image: {
+              ...value[type].image,
+              [field]: val
+            }
+          }
+        };
+      } else {
+        newValue = {
+          ...value,
+          image: {
+            ...value.image,
+            [field]: val
+          }
+        };
+      }
+    }
+    setValue(newValue);
+    setting.set(newValue);
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "control-content is-block",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components__WEBPACK_IMPORTED_MODULE_0__.IanControlHead, {
@@ -3105,10 +3183,16 @@ const ColorComponent = props => {
       className: `content-wrapper${include_hover ? ' is-hover' : ''}`,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Color, {
         color: initialColor,
-        handleColorChange: handleColorChange
+        handleColorChange: handleColorChange,
+        handleImageChange: handleImageChange,
+        type: "initial",
+        color_types: true
       }), include_hover && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Color, {
         color: hoverColor,
-        handleColorChange: handleHoverChange
+        handleColorChange: handleColorChange,
+        handleImageChange: handleImageChange,
+        type: "hover",
+        color_types: true
       })]
     })]
   });
@@ -3121,12 +3205,59 @@ const ColorComponent = props => {
  */
 const Color = props => {
   const {
-    color,
-    handleColorChange
-  } = props;
+      color,
+      handleColorChange,
+      type,
+      handleImageChange
+    } = props,
+    {
+      type: colorType
+    } = color,
+    [activeButton, setActiveButton] = useState(colorType),
+    mediaFrame = useRef(null),
+    [imageUrl, setImageUrl] = useState('');
+  useEffect(() => {
+    if (color.type === 'image') {
+      const attachment = mediaAttachment(color.value);
+      attachment.fetch().then(() => {
+        const data = attachment.toJSON();
+        setImageUrl(data.url);
+      });
+    }
+  }, [color]);
+
+  /**
+   * Open media library
+   * 
+   * @since 1.0.0
+   */
+  const openMediaLibrary = () => {
+    if (mediaFrame.current) {
+      mediaFrame.current.open();
+      return;
+    }
+    mediaFrame.current = wp.media({
+      title: 'Select or Upload Image',
+      button: {
+        text: 'Use this image'
+      },
+      library: {
+        type: 'image'
+      },
+      multiple: false
+    });
+    mediaFrame.current.on('select', () => {
+      const attachment = mediaFrame.current.state().get('selection').first().toJSON();
+      setImageUrl(attachment.url);
+      handleColorChange(attachment.id, 'image', type);
+    });
+    mediaFrame.current.open();
+  };
+
+  // console.log( color )
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Dropdown, {
-    className: "ian-dropdown-container",
-    contentClassName: "ian-dropdown-popover",
+    className: "ian-dropdown-container ian-color-dropdown-container",
+    contentClassName: "ian-dropdown-popover ian-color-dropdown-popover",
     popoverProps: {
       placement: 'bottom-start',
       shift: true
@@ -3140,17 +3271,162 @@ const Color = props => {
         delay: 300,
         placement: "top",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ColorIndicator, {
-          colorValue: color,
+          colorValue: color.value,
           onClick: onToggle,
           className: "ian-color-indicator"
         })
       });
     },
     renderContent: () => {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ColorPicker, {
-        color: color,
-        onChangeComplete: handleColorChange,
-        enableAlpha: true
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "color-container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "container-head",
+          children: ColorTypes.map(_this => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Button, {
+            variant: activeButton === _this ? 'primary' : 'secondary',
+            text: __(escapeHTML(_this.charAt(0).toUpperCase() + _this.slice(1)), 'i-am-news'),
+            onClick: () => setActiveButton(_this),
+            className: "color-tab"
+          }))
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "container-body",
+          children: [activeButton === 'solid' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(ColorPicker, {
+            color: color.value,
+            onChange: newColor => handleColorChange(newColor, 'solid', type),
+            enableAlpha: true
+          }), activeButton === 'gradient' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(GradientPicker, {
+            value: color.value,
+            onChange: newColor => handleColorChange(newColor, 'gradient', type),
+            __nextHasNoMargin: true,
+            gradients: []
+          }), activeButton === 'image' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(Card, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(CardHeader, {
+                onClick: openMediaLibrary,
+                children: imageUrl ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                  src: imageUrl
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "add-image",
+                  children: __('Add Image', 'i-am-news')
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(CardBody, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SelectControl, {
+                  label: __('Blend Mode', 'i-am-news'),
+                  value: Object.hasOwn(color, 'image') ? color.image.blend_mode : 'normal',
+                  options: [{
+                    label: 'Normal',
+                    value: 'normal'
+                  }, {
+                    label: 'Multiply',
+                    value: 'multiply'
+                  }, {
+                    label: 'Screen',
+                    value: 'screen'
+                  }, {
+                    label: 'Overlay',
+                    value: 'overlay'
+                  }, {
+                    label: 'Darken',
+                    value: 'darken'
+                  }, {
+                    label: 'Lighten',
+                    value: 'lighten'
+                  }, {
+                    label: 'Color Dodge',
+                    value: 'color-dodge'
+                  }, {
+                    label: 'Saturation',
+                    value: 'saturation'
+                  }, {
+                    label: 'Color',
+                    value: 'color'
+                  }, {
+                    label: 'Luminosity',
+                    value: 'luminosity'
+                  }],
+                  onChange: newBlendMode => handleImageChange(newBlendMode, 'blend_mode', type),
+                  __next40pxDefaultSize: true,
+                  __nextHasNoMarginBottom: true
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SelectControl, {
+                  label: __('Position', 'i-am-news'),
+                  value: Object.hasOwn(color, 'image') ? color.image.position : 'left top',
+                  options: [{
+                    label: 'Left Top',
+                    value: 'left top'
+                  }, {
+                    label: 'Left Center',
+                    value: 'left center'
+                  }, {
+                    label: 'Left Bottom',
+                    value: 'left bottom'
+                  }, {
+                    label: 'Right Top',
+                    value: 'right top'
+                  }, {
+                    label: 'Right Center',
+                    value: 'right center'
+                  }, {
+                    label: 'Right Bottom',
+                    value: 'right bottom'
+                  }, {
+                    label: 'Center Top',
+                    value: 'center top'
+                  }, {
+                    label: 'Center Center',
+                    value: 'center center'
+                  }, {
+                    label: 'Center Bottom',
+                    value: 'center bottom'
+                  }],
+                  onChange: newPosition => handleImageChange(newPosition, 'position', type),
+                  __next40pxDefaultSize: true,
+                  __nextHasNoMarginBottom: true
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SelectControl, {
+                  label: __('Repeat', 'i-am-news'),
+                  value: Object.hasOwn(color, 'image') ? color.image.repeat : 'repeat',
+                  options: [{
+                    label: 'Repeat',
+                    value: 'repeat'
+                  }, {
+                    label: 'Repeat X',
+                    value: 'repeat-x'
+                  }, {
+                    label: 'Repeat Y',
+                    value: 'repeat-y'
+                  }, {
+                    label: 'No Repeat',
+                    value: 'no-repeat'
+                  }, {
+                    label: 'Space',
+                    value: 'space'
+                  }, {
+                    label: 'Round',
+                    value: 'round'
+                  }],
+                  onChange: newRepeat => handleImageChange(newRepeat, 'repeat', type),
+                  __next40pxDefaultSize: true,
+                  __nextHasNoMarginBottom: true
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SelectControl, {
+                  label: __('Size', 'i-am-news'),
+                  value: Object.hasOwn(color, 'image') ? color.image.size : 'auto',
+                  options: [{
+                    label: 'Auto',
+                    value: 'auto'
+                  }, {
+                    label: 'Contain',
+                    value: 'contain'
+                  }, {
+                    label: 'Cover',
+                    value: 'cover'
+                  }],
+                  onChange: newSize => handleImageChange(newSize, 'size', type),
+                  __next40pxDefaultSize: true,
+                  __nextHasNoMarginBottom: true
+                })]
+              })]
+            })
+          })]
+        })]
       });
     }
   });
@@ -5285,7 +5561,6 @@ const TextTransform = () => {
       value: textTransform,
       className: "typography-select",
       options: getOptions(),
-      variant: "minimal",
       onChange: handleChange
     })]
   });

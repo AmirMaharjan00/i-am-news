@@ -346,9 +346,37 @@
          * @param { array }     value   updated value of the setting
          */
         color: function( id, value ) {
-            const { selector, property } = IanConfig[ id ]
+            const { selector, property } = IanConfig[ id ],
+                isHoverType = Object.hasOwn( value, 'hover' )
 
-            // Utils.generateStyleTag( id, css )
+            let color = '', hoverColor = ''
+            if( isHoverType ) {
+                let { initial, hover } = value
+                color = initial.value
+                hoverColor = hover.value
+            } else {
+                color = value.value
+            }
+
+            let hoverSelector = `${ selector }:hover`, hoverSelectorExists = false
+            if( Object.hasOwn( IanConfig[ id ], 'hover_selector' ) ) {
+                hoverSelector = IanConfig[ id ].hover_selector
+                hoverSelectorExists = true
+            }
+
+            let css = `
+                ${ selector } {
+                    ${ property }: ${ color };
+                }
+            `
+            if( hoverSelectorExists && isHoverType ) {
+                css += `
+                    ${ hoverSelector } {
+                        ${ property }: ${ hoverColor };
+                    }
+                `
+            }
+            Utils.generateStyleTag( id, css )
         },
     }
 

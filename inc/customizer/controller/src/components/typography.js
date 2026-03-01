@@ -681,7 +681,6 @@ const TextTransform = () => {
             value = { textTransform }
             className = 'typography-select'
             options = { getOptions() }
-            variant = "minimal"
             onChange = { handleChange }
         />
     </div>

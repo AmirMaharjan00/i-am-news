@@ -20,7 +20,6 @@ export const BoxShadowComponent = ( props ) => {
      * @return void 
      */
     const handleChange = ( id, newValue ) => {
-        console.log( newValue )
         let updatedValue = {
             ...value,
             [ id ]: newValue

@@ -338,6 +338,7 @@
                     'scroll_to_top_background'  =>  [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_background' ),
                         'selector'  =>  '.ian-scroll-to-top',
+                        'hover_selector'  =>  '.ian-scroll-to-top:hover',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_background' ),
                         'property'  =>  'background'
                     ],
