@@ -113,7 +113,7 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'scroll_to_top_background' =>  [
-                        // 'sanitize_callback' =>  [ $this, 'sanitize_color' ],
+                        'sanitize_callback' =>  [ $this, 'sanitize_color' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],

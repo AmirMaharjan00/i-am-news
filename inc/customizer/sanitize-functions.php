@@ -15,7 +15,7 @@
          */
         trait Sanitize_Functions {
             /**
-             * Sanitize boolean
+             * MARK: Sanitize boolean
              * 
              * @since 1.0.0
              * @param bool $value   The current value
@@ -27,7 +27,7 @@
             }
 
             /**
-             * Sanitize positive and negetive number
+             * MARK: Sanitize positive and negetive number
              * 
              * @since 1.0.0
              * @param int|float $value      The current value
@@ -41,7 +41,69 @@
             }
 
             /**
-             * Sanitize unit
+             * MARK: Sanitize solid color
+             * 
+             * @since 1.0.0
+             * @param   string  $color  The solid color to sanitize
+             * @param   string  $default  The value to return in case of failure
+             */
+            public function sanitize_solid_color( $color, $default ): string {
+                $solid = preg_match( '/^#([a-z0-9]{3}|[a-z0-9]{6}|[a-z0-9]{8})$/i', $color );
+                if( $solid ) {
+                    return $color;
+                } else {
+                    return $default;
+                }
+            }
+
+            /**
+             * MARK: Sanitize gradient color
+             * 
+             * @since 1.0.0
+             * @param   string  $color  The solid gradient to sanitize
+             * @param   string  $default  The value to return in case of failure
+             */
+            public function sanitize_gradient_color( $color, $default ): string {
+                $gradient = preg_match( '/^(linear-gradient|radial-gradient|conic-gradient)\(.*\)$/i', $color );
+                if( $gradient ) {
+                    return $color;
+                } else {
+                    return $default;
+                }
+            }
+
+            /**
+             * MARK: Sanitize individual color
+             * 
+             * @since 1.0.0
+             * @param int|float $value      The current value
+             * @param int|float @default    The value to return in case of failure
+             */
+            public function sanitize_individual_color( $value, $default ) {
+                if ( ! is_array( $value ) ) return $default;
+
+                if( $value[ 'type' ] === 'solid' ) {
+                    // sanitize solid color
+                    return [
+                        'type' => 'solid',
+                        'value' => $this->sanitize_solid_color( $value[ 'value' ], $default[ 'value' ] )
+                    ];
+                } elseif( $value[ 'type' ] === 'gradient' ) {
+                    // santize gradient color
+                    return [
+                        'type'  =>  'gradient',
+                        'value' =>  $this->sanitize_gradient_color( $value[ 'value' ], $default[ 'value' ] )
+                    ];
+                } else {
+                    // if everything else fails
+                    return $default;
+                }
+
+                // sanitize gradient color
+            }
+
+            /**
+             * MARK: Sanitize unit
              * 
              * @since 1.0.0
              * @param int|float $value      The current value
@@ -56,7 +118,7 @@
             }
 
             /**
-             * Sanitize number unit 
+             * MARK: Sanitize number unit 
              * 
              * @since 1.0.0
              * @param int|float $value      The current value
@@ -84,7 +146,7 @@
             }
 
             /**
-             * Sanitize box shadow value
+             * MARK: Sanitize box shadow value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -93,18 +155,18 @@
             public function sanitize_box_shadow( $input, $setting ): array {
                 if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
                 return [
-                    'enable'   =>  $this->sanitize_boolean( $input[ 'enable' ], $setting->default[ 'enable' ] ),
+                    'enable'    =>  $this->sanitize_boolean( $input[ 'enable' ], $setting->default[ 'enable' ] ),
                     'offsetx'   =>  $this->sanitize_number( $input[ 'offsetx' ], $setting->default[ 'offsetx' ] ),
                     'offsety'   =>  $this->sanitize_number( $input[ 'offsety' ], $setting->default[ 'offsety' ] ),
-                    'inset'     =>  $this->sanitize_boolean( $input[ 'inset' ], $setting->default[ 'inset' ] ),
-                    'color'     =>  sanitize_hex_color( $input[ 'color' ] ) ?: $setting->default[ 'color' ],
-                    'blur'      =>  absint( $input[ 'blur' ] ) ?? $setting->default[ 'blur' ] ,
+                    'inset' =>  $this->sanitize_boolean( $input[ 'inset' ], $setting->default[ 'inset' ] ),
+                    'color' =>  $this->sanitize_solid_color( $input[ 'color' ], $setting->default[ 'color' ] ),
+                    'blur'  =>  absint( $input[ 'blur' ] ) ?? $setting->default[ 'blur' ] ,
                     'spread'    =>  $this->sanitize_number( $input[ 'spread' ], $setting->default[ 'spread' ] )
                 ];
             }
 
             /**
-             * Sanitize radio image value
+             * MARK: Sanitize radio image value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -122,7 +184,7 @@
             }
 
             /**
-             * Sanitize icon picker value
+             * MARK: Sanitize icon picker value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -153,7 +215,7 @@
             }
             
             /**
-             * Sanitize toggle value
+             * MARK: Sanitize toggle value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -166,7 +228,7 @@
             }
 
             /**
-             * Sanitize radio tab value
+             * MARK: Sanitize radio tab value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -185,7 +247,7 @@
             }
 
             /**
-             * Sanitize typography value
+             * MARK: Sanitize typography value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -271,7 +333,7 @@
             }
 
             /**
-             * Sanitize range value
+             * MARK: Sanitize range value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -305,7 +367,7 @@
             }
             
             /**
-             * Sanitize dimension value
+             * MARK: Sanitize dimension value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -365,7 +427,7 @@
             }
             
             /**
-             * Sanitize border value
+             * MARK: Sanitize border value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
@@ -409,17 +471,25 @@
             }
             
             /**
-             * Sanitize color value
+             * MARK: Sanitize color value
              * 
              * @since 1.0.0
              * @param array $input      The current value saved in db
              * @param object $setting  An instance of WP_Customize_Setting
              */
-            // public function sanitize_color( $input, $setting ): array {
-            //     if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
-            //     $control = $setting->manager->get_control( $setting->id );
-            //     $color_types = $control[ 'color_types' ];
-            //     $include_hover = $control[ 'include_hover' ];
-            // }
+            public function sanitize_color( $input, $setting ): array {
+                if( empty( $input ) || ! is_array( $input ) ) return $setting->default;
+                
+                if( array_key_exists( 'initial', $input ) ) {
+                    $initial = $input[ 'initial' ];
+                    $hover = $input[ 'hover' ];
+                    return [
+                        'initial'   =>  $this->sanitize_individual_color( $initial, $setting->default[ 'initial' ] ),
+                        'hover'   =>  $this->sanitize_individual_color( $hover, $setting->default[ 'hover' ] )
+                    ];
+                } else {
+                    return $this->sanitize_individual_color( $input, $setting->default );
+                }
+            }
         }
     }

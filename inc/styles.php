@@ -78,15 +78,33 @@
              * @param   string  $weight The font weight value from typogrpahy control
              */
             private function get_font_weight( $weight ): array {
-                if( ! $weight ) return [
-                    'weight'    =>  400,
-                    'style' =>  'regular'
-                ];
-
-                $string_regex = preg_match( '/^(\d+)([a-z]+)$/i', $weight, $matches );
+                $defualt_weight = "400" ;
+                $default_style = 'regular';
+                if( $weight === 'regular' ) {
+                    return [
+                        'weight'    =>  400,
+                        'style' =>  'normal'
+                    ];
+                } else if( $weight === 'italic' ) {
+                    return [
+                        'weight'    =>  400,
+                        'style' =>  'italic'
+                    ];
+                } else if( in_array( $weight, [ '100', '200', '300', '500', '600', '700', '800', '900' ] ) ) {
+                    return [
+                        'weight'    =>  $weight,
+                        'style' =>  'normal'
+                    ];
+                } else {
+                    $string_regex = preg_match( '/^(\d+)([a-z]+)$/i', $weight, $matches );
+                    return [
+                        'weight'    =>  $matches[ 1 ],
+                        'style' =>  $matches[ 2 ]
+                    ];
+                }
                 return [
-                    'weight'    =>  $matches[ 1 ],
-                    'style' =>  $matches[ 2 ]
+                    'weight'    =>  $defualt_weight,
+                    'style' =>  $default_style
                 ];
             }
 
