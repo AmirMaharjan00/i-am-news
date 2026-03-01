@@ -15,6 +15,7 @@ import { BorderComponent } from './components/border'
 import { DimensionComponent } from './components/dimension'
 import { HeadingToggleComponent } from './components/heading-toggle'
 import { CheckboxComponent } from './components/checkbox'
+import { ColorComponent } from './components/color'
 
 /**
  * MARK: Box Shadow
@@ -637,6 +638,55 @@ controlConstructor[ 'ian-checkbox' ] = Control.extend({
             } );
         } else {
             renderCheckbox()
+        }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Color
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'ian-color' ] = Control.extend({
+
+    ready: function () {
+        
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderColor = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <ColorComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderColor()
+            } );
+        } else {
+            renderColor()
         }
 
         /**

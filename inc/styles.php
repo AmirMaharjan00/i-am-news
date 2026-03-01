@@ -132,6 +132,10 @@
                     $css .= $tablet_width . $opening_bracket . $selector . $opening_bracket . implode( ';', $tablet ) . $closing_bracket . $closing_bracket;
                     $css .= $mobile_width . $opening_bracket . $selector . $opening_bracket . implode( ';', $mobile ) . $closing_bracket . $closing_bracket;
                     return $css;
+                } elseif( array_key_exists( 'initial', $value ) ) {
+                    // $css = array_map( fn( $property, $property_value ) => "$property: $property_value", array_keys( $value ), $value );
+                    // return $selector . $opening_bracket . implode( ';', $css ) . $closing_bracket;
+                    return '';
                 } else {
                     $css = array_map( fn( $property, $property_value ) => "$property: $property_value", array_keys( $value ), $value );
                     return $selector . $opening_bracket . implode( ';', $css ) . $closing_bracket;
@@ -273,6 +277,51 @@
                 return $this->generate_css( [
                     'selector'  =>  $args[ 'selector' ],
                     'value' =>  $dimension
+                ] );
+            }
+
+            /**
+             * Generate color dynamic css
+             * 
+             * @since 1.0.0
+             * @param   array   $args   The arguments required to generate css
+             */
+            public function dynamic_color( $args ): string {
+                
+                // $expected_keys = [ 'value', 'selector', 'default', 'property' ];
+                // if( array_diff( $expected_keys, array_keys( $args ) ) ) return '';
+                
+                // $value = $args[ 'value' ];
+                // if( serialize( $args[ 'default' ] ) === serialize( $value ) ) return '';
+                // $property = $args[ 'property' ];
+                // if( array_key_exists( 'desktop', $value ) ) {
+                //     $desktop = $value[ 'desktop' ];
+                //     unset( $desktop[ 'link' ] );
+                //     $tablet = $value[ 'tablet' ];
+                //     unset( $tablet[ 'link' ] );
+                //     $mobile = $value[ 'mobile' ];
+                //     unset( $mobile[ 'link' ] );
+                //     $dimension = [
+                //         'desktop'   =>  [
+                //             $property   =>  implode( 'px ', $desktop ) . 'px'
+                //         ],
+                //         'tablet'   =>  [
+                //             $property   =>  implode( 'px ', $tablet ) . 'px'
+                //         ],
+                //         'mobile'   =>  [
+                //             $property   =>  implode( 'px ', $mobile ) . 'px'
+                //         ],
+                //     ];
+                // } else {
+                //     unset( $value[ 'link' ] );
+                //     $dimension = [
+                //         $property   =>  implode( 'px ', $value ) . 'px'
+                //     ];
+                // }
+
+                return $this->generate_css( [
+                    'selector'  =>  $args[ 'selector' ],
+                    'value' =>  $args[ 'value' ]
                 ] );
             }
         }

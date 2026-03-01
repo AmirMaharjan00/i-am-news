@@ -125,5 +125,18 @@
                 ];
                 return $default;
             }
+
+            /**
+             * Get default typography
+             * 
+             * @since 1.0.0
+             */
+            protected function get_color( $color = [] ) {
+                $default = [
+                    'type'   =>  'solid',
+                    'value'    =>  '#000',
+                ];
+                return array_merge( $default, $color );
+            }
         }
     endif;

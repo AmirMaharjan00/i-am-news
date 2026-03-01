@@ -842,3 +842,30 @@ MARK: 12.0 Radio Tab
         display: block;
         text-align: center;
     }
+
+/*
+=========================
+MARK: 13.0 Color
+=========================
+*/
+    .customize-control-ian-color .control-content.is-block .control-head {
+        flex: 1;
+    }
+
+    .customize-control-ian-color .control-content.is-block .content-wrapper:not(.is-hover) {
+        width: 20%;
+        height: 40px;
+    }
+
+    .customize-control-ian-color .control-content.is-block .content-wrapper.is-hover {
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        gap: 5px;
+    }
+
+    .customize-control-ian-color .control-content.is-block .ian-dropdown-container {
+        height: 100%;
+    }

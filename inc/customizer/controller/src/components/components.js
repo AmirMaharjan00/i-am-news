@@ -9,7 +9,7 @@ const { useState, useEffect } = wp.element,
  * @since 1.0.0
  */
 export const IanControlHead = ( props ) => {
-    const { label, description, responsive } = props
+    const { label, description, responsive = false } = props
 
     return responsive ? 
     <div className="control-head-wrapper">

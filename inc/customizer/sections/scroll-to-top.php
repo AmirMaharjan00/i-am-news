@@ -64,6 +64,7 @@
                 $this->add_control( 'scroll_to_top_position' );
                 $this->tab = 'design';
                 $this->add_control( 'scroll_to_top_typography' );
+                $this->add_control( 'scroll_to_top_background' );
                 $this->add_control( 'scroll_to_top_border' );
                 $this->add_control( 'scroll_to_top_border_radius' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
@@ -108,6 +109,11 @@
                     ],
                     'scroll_to_top_typography' =>  [
                         'sanitize_callback' =>  [ $this, 'sanitize_typography' ],
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_background' =>  [
+                        // 'sanitize_callback' =>  [ $this, 'sanitize_color' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -232,6 +238,12 @@
                         'type'  =>  'typography',
                         'tab'  =>  'design',
                     ] ),
+                    'scroll_to_top_background' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Background', 'i-am-news' ),
+                        'type'  =>  'ian-color',
+                        'tab'  =>  'design',
+                        'include_hover'   =>  true
+                    ] ),
                     'scroll_to_top_border' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Border', 'i-am-news' ),
                         'type'  =>  'border',
@@ -288,6 +300,16 @@
                     'scroll_to_top_is_fixed' =>  false,
                     'scroll_to_top_position' =>  'right',
                     'scroll_to_top_typography'   =>  $this->get_typography(),
+                    'scroll_to_top_background' =>  [
+                        'initial'   =>  [
+                            'type'  =>  'solid',
+                            'value' =>  '#000'
+                        ],
+                        'hover'   =>  [
+                            'type'  =>  'solid',
+                            'value' =>  '#ff0000'
+                        ]
+                    ],
                     'scroll_to_top_border' =>  $this->get_border(),
                     'scroll_to_top_border_radius'   =>  $this->get_responsive( '5px', '5px', '5px' ),
                     'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
@@ -312,6 +334,12 @@
                         'selector'  =>  '.ian-scroll-to-top > span',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_typography' ),
                         'variable'  =>  false
+                    ],
+                    'scroll_to_top_background'  =>  [
+                        'value' =>  $this->get_customizer_value( 'scroll_to_top_background' ),
+                        'selector'  =>  '.ian-scroll-to-top',
+                        'default'   =>  $this->get_defaults( 'scroll_to_top_background' ),
+                        'property'  =>  'background'
                     ],
                     'scroll_to_top_border'  =>  [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_border' ),

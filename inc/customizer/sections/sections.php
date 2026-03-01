@@ -20,6 +20,8 @@
     use IAN\Customizer\Controls\Dimension as Dimension;
     use IAN\Customizer\Controls\Heading_Toggle as Heading_Toggle;
     use IAN\Customizer\Controls\Checkbox as Checkbox;
+    use IAN\Customizer\Controls\Color as Color;
+
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
     use IAN\Dynamic_Css as Dynamic_Css;
@@ -169,6 +171,7 @@
                     'dimension'    =>  [ $this, 'add_dimension' ],
                     'heading-toggle'    =>  [ $this, 'add_heading_toggle' ],
                     'ian-checkbox'    =>  [ $this, 'add_checkbox' ],
+                    'ian-color'    =>  [ $this, 'add_color' ],
                 ];
             }
 
@@ -184,6 +187,7 @@
                     'ian-number'    =>  [ $this, 'dynamic_number' ],
                     'border'    =>  [ $this, 'dynamic_border' ],
                     'dimension'    =>  [ $this, 'dynamic_dimension' ],
+                    'ian-color'    =>  [ $this, 'dynamic_color' ],
                 ];
             }
 
@@ -368,7 +372,7 @@
             }
 
             /**
-             * Add Text
+             * Add Dimension
              * 
              * @since 1.0.0
              */
@@ -377,7 +381,7 @@
             }
             
             /**
-             * Add Text
+             * Add Heading Toggle
              * 
              * @since 1.0.0
              */
@@ -386,12 +390,21 @@
             }
 
             /**
-             * Add Text
+             * Add Checkbox
              * 
              * @since 1.0.0
              */
             private function add_checkbox( $id, $control ) {
                 $this->manager->add_control( new Checkbox( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add Color
+             * 
+             * @since 1.0.0
+             */
+            private function add_color( $id, $control ) {
+                $this->manager->add_control( new Color( $this->manager, $id, $control ) );
             }
 
             /**

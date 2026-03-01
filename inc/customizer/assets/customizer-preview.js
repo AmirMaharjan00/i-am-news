@@ -30,6 +30,7 @@
                 'ian-number': 'number',
                 'border': 'border',
                 'dimension': 'dimension',
+                'ian-color': 'color',
             }
             return allControlTypes[ type ]
         },
@@ -335,6 +336,19 @@
             `
 
             Utils.generateStyleTag( id, css )
+        },
+
+        /**
+         * Color
+         * 
+         * @since 1.0.0
+         * @param { string }    id  updated value of the setting
+         * @param { array }     value   updated value of the setting
+         */
+        color: function( id, value ) {
+            const { selector, property } = IanConfig[ id ]
+
+            // Utils.generateStyleTag( id, css )
         },
     }
 
