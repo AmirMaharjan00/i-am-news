@@ -36,7 +36,7 @@
              * @since 1.0.0
              * @var array
              */
-            public $color_types = [];
+            public $color_types = [ 'solid' ];
 
             /**
              * To json

@@ -90,7 +90,9 @@ export const IanRangeControl = ( props ) => {
             { label: '%', value: '%' },
         ],
         rangeValue = 0,
-        selectValue = 'px'
+        selectValue = 'px',
+        showUnit = true,
+        showRange = true
     } = props
 
     /**
@@ -112,25 +114,29 @@ export const IanRangeControl = ( props ) => {
     }
 
     return <>
-        <RangeControl
-            __next40pxDefaultSize
-            __nextHasNoMarginBottom
-            value = { rangeValue }
-            className = 'ian-range-item'
-            onChange = { handleRangeChange }
-            min = { min }
-            max = { max }
-            step = { step }
-        />
-        <SelectControl
-            __nextHasNoMarginBottom
-            value = { selectValue }
-            className = 'ian-range-item'
-            options = { options }
-            variant = "minimal"
-            onChange = { handleSelectChange }
-            __next40pxDefaultSize
-        />
+        {
+            showRange && <RangeControl
+                __next40pxDefaultSize
+                __nextHasNoMarginBottom
+                value = { rangeValue }
+                className = 'ian-range-item'
+                onChange = { handleRangeChange }
+                min = { min }
+                max = { max }
+                step = { step }
+            />
+        }
+        {
+            showUnit && <SelectControl
+                __nextHasNoMarginBottom
+                __next40pxDefaultSize
+                value = { selectValue }
+                className = 'ian-range-item'
+                options = { options }
+                variant = "minimal"
+                onChange = { handleSelectChange }
+            />
+        }
     </>
 }
 

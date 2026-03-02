@@ -2,11 +2,9 @@ const { ColorIndicator, ColorPicker, Dropdown, Tooltip, GradientPicker, Button, 
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
     { useState, useRef, useEffect } = wp.element,
-    { attachment: mediaAttachment } = wp.media,
-    ColorTypes = [ 'solid', 'gradient', 'image' ]
+    { attachment: mediaAttachment } = wp.media
 
 import { IanControlHead } from "./components"
-import { getUnit, getValue } from '../functions'
 
 /**
  * Color Component
@@ -103,14 +101,14 @@ export const ColorComponent = ( props ) => {
                 handleColorChange = { handleColorChange }
                 handleImageChange = { handleImageChange }
                 type = 'initial'
-                color_types
+                color_types = { color_types }
             />
             { include_hover && <Color
                 color = { hoverColor }
                 handleColorChange = { handleColorChange }
                 handleImageChange = { handleImageChange }
                 type = 'hover'
-                color_types
+                color_types = { color_types }
             /> }
         </div>
     </div>
@@ -122,7 +120,7 @@ export const ColorComponent = ( props ) => {
  * @since 1.0.0
  */
 export const Color = ( props ) => {
-    const { color, handleColorChange, type, handleImageChange } = props,
+    const { color, handleColorChange, type, handleImageChange, color_types } = props,
         { type: colorType } = color,
         [ activeButton, setActiveButton ] = useState( colorType ),
         mediaFrame = useRef( null ),
@@ -189,19 +187,19 @@ export const Color = ( props ) => {
         } }
         renderContent = { () => {
             return <div className="color-container">
-                <div className="container-head">
+                { ( color_types.length > 1 ) && <div className="container-head">
                     {
-                        ColorTypes.map( _this => <Button
+                        color_types.map( _this => <Button
                             variant = { activeButton === _this ? 'primary' : 'secondary' }
                             text = { __( escapeHTML( _this.charAt( 0 ).toUpperCase() + _this.slice( 1 ) ), 'i-am-news' ) }
                             onClick = { () => setActiveButton( _this ) }
                             className = "color-tab"
                         /> )
                     }
-                </div>
+                </div> }
                 <div className="container-body">
                     {
-                        ( activeButton === 'solid' ) && <ColorPicker
+                        ( ( activeButton === 'solid' ) && color_types.includes( 'solid' ) ) && <ColorPicker
                             color = { color.value }
                             onChange = { ( newColor ) => {
                                 handleColorChange( newColor, 'solid', type )
@@ -211,7 +209,7 @@ export const Color = ( props ) => {
                         />
                     }
                     {
-                        ( activeButton === 'gradient' ) && <GradientPicker
+                        ( ( activeButton === 'gradient' ) && color_types.includes( 'gradient' ) ) && <GradientPicker
                             value = { color.value }
                             onChange = { ( newColor ) => {
                                 handleColorChange( newColor, 'gradient', type )
@@ -222,7 +220,7 @@ export const Color = ( props ) => {
                         />
                     }
                     {
-                        ( activeButton === 'image' ) &&  <>
+                        ( activeButton === 'image' ) && color_types.includes( 'image' ) && <>
                             <Card>
                                 <CardHeader onClick={ openMediaLibrary }>
                                     { 

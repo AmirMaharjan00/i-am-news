@@ -271,13 +271,21 @@
                 { enable, offsetx, offsety, inset, blur, spread, color } = value,
                 type = inset ? 'inset' : ''
 
-            if( ! enable ) return
+            let css = ''
 
-            let css = `
-                ${ selector } {
-                    box-shadow: ${ type } ${ offsetx }px ${ offsety }px ${ blur }px ${ spread }px ${ color };
-                }
-            `
+            if( enable ) {
+                css = `
+                    ${ selector } {
+                        box-shadow: ${ type } ${ offsetx }px ${ offsety }px ${ blur }px ${ spread }px ${ color };
+                    }
+                `
+            } else {
+                css = `
+                    ${ selector } {
+                        box-shadow: none;
+                    }
+                `
+            }
 
             Utils.generateStyleTag( id, css )
         },
@@ -326,7 +334,7 @@
          * @param { array }     value   updated value of the setting
          */
         typography: function( id, value ) {
-            const { selector, property } = IanConfig[ id ],
+            const { selector } = IanConfig[ id ],
                 { font_family, font_weight, font_size, line_height, letter_spacing, text_decoration, text_transform } = value,
                 { weight, style } = Utils.getFontWeightAndStyle( font_weight )
 

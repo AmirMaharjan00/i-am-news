@@ -20,13 +20,13 @@
              */
             protected function get_box_shadow( $box_shadow = [] ) {
                 $default = [
-                    'enable'    =>  true,
+                    'enable'    =>  false,
                     'offsetx'   =>  0,
                     'offsety'   =>  0,
                     'inset' =>  false,
-                    'color' =>  '#000',
-                    'blur'  =>  0,
-                    'spread'    =>  0
+                    'color' =>  '#00000010',
+                    'blur'  =>  5,
+                    'spread'    =>  3
                 ];
                 return array_merge( $default, $box_shadow );
             }
@@ -51,17 +51,17 @@
              */
             protected function get_typography( $typography = [] ) {
                 $default = [
-                    'font_family'   => [ 'value' => 'Jost', 'label' => 'Jost' ],
-                    'font_weight'   =>  '500italic',
+                    'font_family'   => [ 'value' => 'Inter', 'label' => 'Inter' ],
+                    'font_weight'   =>  '500',
                     'font_size'   => [
-                        'desktop'   =>  '13px',
-                        'tablet'   =>  '13px',
-                        'mobile'   =>  '13px'
+                        'desktop'   =>  '16px',
+                        'tablet'   =>  '14px',
+                        'mobile'   =>  '12px'
                     ],
                     'line_height'   => [
-                        'desktop'   =>  '21%',
-                        'tablet'   =>  '21%',
-                        'mobile'   =>  '21%'
+                        'desktop'   =>  1.5,
+                        'tablet'   =>  1.3,
+                        'mobile'   =>  1.1
                     ],
                     'letter_spacing'   => [
                         'desktop'   =>  '0em',
@@ -100,12 +100,12 @@
             protected function get_border( $border = [] ) {
                 $default = [
                     'color' =>  '#000',
-                    'style' =>  'solid',
+                    'style' =>  'none',
                     'width' =>  [
-                        'top'   =>  0,
-                        'right'   =>  0,
-                        'bottom'   =>  0,
-                        'left'   =>  0,
+                        'top'   =>  1,
+                        'right'   =>  1,
+                        'bottom'   =>  1,
+                        'left'   =>  1,
                         'link'   =>  true
                     ]
                 ];

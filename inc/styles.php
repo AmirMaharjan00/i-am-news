@@ -354,7 +354,7 @@
                 if( array_diff( $expected_keys, array_keys( $args ) ) ) return '';
                 
                 $value = $args[ 'value' ];
-                // if( serialize( $args[ 'default' ] ) === serialize( $value ) ) return '';
+                if( serialize( $args[ 'default' ] ) === serialize( $value ) ) return '';
                 $property = $args[ 'property' ];
                 if( array_key_exists( 'initial', $value ) ) {
                     $initial = $value[ 'initial' ];

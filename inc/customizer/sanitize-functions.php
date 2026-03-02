@@ -341,9 +341,9 @@
                 // sanitize line height
                 if( array_diff( $responsive_keys, array_keys( $line_height ) ) ) return $setting->default;
                 $sanitized_line_height = [
-                    'desktop'   =>  $this->sanitize_number_unit( $line_height[ 'desktop' ], $setting->default[ 'line_height' ][ 'desktop' ] ),
-                    'tablet'   =>  $this->sanitize_number_unit( $line_height[ 'tablet' ], $setting->default[ 'line_height' ][ 'tablet' ] ),
-                    'mobile'   =>  $this->sanitize_number_unit( $line_height[ 'mobile' ], $setting->default[ 'line_height' ][ 'mobile' ] )
+                    'desktop'   =>  $this->sanitize_number( $line_height[ 'desktop' ], $setting->default[ 'line_height' ][ 'desktop' ] ),
+                    'tablet'   =>  $this->sanitize_number( $line_height[ 'tablet' ], $setting->default[ 'line_height' ][ 'tablet' ] ),
+                    'mobile'   =>  $this->sanitize_number( $line_height[ 'mobile' ], $setting->default[ 'line_height' ][ 'mobile' ] )
                 ];
 
                 // sanitize letter spacing

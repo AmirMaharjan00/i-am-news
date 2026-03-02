@@ -1,4 +1,4 @@
-const { Dropdown, SelectControl } = wp.components,
+const { Dropdown, SelectControl, RangeControl } = wp.components,
     { useState, useEffect, useContext, createContext } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml
@@ -437,23 +437,7 @@ const FontSize = () => {
  * @since 1.0.0
  */
 const LineHeight = () => {
-    const { lineHeight, updateValue } = useContext( TypographyContext ),
-        unit = getUnit( lineHeight ),
-        value = getValue( lineHeight )
-
-    const getMax = () => {
-        switch( unit ) {
-            case "%" :
-                    return 100
-                break;
-            case "px" :
-                    return 300
-                break;
-            default : 
-                    return 5
-                break;
-        }
-    }
+    const { lineHeight, updateValue } = useContext( TypographyContext )
 
     /**
      * Handle range change
@@ -461,18 +445,7 @@ const LineHeight = () => {
      * @since 1.0.0
      */
     const handleRangeChange = ( val ) => {
-        let newValue = `${ val }${ unit }`
-        updateValue( 'line_height', newValue )
-    }
-
-    /**
-     * Handle select change
-     * 
-     * @since 1.0.0
-     */
-    const handleSelectChange = ( val ) => {
-        let newValue = `${ value }${ val }`
-        updateValue( 'line_height', newValue )
+        updateValue( 'line_height', val )
     }
 
     return <div className="typography-block line-height-block">
@@ -480,15 +453,14 @@ const LineHeight = () => {
             <span className="label">{ __( 'Line Height' , 'i-am-news') }</span>
             <IanResponsiveIcons />
         </div>
-        <div className="range-control">
+        <div className="range-control single-item">
             <IanRangeControl
                 min = { 0 }
-                max = { getMax() }
-                step = { getStep( unit ) }
-                selectValue = { unit }
-                rangeValue = { value }
+                max = { 5 }
+                step = { 0.1 }
+                showUnit = { false }
+                rangeValue = { lineHeight }
                 handleRangeChange = { handleRangeChange }
-                handleSelectChange = { handleSelectChange }
             />
         </div>
     </div>

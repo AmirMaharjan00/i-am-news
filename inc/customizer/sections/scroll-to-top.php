@@ -64,6 +64,7 @@
                 $this->add_control( 'scroll_to_top_position' );
                 $this->tab = 'design';
                 $this->add_control( 'scroll_to_top_typography' );
+                $this->add_control( 'scroll_to_top_color' );
                 $this->add_control( 'scroll_to_top_background' );
                 $this->add_control( 'scroll_to_top_border' );
                 $this->add_control( 'scroll_to_top_border_radius' );
@@ -109,6 +110,11 @@
                     ],
                     'scroll_to_top_typography' =>  [
                         'sanitize_callback' =>  [ $this, 'sanitize_typography' ],
+                        'transport'   =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'scroll_to_top_color' =>  [
+                        'sanitize_callback' =>  [ $this, 'sanitize_color' ],
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -238,16 +244,28 @@
                         'type'  =>  'typography',
                         'tab'  =>  'design',
                     ] ),
-                    'scroll_to_top_background' =>  array_merge( $this->common, [
-                        'label' =>  esc_html__( 'Background', 'i-am-news' ),
+                    'scroll_to_top_color' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Color', 'i-am-news' ),
                         'type'  =>  'ian-color',
                         'tab'  =>  'design',
                         'include_hover'   =>  true
                     ] ),
+                    'scroll_to_top_background' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Background', 'i-am-news' ),
+                        'type'  =>  'ian-color',
+                        'tab'  =>  'design',
+                        'include_hover'   =>  true,
+                        'color_types'   =>  [ 'solid', 'gradient' ]
+                    ] ),
                     'scroll_to_top_border' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Border', 'i-am-news' ),
                         'type'  =>  'border',
-                        'tab'  =>  'design'
+                        'tab'  =>  'design',
+                        'input_attrs'   =>  [
+                            'min'   =>  1,
+                            'max'   =>  20,
+                            'step'  =>  1
+                        ]
                     ] ),
                     'scroll_to_top_border_radius' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),
@@ -256,7 +274,7 @@
                         'responsive'    =>  true,
                         'input_attrs'   =>  [
                             'min'   =>  0,
-                            'max'   =>  200,
+                            'max'   =>  100,
                             'step'  =>  1
                         ]
                     ] ),
@@ -297,10 +315,10 @@
                     'scroll_to_top_layouts' =>  'one',
                     'scroll_to_top_label' =>  esc_html__( 'Go to Top', 'i-am-news' ),
                     'scroll_to_top_icon_picker' =>  $this->get_icon_picker(),
-                    'scroll_to_top_is_fixed' =>  false,
+                    'scroll_to_top_is_fixed' =>  true,
                     'scroll_to_top_position' =>  'right',
                     'scroll_to_top_typography'   =>  $this->get_typography(),
-                    'scroll_to_top_background' =>  [
+                    'scroll_to_top_color' =>  [
                         'initial'   =>  [
                             'type'  =>  'solid',
                             'value' =>  '#000'
@@ -310,13 +328,25 @@
                             'value' =>  '#ff0000'
                         ]
                     ],
-                    'scroll_to_top_border' =>  $this->get_border(),
-                    'scroll_to_top_border_radius'   =>  $this->get_responsive( '5px', '5px', '5px' ),
-                    'scroll_to_top_box_shadow' =>  $this->get_box_shadow([
-                        'offsetx'   =>  10,
-                        'offsety'   =>  10
-                    ]),
-                    'scroll_to_top_padding' => $this->get_dimension(),
+                    'scroll_to_top_background' =>  [
+                        'initial'   =>  [
+                            'type'  =>  'solid',
+                            'value' =>  '#ffff00'
+                        ],
+                        'hover'   =>  [
+                            'type'  =>  'solid',
+                            'value' =>  '#ff0000'
+                        ]
+                    ],
+                    'scroll_to_top_border' =>  $this->get_border( [ 'stye' => 'none' ] ),
+                    'scroll_to_top_border_radius'   =>  $this->get_responsive( '0px', '0px', '0px' ),
+                    'scroll_to_top_box_shadow' =>  $this->get_box_shadow(),
+                    'scroll_to_top_padding' => $this->get_dimension( [
+                        'top'   =>  5,
+                        'right'   =>  5,
+                        'bottom'   =>  5,
+                        'left'   =>  5
+                    ] ),
                     'scroll_to_top_heading_toggle'    =>  'one',
                     'scroll_to_top_checkbox'    =>  'one',
                 ];
@@ -334,6 +364,13 @@
                         'selector'  =>  '.ian-scroll-to-top > span',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_typography' ),
                         'variable'  =>  false
+                    ],
+                    'scroll_to_top_color'  =>  [
+                        'value' =>  $this->get_customizer_value( 'scroll_to_top_color' ),
+                        'selector'  =>  '.ian-scroll-to-top > span',
+                        'hover_selector'  =>  '.ian-scroll-to-top:hover > span',
+                        'default'   =>  $this->get_defaults( 'scroll_to_top_color' ),
+                        'property'  =>  'color'
                     ],
                     'scroll_to_top_background'  =>  [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_background' ),

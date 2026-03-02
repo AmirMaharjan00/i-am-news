@@ -574,7 +574,11 @@ MARK: 7.0 Typography
         font-size: 15px;
     }
     
-    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control {
+    .ian-dropdown-popover.typography-popover .typography-block .range-control.single-item .ian-range-item.components-range-control {
+        width: 100%;
+    }
+    
+    .ian-dropdown-popover.typography-popover .typography-block .range-control:not(.single-item) .ian-range-item.components-range-control {
         width: 90%;
     }
 
@@ -582,6 +586,7 @@ MARK: 7.0 Typography
         flex: 1;
     }
 
+    .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-number-control,
     .ian-dropdown-popover.typography-popover .typography-block .range-control .ian-range-item.components-range-control .components-number-control {
         margin-left: 5px !important;
     }
