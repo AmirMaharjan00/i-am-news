@@ -163,7 +163,6 @@
          * @returns { css }
          */
         getColorCss: function( color, property ) {
-            console.log( color )
             let { type, value } = color
             if( type === 'image' ) {
                 let css = ''

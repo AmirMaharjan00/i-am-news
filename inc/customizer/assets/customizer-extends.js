@@ -18611,6 +18611,7 @@ const ConditionalRendering = {
         self.settingsMap[setting].push(control); // push setting on which the control should show or hide
       });
     });
+    this.initialRendering();
     this.bindSettings();
   },
   bindSettings: function () {
@@ -18620,11 +18621,11 @@ const ConditionalRendering = {
       if (!setting) return;
       setting.bind(function (settingValue) {
         self.settingsMap[settingId].forEach(function (control) {
-          let test = self.evaluate(settingValue, control);
-          if (test) {
-            control.container.show();
+          let evaluate = self.evaluate(settingValue, control);
+          if (evaluate) {
+            control.container.slideDown();
           } else {
-            control.container.hide();
+            control.container.slideUp();
           }
         });
       });
@@ -18663,12 +18664,22 @@ const ConditionalRendering = {
     });
     if (relation === 'OR') return results.some(Boolean);
     return results.every(Boolean);
+  },
+  initialRendering: function () {
+    let self = this;
+    Object.keys(this.settingsMap).map(settingId => {
+      let settingValue = customize(settingId).get();
+      self.settingsMap[settingId].map(instance => {
+        let evaluate = self.evaluate(settingValue, instance);
+        if (!evaluate) {
+          instance.container.hide();
+        }
+      });
+    });
   }
 };
 customize.bind('ready', function () {
   ConditionalRendering.init();
-
-  // console.log( ConditionalRendering )
 });
 })();
 

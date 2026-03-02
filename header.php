@@ -31,7 +31,6 @@ use IAN\Customizer\Section\Section;
 			<div class="row">
 				<div class="site-branding">
 					<?php
-					var_dump( get_theme_mod( 'scroll_to_top_background' ) );
 					the_custom_logo();
 					if ( is_front_page() && is_home() ) :
 						?>
