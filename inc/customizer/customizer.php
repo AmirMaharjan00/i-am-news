@@ -91,6 +91,11 @@ function i_am_news_customize_register( $wp_customize ) {
 	*/
 	require_once get_template_directory() . '/inc/customizer/custom-controls/color/color.php';
 
+	/**
+	 * Builder Control
+	*/
+	require_once get_template_directory() . '/inc/customizer/custom-controls/builder/builder.php';
+
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial(
 			'blogname',

@@ -21,6 +21,7 @@
     use IAN\Customizer\Controls\Heading_Toggle as Heading_Toggle;
     use IAN\Customizer\Controls\Checkbox as Checkbox;
     use IAN\Customizer\Controls\Color as Color;
+    use IAN\Customizer\Controls\Builder as Builder;
 
     use IAN\Customizer\Customizer_Defaults as Customizer_Defaults;
     use IAN\Customizer\Sanitize_Functions as Sanitize_Functions;
@@ -172,6 +173,7 @@
                     'heading-toggle'    =>  [ $this, 'add_heading_toggle' ],
                     'ian-checkbox'    =>  [ $this, 'add_checkbox' ],
                     'ian-color'    =>  [ $this, 'add_color' ],
+                    'ian-builder'    =>  [ $this, 'add_builder' ],
                 ];
             }
 
@@ -408,6 +410,15 @@
             }
 
             /**
+             * Add builder
+             * 
+             * @since 1.0.0
+             */
+            private function add_builder( $id, $control ) {
+                $this->manager->add_control( new Builder( $this->manager, $id, $control ) );
+            }
+
+            /**
              * Get defaults
              * 
              * @since 1.0.0
@@ -438,7 +449,9 @@
                 $dynamic_css_args = $this->get_dynamic_css_args();
                 foreach( $dynamic_css_args as $id => $args ) {
                     $control_args = $this->get_controls( $id );
-                    $dynamic_css[ $id ] = call_user_func( $this->dynamic_styles[ $control_args[ 'type' ] ], $args );
+                    $css = call_user_func( $this->dynamic_styles[ $control_args[ 'type' ] ], $args );
+                    if( ! $css ) continue;
+                    $dynamic_css[ $id ] = $css;
                 }
                 $replaced_id = str_replace( '-', '_', $this->id );
                 return apply_filters( "{$replaced_id}_dynamic_css_filter", $dynamic_css );

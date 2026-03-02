@@ -175,3 +175,8 @@ require_once get_template_directory() . '/inc/customizer/sections/sections.php';
  * Scroll to top section
 */
 require_once get_template_directory() . '/inc/customizer/sections/scroll-to-top.php';
+
+/**
+ * Header builder section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/header-builder.php';

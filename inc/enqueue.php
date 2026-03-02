@@ -19,6 +19,7 @@
     use function comments_open;
 
     use IAN\Customizer\Section\Scroll_To_Top as Scroll_To_Top;
+    use IAN\Customizer\Section\Header_Builder as Header_Builder;
 
     if( ! class_exists( __NAMESPACE__ . '\\Enqueue' ) ) :
         /**
@@ -120,10 +121,15 @@
              */
             private function generate_whole_site_dynamic_css() {
                 $scroll_to_top = Scroll_To_Top::get_instance()->render_dynamic_css();
-                $dynamic_css = [
-                    implode( "\n", $scroll_to_top )
-                ];
-                return implode( ' ', $dynamic_css );
+                $header_builder = Header_Builder::get_instance()->render_dynamic_css();
+                $dynamic_css = [];
+                if( $scroll_to_top ) $dynamic_css[] = implode( "\n", $scroll_to_top );
+                if( $header_builder ) $dynamic_css[] = implode( "\n", $header_builder );
+                if( $dynamic_css ) {
+                    return implode( ' ', $dynamic_css );
+                } else {
+                    return '';
+                }
             }
 
             /**
@@ -133,7 +139,8 @@
              */
             private function get_preview_configs(): array {
                 $raw_configs = array_merge(
-                    Scroll_To_Top::get_instance()->get_dynamic_css_args( true )
+                    Scroll_To_Top::get_instance()->get_dynamic_css_args( true ),
+                    Header_Builder::get_instance()->get_dynamic_css_args( true ),
                 );
                 $configs = [];
                 foreach( $raw_configs as $id => $args ) {

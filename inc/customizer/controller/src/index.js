@@ -16,6 +16,7 @@ import { DimensionComponent } from './components/dimension'
 import { HeadingToggleComponent } from './components/heading-toggle'
 import { CheckboxComponent } from './components/checkbox'
 import { ColorComponent } from './components/color'
+import { BuilderComponent } from './components/builder'
 
 /**
  * MARK: Box Shadow
@@ -687,6 +688,57 @@ controlConstructor[ 'ian-color' ] = Control.extend({
             } );
         } else {
             renderColor()
+        }
+
+        /**
+         * Unbind if the controls container <li> tag is remoed
+         */
+        container.on( 'remove', () => reactRoot.unmount() );
+    }
+});
+
+/**
+ * MARK: Builder
+ * 
+ * @package I am News
+ * @since 1.0.0
+ */
+controlConstructor[ 'ian-builder' ] = Control.extend({
+
+    ready: function () {
+        
+        const control = this,
+            { params, container, section: _thisSection, setting } = control,
+            root = container.find( '.root' )[ 0 ],
+            reactRoot = createRoot( root ),
+            props = { 
+                ...params,
+                setting
+            }
+
+        console.log( control )
+        
+        let rendered = false; // ensure we render only once
+
+        /**
+         * Function to render your React toggle
+         */
+        const renderBuilder = () => {
+            if ( rendered ) return;
+            rendered = true;
+            reactRoot.render( <BuilderComponent { ...props } /> )
+        };
+
+        /**
+         * Lazy load when the section expands
+         * Component will mount only when section is mounted
+         */
+        if( _thisSection ) {
+            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                if( isExpanded ) renderBuilder()
+            } );
+        } else {
+            renderBuilder()
         }
 
         /**
