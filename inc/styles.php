@@ -320,27 +320,17 @@
             private function get_color_css( $color_args, $property ) {
                 $value = $color_args[ 'value' ];
                 if( $color_args[ 'type' ] === 'image' ) {
-                    $image_url = wp_get_attachment_image_src( $value );
-                    $background_image_css = [
-                        'background-image'  =>  'url('. $image_url[ 0 ] .')'
-                    ];
-
                     if( isset( $color_args[ 'image' ] ) ) {
                         $image_properties = $color_args[ 'image' ];
-                        $blend_mode = $image_properties[ 'blend_mode' ];
-                        $position = $image_properties[ 'position' ];
-                        $repeat = $image_properties[ 'repeat' ];
-                        $size = $image_properties[ 'size' ];
-                        $background_properties = [
-                            'background-blend-mode' =>  $blend_mode,
-                            'background-position'   =>  $position,
-                            'background-repeat' =>  $repeat,
-                            'background-size'   =>  $size
-                        ];
-                        return array_merge( $background_image_css, $background_properties );
+                        $background_properties = [];
+                        if( array_key_exists( 'url', $image_properties ) ) $background_properties[ 'background-image' ] = 'url('. $image_properties[ 'url' ] .')';
+                        if( array_key_exists( 'position', $image_properties ) ) $background_properties[ 'background-position' ] = $image_properties[ 'position' ];
+                        if( array_key_exists( 'repeat', $image_properties ) ) $background_properties[ 'background-repeat' ] = $image_properties[ 'repeat' ];
+                        if( array_key_exists( 'size', $image_properties ) ) $background_properties[ 'background-size' ] = $image_properties[ 'size' ];
+                        return $background_properties;
+                    } else {
+                        return [];
                     }
-    
-                    return $background_image_css;
                 } else {
                     return [
                         $property   =>  $value

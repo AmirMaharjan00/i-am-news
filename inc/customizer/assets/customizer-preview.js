@@ -152,6 +152,32 @@
                 }, [] ).join( '&' )
             
             return `${ googleFontsURL }?${ fontArgs }&display=swap`
+        },
+
+        /**
+         * Get color css
+         * 
+         * @since 1.0.0
+         * @param { array } color   The color value saved in db
+         * @param { string } property   The css property
+         * @returns { css }
+         */
+        getColorCss: function( color, property ) {
+            console.log( color )
+            let { type, value } = color
+            if( type === 'image' ) {
+                let css = ''
+                if( Object.hasOwn( color, 'image' ) ) {
+                    let image = color.image
+                    if( Object.hasOwn( image, 'url' ) ) css += `background-image: url(${ image.url });`
+                    if( Object.hasOwn( image, 'position' ) ) css += `background-position: ${ image.position };`
+                    if( Object.hasOwn( image, 'repeat' ) ) css += `background-repeat: ${ image.repeat };`
+                    if( Object.hasOwn( image, 'size' ) ) css += `background-size: ${ image.size };`
+                }
+                return css
+            } else {
+                return `${ property }: ${ value }`
+            }
         }
     }
     
@@ -347,13 +373,11 @@
             const { selector, property } = IanConfig[ id ],
                 isHoverType = Object.hasOwn( value, 'hover' )
 
-            let color = '', hoverColor = ''
+            let color = value, hoverColor = ''
             if( isHoverType ) {
                 let { initial, hover } = value
-                color = initial.value
-                hoverColor = hover.value
-            } else {
-                color = value.value
+                color = initial
+                hoverColor = hover
             }
 
             let hoverSelector = `${ selector }:hover`, hoverSelectorExists = false
@@ -363,15 +387,11 @@
             }
 
             let css = `
-                ${ selector } {
-                    ${ property }: ${ color };
-                }
+                ${ selector } { ${ Utils.getColorCss( color, property ) } }
             `
             if( hoverSelectorExists && isHoverType ) {
                 css += `
-                    ${ hoverSelector } {
-                        ${ property }: ${ hoverColor };
-                    }
+                    ${ hoverSelector } { ${ Utils.getColorCss( hoverColor, property ) } }
                 `
             }
             Utils.generateStyleTag( id, css )

@@ -27,26 +27,9 @@ export const ColorComponent = ( props ) => {
         initialColor = value
     }
 
-    /**
-     * Add missing image fields
-     * 
-     * @since 1.0.0
-     * @param  { object }  imageFields     image fields that already exists in the data that is to be saved
-     */
-    const addMissingImageValues = ( imageFields ) => {
-        let defaultFieldValues = {
-            blend_mode: 'normal',
-            position: 'left top',
-            repeat: 'repeat',
-            size: 'auto',
-        }
-        
-        return {
-            ...defaultFieldValues,
-            ...imageFields
-        }
-    }
-
+    useEffect( () => {
+        setting.set( value )
+    }, [ value ] )
 
     /**
      * Handle color change
@@ -57,23 +40,22 @@ export const ColorComponent = ( props ) => {
      * @param   { string }      type        If initial or hover
      */
     const handleColorChange = ( newColor, colorType, type ) => {
-        let newValue = {}
-        if( include_hover ) {
-            newValue = {
-                ...value,
-                [ type ]: {
+        setValue( prev => {
+            if( include_hover ) {
+                return {
+                    ...prev,
+                    [ type ]: {
+                        type: colorType,
+                        value: newColor
+                    }
+                }
+            } else {
+                return {
                     type: colorType,
                     value: newColor
                 }
             }
-        } else {
-            newValue = {
-                type: colorType,
-                value: newColor
-            }
-        }
-        setValue( newValue )
-        setting.set( newValue )
+        } )
     }
 
     /**
@@ -85,40 +67,28 @@ export const ColorComponent = ( props ) => {
      * @param   { string }  type        If initial or hover
      */
     const handleImageChange = ( val, field, type ) => {
-        let newValue = { ...value },
-            objectToCheck = include_hover ? value[ type ] : value
-        if( ! Object.hasOwn( objectToCheck, 'image' ) ) {
+        setValue( prev => {
             if( include_hover ) {
-                newValue[ type ].image = { [ field ]: val }
-                newValue[ type ].image = addMissingImageValues( newValue[ type ].image || {} )
-            } else {
-                newValue.image = { [ field ]: val }
-                newValue.image = addMissingImageValues( newValue.image )
-            }
-        } else {
-            if( include_hover ) {
-                newValue = {
-                    ...value,
+                return {
+                    ...prev,
                     [ type ]: {
-                        ...value[ type ],
+                        ...prev[ type ],
                         image: {
-                            ...value[ type ].image,
+                            ...prev[ type ].image,
                             [ field ]: val
                         }
                     }
                 }
             } else {
-                newValue = {
-                    ...value,
+                return {
+                    ...prev,
                     image: {
-                        ...value.image,
+                        ...prev.image,
                         [ field ]: val
                     }
                 }
             }
-        }
-        setValue( newValue )
-        setting.set( newValue )
+        } )
     }
 
     return <div className="control-content is-block">
@@ -195,12 +165,12 @@ export const Color = ( props ) => {
             
             setImageUrl( attachment.url );
             handleColorChange( attachment.id, 'image', type )
+            handleImageChange( attachment.url, 'url', type )
         } );
 
         mediaFrame.current.open();
     };
 
-    // console.log( color )
     return <Dropdown
         className = 'ian-dropdown-container ian-color-dropdown-container'
         contentClassName = 'ian-dropdown-popover ian-color-dropdown-popover'
@@ -233,14 +203,20 @@ export const Color = ( props ) => {
                     {
                         ( activeButton === 'solid' ) && <ColorPicker
                             color = { color.value }
-                            onChange = { ( newColor ) => handleColorChange( newColor, 'solid', type ) }
+                            onChange = { ( newColor ) => {
+                                handleColorChange( newColor, 'solid', type )
+                                setImageUrl( '' )
+                            } }
                             enableAlpha
                         />
                     }
                     {
                         ( activeButton === 'gradient' ) && <GradientPicker
                             value = { color.value }
-                            onChange = { ( newColor ) => handleColorChange( newColor, 'gradient', type ) }
+                            onChange = { ( newColor ) => {
+                                handleColorChange( newColor, 'gradient', type )
+                                setImageUrl( '' )
+                            } }
                             __nextHasNoMargin
                             gradients = { [] }
                         />
@@ -256,25 +232,6 @@ export const Color = ( props ) => {
                                     }
                                 </CardHeader>
                                 <CardBody>
-                                    <SelectControl
-                                        label = { __( 'Blend Mode', 'i-am-news' ) }
-                                        value = { Object.hasOwn( color, 'image' ) ? color.image.blend_mode : 'normal' }
-                                        options = { [
-                                            { label: 'Normal', value: 'normal' },
-                                            { label: 'Multiply', value: 'multiply' },
-                                            { label: 'Screen', value: 'screen' },
-                                            { label: 'Overlay', value: 'overlay' },
-                                            { label: 'Darken', value: 'darken' },
-                                            { label: 'Lighten', value: 'lighten' },
-                                            { label: 'Color Dodge', value: 'color-dodge' },
-                                            { label: 'Saturation', value: 'saturation' },
-                                            { label: 'Color', value: 'color' },
-                                            { label: 'Luminosity', value: 'luminosity' },
-                                        ] }
-                                        onChange = { ( newBlendMode ) => handleImageChange( newBlendMode, 'blend_mode', type ) }
-                                        __next40pxDefaultSize
-                                        __nextHasNoMarginBottom
-                                    />
                                     <SelectControl
                                         label = { __( 'Position', 'i-am-news' ) }
                                         value = { Object.hasOwn( color, 'image' ) ? color.image.position : 'left top' }

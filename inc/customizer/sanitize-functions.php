@@ -73,6 +73,54 @@
             }
 
             /**
+             * MARK: Sanitize background image
+             * 
+             * @since 1.0.0
+             * @param   string  $color  The solid gradient to sanitize
+             * @param   string  $default  The value to return in case of failure
+             */
+            public function sanitize_image( $image, $default ) {
+                if( ! is_array( $image ) ) return $default;
+                $type = 'image'; $value = 0; $image_properties = [];
+
+                if( wp_attachment_is( 'image', $image[ 'value' ] )  ) {
+                    $value = $image[ 'value' ];
+                } else {
+                    return $default;
+                }
+
+                if( array_key_exists( 'image', $image ) ) {
+                    $image_keys = $image[ 'image' ];
+                    if( array_key_exists( 'url', $image_keys ) ) {
+                        $image_properties[ 'url' ] = sanitize_url( $image_keys[ 'url' ] );
+                    }
+
+                    if( array_key_exists( 'position', $image_keys ) ) {
+                        $position_values = [ 'left top', 'left center', 'left bottom', 'right top', 'right center', 'right bottom', 'center top', 'center center', 'center bottom' ];
+                        $image_properties[ 'position' ] = in_array( $image_keys[ 'position' ], $position_values ) ? $image_keys[ 'position' ] : 'left top';
+                    }
+
+                    if( array_key_exists( 'repeat', $image_keys ) ) {
+                        $repeat_values = [ 'repeat', 'repeat-x', 'repeat-y', 'no-repeat', 'space', 'round' ];
+                        $image_properties[ 'repeat' ] = in_array( $image_keys[ 'repeat' ], $repeat_values ) ? $image_keys[ 'repeat' ] : 'repeat';
+                    }
+
+                    if( array_key_exists( 'size', $image_keys ) ) {
+                        $size_values = [ 'auto', 'contain', 'cover' ];
+                        $image_properties[ 'size' ] = in_array( $image_keys[ 'size' ], $size_values ) ? $image_keys[ 'size' ] : 'normal';
+                    }
+                }
+
+                $sanitized_image = [
+                    'type'  =>  $type,
+                    'value' =>  $value
+                ];
+                if( ! empty( $image_properties ) ) $sanitized_image[ 'image' ] = $image_properties;
+
+                return $sanitized_image;
+            }
+
+            /**
              * MARK: Sanitize individual color
              * 
              * @since 1.0.0
@@ -94,12 +142,13 @@
                         'type'  =>  'gradient',
                         'value' =>  $this->sanitize_gradient_color( $value[ 'value' ], $default[ 'value' ] )
                     ];
+                } elseif( $value[ 'type' ] === 'image' ) {
+                    // santize image color
+                    return $this->sanitize_image( $value, $default );
                 } else {
                     // if everything else fails
                     return $default;
                 }
-
-                // sanitize gradient color
             }
 
             /**
