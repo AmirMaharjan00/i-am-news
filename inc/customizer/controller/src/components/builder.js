@@ -2,6 +2,7 @@ const { useState, useContext, createContext, useEffect } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
     { Dashicon, Dropdown, Button } = wp.components,
+    { customize } = wp,
     BuilderContext = createContext()
 
 import {
@@ -22,13 +23,28 @@ import { CSS } from "@dnd-kit/utilities";
 
 export const BuilderComponent = ( props ) => {
     const { setting, widgets } = props,
+        widgetKeys = Object.keys( widgets ),
         [ value, setValue ] = useState( setting.get() ),
+        usedWidgets = Object.keys( value ).reduce( ( _this, rowId ) => {
+            let columnWidgets = Object.values( value[ rowId ] ).reduce( ( _inner, widgets ) => {
+                return [
+                    ..._inner,
+                    ...widgets
+                ]
+            }, [] )
+
+            return [
+                ..._this,
+                ...columnWidgets
+            ]
+        }, [] ),
         sensors = useSensors( useSensor( PointerSensor, {
             activationConstraint: {
                 distance: 3
             }
         } ) ),
-        [ activeId, setActiveId ] = useState( null );
+        [ activeId, setActiveId ] = useState( null ),
+        [ filteredWidgets, setFilteredWidgets ] = useState( widgetKeys.filter( widget => ! usedWidgets.includes( widget ) ) )
 
     useEffect( () => {
         setting.set( value )
@@ -91,6 +107,9 @@ export const BuilderComponent = ( props ) => {
      * @param { string } columnId   Id of the column to add the widget in
      */
     const addWidget = ( widgetId, rowId, columnId ) => {
+        setFilteredWidgets( prev => {
+            return prev.filter( item => item !== widgetId )
+        } )
         setValue( prev => {
             return {
                 ...prev,
@@ -111,6 +130,10 @@ export const BuilderComponent = ( props ) => {
      * @param { string } columnId   Id of the column to remove the widget from
      */
     const removeWidget = ( widgetId, rowId, columnId ) => {
+        setFilteredWidgets( [
+            ...filteredWidgets,
+            widgetId
+        ] )
         setValue( prev => {
             return {
                 ...prev,
@@ -126,7 +149,8 @@ export const BuilderComponent = ( props ) => {
     const builderContextObject = {
         widgets,
         addWidget,
-        removeWidget
+        removeWidget,
+        filteredWidgets, setFilteredWidgets
     }
 
     return (
@@ -184,7 +208,7 @@ const SortableGroup = ( { id, items, rowId, columnId } ) => {
     },
     { setNodeRef } = useDroppable( droppableObject ),
     isEmpty = ( items.length === 0 ),
-    { widgets, addWidget } = useContext( BuilderContext )
+    { widgets, addWidget, filteredWidgets } = useContext( BuilderContext )
 
     return (
         <Dropdown
@@ -225,16 +249,20 @@ const SortableGroup = ( { id, items, rowId, columnId } ) => {
                 </div>
             } }
             renderContent = { () => {
-                return <div>
+                return <div className="widget-wrapper">
                     {
-                        Object.entries( widgets ).map( ( widget ) => {
-                            let [ widgetId, widgetArgs ] = widget
+                        filteredWidgets.length ? filteredWidgets.map( ( widgetId ) => {
                             return <Button
                                 variant = "tertiary"
-                                text = { __( escapeHTML( widgetArgs.label ), 'i-am-news' ) }
                                 onClick = { () => addWidget( widgetId, rowId, columnId ) }
-                            />
-                        } )
+                                className = 'widget-item'
+                            >
+                                <Dashicon 
+                                    icon = { widgets[ widgetId ].icon }
+                                />
+                                <span className="button-label">{ __( escapeHTML( widgets[ widgetId ].label ), 'i-am-news' ) }</span>
+                            </Button>
+                        } ) : <span className="no-widgets">{ __( 'All widgets used.', 'i-am-news' ) }</span>
                     }
                 </div>
             } }
@@ -262,7 +290,15 @@ const SortableItem = ( { id, columnId, rowId } ) => {
 
     return (
         <div ref={ setNodeRef } style={ style } {...attributes} {...listeners} className="widget-item">
-            <span className="label">{ __( escapeHTML( widgets[ id ].label ), 'i-am-news' ) }</span>
+            <span
+                className = "label"
+                onClick = { ( event ) => {
+                    customize.section( widgets[ id ].section_id ).expand()
+                    event.stopPropagation()
+                } }
+            >
+                { __( escapeHTML( widgets[ id ].label ), 'i-am-news' ) }
+            </span>
             <Dashicon
                 icon = "no"
                 onClick = { ( event ) => {

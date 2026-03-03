@@ -922,20 +922,19 @@ MARK: 14.0 Builder
     }
 
     .customize-control-ian-builder .content-wrapper .row .column {
-        padding: 4px;
+       padding: 8px;
         background: #fff;
         border-radius: 6px;
         display: flex;
         justify-content: center;
-        gap: 1px;
+        gap: 10px;
         height: 40px;
         min-height: 40px;
+        align-items: center;
     }
 
     .customize-control-ian-builder .content-wrapper .widget-item:not(.placeholder),
     .customize-control-ian-builder .content-wrapper .overlay {
-        background: #eee;
-        border-radius: 4px;
         cursor: grab;
         box-sizing: border-box;
         text-align: center;
@@ -945,7 +944,8 @@ MARK: 14.0 Builder
         width: 120px;
         justify-content: center;
         font-weight: 500;
-        gap: 5px;
+        height: 30px;
+        min-height: 30px;
     }
 
     .customize-control-ian-builder .content-wrapper .widget-item.placeholder {
@@ -954,6 +954,68 @@ MARK: 14.0 Builder
     }
 
     .customize-control-ian-builder .content-wrapper .overlay {
-        height: 40px;
-        min-height: 40px;
+        outline: 1px solid var(--customizer-dark-grey);
+        border-radius: 4px;
+    }
+
+    .customize-control-ian-builder .content-wrapper .widget-item:not(.placeholder) > span {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .customize-control-ian-builder .content-wrapper .widget-item:not(.placeholder) .label {
+        width: 70%;
+        border: 1px solid var(--customizer-dark-grey);
+        border-radius: 4px 0 0 4px;
+    }
+
+    .customize-control-ian-builder .content-wrapper .widget-item:not(.placeholder) .label:hover {
+        background: var(--customizer-hover);
+        cursor: pointer;
+        border-color: var(--customizer-color);
+    }
+
+    .customize-control-ian-builder .content-wrapper .widget-item:not(.placeholder) > .dashicon {
+        flex: 1;
+        border-width: 1px 1px 1px 0;
+        border-color: var(--customizer-dark-grey);
+        border-style: solid ;
+        border-radius: 0 4px 4px 0;
+        transition: .3s;
+    }
+
+    .customize-control-ian-builder .content-wrapper .widget-item:not(.placeholder) > .dashicon:hover {
+        background: #ff0000;
+        border-color: #ff0000;
+        color: #fff;
+        cursor: default;
+    }
+
+    .components-popover.ian-dropdown-popover.builder-popover .components-popover__content {
+        width: unset;
+    }
+
+    .builder-popover .components-popover__content .widget-wrapper {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .builder-popover .components-popover__content .widget-wrapper .widget-item {
+        flex-direction: column;
+        gap: 3px;
+        height: unset;
+        padding: 7px;
+        color: #50575e;
+        outline: 1px solid var(--customizer-light-grey);
+    }
+
+    .builder-popover .components-popover__content .widget-wrapper .widget-item:hover > span {
+        color: var(--customizer-color);
+    }
+
+    .builder-popover .components-popover__content .widget-wrapper .widget-item:hover {
+        outline: 1px solid var(--customizer-color);
     }

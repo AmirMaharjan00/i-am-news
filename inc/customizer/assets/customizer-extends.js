@@ -8265,6 +8265,9 @@ const {
     Dropdown,
     Button
   } = wp.components,
+  {
+    customize
+  } = wp,
   BuilderContext = createContext();
 
 
@@ -8275,13 +8278,21 @@ const BuilderComponent = props => {
       setting,
       widgets
     } = props,
+    widgetKeys = Object.keys(widgets),
     [value, setValue] = useState(setting.get()),
+    usedWidgets = Object.keys(value).reduce((_this, rowId) => {
+      let columnWidgets = Object.values(value[rowId]).reduce((_inner, widgets) => {
+        return [..._inner, ...widgets];
+      }, []);
+      return [..._this, ...columnWidgets];
+    }, []),
     sensors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensors)((0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.PointerSensor, {
       activationConstraint: {
         distance: 3
       }
     })),
-    [activeId, setActiveId] = useState(null);
+    [activeId, setActiveId] = useState(null),
+    [filteredWidgets, setFilteredWidgets] = useState(widgetKeys.filter(widget => !usedWidgets.includes(widget)));
   useEffect(() => {
     setting.set(value);
   }, [value]);
@@ -8341,6 +8352,9 @@ const BuilderComponent = props => {
    * @param { string } columnId   Id of the column to add the widget in
    */
   const addWidget = (widgetId, rowId, columnId) => {
+    setFilteredWidgets(prev => {
+      return prev.filter(item => item !== widgetId);
+    });
     setValue(prev => {
       return {
         ...prev,
@@ -8361,6 +8375,7 @@ const BuilderComponent = props => {
    * @param { string } columnId   Id of the column to remove the widget from
    */
   const removeWidget = (widgetId, rowId, columnId) => {
+    setFilteredWidgets([...filteredWidgets, widgetId]);
     setValue(prev => {
       return {
         ...prev,
@@ -8376,7 +8391,9 @@ const BuilderComponent = props => {
   const builderContextObject = {
     widgets,
     addWidget,
-    removeWidget
+    removeWidget,
+    filteredWidgets,
+    setFilteredWidgets
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "content-wrapper",
@@ -8432,7 +8449,8 @@ const SortableGroup = ({
     isEmpty = items.length === 0,
     {
       widgets,
-      addWidget
+      addWidget,
+      filteredWidgets
     } = useContext(BuilderContext);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dropdown, {
     className: "ian-dropdown-container builder-container",
@@ -8470,13 +8488,22 @@ const SortableGroup = ({
     },
     renderContent: () => {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        children: Object.entries(widgets).map(widget => {
-          let [widgetId, widgetArgs] = widget;
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
+        className: "widget-wrapper",
+        children: filteredWidgets.length ? filteredWidgets.map(widgetId => {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(Button, {
             variant: "tertiary",
-            text: __(escapeHTML(widgetArgs.label), 'i-am-news'),
-            onClick: () => addWidget(widgetId, rowId, columnId)
+            onClick: () => addWidget(widgetId, rowId, columnId),
+            className: "widget-item",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
+              icon: widgets[widgetId].icon
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              className: "button-label",
+              children: __(escapeHTML(widgets[widgetId].label), 'i-am-news')
+            })]
           });
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+          className: "no-widgets",
+          children: __('All widgets used.', 'i-am-news')
         })
       });
     }
@@ -8526,6 +8553,10 @@ const SortableItem = ({
     className: "widget-item",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
       className: "label",
+      onClick: event => {
+        customize.section(widgets[id].section_id).expand();
+        event.stopPropagation();
+      },
       children: __(escapeHTML(widgets[id].label), 'i-am-news')
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
       icon: "no",
@@ -23531,7 +23562,6 @@ controlConstructor['section-tab'] = Control.extend({
         id: control.id,
         controls: instance.controls()
       };
-      console.log(instance.controls());
       reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
         ...props
       }));
@@ -24162,7 +24192,6 @@ controlConstructor['ian-builder'] = Control.extend({
         ...params,
         setting
       };
-    console.log(control);
     let rendered = false; // ensure we render only once
 
     /**

@@ -142,7 +142,7 @@ controlConstructor[ 'section-tab' ] = Control.extend({
                 id: control.id,
                 controls: instance.controls()
             }
-            console.log( instance.controls() )
+
             reactRoot.render( <SectionTabComponent { ...props } /> )
         };
 
@@ -716,8 +716,6 @@ controlConstructor[ 'ian-builder' ] = Control.extend({
                 ...params,
                 setting
             }
-
-        console.log( control )
         
         let rendered = false; // ensure we render only once
 
