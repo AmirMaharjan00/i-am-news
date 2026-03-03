@@ -58,6 +58,7 @@
                 $this->add_section( 'header_builder_section' );
                 $this->add_control( 'header_builder_section_tab' );
                 $this->add_control( 'header_builder' );
+                $this->add_control( 'header_builder_layouts' );
                 $this->tab = 'design';
                 $this->add_control( 'header_builder_background' );
             }
@@ -76,6 +77,11 @@
                     ],
                     'header_builder' =>  [
                         // 'sanitize_callback' =>  [ $this, 'sanitize_color' ],
+                        'transport' =>  'postMessage',
+                        'default' =>  $this->get_defaults( $id )
+                    ],
+                    'header_builder_layouts' =>  [
+                        'sanitize_callback' =>  [ $this, 'sanitize_radio_image' ],
                         'transport' =>  'postMessage',
                         'default' =>  $this->get_defaults( $id )
                     ],
@@ -110,6 +116,22 @@
                             [
                                 'label' =>  esc_html__( 'Design', 'i-am-news' ),
                                 'value' =>  'design'
+                            ]
+                        ]
+                    ] ),
+                    'header_builder_layouts' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Layouts', 'i-am-news' ),
+                        'type'  =>  'radio-image',
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'Layout 1', 'i-am-news' ),
+                                'url' =>  get_template_directory_uri() . '/inc/customizer/assets/images/header-builder-one.png',
+                                'value' =>  'one'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Layout 2', 'i-am-news' ),
+                                'url' =>  get_template_directory_uri() . '/inc/customizer/assets/images/header-builder-two.png',
+                                'value' =>  'two'
                             ]
                         ]
                     ] ),
@@ -153,6 +175,7 @@
             public function set_defaults() {
                 $this->defaults = [
                     'header_builder_section_tab' =>  'general',
+                    'header_builder_layouts' =>  'one',
                     'header_builder' =>  [
                         'top'   =>  [
                             'first' =>  [ 'date-time', 'dark-mode' ],

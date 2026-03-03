@@ -10064,7 +10064,7 @@ const SectionTabComponent = props => {
     [value, setValue] = useState(setting.get());
   useEffect(() => {
     controls.forEach(control => {
-      if (id === control.id) return;
+      if (id === control.id || ['ian-builder'].includes(control.params.type)) return;
       let {
           params,
           container
@@ -23531,6 +23531,7 @@ controlConstructor['section-tab'] = Control.extend({
         id: control.id,
         controls: instance.controls()
       };
+      console.log(instance.controls());
       reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx)(_components_section_tab__WEBPACK_IMPORTED_MODULE_2__.SectionTabComponent, {
         ...props
       }));

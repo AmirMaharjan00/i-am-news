@@ -142,6 +142,7 @@ controlConstructor[ 'section-tab' ] = Control.extend({
                 id: control.id,
                 controls: instance.controls()
             }
+            console.log( instance.controls() )
             reactRoot.render( <SectionTabComponent { ...props } /> )
         };
 

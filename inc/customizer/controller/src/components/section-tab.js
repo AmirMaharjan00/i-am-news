@@ -9,7 +9,7 @@ export const SectionTabComponent = ( props ) => {
 
     useEffect(() => {
         controls.forEach(( control ) => {
-            if( id === control.id ) return
+            if( id === control.id || [ 'ian-builder' ].includes( control.params.type ) ) return
             let { params, container } = control,
                 { tab = 'general' } = params
 
