@@ -188,6 +188,7 @@ export const BuilderComponent = ( props ) => {
                     </DragOverlay>
                 </DndContext>
             </BuilderContext.Provider>
+            <Footer />
         </div>
     );
 };
@@ -309,3 +310,16 @@ const SortableItem = ( { id, columnId, rowId } ) => {
         </div>
     );
 };
+
+/**
+ * Footer 
+ * 
+ * @since 1.0.0
+ */
+const Footer = () => {
+    return (
+        <div className="builder-footer">
+
+        </div>
+    )
+}
