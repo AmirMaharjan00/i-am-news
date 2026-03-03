@@ -220,6 +220,10 @@ MARK: 1.0 Normalize
         width: 100%;
     }
 
+    #customize-theme-controls .control-section.open {
+        border-bottom: unset;
+    }
+
 /*
 =========================
 MARK: 2.0 Radio Image
@@ -894,6 +898,11 @@ MARK: 13.0 Color
 MARK: 14.0 Builder
 =========================
 */
+    .customize-pane-child.control-section .customize-control.customize-control-ian-builder {
+        padding: 0;
+        border-bottom: unset;
+    }
+
     .customize-control-ian-builder .content-wrapper {
         position: fixed;
         bottom: 0;
@@ -925,7 +934,6 @@ MARK: 14.0 Builder
 
     .customize-control-ian-builder .content-wrapper .widget-item:not(.placeholder),
     .customize-control-ian-builder .content-wrapper .overlay {
-        padding: 10px;
         background: #eee;
         border-radius: 4px;
         cursor: grab;
@@ -933,10 +941,11 @@ MARK: 14.0 Builder
         text-align: center;
         display: flex;
         align-items: center;
-        min-width: 100px;
-        width: 100px;
+        min-width: 120px;
+        width: 120px;
         justify-content: center;
         font-weight: 500;
+        gap: 5px;
     }
 
     .customize-control-ian-builder .content-wrapper .widget-item.placeholder {
@@ -945,6 +954,6 @@ MARK: 14.0 Builder
     }
 
     .customize-control-ian-builder .content-wrapper .overlay {
-        width: 100px;
-        min-width: 100px;
+        height: 40px;
+        min-height: 40px;
     }

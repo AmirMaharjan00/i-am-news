@@ -8260,6 +8260,11 @@ const {
   {
     escapeHTML
   } = wp.escapeHtml,
+  {
+    Dashicon,
+    Dropdown,
+    Button
+  } = wp.components,
   BuilderContext = createContext();
 
 
@@ -8271,11 +8276,14 @@ const BuilderComponent = props => {
       widgets
     } = props,
     [value, setValue] = useState(setting.get()),
-    sensors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensors)((0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.PointerSensor)),
+    sensors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensors)((0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.PointerSensor, {
+      activationConstraint: {
+        distance: 3
+      }
+    })),
     [activeId, setActiveId] = useState(null);
   useEffect(() => {
     setting.set(value);
-    console.log(value);
   }, [value]);
 
   // Handle drag start
@@ -8295,16 +8303,16 @@ const BuilderComponent = props => {
     if (!activeData || !overData) return;
     const currentColumn = activeData.column,
       // column before this dragOver
-      targetColumn = overData.column;
+      currentRow = activeData.row,
+      targetColumn = overData.column,
+      targetRow = overData.row;
 
     // Only proceed if we're moving to a different column
-    if (!targetColumn || currentColumn === targetColumn) return;
-    const [startRow, startColumn] = currentColumn.split("-"),
-      [endRow, endColumn] = targetColumn.split("-");
+    if (!targetColumn || !targetRow || currentColumn === targetColumn && targetRow === currentRow) return;
     setValue(prev => {
       const newValue = structuredClone(prev),
-        sourceItems = [...newValue[startRow][startColumn]],
-        targetItems = [...newValue[endRow][endColumn]],
+        sourceItems = [...newValue[currentRow][currentColumn]],
+        targetItems = [...newValue[targetRow][targetColumn]],
         activeIndex = sourceItems.indexOf(active.id);
 
       // Remove active from source
@@ -8315,16 +8323,60 @@ const BuilderComponent = props => {
       if (!targetItems.includes(active.id)) targetItems.splice(overIndex, 0, active.id);
 
       // Assign back
-      newValue[startRow][startColumn] = sourceItems;
-      newValue[endRow][endColumn] = targetItems;
+      newValue[currentRow][currentColumn] = sourceItems;
+      newValue[targetRow][targetColumn] = targetItems;
       return newValue;
     });
 
     // Update active's column only after moving
     active.data.current.column = targetColumn;
   };
+
+  /**
+   * Add new widget to column
+   * 
+   * @since 1.0.0
+   * @param { string } widgetId   Id of the widget to add
+   * @param { string } rowId      Id of the row to add the widget in
+   * @param { string } columnId   Id of the column to add the widget in
+   */
+  const addWidget = (widgetId, rowId, columnId) => {
+    setValue(prev => {
+      return {
+        ...prev,
+        [rowId]: {
+          ...prev[rowId],
+          [columnId]: [...prev[rowId][columnId], widgetId]
+        }
+      };
+    });
+  };
+
+  /**
+   * Remove widget from column
+   * 
+   * @since 1.0.0
+   * @param { string } widgetId   Id of the widget to remove
+   * @param { string } rowId      Id of the row to remove the widget from
+   * @param { string } columnId   Id of the column to remove the widget from
+   */
+  const removeWidget = (widgetId, rowId, columnId) => {
+    setValue(prev => {
+      return {
+        ...prev,
+        [rowId]: {
+          ...prev[rowId],
+          [columnId]: prev[rowId][columnId].filter(widget => widget !== widgetId)
+        }
+      };
+    });
+  };
+
+  // Builder context object
   const builderContextObject = {
-    widgets
+    widgets,
+    addWidget,
+    removeWidget
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "content-wrapper",
@@ -8340,6 +8392,8 @@ const BuilderComponent = props => {
           className: "row",
           children: Object.keys(value[rowKey]).map(colKey => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SortableGroup, {
             id: `${rowKey}-${colKey}`,
+            rowId: rowKey,
+            columnId: colKey,
             items: value[rowKey][colKey]
           }, colKey))
         }, rowKey)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.DragOverlay, {
@@ -8360,36 +8414,72 @@ const BuilderComponent = props => {
  */
 const SortableGroup = ({
   id,
-  items
+  items,
+  rowId,
+  columnId
 }) => {
   const droppableObject = {
       id,
       data: {
         type: "column",
-        column: id
+        column: columnId,
+        row: rowId
       }
     },
     {
       setNodeRef
     } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useDroppable)(droppableObject),
-    isEmpty = items.length === 0;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-    ref: setNodeRef,
-    className: "column",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__.SortableContext, {
-      items: [...items, `${id}-placeholder`],
-      strategy: _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__.rectSortingStrategy,
-      children: [items.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SortableItem, {
-        id: item,
-        columnId: id
-      }, item)), isEmpty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        id: `${id}-placeholder`,
-        className: "widget-item placeholder",
-        style: {
-          opacity: 0
-        }
-      }, `${id}-placeholder`)]
-    })
+    isEmpty = items.length === 0,
+    {
+      widgets,
+      addWidget
+    } = useContext(BuilderContext);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dropdown, {
+    className: "ian-dropdown-container builder-container",
+    contentClassName: "ian-dropdown-popover builder-popover",
+    focusOnMount: true,
+    popoverProps: {
+      placement: 'top',
+      shift: true
+    },
+    renderToggle: ({
+      isOpen,
+      onToggle,
+      onClose
+    }) => {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        ref: setNodeRef,
+        className: "column",
+        onClick: onToggle,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__.SortableContext, {
+          items: [...items, `${rowId}-${columnId}-placeholder`],
+          strategy: _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__.rectSortingStrategy,
+          children: [items.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SortableItem, {
+            id: item,
+            rowId: rowId,
+            columnId: columnId
+          }, item)), isEmpty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            id: `${rowId}-${columnId}-placeholder`,
+            className: "widget-item placeholder",
+            style: {
+              opacity: 0
+            }
+          }, `${rowId}-${columnId}-placeholder`)]
+        })
+      });
+    },
+    renderContent: () => {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: Object.entries(widgets).map(widget => {
+          let [widgetId, widgetArgs] = widget;
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
+            variant: "tertiary",
+            text: __(escapeHTML(widgetArgs.label), 'i-am-news'),
+            onClick: () => addWidget(widgetId, rowId, columnId)
+          });
+        })
+      });
+    }
   });
 };
 
@@ -8400,13 +8490,15 @@ const SortableGroup = ({
  */
 const SortableItem = ({
   id,
-  columnId
+  columnId,
+  rowId
 }) => {
   const sortableObject = {
       id,
       data: {
         type: "widget",
-        column: columnId
+        column: columnId,
+        row: rowId
       }
     },
     {
@@ -8423,15 +8515,25 @@ const SortableItem = ({
       opacity: isDragging ? 0.5 : 1
     },
     {
-      widgets
+      widgets,
+      removeWidget
     } = useContext(BuilderContext);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     ref: setNodeRef,
     style: style,
     ...attributes,
     ...listeners,
     className: "widget-item",
-    children: __(escapeHTML(widgets[id].label), 'i-am-news')
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+      className: "label",
+      children: __(escapeHTML(widgets[id].label), 'i-am-news')
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
+      icon: "no",
+      onClick: event => {
+        removeWidget(id, rowId, columnId);
+        event.stopPropagation();
+      }
+    })]
   });
 };
 

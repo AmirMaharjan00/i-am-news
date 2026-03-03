@@ -1,6 +1,7 @@
 const { useState, useContext, createContext, useEffect } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
+    { Dashicon, Dropdown, Button } = wp.components,
     BuilderContext = createContext()
 
 import {
@@ -22,12 +23,15 @@ import { CSS } from "@dnd-kit/utilities";
 export const BuilderComponent = ( props ) => {
     const { setting, widgets } = props,
         [ value, setValue ] = useState( setting.get() ),
-        sensors = useSensors( useSensor( PointerSensor ) ),
+        sensors = useSensors( useSensor( PointerSensor, {
+            activationConstraint: {
+                distance: 3
+            }
+        } ) ),
         [ activeId, setActiveId ] = useState( null );
 
     useEffect( () => {
         setting.set( value )
-        console.log( value )
     }, [ value] )
 
     // Handle drag start
@@ -46,18 +50,17 @@ export const BuilderComponent = ( props ) => {
         if( ! activeData || ! overData ) return;
 
         const currentColumn = activeData.column, // column before this dragOver
-            targetColumn = overData.column;
+            currentRow = activeData.row,
+            targetColumn = overData.column,
+            targetRow = overData.row
 
         // Only proceed if we're moving to a different column
-        if( ! targetColumn || currentColumn === targetColumn ) return;
-
-        const [ startRow, startColumn ] = currentColumn.split( "-" ),
-            [ endRow, endColumn ] = targetColumn.split( "-" );
+        if( ! targetColumn || ! targetRow || ( ( currentColumn === targetColumn ) && ( targetRow === currentRow ) ) ) return;
 
         setValue( ( prev ) => {
             const newValue = structuredClone( prev ),
-                sourceItems = [ ...newValue[ startRow ][ startColumn ] ],
-                targetItems = [ ...newValue[ endRow ][ endColumn ] ],
+                sourceItems = [ ...newValue[ currentRow ][ currentColumn ] ],
+                targetItems = [ ...newValue[ targetRow ][ targetColumn ] ],
                 activeIndex = sourceItems.indexOf( active.id );
 
             // Remove active from source
@@ -69,8 +72,8 @@ export const BuilderComponent = ( props ) => {
             if( ! targetItems.includes( active.id ) ) targetItems.splice( overIndex, 0, active.id );
 
             // Assign back
-            newValue[ startRow ][ startColumn ] = sourceItems;
-            newValue[ endRow ][ endColumn ] = targetItems;
+            newValue[ currentRow ][ currentColumn ] = sourceItems;
+            newValue[ targetRow ][ targetColumn ] = targetItems;
 
             return newValue;
         } );
@@ -79,8 +82,51 @@ export const BuilderComponent = ( props ) => {
         active.data.current.column = targetColumn;
     };
 
+    /**
+     * Add new widget to column
+     * 
+     * @since 1.0.0
+     * @param { string } widgetId   Id of the widget to add
+     * @param { string } rowId      Id of the row to add the widget in
+     * @param { string } columnId   Id of the column to add the widget in
+     */
+    const addWidget = ( widgetId, rowId, columnId ) => {
+        setValue( prev => {
+            return {
+                ...prev,
+                [ rowId ]: {
+                    ...prev[ rowId ],
+                    [ columnId ]: [ ...prev[ rowId ][ columnId ], widgetId ]
+                }
+            }
+        } )
+    }
+
+    /**
+     * Remove widget from column
+     * 
+     * @since 1.0.0
+     * @param { string } widgetId   Id of the widget to remove
+     * @param { string } rowId      Id of the row to remove the widget from
+     * @param { string } columnId   Id of the column to remove the widget from
+     */
+    const removeWidget = ( widgetId, rowId, columnId ) => {
+        setValue( prev => {
+            return {
+                ...prev,
+                [ rowId ]: {
+                    ...prev[ rowId ],
+                    [ columnId ]: prev[ rowId ][ columnId ].filter( widget => widget !== widgetId )
+                }
+            }
+        } )
+    }
+
+    // Builder context object
     const builderContextObject = {
-        widgets
+        widgets,
+        addWidget,
+        removeWidget
     }
 
     return (
@@ -101,6 +147,8 @@ export const BuilderComponent = ( props ) => {
                                         <SortableGroup
                                             key = { colKey }
                                             id = { `${ rowKey }-${ colKey }` }
+                                            rowId = { rowKey }
+                                            columnId = { colKey }
                                             items = { value[ rowKey ][ colKey ] }
                                         />
                                     ) )
@@ -125,44 +173,72 @@ export const BuilderComponent = ( props ) => {
  * 
  * @since 1.0.0
  */
-const SortableGroup = ( { id, items } ) => {
+const SortableGroup = ( { id, items, rowId, columnId } ) => {
     const droppableObject = {
         id,
         data: {
             type: "column",
-            column: id,
+            column: columnId,
+            row: rowId,
         },
     },
     { setNodeRef } = useDroppable( droppableObject ),
-    isEmpty = ( items.length === 0 );
+    isEmpty = ( items.length === 0 ),
+    { widgets, addWidget } = useContext( BuilderContext )
 
     return (
-        <div ref = { setNodeRef } className = "column">
-            <SortableContext
-                items = { [ ...items, `${ id }-placeholder` ] }
-                strategy = { rectSortingStrategy }
-            >
-                {
-                    items.map( ( item ) => (
-                        <SortableItem 
-                            key = { item }
-                            id = { item }
-                            columnId = { id }
-                        />
-                    ) )
-                }
+        <Dropdown
+            className = 'ian-dropdown-container builder-container'
+            contentClassName = 'ian-dropdown-popover builder-popover'
+            focusOnMount = { true }
+            popoverProps = { {
+                placement: 'top',
+                shift: true
+            } }
+            renderToggle = { ( { isOpen, onToggle, onClose } ) => {
+                return <div ref = { setNodeRef } className = "column" onClick={ onToggle }>
+                    <SortableContext
+                        items = { [ ...items, `${ rowId }-${ columnId }-placeholder` ] }
+                        strategy = { rectSortingStrategy }
+                    >
+                        {
+                            items.map( ( item ) => (
+                                <SortableItem 
+                                    key = { item }
+                                    id = { item }
+                                    rowId = { rowId }
+                                    columnId = { columnId }
+                                />
+                            ) )
+                        }
 
-                {/* Always render placeholder to prevent shrink/expand */}
-                {
-                    isEmpty && <div
-                        key = { `${ id }-placeholder` }
-                        id = { `${ id }-placeholder` }
-                        className = "widget-item placeholder"
-                        style = { { opacity: 0 } }
-                    /> 
-                }
-            </SortableContext>
-        </div>
+                        {/* Always render placeholder to prevent shrink/expand */}
+                        {
+                            isEmpty && <div
+                                key = { `${ rowId }-${ columnId }-placeholder` }
+                                id = { `${ rowId }-${ columnId }-placeholder` }
+                                className = "widget-item placeholder"
+                                style = { { opacity: 0 } }
+                            /> 
+                        }
+                    </SortableContext>
+                </div>
+            } }
+            renderContent = { () => {
+                return <div>
+                    {
+                        Object.entries( widgets ).map( ( widget ) => {
+                            let [ widgetId, widgetArgs ] = widget
+                            return <Button
+                                variant = "tertiary"
+                                text = { __( escapeHTML( widgetArgs.label ), 'i-am-news' ) }
+                                onClick = { () => addWidget( widgetId, rowId, columnId ) }
+                            />
+                        } )
+                    }
+                </div>
+            } }
+        />
     );
 };
 
@@ -171,10 +247,10 @@ const SortableGroup = ( { id, items } ) => {
  * 
  * @since 1.0.0
  */
-const SortableItem = ( { id, columnId } ) => {
+const SortableItem = ( { id, columnId, rowId } ) => {
     const sortableObject = {
         id,
-        data: { type: "widget", column: columnId },
+        data: { type: "widget", column: columnId, row: rowId },
     },
     { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable( sortableObject ),
     style = {
@@ -182,11 +258,18 @@ const SortableItem = ( { id, columnId } ) => {
         transition,
         opacity: isDragging ? 0.5 : 1
     },
-    { widgets } = useContext( BuilderContext )
+    { widgets, removeWidget } = useContext( BuilderContext )
 
     return (
         <div ref={ setNodeRef } style={ style } {...attributes} {...listeners} className="widget-item">
-            { __( escapeHTML( widgets[ id ].label ), 'i-am-news' ) }
+            <span className="label">{ __( escapeHTML( widgets[ id ].label ), 'i-am-news' ) }</span>
+            <Dashicon
+                icon = "no"
+                onClick = { ( event ) => {
+                    removeWidget( id, rowId, columnId )
+                    event.stopPropagation()
+                } }
+            />
         </div>
     );
 };
