@@ -8246,14 +8246,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @dnd-kit/core */ "./node_modules/@dnd-kit/core/dist/core.esm.js");
 /* harmony import */ var _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @dnd-kit/sortable */ "./node_modules/@dnd-kit/sortable/dist/sortable.esm.js");
 /* harmony import */ var _dnd_kit_utilities__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @dnd-kit/utilities */ "./node_modules/@dnd-kit/utilities/dist/utilities.esm.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
 const {
     useState,
     useContext,
-    createContext
+    createContext,
+    useEffect
   } = wp.element,
   {
     __
@@ -8266,7 +8265,6 @@ const {
 
 
 
-
 const BuilderComponent = props => {
   const {
       setting,
@@ -8275,8 +8273,9 @@ const BuilderComponent = props => {
     [value, setValue] = useState(setting.get()),
     sensors = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensors)((0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useSensor)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.PointerSensor)),
     [activeId, setActiveId] = useState(null);
-  (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
+  useEffect(() => {
     setting.set(value);
+    console.log(value);
   }, [value]);
 
   // Handle drag start
@@ -8303,9 +8302,7 @@ const BuilderComponent = props => {
     const [startRow, startColumn] = currentColumn.split("-"),
       [endRow, endColumn] = targetColumn.split("-");
     setValue(prev => {
-      const newValue = {
-          ...prev
-        },
+      const newValue = structuredClone(prev),
         sourceItems = [...newValue[startRow][startColumn]],
         targetItems = [...newValue[endRow][endColumn]],
         activeIndex = sourceItems.indexOf(active.id);
@@ -8315,7 +8312,7 @@ const BuilderComponent = props => {
 
       // Determine insertion index
       let overIndex = overData.type === "widget" ? targetItems.indexOf(over.id) : targetItems.length;
-      targetItems.splice(overIndex, 0, active.id);
+      if (!targetItems.includes(active.id)) targetItems.splice(overIndex, 0, active.id);
 
       // Assign back
       newValue[startRow][startColumn] = sourceItems;
@@ -8329,24 +8326,24 @@ const BuilderComponent = props => {
   const builderContextObject = {
     widgets
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "content-wrapper",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(BuilderContext.Provider, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(BuilderContext.Provider, {
       value: builderContextObject,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.DndContext, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.DndContext, {
         sensors: sensors,
         collisionDetection: _dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.closestCenter,
         onDragEnd: handleDragEnd,
         onDragStart: handleDragStart,
         onDragOver: handleDragOver,
-        children: [Object.keys(value).map(rowKey => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        children: [Object.keys(value).map(rowKey => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "row",
-          children: Object.keys(value[rowKey]).map(colKey => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(SortableGroup, {
+          children: Object.keys(value[rowKey]).map(colKey => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SortableGroup, {
             id: `${rowKey}-${colKey}`,
             items: value[rowKey][colKey]
           }, colKey))
-        }, rowKey)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.DragOverlay, {
-          children: activeId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        }, rowKey)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.DragOverlay, {
+          children: activeId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "overlay",
             children: widgets[activeId].label
           })
@@ -8376,16 +8373,16 @@ const SortableGroup = ({
       setNodeRef
     } = (0,_dnd_kit_core__WEBPACK_IMPORTED_MODULE_0__.useDroppable)(droppableObject),
     isEmpty = items.length === 0;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     ref: setNodeRef,
     className: "column",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__.SortableContext, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__.SortableContext, {
       items: [...items, `${id}-placeholder`],
       strategy: _dnd_kit_sortable__WEBPACK_IMPORTED_MODULE_1__.rectSortingStrategy,
-      children: [items.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(SortableItem, {
+      children: [items.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SortableItem, {
         id: item,
         columnId: id
-      }, item)), isEmpty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }, item)), isEmpty && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         id: `${id}-placeholder`,
         className: "widget-item placeholder",
         style: {
@@ -8428,7 +8425,7 @@ const SortableItem = ({
     {
       widgets
     } = useContext(BuilderContext);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     ref: setNodeRef,
     style: style,
     ...attributes,

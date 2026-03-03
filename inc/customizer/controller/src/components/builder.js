@@ -1,4 +1,4 @@
-const { useState, useContext, createContext } = wp.element,
+const { useState, useContext, createContext, useEffect } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
     BuilderContext = createContext()
@@ -18,7 +18,6 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useEffect } from "react";
 
 export const BuilderComponent = ( props ) => {
     const { setting, widgets } = props,
@@ -28,7 +27,8 @@ export const BuilderComponent = ( props ) => {
 
     useEffect( () => {
         setting.set( value )
-    }, [ value ] )
+        console.log( value )
+    }, [ value] )
 
     // Handle drag start
     const handleDragStart = ( event ) => setActiveId( event.active.id );
@@ -55,7 +55,7 @@ export const BuilderComponent = ( props ) => {
             [ endRow, endColumn ] = targetColumn.split( "-" );
 
         setValue( ( prev ) => {
-            const newValue = { ...prev },
+            const newValue = structuredClone( prev ),
                 sourceItems = [ ...newValue[ startRow ][ startColumn ] ],
                 targetItems = [ ...newValue[ endRow ][ endColumn ] ],
                 activeIndex = sourceItems.indexOf( active.id );
@@ -66,14 +66,14 @@ export const BuilderComponent = ( props ) => {
             // Determine insertion index
             let overIndex = ( overData.type === "widget" ) ? targetItems.indexOf( over.id ) : targetItems.length;
 
-            targetItems.splice( overIndex, 0, active.id );
+            if( ! targetItems.includes( active.id ) ) targetItems.splice( overIndex, 0, active.id );
 
             // Assign back
             newValue[ startRow ][ startColumn ] = sourceItems;
             newValue[ endRow ][ endColumn ] = targetItems;
 
             return newValue;
-        });
+        } );
 
         // Update active's column only after moving
         active.data.current.column = targetColumn;
