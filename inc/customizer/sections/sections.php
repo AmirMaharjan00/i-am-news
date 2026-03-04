@@ -150,6 +150,8 @@
                 $this->manager = $wp_customize;
                 $this->set_custom_controls();
                 $this->register_controls();
+
+                $wp_customize->get_section( 'title_tagline' )->active_callback = '__return_false';
             }
 
             /**
@@ -245,8 +247,7 @@
                 $section = $this->get_controls( $id );
                 $this->manager->add_section( $id, $section );
                 $this->common = [
-                    'section'   =>  $id,
-                    'tab'   =>  $this->tab
+                    'section'   =>  $id
                 ];
             }
 
@@ -257,7 +258,8 @@
              */
             protected function add_control( $id ) {
                 $setting = $this->get_settings( $id );
-                $control = $this->get_controls( $id );
+                $this->common[ 'tab' ] = $this->tab;
+                $control = array_merge( $this->get_controls( $id ), $this->common );
                 $default_types = [ 'text', 'checkbox', 'textarea', 'radio', 'select', 'dropdown-pages', 'email', 'url', 'number', 'hidden', 'date' ];
 
                 $this->manager->add_setting( $id, $setting );

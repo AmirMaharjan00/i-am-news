@@ -8,6 +8,7 @@
     namespace IAN\Customizer\Section;
 
     use IAN\Customizer\Section\Date_Time as Date_Time;
+    use IAN\Customizer\Section\Time as Time;
 
     use function esc_html__;
     use function esc_attr;
@@ -159,24 +160,34 @@
                         'type'  =>  'ian-builder',
                         'widgets'   =>  [
                             'logo'  =>  [
-                                'label' =>  esc_html__( 'Site Logo and Title', 'i-am-news' ),
-                                'section_id' =>  'scroll_to_top_section',
+                                'label' =>  esc_html__( 'Site Identity', 'i-am-news' ),
+                                'section_id' =>  'title_tagline',
                                 'icon'  =>  'admin-site'
+                            ],
+                            'time'  =>  [
+                                'label' =>  esc_html__( 'Time', 'i-am-news' ),
+                                'section_id' =>  'time_section',
+                                'icon'  =>  'clock'
                             ],
                             'date-time'  =>  [
                                 'label' =>  esc_html__( 'Date Time', 'i-am-news' ),
-                                'section_id' =>  'scroll_to_top_section',
+                                'section_id' =>  'date_time_section',
                                 'icon'  =>  'calendar'
                             ],
                             'dark-mode'  =>  [
                                 'label' =>  esc_html__( 'Dark Mode', 'i-am-news' ),
-                                'section_id' =>  'scroll_to_top_section',
+                                'section_id' =>  'dark_mode_section',
                                 'icon'  =>  'lightbulb'
                             ],
                             'social-icons'  =>  [
                                 'label' =>  esc_html__( 'Social Icons', 'i-am-news' ),
                                 'section_id' =>  'scroll_to_top_section',
                                 'icon'  =>  'share'
+                            ],
+                            'search'  =>  [
+                                'label' =>  esc_html__( 'Search', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'search'
                             ],
                             'menu'  =>  [
                                 'label' =>  esc_html__( 'Menu', 'i-am-news' ),
@@ -297,7 +308,7 @@
                 ?>
                     <header id="masthead" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
                         <?php Date_Time::get_instance()->render_html(); ?>
-                        <span>Dark Mode</span>
+                        <?php Time::get_instance()->render_html(); ?>
                         <span>Social Icons</span>
                         <span>Logo</span>
                         <span>Primary Menu</span>

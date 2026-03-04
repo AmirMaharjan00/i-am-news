@@ -20,6 +20,8 @@
 
     use IAN\Customizer\Section\Scroll_To_Top as Scroll_To_Top;
     use IAN\Customizer\Section\Header_Builder as Header_Builder;
+    use IAN\Customizer\Section\Date_time as Date_time;
+    use IAN\Customizer\Section\Time as Time;
 
     if( ! class_exists( __NAMESPACE__ . '\\Enqueue' ) ) :
         /**
@@ -122,9 +124,13 @@
             private function generate_whole_site_dynamic_css() {
                 $scroll_to_top = Scroll_To_Top::get_instance()->render_dynamic_css();
                 $header_builder = Header_Builder::get_instance()->render_dynamic_css();
+                $date_time = Date_time::get_instance()->render_dynamic_css();
+                $time = Time::get_instance()->render_dynamic_css();
                 $dynamic_css = [];
                 if( $scroll_to_top ) $dynamic_css[] = implode( "\n", $scroll_to_top );
                 if( $header_builder ) $dynamic_css[] = implode( "\n", $header_builder );
+                if( $date_time ) $dynamic_css[] = implode( "\n", $date_time );
+                if( $time ) $dynamic_css[] = implode( "\n", $time );
                 if( $dynamic_css ) {
                     return implode( ' ', $dynamic_css );
                 } else {
@@ -141,6 +147,8 @@
                 $raw_configs = array_merge(
                     Scroll_To_Top::get_instance()->get_dynamic_css( true ),
                     Header_Builder::get_instance()->get_dynamic_css( true ),
+                    Date_time::get_instance()->get_dynamic_css( true ),
+                    Time::get_instance()->get_dynamic_css( true ),
                 );
                 $configs = [];
                 foreach( $raw_configs as $id => $args ) {

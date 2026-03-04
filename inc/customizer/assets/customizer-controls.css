@@ -908,16 +908,50 @@ MARK: 14.0 Builder
         bottom: 0;
         left: clamp(300px, 18%, 500px);
         right: 0;
+        background: #2271b1;
+    }
+
+    .customize-control-ian-builder .content-wrapper .builder-wrapper {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-        background: #2271b1;
         padding: 10px;
         gap: 1px;
     }
 
+    .customize-control-ian-builder .content-wrapper .builder-wrapper .row-settings {
+        width: 40px;
+        height: 100%;
+        background: white;
+        margin-right: 10px;
+        display: block;
+        border-radius: 6px;
+    }
+
+    .customize-control-ian-builder .content-wrapper .builder-footer {
+        display: flex;
+        height: 45px;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--customizer-dark-grey);
+        padding: 0 10px;
+        background: #02467d;
+        color: #F7F6E5;
+    }
+
+    .customize-control-ian-builder .content-wrapper .builder-footer .info-actions-wrapper {
+        padding-left: 10px;
+    }
+
+    .customize-control-ian-builder .content-wrapper .builder-footer .show-hide-button {
+        border-left: 1px solid var(--customizer-dark-grey);
+        color: #F7F6E5;
+        padding: 0 10px;
+        box-shadow: unset;
+    }
+
     .customize-control-ian-builder .content-wrapper .row {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: 40px repeat(4, 1fr);
         gap: 1px;
     }
 

@@ -155,39 +155,47 @@ export const BuilderComponent = ( props ) => {
 
     return (
         <div className="content-wrapper">
-            <BuilderContext.Provider value={ builderContextObject }>
-                <DndContext
-                    sensors = { sensors }
-                    collisionDetection = { closestCenter }
-                    onDragEnd = { handleDragEnd }
-                    onDragStart = { handleDragStart }
-                    onDragOver = { handleDragOver }
-                >
-                    {
-                        Object.keys( value ).map( ( rowKey ) => (
-                            <div key={ rowKey } className="row">
-                                {
-                                    Object.keys( value[ rowKey ] ).map( ( colKey ) => (
-                                        <SortableGroup
-                                            key = { colKey }
-                                            id = { `${ rowKey }-${ colKey }` }
-                                            rowId = { rowKey }
-                                            columnId = { colKey }
-                                            items = { value[ rowKey ][ colKey ] }
-                                        />
-                                    ) )
-                                }
-                            </div>
-                        ) )
-                    }
-
-                    <DragOverlay>
+            <div className="builder-wrapper">
+                <BuilderContext.Provider value={ builderContextObject }>
+                    <DndContext
+                        sensors = { sensors }
+                        collisionDetection = { closestCenter }
+                        onDragEnd = { handleDragEnd }
+                        onDragStart = { handleDragStart }
+                        onDragOver = { handleDragOver }
+                    >
                         {
-                            activeId && <div className="overlay">{ widgets[ activeId ].label }</div>
+                            Object.keys( value ).map( ( rowKey ) => (
+                                <div key={ rowKey } className="row">
+                                    <Button
+                                        variant = "tertiary"
+                                        className = "row-settings"
+                                    >
+                                        <Dashicon icon="admin-generic" />
+                                    </Button>
+                                    {
+                                        Object.keys( value[ rowKey ] ).map( ( colKey ) => (
+                                            <SortableGroup
+                                                key = { colKey }
+                                                id = { `${ rowKey }-${ colKey }` }
+                                                rowId = { rowKey }
+                                                columnId = { colKey }
+                                                items = { value[ rowKey ][ colKey ] }
+                                            />
+                                        ) )
+                                    }
+                                </div>
+                            ) )
                         }
-                    </DragOverlay>
-                </DndContext>
-            </BuilderContext.Provider>
+
+                        <DragOverlay>
+                            {
+                                activeId && <div className="overlay">{ widgets[ activeId ].label }</div>
+                            }
+                        </DragOverlay>
+                    </DndContext>
+                </BuilderContext.Provider>
+            </div>
             <Footer />
         </div>
     );
@@ -263,7 +271,13 @@ const SortableGroup = ( { id, items, rowId, columnId } ) => {
                                 />
                                 <span className="button-label">{ __( escapeHTML( widgets[ widgetId ].label ), 'i-am-news' ) }</span>
                             </Button>
-                        } ) : <span className="no-widgets">{ __( 'All widgets used.', 'i-am-news' ) }</span>
+                        } ) : <Button
+                            variant = "tertiary"
+                            className = 'no-widget'
+                            accessibleWhenDisabled = { true }
+                        >
+                            { __( 'All widgets used.', 'i-am-news' ) }
+                        </Button>
                     }
                 </div>
             } }
@@ -319,7 +333,12 @@ const SortableItem = ( { id, columnId, rowId } ) => {
 const Footer = () => {
     return (
         <div className="builder-footer">
-
+            <div className="info-actions-wrapper">
+                <span>{ __( 'Want more features ? Consider switching to Pro.', 'i-am-news' ) }</span>
+            </div>
+            <Button className="show-hide-button">
+                { __( 'Show / Hide', 'i-am-news' ) }
+            </Button>
         </div>
     )
 }

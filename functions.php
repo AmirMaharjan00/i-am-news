@@ -182,6 +182,16 @@ require_once get_template_directory() . '/inc/customizer/sections/scroll-to-top.
 require_once get_template_directory() . '/inc/customizer/sections/date-time.php';
 
 /**
+ * Time section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/time.php';
+
+/**
+ * Dark mode section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/dark-mode.php';
+
+/**
  * Header builder section
 */
 require_once get_template_directory() . '/inc/customizer/sections/header-builder.php';
