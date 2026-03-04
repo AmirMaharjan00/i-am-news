@@ -177,6 +177,11 @@ require_once get_template_directory() . '/inc/customizer/sections/sections.php';
 require_once get_template_directory() . '/inc/customizer/sections/scroll-to-top.php';
 
 /**
+ * Date time section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/date-time.php';
+
+/**
  * Header builder section
 */
 require_once get_template_directory() . '/inc/customizer/sections/header-builder.php';

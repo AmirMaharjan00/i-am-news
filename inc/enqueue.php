@@ -139,8 +139,8 @@
              */
             private function get_preview_configs(): array {
                 $raw_configs = array_merge(
-                    Scroll_To_Top::get_instance()->get_dynamic_css_args( true ),
-                    Header_Builder::get_instance()->get_dynamic_css_args( true ),
+                    Scroll_To_Top::get_instance()->get_dynamic_css( true ),
+                    Header_Builder::get_instance()->get_dynamic_css( true ),
                 );
                 $configs = [];
                 foreach( $raw_configs as $id => $args ) {

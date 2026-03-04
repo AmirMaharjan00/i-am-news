@@ -7,13 +7,15 @@
      */
     namespace IAN\Customizer\Section;
 
+    use IAN\Customizer\Section\Date_Time as Date_Time;
+
     use function esc_html__;
     use function esc_attr;
     use function get_template_directory_uri;
 
     use IAN\Helpers;
 
-    if( ! class_exists( __NAMESPACE__ . '\\Header_Builder' ) ) :
+    if( ! class_exists( __NAMESPACE__ . '\\Header_Builder' ) ) {
         /**
          * Header builder
          */
@@ -254,7 +256,7 @@
              * 
              * @since 1.0.0
              */
-            public function get_dynamic_css_args( $add_type = false ): array {
+            public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
                     'header_builder_background' =>  [
                         'value' =>  $this->get_customizer_value( 'header_builder_background' ),
@@ -279,17 +281,7 @@
                         'property'  =>  'padding'
                     ],
                 ];
-                if( $add_type ) {
-                    $configs = [];
-                    foreach( $dynamic_css_args as $id => $args ) {
-                        $control_args = $this->get_controls( $id );
-                        $args[ 'type' ] = $control_args[ 'type' ];
-                        $configs[ $id ] = $args;
-                    }
-                    return $configs;
-                } else {
-                    return $dynamic_css_args;
-                }
+                return $dynamic_css_args;
             }
 
             /**
@@ -304,7 +296,7 @@
                 $block_class[] = 'layout--' . $this->get_customizer_value( 'header_builder_layouts' );
                 ?>
                     <header id="masthead" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
-                        <span>Date Time</span>
+                        <?php Date_Time::get_instance()->render_html(); ?>
                         <span>Dark Mode</span>
                         <span>Social Icons</span>
                         <span>Logo</span>
@@ -322,4 +314,4 @@
             }
         }
         Header_Builder::get_instance();
-    endif;
+    }

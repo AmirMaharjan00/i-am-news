@@ -233,7 +233,7 @@
              * 
              * @since 1.0.0
              */
-            abstract public function get_dynamic_css_args( $add_type = false );
+            abstract public function get_dynamic_css_args();
 
             /**
              * Add setting
@@ -436,6 +436,27 @@
             public function get_customizer_value( $id = '' ) {
                 if( ! $id ) return;
                 return get_theme_mod( $id, $this->get_defaults( $id ) );
+            }
+
+            /**
+             * Get dynamic css
+             * 
+             * @since 1.0.0
+             * @param   bool    $add_type   
+             */
+            public function get_dynamic_css( $add_type = false ) {
+                $dynamic_css_args = $this->get_dynamic_css_args();
+                if( $add_type ) {
+                    $configs = [];
+                    foreach( $dynamic_css_args as $id => $args ) {
+                        $control_args = $this->get_controls( $id );
+                        $args[ 'type' ] = $control_args[ 'type' ];
+                        $configs[ $id ] = $args;
+                    }
+                    return $configs;
+                } else {
+                    return $dynamic_css_args;
+                }
             }
 
             /**

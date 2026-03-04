@@ -357,7 +357,7 @@
              * 
              * @since 1.0.0
              */
-            public function get_dynamic_css_args( $add_type = false ): array {
+            public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
                     'scroll_to_top_typography'  =>  [
                         'value' =>  $this->get_customizer_value( 'scroll_to_top_typography' ),
@@ -402,17 +402,7 @@
                         'property'  =>  'padding'
                     ],
                 ];
-                if( $add_type ) {
-                    $configs = [];
-                    foreach( $dynamic_css_args as $id => $args ) {
-                        $control_args = $this->get_controls( $id );
-                        $args[ 'type' ] = $control_args[ 'type' ];
-                        $configs[ $id ] = $args;
-                    }
-                    return $configs;
-                } else {
-                    return $dynamic_css_args;
-                }
+                return $dynamic_css_args;
             }
 
             /**
