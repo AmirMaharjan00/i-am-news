@@ -152,7 +152,7 @@
              * 
              */
             public function set_defaults() {
-                $this->defaults = [
+                self::update_theme_defaults( [
                     'time_section_tab' =>  'general',
                     'time_typography'  =>  $this->get_typography(),
                     'time_color'  =>  $this->get_color(),
@@ -160,7 +160,7 @@
                     'time_border'  =>  $this->get_border(),
                     'time_box_shadow'  =>  $this->get_box_shadow(),
                     'time_padding' =>  $this->get_dimension(),
-                ];
+                ] );
             }
 
             /**
@@ -171,35 +171,35 @@
             public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
                     'time_typography'  =>  [
-                        'value' =>  $this->get_customizer_value( 'time_typography' ),
+                        'value' =>  self::get_theme_option( 'time_typography' ),
                         'selector'  =>  '.time-section > span',
                         'default'   =>  $this->get_defaults( 'time_typography' ),
                         'variable'  =>  false
                     ],
                     'time_color'  =>  [
-                        'value' =>  $this->get_customizer_value( 'time_color' ),
+                        'value' =>  self::get_theme_option( 'time_color' ),
                         'default'   =>  $this->get_defaults( 'time_color' ),
                         'selector'  =>  '.time-section .time',
                         'property'  =>  'color'
                     ],
                     'time_background' =>  [
-                        'value' =>  $this->get_customizer_value( 'time_background' ),
+                        'value' =>  self::get_theme_option( 'time_background' ),
                         'default'   =>  $this->get_defaults( 'time_background' ),
                         'selector'  =>  '.time-section',
                         'property'  =>  'background'
                     ],
                     'time_border'  =>  [
-                        'value' =>  $this->get_customizer_value( 'time_border' ),
+                        'value' =>  self::get_theme_option( 'time_border' ),
                         'default'   =>  $this->get_defaults( 'time_border' ),
                         'selector'  =>  '.time-section'
                     ],
                     'time_box_shadow'  =>  [
-                        'value' =>  $this->get_customizer_value( 'time_box_shadow' ),
+                        'value' =>  self::get_theme_option( 'time_box_shadow' ),
                         'default'   =>  $this->get_defaults( 'time_box_shadow' ),
                         'selector'  =>  '.time-section'
                     ],
                     'time_padding' =>  [
-                        'value' =>  $this->get_customizer_value( 'time_padding' ),
+                        'value' =>  self::get_theme_option( 'time_padding' ),
                         'default'   =>  $this->get_defaults( 'time_padding' ),
                         'selector'  =>  '.time-section',
                         'property'  =>  'padding'
@@ -215,6 +215,7 @@
              */
             public function render_html() {
                 $block_class[] = 'time-section';
+                $block_class[] = 'header-widget';
 
                 echo '<div class="', esc_attr( implode( ' ', $block_class ) ), '">';
 

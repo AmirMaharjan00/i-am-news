@@ -30,19 +30,6 @@
     use function get_theme_mod;
 
     interface Section_Interface {
-        /**
-         * Get defaults
-         * 
-         * @since 1.0.0
-         */
-        public function get_defaults( $id = '' );
-
-        /**
-         * Render html
-         * 
-         * @since 1.0.0
-         */
-        public function render_html();
 
         /**
          * Dynamic css
@@ -215,7 +202,7 @@
             abstract protected function get_controls( $id = '' );
 
             /**
-             * Get controls
+             * Set controls
              * 
              * @since 1.0.0
              */
@@ -416,26 +403,6 @@
              */
             private function add_builder( $id, $control ) {
                 $this->manager->add_control( new Builder( $this->manager, $id, $control ) );
-            }
-
-            /**
-             * Get defaults
-             * 
-             * @since 1.0.0
-             * @var array
-             */
-            public function get_defaults( $id = '' ) {
-                return $id ? $this->defaults[ $id ] : $this->defaults;
-            }
-
-            /**
-             * Get updated customizer value
-             * 
-             * @since 1.0.0
-             */
-            public function get_customizer_value( $id = '' ) {
-                if( ! $id ) return;
-                return get_theme_mod( $id, $this->get_defaults( $id ) );
             }
 
             /**

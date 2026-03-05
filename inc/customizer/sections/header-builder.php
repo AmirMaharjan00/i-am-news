@@ -235,7 +235,7 @@
              * @var array
              */
             public function set_defaults() {
-                $this->defaults = [
+                self::update_theme_defaults( [
                     'header_builder_section_tab' =>  'general',
                     'header_builder_layouts' =>  'one',
                     'header_builder' =>  [
@@ -262,7 +262,7 @@
                     'header_builder_border' =>  $this->get_border(),
                     'header_builder_box_shadow' =>  $this->get_box_shadow(),
                     'header_builder_padding' =>  $this->get_dimension(),
-                ];
+                ] );
             }
 
             /**
@@ -273,23 +273,23 @@
             public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
                     'header_builder_background' =>  [
-                        'value' =>  $this->get_customizer_value( 'header_builder_background' ),
+                        'value' =>  self::get_theme_option( 'header_builder_background' ),
                         'selector'  =>  '.ian-header',
                         'default'   =>  $this->get_defaults( 'header_builder_background' ),
                         'property'  =>  'background'
                     ],
                     'header_builder_border' =>  [
-                        'value' =>  $this->get_customizer_value( 'header_builder_border' ),
+                        'value' =>  self::get_theme_option( 'header_builder_border' ),
                         'selector'  =>  '.ian-header',
                         'default'   =>  $this->get_defaults( 'header_builder_border' )
                     ],
                     'header_builder_box_shadow' =>  [
-                        'value' =>  $this->get_customizer_value( 'header_builder_box_shadow' ),
+                        'value' =>  self::get_theme_option( 'header_builder_box_shadow' ),
                         'selector'  =>  '.ian-header',
                         'default'   =>  $this->get_defaults( 'header_builder_box_shadow' )
                     ],
                     'header_builder_padding' =>  [
-                        'value' =>  $this->get_customizer_value( 'header_builder_padding' ),
+                        'value' =>  self::get_theme_option( 'header_builder_padding' ),
                         'selector'  =>  '.ian-header',
                         'default'   =>  $this->get_defaults( 'header_builder_padding' ),
                         'property'  =>  'padding'
@@ -307,7 +307,7 @@
             public function render_html() {
                 $block_class[] = $this->id;
                 $block_class[] = 'site-header';
-                $block_class[] = 'layout--' . $this->get_customizer_value( 'header_builder_layouts' );
+                $block_class[] = 'layout--' . self::get_theme_option( 'header_builder_layouts' );
                 ?>
                     <header id="masthead" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
                         <?php Header_Top_Row::get_instance()->render_html(); ?>

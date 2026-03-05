@@ -104,9 +104,9 @@
              * @since 1.0.0
              */
             public function set_defaults() {
-                $this->defaults = [
+                self::update_theme_defaults( [
                     'dark_mode_section_tab' =>  'general'
-                ];
+                ] );
             }
 
             /**

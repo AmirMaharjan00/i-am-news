@@ -12,6 +12,39 @@
          * Customizer Defaults
          */
         trait Customizer_Defaults {
+
+            /**
+             * Theme defaults
+             */
+            private static $theme_defaults = [];
+
+            /**
+             * Update theme default
+             * 
+             * @since 1.0.0
+             */
+            public static function update_theme_defaults( $new_defaults = [] ) {
+                self::$theme_defaults = array_merge( self::$theme_defaults, $new_defaults );
+            }
+
+            /**
+             * Get defaults
+             * 
+             * @since 1.0.0
+             */
+            public static function get_defaults( $id = '' ) {
+                return $id ? self::$theme_defaults[ $id ] : self::$theme_defaults;
+            }
+
+            /**
+             * Get theme options
+             * 
+             * @since 1.0.0
+             * @param   string  $id The control Id
+             */
+            public static function get_theme_option( $id ) {
+                return get_theme_mod( $id, self::get_defaults( $id ) );
+            }
             
             /**
              * Get default box shadow

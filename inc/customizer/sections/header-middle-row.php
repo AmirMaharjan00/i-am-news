@@ -9,8 +9,8 @@
 
     use IAN\Customizer\Section\Section as Section;
     use IAN\Helpers;
-    use IAN\Customizer\Section\Date_Time as Date_Time;
-    use IAN\Customizer\Section\Time as Time;
+
+    use Utility;
 
     use function esc_html__;
     use function esc_attr;
@@ -256,7 +256,7 @@
              * 
              */
             public function set_defaults() {
-                $this->defaults = [
+                self::update_theme_defaults( [
                     'header_middle_row_section_tab' =>  'general',
                     'header_middle_row_middle_column_heading_toggle' => true,
                     'header_middle_row_second_column_heading_toggle' => false,
@@ -268,7 +268,7 @@
                     'header_middle_row_border' =>  $this->get_border(),
                     'header_middle_row_box_shadow' =>  $this->get_box_shadow(),
                     'header_middle_row_padding'    =>  $this->get_dimension(),
-                ];
+                ] );
             }
 
             /**
@@ -279,23 +279,23 @@
             public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
                     'header_middle_row_background' =>  [
-                        'value' =>  $this->get_customizer_value( 'header_middle_row_background' ),
+                        'value' =>  self::get_theme_option( 'header_middle_row_background' ),
                         'selector'  =>  '.ian-header-middle-row',
                         'default'   =>  $this->get_defaults( 'header_middle_row_background' ),
                         'property'  =>  'background'
                     ],
                     'header_middle_row_border' =>  [
-                        'value' =>  $this->get_customizer_value( 'header_middle_row_border' ),
+                        'value' =>  self::get_theme_option( 'header_middle_row_border' ),
                         'selector'  =>  '.ian-header-middle-row',
                         'default'   =>  $this->get_defaults( 'header_middle_row_border' )
                     ],
                     'header_middle_row_box_shadow' =>  [
-                        'value' =>  $this->get_customizer_value( 'header_middle_row_box_shadow' ),
+                        'value' =>  self::get_theme_option( 'header_middle_row_box_shadow' ),
                         'selector'  =>  '.ian-header-middle-row',
                         'default'   =>  $this->get_defaults( 'header_middle_row_box_shadow' )
                     ],
                     'header_middle_row_padding'    =>  [
-                        'value' =>  $this->get_customizer_value( 'header_middle_row_padding' ),
+                        'value' =>  self::get_theme_option( 'header_middle_row_padding' ),
                         'selector'  =>  '.ian-header-middle-row',
                         'default'   =>  $this->get_defaults( 'header_middle_row_padding' ),
                         'property'  =>  'padding'
@@ -311,10 +311,20 @@
              */
             public function render_html() {
                 $block_class[] = $this->id;
+                
+                $header_builder = self::get_theme_option( 'header_builder' );
+                $middle_row = $header_builder[ 'middle' ];
                 ?>  
                     <div class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
-                        <?php Date_Time::get_instance()->render_html(); ?>
-                        <?php Time::get_instance()->render_html(); ?>
+                        <?php
+                            foreach( $middle_row as $column => $widgets ) :
+                                if( ! empty( $widgets ) ) :
+                                    foreach( $widgets as $widget ) :
+                                        Utility::get_header_builder_widget_html( $widget );
+                                    endforeach;
+                                endif;
+                            endforeach;
+                        ?>
                     </div>
                 <?php
             }

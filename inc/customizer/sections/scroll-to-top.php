@@ -40,9 +40,8 @@
              * @since 1.0.0
              * @return IAN\Customizer\Section\Scroll_To_Top
              */
-            public static function get_instance() {
+            public static function get_instance(): Scroll_To_Top {
                 if( self::$instance === null ) self::$instance = new self();
-
                 return self::$instance;
             }
 
@@ -310,7 +309,7 @@
              * @var array
              */
             public function set_defaults() {
-                $this->defaults = [
+                self::update_theme_defaults( [
                     'scroll_to_top_section_tab' =>  'general',
                     'scroll_to_top_layouts' =>  'one',
                     'scroll_to_top_label' =>  esc_html__( 'Go to Top', 'i-am-news' ),
@@ -349,7 +348,7 @@
                     ] ),
                     'scroll_to_top_heading_toggle'    =>  'one',
                     'scroll_to_top_checkbox'    =>  'one',
-                ];
+                ] );
             }
 
             /**
@@ -360,43 +359,43 @@
             public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
                     'scroll_to_top_typography'  =>  [
-                        'value' =>  $this->get_customizer_value( 'scroll_to_top_typography' ),
+                        'value' =>  self::get_theme_option( 'scroll_to_top_typography' ),
                         'selector'  =>  '.ian-scroll-to-top > span',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_typography' ),
                         'variable'  =>  false
                     ],
                     'scroll_to_top_color'  =>  [
-                        'value' =>  $this->get_customizer_value( 'scroll_to_top_color' ),
+                        'value' =>  self::get_theme_option( 'scroll_to_top_color' ),
                         'selector'  =>  '.ian-scroll-to-top > span',
                         'hover_selector'  =>  '.ian-scroll-to-top:hover > span',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_color' ),
                         'property'  =>  'color'
                     ],
                     'scroll_to_top_background'  =>  [
-                        'value' =>  $this->get_customizer_value( 'scroll_to_top_background' ),
+                        'value' =>  self::get_theme_option( 'scroll_to_top_background' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'hover_selector'  =>  '.ian-scroll-to-top:hover',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_background' ),
                         'property'  =>  'background'
                     ],
                     'scroll_to_top_border'  =>  [
-                        'value' =>  $this->get_customizer_value( 'scroll_to_top_border' ),
+                        'value' =>  self::get_theme_option( 'scroll_to_top_border' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_border' )
                     ],
                     'scroll_to_top_border_radius'  =>   [
-                        'value' =>  $this->get_customizer_value( 'scroll_to_top_border_radius' ),
+                        'value' =>  self::get_theme_option( 'scroll_to_top_border_radius' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_border_radius' ),
                         'property'  =>  'border-radius'
                     ],
                     'scroll_to_top_box_shadow'  =>  [
-                        'value' =>  $this->get_customizer_value( 'scroll_to_top_box_shadow' ),
+                        'value' =>  self::get_theme_option( 'scroll_to_top_box_shadow' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_box_shadow' )
                     ],
                     'scroll_to_top_padding'  => [
-                        'value' =>  $this->get_customizer_value( 'scroll_to_top_padding' ),
+                        'value' =>  self::get_theme_option( 'scroll_to_top_padding' ),
                         'selector'  =>  '.ian-scroll-to-top',
                         'default'   =>  $this->get_defaults( 'scroll_to_top_padding' ),
                         'property'  =>  'padding'
@@ -413,18 +412,18 @@
              */
             public function render_html() {
                 $block_class[] = $this->id;
-                $block_class[] = 'layout--' . $this->get_customizer_value( 'scroll_to_top_layouts' );
+                $block_class[] = 'layout--' . self::get_theme_option( 'scroll_to_top_layouts' );
 
-                if( $this->get_customizer_value( 'scroll_to_top_is_fixed' ) ) {
-                    $block_class[] = 'position--' . $this->get_customizer_value( 'scroll_to_top_position' );
+                if( self::get_theme_option( 'scroll_to_top_is_fixed' ) ) {
+                    $block_class[] = 'position--' . self::get_theme_option( 'scroll_to_top_position' );
                 }
 
                 ?>
                     <div id="<?php echo esc_attr( $this->id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
 
-                        <span class="label"><?php echo esc_html( $this->get_customizer_value( 'scroll_to_top_label' ) ); ?></span>
+                        <span class="label"><?php echo esc_html( self::get_theme_option( 'scroll_to_top_label' ) ); ?></span>
 
-                        <?php echo Helpers::get_icon_html( $this->get_customizer_value( 'scroll_to_top_icon_picker' ) ); ?>
+                        <?php echo Helpers::get_icon_html( self::get_theme_option( 'scroll_to_top_icon_picker' ) ); ?>
 
                     </div>
                 <?php

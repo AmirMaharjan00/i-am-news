@@ -210,3 +210,8 @@ require_once get_template_directory() . '/inc/customizer/sections/header-bottom-
  * Header builder section
 */
 require_once get_template_directory() . '/inc/customizer/sections/header-builder.php';
+
+/**
+ * Utility Class
+ */
+require_once get_template_directory() . '/inc/utility.php';

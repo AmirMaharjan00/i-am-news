@@ -189,7 +189,7 @@
              * 
              */
             public function set_defaults() {
-                $this->defaults = [
+                self::update_theme_defaults( [
                     'date_time_section_tab' =>  'general',
                     'date_time_enable_date' =>  true,
                     'date_time_enable_time' =>  true,
@@ -199,7 +199,7 @@
                     'date_time_border'  =>  $this->get_border(),
                     'date_time_box_shadow'  =>  $this->get_box_shadow(),
                     'date_time_padding' =>  $this->get_dimension(),
-                ];
+                ] );
             }
 
             /**
@@ -210,35 +210,35 @@
             public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
                     'date_time_typography'  =>  [
-                        'value' =>  $this->get_customizer_value( 'date_time_typography' ),
+                        'value' =>  self::get_theme_option( 'date_time_typography' ),
                         'selector'  =>  '.date-time-section > span',
                         'default'   =>  $this->get_defaults( 'date_time_typography' ),
                         'variable'  =>  false
                     ],
                     'date_time_date_color'  =>  [
-                        'value' =>  $this->get_customizer_value( 'date_time_date_color' ),
+                        'value' =>  self::get_theme_option( 'date_time_date_color' ),
                         'default'   =>  $this->get_defaults( 'date_time_date_color' ),
                         'selector'  =>  '.date-time-section .date',
                         'property'  =>  'color'
                     ],
                     'date_time_date_background' =>  [
-                        'value' =>  $this->get_customizer_value( 'date_time_date_background' ),
+                        'value' =>  self::get_theme_option( 'date_time_date_background' ),
                         'default'   =>  $this->get_defaults( 'date_time_date_background' ),
                         'selector'  =>  '.date-time-section .date',
                         'property'  =>  'background'
                     ],
                     'date_time_border'  =>  [
-                        'value' =>  $this->get_customizer_value( 'date_time_border' ),
+                        'value' =>  self::get_theme_option( 'date_time_border' ),
                         'default'   =>  $this->get_defaults( 'date_time_border' ),
                         'selector'  =>  '.date-time-section'
                     ],
                     'date_time_box_shadow'  =>  [
-                        'value' =>  $this->get_customizer_value( 'date_time_box_shadow' ),
+                        'value' =>  self::get_theme_option( 'date_time_box_shadow' ),
                         'default'   =>  $this->get_defaults( 'date_time_box_shadow' ),
                         'selector'  =>  '.date-time-section'
                     ],
                     'date_time_padding' =>  [
-                        'value' =>  $this->get_customizer_value( 'date_time_padding' ),
+                        'value' =>  self::get_theme_option( 'date_time_padding' ),
                         'default'   =>  $this->get_defaults( 'date_time_padding' ),
                         'selector'  =>  '.date-time-section',
                         'property'  =>  'padding'
@@ -253,11 +253,12 @@
              * @since 1.0.0
              */
             public function render_html() {
-                $enable_date = $this->get_customizer_value( 'date_time_enable_date' );
-                $enable_time = $this->get_customizer_value( 'date_time_enable_time' );
+                $enable_date = self::get_theme_option( 'date_time_enable_date' );
+                $enable_time = self::get_theme_option( 'date_time_enable_time' );
                 if( ! $enable_date && ! $enable_time ) return;
                 
                 $block_class[] = 'date-time-section';
+                $block_class[] = 'header-widget';
 
                 echo '<div class="', esc_attr( implode( ' ', $block_class ) ), '">';
 

@@ -37,18 +37,18 @@ function i_am_news_pingback_header() {
 add_action( 'wp_head', 'i_am_news_pingback_header' );
 
 /**
- * Enqueue files
- * 
- * @since 1.0.0
- */
-require_once get_template_directory() . '/inc/enqueue.php';
-
-/**
  * Customizer Defaults
  * 
  * @since 1.0.0
  */
 require_once get_template_directory() . '/inc/customizer/theme-starter.php';
+
+/**
+ * Enqueue files
+ * 
+ * @since 1.0.0
+ */
+require_once get_template_directory() . '/inc/enqueue.php';
 
 /**
  * Customizer Sanitize Function
