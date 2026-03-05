@@ -8276,7 +8276,8 @@ const {
 const BuilderComponent = props => {
   const {
       setting,
-      widgets
+      widgets,
+      row_section_ids
     } = props,
     widgetKeys = Object.keys(widgets),
     [value, setValue] = useState(setting.get()),
@@ -8387,6 +8388,15 @@ const BuilderComponent = props => {
     });
   };
 
+  /**
+   * Handle Row click
+   * 
+   * @since 1.0.0
+   */
+  const handleRowClick = row => {
+    customize.section(row_section_ids[row]).expand();
+  };
+
   // Builder context object
   const builderContextObject = {
     widgets,
@@ -8412,6 +8422,7 @@ const BuilderComponent = props => {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Button, {
               variant: "tertiary",
               className: "row-settings",
+              onClick: () => handleRowClick(rowKey),
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
                 icon: "admin-generic"
               })
@@ -9321,47 +9332,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HeadingToggleComponent: () => (/* binding */ HeadingToggleComponent)
 /* harmony export */ });
-/* harmony import */ var _font_awesome_classes_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../font-awesome-classes.json */ "./src/font-awesome-classes.json");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
+
 const {
     Button,
     Dashicon,
     Dropdown
   } = wp.components,
   {
-    useState
+    useState,
+    useEffect
   } = wp.element;
-
 
 /**
  * MARK: Heading Toggle Component
  * 
  * @since 1.0.0
  */
-
 const HeadingToggleComponent = props => {
   const {
       label,
-      description
+      setting,
+      controls
     } = props,
-    [display, setDisplay] = useState(true);
-  function value() {
-    setDisplay(display => !display);
-  }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    [display, setDisplay] = useState(setting.get());
+  useEffect(() => {
+    controls.forEach(control => {
+      if (display) {
+        control.classList.remove('ian-hidden-control');
+      } else {
+        control.classList.add('ian-hidden-control');
+      }
+    });
+  }, [display]);
+
+  /**
+   * Handle on click
+   * 
+   * @since 1.0.0
+   */
+  const handleOnClick = () => {
+    setDisplay(!display);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "control-content",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
       className: "content-wrapper",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
-          onClick: value,
-          children: "Heading"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Dashicon, {
-          className: "icon-picker-dashicon"
-        })]
-      }), display && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-        children: "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"
+      onClick: handleOnClick,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+        className: "label",
+        children: label
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
+        icon: `arrow-${display ? 'down' : 'up'}-alt2`
       })]
     })
   });
@@ -24056,7 +24079,8 @@ controlConstructor['heading-toggle'] = Control.extend({
         params,
         container,
         section: _thisSection,
-        setting
+        setting,
+        id
       } = control,
       root = container.find('.root')[0],
       reactRoot = createRoot(root),
@@ -24069,11 +24093,31 @@ controlConstructor['heading-toggle'] = Control.extend({
     /**
      * Function to render your React toggle
      */
-    const renderHeadingToggle = () => {
+    const renderHeadingToggle = instance => {
       if (rendered) return;
       rendered = true;
+      let controlDetected = false;
+      let controlsToToggle = instance.controls().reduce((_this, controlInstance) => {
+        let {
+            id: _thisId,
+            container,
+            params
+          } = controlInstance,
+          notSameControl = id !== _thisId;
+        if (params.tab !== control.params.tab) return _this;
+        if (id === _thisId) controlDetected = true;
+        if (controlDetected) {
+          if (params.type === 'heading-toggle' && notSameControl) {
+            controlDetected = false;
+            return _this;
+          }
+          if (notSameControl) _this.push(container[0]);
+        }
+        return _this;
+      }, []);
       reactRoot.render(/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_15__.jsx)(_components_heading_toggle__WEBPACK_IMPORTED_MODULE_11__.HeadingToggleComponent, {
-        ...props
+        ...props,
+        controls: controlsToToggle
       }));
     };
 
@@ -24081,13 +24125,15 @@ controlConstructor['heading-toggle'] = Control.extend({
      * Lazy load when the section expands
      * Component will mount only when section is mounted
      */
-    if (_thisSection) {
-      section(_thisSection()).expanded.bind('expanded', function (isExpanded) {
-        if (isExpanded) renderHeadingToggle();
-      });
-    } else {
-      renderHeadingToggle();
-    }
+    section(_thisSection(), function (instance) {
+      if (_thisSection) {
+        section(_thisSection()).expanded.bind('expanded', function (isExpanded) {
+          if (isExpanded) renderHeadingToggle(instance);
+        });
+      } else {
+        renderHeadingToggle(instance);
+      }
+    });
 
     /**
      * Unbind if the controls container <li> tag is remoed
@@ -24226,6 +24272,37 @@ controlConstructor['ian-builder'] = Control.extend({
     let rendered = false; // ensure we render only once
 
     /**
+     * Extras
+     * 
+     * @since 1.0.0
+     */
+    const getAllSections = () => {
+      return new Set([_thisSection(), ...Object.values(params.row_section_ids), ...Object.values(params.widgets).map(w => w.section_id)]);
+    };
+
+    /**
+     * Section open
+     * 
+     * @since 1.0.0
+     */
+    const checkIfSectionOpen = () => {
+      let allSections = getAllSections();
+      for (const sectionId of allSections) {
+        section(sectionId, function (sectionInstance) {
+          if (sectionInstance.id !== _thisSection()) {
+            sectionInstance.headContainer.addClass('ian-builder-section');
+          }
+          sectionInstance.expanded.bind(function (isExpanded) {
+            if (isExpanded) {
+              control.section(sectionId);
+              if (!rendered) renderBuilder();
+            }
+          });
+        });
+      }
+    };
+
+    /**
      * Function to render your React toggle
      */
     const renderBuilder = () => {
@@ -24247,6 +24324,7 @@ controlConstructor['ian-builder'] = Control.extend({
     } else {
       renderBuilder();
     }
+    checkIfSectionOpen();
 
     /**
      * Unbind if the controls container <li> tag is remoed
@@ -24256,7 +24334,7 @@ controlConstructor['ian-builder'] = Control.extend({
 });
 
 /**
- * Conditional rendering
+ * MARK: Conditional rendering
  * 
  * @since 1.0.0
  */

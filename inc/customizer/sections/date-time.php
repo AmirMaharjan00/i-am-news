@@ -130,8 +130,7 @@
             public function get_controls( $id = '' ): array {
                 $controls = [
                     'date_time_section' =>  [
-                        'title' =>  esc_html__( 'Date Time', 'i-am-news' ),
-                        'active_callback'   =>  function(){ return false; }
+                        'title' =>  esc_html__( 'Date Time', 'i-am-news' )
                     ],
                     'date_time_section_tab' =>  array_merge( $this->common, [
                         'type'  =>  'section-tab',

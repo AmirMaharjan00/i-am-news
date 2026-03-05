@@ -562,7 +562,7 @@ controlConstructor[ 'heading-toggle' ] = Control.extend({
 
     ready: function () {
         const control = this,
-            { params, container, section: _thisSection, setting } = control,
+            { params, container, section: _thisSection, setting, id } = control,
             root = container.find( '.root' )[ 0 ],
             reactRoot = createRoot( root ),
             props = { 
@@ -575,23 +575,43 @@ controlConstructor[ 'heading-toggle' ] = Control.extend({
         /**
          * Function to render your React toggle
          */
-        const renderHeadingToggle = () => {
+        const renderHeadingToggle = ( instance ) => {
             if ( rendered ) return;
             rendered = true;
-            reactRoot.render( <HeadingToggleComponent { ...props } /> )
+            let controlDetected = false
+            let controlsToToggle = instance.controls().reduce( ( _this, controlInstance ) => {
+                let { id: _thisId, container, params } = controlInstance,
+                    notSameControl = ( id !== _thisId )
+                if( params.tab !== control.params.tab ) return _this
+                if( id === _thisId ) controlDetected = true
+                if( controlDetected ) {
+                    if( params.type === 'heading-toggle' && notSameControl ) {
+                        controlDetected = false
+                        return _this
+                    }
+                    if( notSameControl ) _this.push( container[0] )
+                }
+                return _this
+            }, [] )
+            reactRoot.render( <HeadingToggleComponent 
+                { ...props }
+                controls = { controlsToToggle }
+            /> )
         };
 
         /**
          * Lazy load when the section expands
          * Component will mount only when section is mounted
          */
-        if( _thisSection ) {
-            section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
-                if( isExpanded ) renderHeadingToggle()
-            } );
-        } else {
-            renderHeadingToggle()
-        }
+        section( _thisSection(), function( instance ) {
+            if( _thisSection ) {
+                section( _thisSection() ).expanded.bind( 'expanded', function( isExpanded ) {
+                    if( isExpanded ) renderHeadingToggle( instance )
+                } );
+            } else {
+                renderHeadingToggle( instance )
+            }
+        } )
 
         /**
          * Unbind if the controls container <li> tag is remoed
@@ -720,6 +740,41 @@ controlConstructor[ 'ian-builder' ] = Control.extend({
         let rendered = false; // ensure we render only once
 
         /**
+         * Extras
+         * 
+         * @since 1.0.0
+         */
+        const getAllSections = () => {
+            return new Set( [
+                _thisSection(),
+                ...Object.values( params.row_section_ids ),
+                ...Object.values( params.widgets ).map( w => w.section_id )
+            ] )
+        }
+
+        /**
+         * Section open
+         * 
+         * @since 1.0.0
+         */
+        const checkIfSectionOpen = () => {
+            let allSections = getAllSections()
+            for( const sectionId of allSections ){
+                section( sectionId, function( sectionInstance ){
+                    if( sectionInstance.id !== _thisSection() ) {
+                        sectionInstance.headContainer.addClass( 'ian-builder-section' )
+                    }
+                    sectionInstance.expanded.bind( function( isExpanded ){
+                        if( isExpanded ) {
+                            control.section( sectionId )
+                            if( ! rendered ) renderBuilder()
+                        }
+                    } )
+                } )
+            }
+        }
+
+        /**
          * Function to render your React toggle
          */
         const renderBuilder = () => {
@@ -739,6 +794,7 @@ controlConstructor[ 'ian-builder' ] = Control.extend({
         } else {
             renderBuilder()
         }
+        checkIfSectionOpen()
 
         /**
          * Unbind if the controls container <li> tag is remoed
@@ -748,7 +804,7 @@ controlConstructor[ 'ian-builder' ] = Control.extend({
 });
 
 /**
- * Conditional rendering
+ * MARK: Conditional rendering
  * 
  * @since 1.0.0
  */
@@ -839,7 +895,6 @@ const ConditionalRendering = {
             } )
         } )
     }
-    
 }
 
 customize.bind( 'ready', function() {

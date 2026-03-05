@@ -31,6 +31,14 @@
             public $widgets = [];
 
             /**
+             * Row section ids
+             * 
+             * @var array
+             * @since 1.0.0
+             */
+            public $row_section_ids = [];
+
+            /**
              * To json
              * 
              * @since 1.0.0
@@ -38,6 +46,7 @@
             public function to_json() {
                 parent::to_json();
                 $this->json[ 'widgets' ] = $this->widgets;
+                $this->json[ 'row_section_ids' ] = $this->row_section_ids;
             }
         }
     endif;

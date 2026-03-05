@@ -114,8 +114,7 @@
             public function get_controls( $id = '' ): array {
                 $controls = [
                     'time_section' =>  [
-                        'title' =>  esc_html__( 'Time', 'i-am-news' ),
-                        'active_callback'   =>  function(){ return false; }
+                        'title' =>  esc_html__( 'Time', 'i-am-news' )
                     ],
                     'time_typography' =>  [
                         'label' =>  esc_html__( 'Typography', 'i-am-news' ),

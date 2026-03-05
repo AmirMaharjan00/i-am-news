@@ -79,8 +79,7 @@
             public function get_controls( $id = '' ) {
                 $controls = [
                     'dark_mode_section' =>  [
-                        'title' =>  esc_html__( 'Dark Mode', 'i-am-news' ),
-                        'active_callback'   =>  '__return_false'
+                        'title' =>  esc_html__( 'Dark Mode', 'i-am-news' )
                     ],
                     'dark_mode_section_tab' =>  [
                         'type'  =>  'section-tab',

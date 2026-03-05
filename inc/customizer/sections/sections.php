@@ -150,8 +150,6 @@
                 $this->manager = $wp_customize;
                 $this->set_custom_controls();
                 $this->register_controls();
-
-                $wp_customize->get_section( 'title_tagline' )->active_callback = '__return_false';
             }
 
             /**

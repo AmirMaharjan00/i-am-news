@@ -7,8 +7,9 @@
      */
     namespace IAN\Customizer\Section;
 
-    use IAN\Customizer\Section\Date_Time as Date_Time;
-    use IAN\Customizer\Section\Time as Time;
+    use IAN\Customizer\Section\Header_Top_Row as Header_Top_Row;
+    use IAN\Customizer\Section\Header_Middle_Row as Header_Middle_Row;
+    use IAN\Customizer\Section\Header_Bottom_Row as Header_Bottom_Row;
 
     use function esc_html__;
     use function esc_attr;
@@ -158,6 +159,11 @@
                     ] ),
                     'header_builder' =>  array_merge( $this->common, [
                         'type'  =>  'ian-builder',
+                        'row_section_ids'   =>  [
+                            'top' =>  'header_top_row_section',
+                            'middle' =>  'header_middle_row_section',
+                            'bottom' =>  'header_bottom_row_section',
+                        ],
                         'widgets'   =>  [
                             'logo'  =>  [
                                 'label' =>  esc_html__( 'Site Identity', 'i-am-news' ),
@@ -236,20 +242,17 @@
                         'top'   =>  [
                             'first' =>  [ 'date-time', 'dark-mode' ],
                             'second' =>  [],
-                            'third' =>  [],
-                            'forth' =>  [],
+                            'third' =>  []
                         ],
                         'middle'    =>  [
                             'first' =>  [ 'logo' ],
                             'second' =>  [ 'social-icons' ],
-                            'third' =>  [],
-                            'forth' =>  [],
+                            'third' =>  []
                         ],
                         'bottom'    =>  [
                             'first' =>  [],
                             'second' =>  [],
-                            'third' =>  [],
-                            'forth' =>  [],
+                            'third' =>  []
                         ],
                     ],
                     'header_builder_background' =>  [
@@ -307,19 +310,9 @@
                 $block_class[] = 'layout--' . $this->get_customizer_value( 'header_builder_layouts' );
                 ?>
                     <header id="masthead" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
-                        <?php Date_Time::get_instance()->render_html(); ?>
-                        <?php Time::get_instance()->render_html(); ?>
-                        <span>Social Icons</span>
-                        <span>Logo</span>
-                        <span>Primary Menu</span>
-                        <span>Secondary Menu</span>
-                        <span>Search</span>
-                        <span>Instagram</span>
-                        <span>Ticker News</span>
-                        <span>Random News</span>
-                        <span>NewsLetter</span>
-                        <span>Widget Area</span>
-                        <span>Weather</span>
+                        <?php Header_Top_Row::get_instance()->render_html(); ?>
+                        <?php Header_Middle_Row::get_instance()->render_html(); ?>
+                        <?php Header_Bottom_Row::get_instance()->render_html(); ?>
                     </header>
                 <?php
             }

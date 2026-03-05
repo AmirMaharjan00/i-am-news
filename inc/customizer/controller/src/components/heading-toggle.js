@@ -1,7 +1,5 @@
 const { Button, Dashicon, Dropdown } = wp.components,
-    { useState } = wp.element
-
-import fontAwesomeIcons from '../font-awesome-classes.json'
+    { useState, useEffect } = wp.element
 
 /**
  * MARK: Heading Toggle Component
@@ -9,28 +7,34 @@ import fontAwesomeIcons from '../font-awesome-classes.json'
  * @since 1.0.0
  */
 export const HeadingToggleComponent = ( props ) => {
-    const { label, description } = props,
-        [ display, setDisplay ] = useState( true );
+    const { label, setting, controls } = props,
+        [ display, setDisplay ] = useState( setting.get() );
 
-    function value() {
-        setDisplay( display => ! display )
+    useEffect( () => {
+        controls.forEach( ( control ) => {
+            if( display ) {
+                control.classList.remove( 'ian-hidden-control' )
+            } else {
+                control.classList.add( 'ian-hidden-control' )
+            }
+        } )
+    }, [ display ] )
+
+    /**
+     * Handle on click
+     * 
+     * @since 1.0.0
+     */
+    const handleOnClick = () => {
+        setDisplay( ! display )
     }
 
     return <div className="control-content">
-
-        <div className="content-wrapper">
-            <div>
-                <h2 onClick={ value }>
-                    Heading
-                </h2>
-                <Dashicon  className="icon-picker-dashicon" />
-            </div>
-            {
-                display &&
-                <span>
-                    Welcome to WordPress. This is your first post. Edit or delete it, then start writing!
-                </span>
-            }
+        <div className="content-wrapper" onClick = { handleOnClick }>
+            <h2 className='label'>{ label }</h2>
+            <Dashicon
+                icon = { `arrow-${ display ? 'down' : 'up' }-alt2` }
+            />
         </div>
     </div>
 }

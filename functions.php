@@ -192,6 +192,21 @@ require_once get_template_directory() . '/inc/customizer/sections/time.php';
 require_once get_template_directory() . '/inc/customizer/sections/dark-mode.php';
 
 /**
+ * Header top row section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/header-top-row.php';
+
+/**
+ * Header middle row section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/header-middle-row.php';
+
+/**
+ * Header bottom row section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/header-bottom-row.php';
+
+/**
  * Header builder section
 */
 require_once get_template_directory() . '/inc/customizer/sections/header-builder.php';

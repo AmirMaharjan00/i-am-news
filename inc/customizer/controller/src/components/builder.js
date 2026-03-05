@@ -22,7 +22,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 
 export const BuilderComponent = ( props ) => {
-    const { setting, widgets } = props,
+    const { setting, widgets, row_section_ids } = props,
         widgetKeys = Object.keys( widgets ),
         [ value, setValue ] = useState( setting.get() ),
         usedWidgets = Object.keys( value ).reduce( ( _this, rowId ) => {
@@ -145,6 +145,15 @@ export const BuilderComponent = ( props ) => {
         } )
     }
 
+    /**
+     * Handle Row click
+     * 
+     * @since 1.0.0
+     */
+    const handleRowClick = ( row ) => {
+        customize.section( row_section_ids[ row ] ).expand()
+    }
+
     // Builder context object
     const builderContextObject = {
         widgets,
@@ -170,6 +179,7 @@ export const BuilderComponent = ( props ) => {
                                     <Button
                                         variant = "tertiary"
                                         className = "row-settings"
+                                        onClick = { () => handleRowClick( rowKey ) }
                                     >
                                         <Dashicon icon="admin-generic" />
                                     </Button>

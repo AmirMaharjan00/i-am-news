@@ -13,6 +13,7 @@
     12.0 Radio Tab
     13.0 Color
     14.0 Builder
+    15.0 Heading Toggle
 */
 
 /*
@@ -100,6 +101,7 @@ MARK: 1.0 Normalize
         display: block;
     }
 
+    .customize-control.ian-hidden-control,
     .customize-control.ian-hide {
         display: none;
     }
@@ -154,7 +156,7 @@ MARK: 1.0 Normalize
     .customize-control .ian-dropdown-container .highlight {
         background-color: #fff;
         color: #1e1e1e;
-        height: 40px;
+        height: 36px;
         display: flex;
         align-items: center;
         padding: 0 12px;
@@ -678,7 +680,7 @@ MARK: 10.0 Border
 */
     .customize-control-border .control-content .content-wrapper {
         display: grid;
-        grid-template-columns: 20% 80%;
+        grid-template-columns: 16% 1fr;
         align-items: center;
         gap: 5px;
     }
@@ -844,8 +846,16 @@ MARK: 12.0 Radio Tab
     .customize-control-radio-tab .control-content.is-block .content-wrapper {
         display: flex;
         align-items: center;
-        /* width: 60%; */
         flex: 1 1;
+    }
+
+    .customize-control-radio-tab .control-content:not(.is-block) .content-wrapper {
+        display: flex;
+    }
+
+    .customize-control-radio-tab .control-content:not(.is-block) .content-wrapper > .components-button {
+        flex: 1;
+        justify-content: center;
     }
 
     .customize-control-radio-tab .control-content.is-block .content-wrapper .components-button {
@@ -864,16 +874,16 @@ MARK: 13.0 Color
     }
 
     .customize-control-ian-color .control-content.is-block .content-wrapper:not(.is-hover) {
-        width: 20%;
-        height: 40px;
+        width: 16%;
+        height: 36px;
     }
 
     .customize-control-ian-color .control-content.is-block .content-wrapper.is-hover {
-        width: 40%;
+        width: 36%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 40px;
+        height: 36px;
         gap: 5px;
     }
 
@@ -898,6 +908,10 @@ MARK: 13.0 Color
 MARK: 14.0 Builder
 =========================
 */
+    .ian-builder-section {
+        display: none !important;
+    }
+
     .customize-pane-child.control-section .customize-control.customize-control-ian-builder {
         padding: 0;
         border-bottom: unset;
@@ -951,7 +965,7 @@ MARK: 14.0 Builder
 
     .customize-control-ian-builder .content-wrapper .row {
         display: grid;
-        grid-template-columns: 40px repeat(4, 1fr);
+        grid-template-columns: 40px repeat(3, 1fr);
         gap: 1px;
     }
 
@@ -1052,4 +1066,34 @@ MARK: 14.0 Builder
 
     .builder-popover .components-popover__content .widget-wrapper .widget-item:hover {
         outline: 1px solid var(--customizer-color);
+    }
+
+/*
+=========================
+MARK: 15.0 Heading Toggle
+=========================
+*/
+    .customize-pane-child.control-section .customize-control.customize-control-heading-toggle {
+        border-bottom: unset;
+        padding-bottom: 0;
+    }
+
+    .customize-control-heading-toggle .content-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--customizer-light-grey);
+        margin-inline: -12px;
+        padding: 0 12px;
+    }
+
+    .customize-control-heading-toggle .content-wrapper:hover > * {
+        color: var(--customizer-color);
+        cursor: default;
+    }
+
+    .customize-control-heading-toggle .content-wrapper > * {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1.3px;
     }
