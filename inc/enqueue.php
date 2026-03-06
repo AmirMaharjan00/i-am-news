@@ -25,6 +25,7 @@
     use IAN\Customizer\Section\Header_Builder as Header_Builder;
     use IAN\Customizer\Section\Date_time as Date_time;
     use IAN\Customizer\Section\Time as Time;
+    use IAN\Customizer\Section\Dark_Mode as Dark_Mode;
 
     if( ! class_exists( __NAMESPACE__ . '\\Enqueue' ) ) :
         /**
@@ -132,6 +133,8 @@
                 $header_top_row = Header_Top_Row::get_instance()->render_dynamic_css();
                 $header_middle_row = Header_Middle_Row::get_instance()->render_dynamic_css();
                 $header_bottom_row = Header_Bottom_Row::get_instance()->render_dynamic_css();
+                $dark_mode = Dark_Mode::get_instance()->render_dynamic_css();
+
                 $dynamic_css = [];
                 if( $scroll_to_top ) $dynamic_css[] = implode( "\n", $scroll_to_top );
                 if( $header_builder ) $dynamic_css[] = implode( "\n", $header_builder );
@@ -140,6 +143,7 @@
                 if( $header_top_row ) $dynamic_css[] = implode( "\n", $header_top_row );
                 if( $header_middle_row ) $dynamic_css[] = implode( "\n", $header_middle_row );
                 if( $header_bottom_row ) $dynamic_css[] = implode( "\n", $header_bottom_row );
+                if( $dark_mode ) $dynamic_css[] = implode( "\n", $dark_mode );
                 if( $dynamic_css ) {
                     return implode( ' ', $dynamic_css );
                 } else {
@@ -161,6 +165,7 @@
                     Header_Top_Row::get_instance()->get_dynamic_css( true ),
                     Header_Middle_Row::get_instance()->get_dynamic_css( true ),
                     Header_Bottom_Row::get_instance()->get_dynamic_css( true ),
+                    Dark_Mode::get_instance()->get_dynamic_css( true ),
                 );
                 $configs = [];
                 foreach( $raw_configs as $id => $args ) {

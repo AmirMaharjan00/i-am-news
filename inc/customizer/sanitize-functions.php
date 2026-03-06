@@ -225,7 +225,7 @@
                 if( empty( $input ) || ! is_string( $input ) ) return $setting->default;
                 $fields = $setting->manager->get_control( $setting->id )->fields;
                 $field_values = array_column( $fields, 'value' );
-                if( in_array( $input, $fields ) ) {
+                if( in_array( $input, $field_values ) ) {
                     return sanitize_text_field( $input );
                 } else {
                     return $setting->default;

@@ -211,7 +211,7 @@
                 
                 if( serialize( $args[ 'default' ] ) === serialize( $args[ 'value' ] ) ) return '';
                 $value = $args[ 'value' ];
-                if( array_key_exists( 'desktop', $args[ 'value' ] ) ) {
+                if( is_array( $args[ 'value' ] ) && array_key_exists( 'desktop', $args[ 'value' ] ) ) {
                     $number = [
                         'desktop'   =>  [
                             $args[ 'property' ] =>  $value[ 'desktop' ]

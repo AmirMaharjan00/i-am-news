@@ -236,7 +236,7 @@
 
             let css = ''
 
-            if( 'desktop' in value ) {
+            if( ( typeof value === 'object' ) && ( 'desktop' in value ) ) {
                 const { desktop, tablet, mobile } = value
                 css = `
                     ${ selector } {
@@ -303,7 +303,7 @@
 
             let css = ''
 
-            if( 'desktop' in value ) {
+            if( ( typeof value === 'object' ) && ( 'desktop' in value ) ) {
                 const { desktop, tablet, mobile } = value
                 css = `
                     ${ selector } {

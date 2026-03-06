@@ -22,15 +22,18 @@
             public static function get_icon_html( array $args = [] ) : string {
                 if( ( ! isset( $args[ 'type' ] ) || empty( $args[ 'type' ] ) ) || ( ! isset( $args[ 'value' ] ) || empty( $args[ 'value' ] ) ) ) return '';
 
-                extract( $args );
+                $type = isset( $args[ 'type' ] ) ? $args[ 'type' ] : 'icon';
+                $value = isset( $args[ 'value' ] ) ? $args[ 'value' ] : 'fa-solid fa-sun';
+                $class = isset( $args[ 'class' ] ) ? $args[ 'class' ] : '';
                 
                 switch( $type ) {
                     case 'icon' : 
-                            $icon_html = '<span class="icon"><i class="' . $value . '"></i></span>';
+                            $icon_class = 'icon ' . $class;
+                            $icon_html = '<span class="' . esc_attr( $icon_class ) . '"><i class="' . esc_attr( $value ) . '"></i></span>';
                             return $icon_html;
                         break;
                     case 'image' : 
-                            $image_html = wp_get_attachment_image( $value );
+                            $image_html = wp_get_attachment_image( $value, 'thumbnail', false, [ 'class' => $class ] );
                             return $image_html;
                         break;
                     default : 
