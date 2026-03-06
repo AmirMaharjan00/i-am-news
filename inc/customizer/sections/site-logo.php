@@ -125,9 +125,11 @@
              * @since 1.0.0
              */
             public function render_html() {
+                $block_class[] = $this->id;
+                $block_class[] = 'header-widget';
                 $title_tag = ( is_home() || is_front_page() ) ? 'h1' : 'p';
 
-                echo '<div class="site-logo">';
+                echo '<div class="', esc_attr( implode( ' ', $block_class ) ),'">';
 
                     echo '<a href="', esc_url( home_url() ),'" rel="home"><', $title_tag,' class="site-title">', esc_html( get_bloginfo( 'title' ) ),'</', $title_tag,'></a>';
 

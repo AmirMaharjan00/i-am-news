@@ -1096,3 +1096,7 @@ MARK: 15.0 Heading Toggle
         text-transform: uppercase;
         letter-spacing: 1.3px;
     }
+
+    .customize-control-heading-toggle .content-wrapper > .dashicon {
+        font-size: 20px;
+    }

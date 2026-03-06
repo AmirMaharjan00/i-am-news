@@ -438,8 +438,12 @@
                 $dynamic_css_args = $this->get_dynamic_css_args();
                 foreach( $dynamic_css_args as $id => $args ) {
                     $control_args = $this->get_controls( $id );
-                    $css = call_user_func( $this->dynamic_styles[ $control_args[ 'type' ] ], $args );
-                    if( ! $css ) continue;
+                    if( isset( $this->dynamic_styles[ $control_args[ 'type' ] ] ) ) {
+                        $css = call_user_func( $this->dynamic_styles[ $control_args[ 'type' ] ], $args );
+                        if( ! $css ) continue;
+                    } else {
+                        continue;
+                    }
                     $dynamic_css[ $id ] = $css;
                 }
                 $replaced_id = str_replace( '-', '_', $this->id );

@@ -62,10 +62,13 @@
                 $this->add_control( 'header_top_row_section_tab' );
                 $this->add_control( 'header_top_row_first_column_heading_toggle' );
                 $this->add_control( 'header_top_row_first_column_width_behavior' );
+                $this->add_control( 'header_top_row_first_column_alignment' );
                 $this->add_control( 'header_top_row_second_column_heading_toggle' );
                 $this->add_control( 'header_top_row_second_column_width_behavior' );
+                $this->add_control( 'header_top_row_second_column_alignment' );
                 $this->add_control( 'header_top_row_third_column_heading_toggle' );
                 $this->add_control( 'header_top_row_third_column_width_behavior' );
+                $this->add_control( 'header_top_row_third_column_alignment' );
                 $this->tab = 'design';
                 $this->add_control( 'header_top_row_background' );
                 $this->add_control( 'header_top_row_border' );
@@ -109,6 +112,21 @@
                         'default'   =>  $this->get_defaults( $id )
                     ],
                     'header_top_row_third_column_width_behavior'    =>  [
+                        'sanitize_callback' =>  [ $this, 'sanitize_radio_tab' ],
+                        'transport' =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'header_top_row_first_column_alignment'    =>  [
+                        'sanitize_callback' =>  [ $this, 'sanitize_radio_tab' ],
+                        'transport' =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'header_top_row_second_column_alignment'    =>  [
+                        'sanitize_callback' =>  [ $this, 'sanitize_radio_tab' ],
+                        'transport' =>  'postMessage',
+                        'default'   =>  $this->get_defaults( $id )
+                    ],
+                    'header_top_row_third_column_alignment'    =>  [
                         'sanitize_callback' =>  [ $this, 'sanitize_radio_tab' ],
                         'transport' =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
@@ -230,6 +248,90 @@
                             ]
                         ]
                     ] ),
+                    'header_top_row_first_column_alignment' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Alignment', 'i-am-news' ),
+                        'type'  =>  'radio-tab',
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'Left', 'i-am-news' ),
+                                'value' =>  'left'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Center', 'i-am-news' ),
+                                'value' =>  'center'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Right', 'i-am-news' ),
+                                'value' =>  'right'
+                            ]
+                        ],
+                        'conditions'    =>  [
+                            'relation'  =>  'AND',
+                            'rules' =>  [
+                                [
+                                    'value' =>  'expand',
+                                    'operator'  =>  '==',
+                                    'setting'   =>  'header_top_row_first_column_width_behavior'
+                                ]
+                            ]
+                        ]
+                    ] ),
+                    'header_top_row_second_column_alignment' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Alignment', 'i-am-news' ),
+                        'type'  =>  'radio-tab',
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'Left', 'i-am-news' ),
+                                'value' =>  'left'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Center', 'i-am-news' ),
+                                'value' =>  'center'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Right', 'i-am-news' ),
+                                'value' =>  'right'
+                            ]
+                        ],
+                        'conditions'    =>  [
+                            'relation'  =>  'AND',
+                            'rules' =>  [
+                                [
+                                    'value' =>  'expand',
+                                    'operator'  =>  '==',
+                                    'setting'   =>  'header_top_row_second_column_width_behavior'
+                                ]
+                            ]
+                        ]
+                    ] ),
+                    'header_top_row_third_column_alignment' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Alignment', 'i-am-news' ),
+                        'type'  =>  'radio-tab',
+                        'fields'    =>  [
+                            [
+                                'label' =>  esc_html__( 'Left', 'i-am-news' ),
+                                'value' =>  'left'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Center', 'i-am-news' ),
+                                'value' =>  'center'
+                            ],
+                            [
+                                'label' =>  esc_html__( 'Right', 'i-am-news' ),
+                                'value' =>  'right'
+                            ]
+                        ],
+                        'conditions'    =>  [
+                            'relation'  =>  'AND',
+                            'rules' =>  [
+                                [
+                                    'value' =>  'expand',
+                                    'operator'  =>  '==',
+                                    'setting'   =>  'header_top_row_third_column_width_behavior'
+                                ]
+                            ]
+                        ]
+                    ] ),
                     'header_top_row_background' =>  array_merge( $this->common, [
                         'label' =>  esc_html__( 'Background', 'i-am-news' ),
                         'type'  =>  'ian-color',
@@ -266,6 +368,9 @@
                     'header_top_row_first_column_width_behavior' => 'auto',
                     'header_top_row_second_column_width_behavior' => 'auto',
                     'header_top_row_third_column_width_behavior' => 'auto',
+                    'header_top_row_first_column_alignment' => 'left',
+                    'header_top_row_second_column_alignment' => 'left',
+                    'header_top_row_third_column_alignment' => 'left',
                     'header_top_row_background' =>  $this->get_color(),
                     'header_top_row_border' =>  $this->get_border(),
                     'header_top_row_box_shadow' =>  $this->get_box_shadow(),
@@ -280,6 +385,30 @@
              */
             public function get_dynamic_css_args(): array {
                 $dynamic_css_args = [
+                    'header_top_row_first_column_width_behavior' =>  [
+                        'selector'  =>  '.ian-header-top-row .column.first',
+                        'prefix'    =>  'width--'
+                    ],
+                    'header_top_row_second_column_width_behavior' =>  [
+                        'selector'  =>  '.ian-header-top-row .column.second',
+                        'prefix'    =>  'width--'
+                    ],
+                    'header_top_row_third_column_width_behavior' =>  [
+                        'selector'  =>  '.ian-header-top-row .column.third',
+                        'prefix'    =>  'width--'
+                    ],
+                    'header_top_row_first_column_alignment' =>  [
+                        'selector'  =>  '.ian-header-top-row .column.first',
+                        'prefix'    =>  'align--'
+                    ],
+                    'header_top_row_second_column_alignment' =>  [
+                        'selector'  =>  '.ian-header-top-row .column.second',
+                        'prefix'    =>  'align--'
+                    ],
+                    'header_top_row_third_column_alignment' =>  [
+                        'selector'  =>  '.ian-header-top-row .column.third',
+                        'prefix'    =>  'align--'
+                    ],
                     'header_top_row_background' =>  [
                         'value' =>  self::get_theme_option( 'header_top_row_background' ),
                         'selector'  =>  '.ian-header-top-row',
@@ -321,19 +450,22 @@
                 $width_behavior[ 'first' ] = self::get_theme_option( 'header_top_row_first_column_width_behavior' );
                 $width_behavior[ 'second' ] = self::get_theme_option( 'header_top_row_second_column_width_behavior' );
                 $width_behavior[ 'third' ] = self::get_theme_option( 'header_top_row_third_column_width_behavior' );
+
+                $alignment[ 'first' ] = self::get_theme_option( 'header_top_row_first_column_alignment' );
+                $alignment[ 'second' ] = self::get_theme_option( 'header_top_row_second_column_alignment' );
+                $alignment[ 'third' ] = self::get_theme_option( 'header_top_row_third_column_alignment' );
                 ?>  
                     <div class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
                         <?php
                             foreach( $top_row as $column => $widgets ) :
-                                if( ! empty( $widgets ) ) :
-                                    $column_class = 'column';
-                                    $column_class .= ' width--' . $width_behavior[ $column ];
-                                    echo '<div class="', esc_attr( $column_class ) ,'">';
-                                        foreach( $widgets as $widget ) :
-                                            Utility::get_header_builder_widget_html( $widget );
-                                        endforeach;
-                                    echo '</div>';
-                                endif;
+                                $column_class = 'column ' . $column;
+                                $column_class .= ' width--' . $width_behavior[ $column ];
+                                $column_class .= ' align--' . $alignment[ $column ];
+                                echo '<div class="', esc_attr( $column_class ) ,'">';
+                                    foreach( $widgets as $widget ) :
+                                        Utility::get_header_builder_widget_html( $widget );
+                                    endforeach;
+                                echo '</div>';
                             endforeach;
                         ?>
                     </div>

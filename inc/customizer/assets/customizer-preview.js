@@ -29,6 +29,7 @@
                 'border': 'border',
                 'dimension': 'dimension',
                 'ian-color': 'color',
+                'radio-tab': 'toggleClass',
             }
             return allControlTypes[ type ]
         },
@@ -188,7 +189,7 @@
      */
     const PreviewJs = {
         /**
-         * Border
+         * MARK: Border
          * 
          * @since 1.0.0
          * @param { string }    id  updated value of the setting
@@ -224,7 +225,7 @@
         },
         
         /**
-         * Number
+         * MARK: Number
          * 
          * @since 1.0.0
          * @param { string }    id  updated value of the setting
@@ -260,7 +261,7 @@
         },
 
         /**
-         * Box shadow
+         * MARK: Box shadow
          * 
          * @since 1.0.0
          * @param { string }    id  updated value of the setting
@@ -291,7 +292,7 @@
         },
 
         /**
-         * Dimension
+         * MARK: Dimension
          * 
          * @since 1.0.0
          * @param { string }    id  updated value of the setting
@@ -327,7 +328,7 @@
         },
 
         /**
-         * Typography
+         * MARK: Typography
          * 
          * @since 1.0.0
          * @param { string }    id  updated value of the setting
@@ -370,7 +371,7 @@
         },
 
         /**
-         * Color
+         * MARK: Color
          * 
          * @since 1.0.0
          * @param { string }    id  updated value of the setting
@@ -403,6 +404,26 @@
             }
             Utils.generateStyleTag( id, css )
         },
+
+        /**
+         * MARK: Toggle class
+         * 
+         * @since 1.0.0
+         * @param { string }    id  updated value of the setting
+         * @param { array }     value   updated value of the setting
+         */
+        toggleClass: function( id, value ) {
+            const { selector, prefix } = IanConfig[ id ]
+
+            if( prefix ) {
+                $( selector ).removeClass( function( index, currentClass ) {
+                    let regex = new RegExp( "\\b" + prefix + "\\S*", 'g' )
+                    return currentClass.match( regex || [] ).join( ' ' )
+                } ).addClass( `${ prefix }${ value }` )
+            } else {
+                $( selector ).toggleClass( value )
+            }
+        },
     }
 
     Object.keys( IanConfig ).forEach( function( controlId ) {
@@ -412,6 +433,7 @@
                     { type } = settingArgs,
                     functionToCall = Utils.getControlFunction( type )
 
+                console.log( functionToCall )
                 PreviewJs[ functionToCall ]( controlId, value )
             } )
         } )
