@@ -69,8 +69,6 @@
                 $this->add_control( 'scroll_to_top_border_radius' );
                 $this->add_control( 'scroll_to_top_box_shadow' );
                 $this->add_control( 'scroll_to_top_padding' );
-                $this->add_control( 'scroll_to_top_heading_toggle' );
-                $this->add_control( 'scroll_to_top_checkbox' );
             }
 
             /**
@@ -139,14 +137,6 @@
                     ],
                     'scroll_to_top_padding' =>  [
                         'sanitize_callback' =>  [ $this, 'sanitize_dimension' ],
-                        'transport'   =>  'postMessage',
-                        'default'   =>  $this->get_defaults( $id )
-                    ],
-                    'scroll_to_top_heading_toggle' =>  [
-                        'sanitize_callback' =>  'sanitize_text_field',
-                    ],
-                    'scroll_to_top_checkbox' =>  [
-                        // 'sanitize_callback' =>  'sanitize_text_field',
                         'transport'   =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -287,16 +277,6 @@
                         'type'  =>  'dimension',
                         'tab'   =>  'design',
                     ] ),
-                    'scroll_to_top_heading_toggle' =>  array_merge( $this->common, [
-                        'label' =>  esc_html__( 'Heading Toggle', 'i-am-news' ),
-                        'type'  =>  'heading-toggle',
-                        'tab'   =>  'general',
-                    ] ),
-                    'scroll_to_top_checkbox' =>  array_merge( $this->common, [
-                        'label' =>  esc_html__( 'Checkbox', 'i-am-news' ),
-                        'type'  =>  'ian-checkbox',
-                        'tab'   =>  'general',
-                    ] ),
                 ];
                 return ( $id ) ? $controls[ $id ] : $controls;
             }
@@ -346,8 +326,6 @@
                         'bottom'   =>  5,
                         'left'   =>  5
                     ] ),
-                    'scroll_to_top_heading_toggle'    =>  'one',
-                    'scroll_to_top_checkbox'    =>  'one',
                 ] );
             }
 

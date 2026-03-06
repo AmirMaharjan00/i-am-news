@@ -775,7 +775,7 @@ MARK: 10.0 Border
     .ian-border-popover .components-popover__content .dropdown-content .item .style,
     .ian-border-container .highlight .style {
         flex: 1;
-        height: 20px;
+        height: 12px;
         width: 10px;
     }
 
@@ -1063,7 +1063,7 @@ MARK: 14.0 Builder
 
     .builder-popover .components-popover__content .widget-wrapper {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 100px);
         gap: 10px;
     }
 
