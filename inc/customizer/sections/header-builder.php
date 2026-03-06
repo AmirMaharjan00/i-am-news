@@ -165,7 +165,7 @@
                             'bottom' =>  'header_bottom_row_section',
                         ],
                         'widgets'   =>  [
-                            'logo'  =>  [
+                            'site-logo'  =>  [
                                 'label' =>  esc_html__( 'Site Identity', 'i-am-news' ),
                                 'section_id' =>  'title_tagline',
                                 'icon'  =>  'admin-site'
@@ -245,7 +245,7 @@
                             'third' =>  []
                         ],
                         'middle'    =>  [
-                            'first' =>  [ 'logo' ],
+                            'first' =>  [ 'site-logo' ],
                             'second' =>  [ 'social-icons' ],
                             'third' =>  []
                         ],

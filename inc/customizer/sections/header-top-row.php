@@ -313,17 +313,26 @@
              */
             public function render_html() {
                 $block_class[] = $this->id;
+                $block_class[] = 'ian-header-row';
                 
                 $header_builder = self::get_theme_option( 'header_builder' );
                 $top_row = $header_builder[ 'top' ];
+
+                $width_behavior[ 'first' ] = self::get_theme_option( 'header_top_row_first_column_width_behavior' );
+                $width_behavior[ 'second' ] = self::get_theme_option( 'header_top_row_second_column_width_behavior' );
+                $width_behavior[ 'third' ] = self::get_theme_option( 'header_top_row_third_column_width_behavior' );
                 ?>  
                     <div class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
                         <?php
                             foreach( $top_row as $column => $widgets ) :
                                 if( ! empty( $widgets ) ) :
-                                    foreach( $widgets as $widget ) :
-                                        Utility::get_header_builder_widget_html( $widget );
-                                    endforeach;
+                                    $column_class = 'column';
+                                    $column_class .= ' width--' . $width_behavior[ $column ];
+                                    echo '<div class="', esc_attr( $column_class ) ,'">';
+                                        foreach( $widgets as $widget ) :
+                                            Utility::get_header_builder_widget_html( $widget );
+                                        endforeach;
+                                    echo '</div>';
                                 endif;
                             endforeach;
                         ?>

@@ -192,7 +192,7 @@
                 self::update_theme_defaults( [
                     'date_time_section_tab' =>  'general',
                     'date_time_enable_date' =>  true,
-                    'date_time_enable_time' =>  true,
+                    'date_time_enable_time' =>  false,
                     'date_time_typography'  =>  $this->get_typography(),
                     'date_time_date_color'  =>  $this->get_color(),
                     'date_time_date_background' =>  $this->get_color(),

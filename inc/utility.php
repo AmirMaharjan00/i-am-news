@@ -38,6 +38,9 @@
                     case 'time':
                         Time::get_instance()->render_html();
                         break;
+                    case 'site-logo':
+                        Site_Logo::get_instance()->render_html();
+                        break;
                 }
             }
         }

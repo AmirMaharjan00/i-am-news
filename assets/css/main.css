@@ -350,3 +350,42 @@
         flex: 0 2 30%;
         max-width: 30%;
     }
+
+
+
+    /* Testing */
+    .ian-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .ian-header-row .column {
+        padding: 20px;
+        text-align: center;
+        background: #f2f2f2;
+        border: 1px solid #999;
+    }
+
+    .width--auto {
+        flex: 0 0 auto;
+    }
+
+    .width--shrink {
+        flex: 0 1 auto;
+    }
+    
+    .width--expand {
+        flex: 1 1 0;
+    }
+
+    .align--right {
+        margin-left: 0;
+    }
+
+    .align--center {
+        margin: 0 auto;
+    }

@@ -135,6 +135,11 @@ function i_am_news_widgets_init() {
 add_action( 'widgets_init', 'i_am_news_widgets_init' );
 
 /**
+ * Add filter
+ */
+require get_template_directory() . '/inc/filters.php';
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
@@ -210,6 +215,11 @@ require_once get_template_directory() . '/inc/customizer/sections/header-bottom-
  * Header builder section
 */
 require_once get_template_directory() . '/inc/customizer/sections/header-builder.php';
+
+/**
+ * Site Logo section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/site-logo.php';
 
 /**
  * Utility Class

@@ -244,6 +244,7 @@
             protected function add_control( $id ) {
                 $setting = $this->get_settings( $id );
                 $this->common[ 'tab' ] = $this->tab;
+                $this->common[ 'section' ] = $this->section;
                 $control = array_merge( $this->get_controls( $id ), $this->common );
                 $default_types = [ 'text', 'checkbox', 'textarea', 'radio', 'select', 'dropdown-pages', 'email', 'url', 'number', 'hidden', 'date' ];
 

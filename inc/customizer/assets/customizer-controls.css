@@ -947,7 +947,6 @@ MARK: 14.0 Builder
         align-items: center;
         justify-content: space-between;
         border-top: 1px solid var(--customizer-dark-grey);
-        padding: 0 10px;
         background: #02467d;
         color: #F7F6E5;
     }
