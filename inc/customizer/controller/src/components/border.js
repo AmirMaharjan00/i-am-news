@@ -1,4 +1,4 @@
-const { ColorIndicator, Dropdown, ColorPicker, Button, Tooltip } = wp.components,
+const { ColorIndicator, Dropdown, ColorPicker, Button, Tooltip, Dashicon } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
     { useState, useContext, createContext } = wp.element,
@@ -132,6 +132,10 @@ const Style = () => {
                 >
                     <span className="label">{ style.charAt(0).toUpperCase() + style.slice(1) }</span>
                     <span className="style"></span>
+                    <Dashicon
+                        className = "dropdown-icon"
+                        icon = { `arrow-${ isOpen ? 'up' : 'down' }-alt2` }
+                    />
                 </Button>
             } }
             renderContent = { () => {

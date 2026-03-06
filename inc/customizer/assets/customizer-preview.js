@@ -433,7 +433,6 @@
                     { type } = settingArgs,
                     functionToCall = Utils.getControlFunction( type )
 
-                console.log( functionToCall )
                 PreviewJs[ functionToCall ]( controlId, value )
             } )
         } )

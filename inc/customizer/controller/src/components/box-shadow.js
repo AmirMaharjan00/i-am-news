@@ -1,5 +1,5 @@
 const { useState, useContext, createContext } = wp.element,
-    { ToggleControl, RangeControl, ColorPicker, Dropdown, ColorIndicator } = wp.components,
+    { ToggleControl, RangeControl, ColorPicker, Dropdown, ColorIndicator, Dashicon } = wp.components,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml,
     BoxShadowContext = createContext()
@@ -44,12 +44,17 @@ export const BoxShadowComponent = ( props ) => {
                 className = 'ian-dropdown-container box-shadow-container'
                 contentClassName = 'ian-dropdown-popover box-shadow-popover'
                 popoverProps = { {
-                    placement: 'right-start',
+                    placement: 'bottom-start',
                     shift: true
                 } }
                 renderToggle = { ( { isOpen, onToggle } ) => {
                     return <div className='highlight' onClick={ onToggle } aria-expanded={ isOpen }>
-                        { `${ ( enable ? 'Enabled': 'Disabled' ) }, x: ${ offsetx }, y: ${ offsety }, blur: ${ blur }, spread: ${ spread }, color: ${ color }` }
+                        <span className='label'>{ `${ ( enable ? 'Enabled': 'Disabled' ) }` }</span>
+                        <span className='info'>{ `${ offsetx } / ${ offsety } / ${ blur } / ${ spread }` }</span>
+                        <Dashicon
+                            className = "dropdown-icon"
+                            icon = { `arrow-${ isOpen ? 'up' : 'down' }-alt2` }
+                        />
                     </div>
                 } }
                 renderContent = { () => {

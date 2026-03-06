@@ -1,4 +1,4 @@
-const { Dropdown, SelectControl, RangeControl } = wp.components,
+const { Dropdown, SelectControl, Dashicon } = wp.components,
     { useState, useEffect, useContext, createContext } = wp.element,
     { __ } = wp.i18n,
     { escapeHTML } = wp.escapeHtml
@@ -210,14 +210,17 @@ export const TypographComponent = ( props ) => {
                 className = 'ian-dropdown-container typography-container'
                 contentClassName = 'ian-dropdown-popover typography-popover'
                 popoverProps = { {
-                    placement: 'right-start',
+                    placement: 'bottom-start',
                     shift: true
                 } }
                 renderToggle = { ( { isOpen, onToggle } ) => {
                     return <div className='highlight' onClick={ onToggle } aria-expanded={ isOpen }>
-                        <span>{ `Family: ${ font_family.value } /` }</span>
-                        <span>{ `Weight: ${ font_weight } /` }</span>
-                        <span>{ `Size: ${ font_size.desktop }` }</span>
+                        <span className="label">{ `${ font_family.value }` }</span>
+                        <span className="info">{ `${ font_size.desktop } / ${ font_weight }` }</span>
+                        <Dashicon
+                            className = "dropdown-icon"
+                            icon = { `arrow-${ isOpen ? 'up' : 'down' }-alt2` }
+                        />
                     </div>
                 } }
                 renderContent = { () => {

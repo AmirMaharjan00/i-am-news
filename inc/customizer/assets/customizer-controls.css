@@ -26,6 +26,8 @@ MARK: 1.0 Normalize
         --customizer-hover: #f5fafc;
         --customizer-light-grey: #f0f0f0;
         --customizer-dark-grey: #939393;
+        --px-height: 30px;
+        --px-width: 45px;
     }
 
     .wp-full-overlay-sidebar-content {
@@ -65,7 +67,7 @@ MARK: 1.0 Normalize
     }
 
     .customize-control .customizer-control-title {
-        font-size: 13px;
+        font-size: 1.11em;
         color: hsl(0, 0%, 0%);
     }
 
@@ -104,14 +106,6 @@ MARK: 1.0 Normalize
     .customize-control.ian-hidden-control,
     .customize-control.ian-hide {
         display: none;
-    }
-
-    .customize-control-radio-image,
-    .customize-control-section-tab,
-    .customize-control-icon-picker,
-    .customize-control-text,
-    .customize-control-box-shadow {
-
     }
 
     /* Chrome, Edge, Safari */
@@ -156,10 +150,10 @@ MARK: 1.0 Normalize
     .customize-control .ian-dropdown-container .highlight {
         background-color: #fff;
         color: #1e1e1e;
-        height: 36px;
+        height: var(--px-height);
         display: flex;
         align-items: center;
-        padding: 0 12px;
+        padding: 0 8px;
         outline: 1px solid #8c8f94;
         gap: 4px;
         overflow: hidden;
@@ -172,6 +166,17 @@ MARK: 1.0 Normalize
     .customize-control .ian-dropdown-container .highlight:hover {
         outline: 1px solid var(--customizer-color);
         background: var(--customizer-hover);
+    }
+
+    .customize-control .ian-dropdown-container .highlight > .label {
+        flex: 1 0 auto;
+    }
+
+    .customize-control .ian-dropdown-container .highlight > .dropdown-icon {
+        margin-left: 5px;
+        height: unset;
+        font-size: 16px;
+        width: unset;
     }
 
     .components-popover.ian-dropdown-popover .components-color-picker,
@@ -282,7 +287,7 @@ MARK: 2.0 Radio Image
         transform: translate(-50%, -50%);
         font-weight: 500;
         font-family: "Dashicons";
-        font-size: 30px;
+        font-size: var(--px-height);
         color: var(--customizer-color);
     }
 
@@ -527,17 +532,29 @@ MARK: 5.0 Box Shadow
 MARK: 6.0 Text
 =========================
 */
-    .customize-control-text .buttons-wrapper {
+    .customize-control-ian-text .buttons-wrapper {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 0px;
     }
 
-    .customize-control-ian-text .content-wrapper .components-text-control__input:not(:focus):hover {
-        outline: 1px solid var(--customizer-color);
-        border: none;
+    .customize-control-ian-text .content-wrapper .components-text-control__input:focus {
         box-shadow: unset;
+        outline: unset;
+        border-color: var(--customizer-color);
+    }
+
+    .customize-control-ian-text .content-wrapper .components-text-control__input:not(:focus):hover {
+        box-shadow: unset;
+        border-color: var(--customizer-color);
+    }
+
+    .customize-control-ian-text .content-wrapper .components-text-control__input {
+        height: var(--px-height);
+        border-style: solid;
+        border-width: 1px;
+        border-color: #8c8f94;
     }
 
 /*
@@ -680,7 +697,7 @@ MARK: 10.0 Border
 */
     .customize-control-border .control-content .content-wrapper {
         display: grid;
-        grid-template-columns: 16% 1fr;
+        grid-template-columns: var(--px-width) 1fr;
         align-items: center;
         gap: 5px;
     }
@@ -725,8 +742,8 @@ MARK: 10.0 Border
 
     .customize-control-border .content-wrapper .border-block.width .components-button {
         padding: 5px;
-        height: 30px;
-        min-height: 30px;
+        height: var(--px-height);
+        min-height: var(--px-height);
     }
 
     .components-popover.ian-dropdown-popover.ian-border-popover .components-popover__content {
@@ -826,8 +843,8 @@ MARK: 11.0 Dimension
 
     .customize-control-dimension .content-wrapper .components-button {
         padding: 5px;
-        height: 30px;
-        min-height: 30px;
+        height: var(--px-height);
+        min-height: var(--px-height);
     }
 
 /*
@@ -874,16 +891,16 @@ MARK: 13.0 Color
     }
 
     .customize-control-ian-color .control-content.is-block .content-wrapper:not(.is-hover) {
-        width: 16%;
-        height: 36px;
+        width: var(--px-width);
+        height: var(--px-height);
     }
 
     .customize-control-ian-color .control-content.is-block .content-wrapper.is-hover {
-        width: 36%;
+        width: 90px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 36px;
+        height: var(--px-height);
         gap: 5px;
     }
 
@@ -991,8 +1008,8 @@ MARK: 14.0 Builder
         width: 120px;
         justify-content: center;
         font-weight: 500;
-        height: 30px;
-        min-height: 30px;
+        height: var(--px-height);;
+        min-height: var(--px-height);;
     }
 
     .customize-control-ian-builder .content-wrapper .widget-item.placeholder {

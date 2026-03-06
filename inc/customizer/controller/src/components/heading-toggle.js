@@ -33,7 +33,7 @@ export const HeadingToggleComponent = ( props ) => {
         <div className="content-wrapper" onClick = { handleOnClick }>
             <h2 className='label'>{ label }</h2>
             <Dashicon
-                icon = { `arrow-${ display ? 'down' : 'up' }-alt2` }
+                icon = { `arrow-${ display ? 'up' : 'down' }-alt2` }
             />
         </div>
     </div>

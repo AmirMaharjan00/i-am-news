@@ -7636,7 +7636,8 @@ const {
     Dropdown,
     ColorPicker,
     Button,
-    Tooltip
+    Tooltip,
+    Dashicon
   } = wp.components,
   {
     __
@@ -7804,6 +7805,9 @@ const Style = () => {
             children: style.charAt(0).toUpperCase() + style.slice(1)
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
             className: "style"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Dashicon, {
+            className: "dropdown-icon",
+            icon: `arrow-${isOpen ? 'up' : 'down'}-alt2`
           })]
         });
       },
@@ -7931,7 +7935,8 @@ const {
     RangeControl,
     ColorPicker,
     Dropdown,
-    ColorIndicator
+    ColorIndicator,
+    Dashicon
   } = wp.components,
   {
     __
@@ -7990,18 +7995,27 @@ const BoxShadowComponent = props => {
         className: "ian-dropdown-container box-shadow-container",
         contentClassName: "ian-dropdown-popover box-shadow-popover",
         popoverProps: {
-          placement: 'right-start',
+          placement: 'bottom-start',
           shift: true
         },
         renderToggle: ({
           isOpen,
           onToggle
         }) => {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "highlight",
             onClick: onToggle,
             "aria-expanded": isOpen,
-            children: `${enable ? 'Enabled' : 'Disabled'}, x: ${offsetx}, y: ${offsety}, blur: ${blur}, spread: ${spread}, color: ${color}`
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "label",
+              children: `${enable ? 'Enabled' : 'Disabled'}`
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              className: "info",
+              children: `${offsetx} / ${offsety} / ${blur} / ${spread}`
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Dashicon, {
+              className: "dropdown-icon",
+              icon: `arrow-${isOpen ? 'up' : 'down'}-alt2`
+            })]
           });
         },
         renderContent: () => {
@@ -9384,7 +9398,7 @@ const HeadingToggleComponent = props => {
         className: "label",
         children: label
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Dashicon, {
-        icon: `arrow-${display ? 'down' : 'up'}-alt2`
+        icon: `arrow-${display ? 'up' : 'down'}-alt2`
       })]
     })
   });
@@ -9692,7 +9706,7 @@ const Image = () => {
         variant: type === 'image' ? 'primary' : 'secondary',
         className: "button-item",
         children: [__(escapeHTML('Image'), 'i-am-news'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
-          icon: `arrow-${isOpen ? 'down' : 'up'}-alt2`,
+          icon: `arrow-${isOpen ? 'up' : 'down'}-alt2`,
           className: "icon-picker-dashicon"
         })]
       });
@@ -9762,7 +9776,7 @@ const Icon = () => {
         children: [currentValue ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
           className: currentValue
         }) : __(escapeHTML('Icon'), 'i-am-news'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Dashicon, {
-          icon: `arrow-${isOpen ? 'down' : 'up'}-alt2`,
+          icon: `arrow-${isOpen ? 'up' : 'down'}-alt2`,
           className: "icon-picker-dashicon"
         })]
       });
@@ -10365,7 +10379,7 @@ __webpack_require__.r(__webpack_exports__);
 const {
     Dropdown,
     SelectControl,
-    RangeControl
+    Dashicon
   } = wp.components,
   {
     useState,
@@ -10607,7 +10621,7 @@ const TypographComponent = props => {
         className: "ian-dropdown-container typography-container",
         contentClassName: "ian-dropdown-popover typography-popover",
         popoverProps: {
-          placement: 'right-start',
+          placement: 'bottom-start',
           shift: true
         },
         renderToggle: ({
@@ -10619,11 +10633,14 @@ const TypographComponent = props => {
             onClick: onToggle,
             "aria-expanded": isOpen,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-              children: `Family: ${font_family.value} /`
+              className: "label",
+              children: `${font_family.value}`
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-              children: `Weight: ${font_weight} /`
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-              children: `Size: ${font_size.desktop}`
+              className: "info",
+              children: `${font_size.desktop} / ${font_weight}`
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Dashicon, {
+              className: "dropdown-icon",
+              icon: `arrow-${isOpen ? 'up' : 'down'}-alt2`
             })]
           });
         },
