@@ -41,6 +41,9 @@
                     case 'site-logo':
                         Site_Logo::get_instance()->render_html();
                         break;
+                    case 'primary-menu':
+                        Primary_Menu::get_instance()->render_html();
+                        break;
                 }
             }
         }

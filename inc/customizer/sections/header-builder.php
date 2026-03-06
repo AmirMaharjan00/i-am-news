@@ -195,9 +195,9 @@
                                 'section_id' =>  'scroll_to_top_section',
                                 'icon'  =>  'search'
                             ],
-                            'menu'  =>  [
+                            'primary-menu'  =>  [
                                 'label' =>  esc_html__( 'Menu', 'i-am-news' ),
-                                'section_id' =>  'scroll_to_top_section',
+                                'section_id' =>  'primary_menu_section',
                                 'icon'  =>  'menu'
                             ],
                         ]
@@ -240,14 +240,14 @@
                     'header_builder_layouts' =>  'one',
                     'header_builder' =>  [
                         'top'   =>  [
-                            'first' =>  [ 'date-time', 'dark-mode' ],
+                            'first' =>  [],
                             'second' =>  [],
                             'third' =>  []
                         ],
                         'middle'    =>  [
                             'first' =>  [ 'site-logo' ],
-                            'second' =>  [ 'social-icons' ],
-                            'third' =>  []
+                            'second' =>  [ 'primary-menu' ],
+                            'third' =>  [ 'search', 'dark-mode' ]
                         ],
                         'bottom'    =>  [
                             'first' =>  [],

@@ -222,6 +222,11 @@ require_once get_template_directory() . '/inc/customizer/sections/header-builder
 require_once get_template_directory() . '/inc/customizer/sections/site-logo.php';
 
 /**
+ * Primary Menu section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/primary-menu.php';
+
+/**
  * Utility Class
  */
 require_once get_template_directory() . '/inc/utility.php';
