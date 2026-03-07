@@ -161,6 +161,7 @@
                     'ian-checkbox'    =>  [ $this, 'add_checkbox' ],
                     'ian-color'    =>  [ $this, 'add_color' ],
                     'ian-builder'    =>  [ $this, 'add_builder' ],
+                    'media'    =>  [ $this, 'add_image' ],
                 ];
             }
 
@@ -404,6 +405,15 @@
              */
             private function add_builder( $id, $control ) {
                 $this->manager->add_control( new Builder( $this->manager, $id, $control ) );
+            }
+
+            /**
+             * Add image
+             * 
+             * @since 1.0.0
+             */
+            private function add_image( $id, $control ) {
+                $this->manager->add_control( new \WP_Customize_Media_Control( $this->manager, $id, $control ) );
             }
 
             /**

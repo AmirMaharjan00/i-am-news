@@ -27,6 +27,7 @@
     use IAN\Customizer\Section\Time as Time;
     use IAN\Customizer\Section\Dark_Mode as Dark_Mode;
     use IAN\Customizer\Section\Search as Search;
+    use IAN\Customizer\Section\Site_Logo as Site_Logo;
 
     if( ! class_exists( __NAMESPACE__ . '\\Enqueue' ) ) :
         /**
@@ -136,6 +137,7 @@
                 $header_bottom_row = Header_Bottom_Row::get_instance()->render_dynamic_css();
                 $dark_mode = Dark_Mode::get_instance()->render_dynamic_css();
                 $search = Search::get_instance()->render_dynamic_css();
+                $site_logo = Site_Logo::get_instance()->render_dynamic_css();
 
                 $dynamic_css = [];
                 if( $scroll_to_top ) $dynamic_css[] = implode( "\n", $scroll_to_top );
@@ -147,6 +149,7 @@
                 if( $header_bottom_row ) $dynamic_css[] = implode( "\n", $header_bottom_row );
                 if( $dark_mode ) $dynamic_css[] = implode( "\n", $dark_mode );
                 if( $search ) $dynamic_css[] = implode( "\n", $search );
+                if( $site_logo ) $dynamic_css[] = implode( "\n", $site_logo );
                 if( $dynamic_css ) {
                     return implode( ' ', $dynamic_css );
                 } else {
@@ -170,6 +173,7 @@
                     Header_Bottom_Row::get_instance()->get_dynamic_css( true ),
                     Dark_Mode::get_instance()->get_dynamic_css( true ),
                     Search::get_instance()->get_dynamic_css( true ),
+                    Site_Logo::get_instance()->get_dynamic_css( true ),
                 );
                 $configs = [];
                 foreach( $raw_configs as $id => $args ) {
