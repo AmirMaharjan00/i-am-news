@@ -186,7 +186,7 @@
                             ],
                             'social-icons'  =>  [
                                 'label' =>  esc_html__( 'Social Icons', 'i-am-news' ),
-                                'section_id' =>  'scroll_to_top_section',
+                                'section_id' =>  'social_icons_section',
                                 'icon'  =>  'share'
                             ],
                             'search'  =>  [

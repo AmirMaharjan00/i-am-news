@@ -30,6 +30,7 @@
                 'dimension': 'dimension',
                 'ian-color': 'color',
                 'radio-tab': 'toggleClass',
+                'select': 'toggleClass',
             }
             return allControlTypes[ type ]
         },

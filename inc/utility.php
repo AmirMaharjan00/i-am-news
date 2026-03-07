@@ -48,6 +48,9 @@
                     case 'search':
                         Search::get_instance()->render_html();
                         break;
+                    case 'social-icons':
+                        Social_Icons::get_instance()->render_html();
+                        break;
                 }
             }
         }

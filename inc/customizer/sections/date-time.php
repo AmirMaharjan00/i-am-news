@@ -63,8 +63,7 @@
                 $this->add_control( 'date_time_typography' );
                 $this->add_control( 'date_time_date_color' );
                 $this->add_control( 'date_time_date_background' );
-                $this->add_control( 'date_time_border' );
-                $this->add_control( 'date_time_box_shadow' );
+                $this->add_control( 'date_time_border_radius' );
                 $this->add_control( 'date_time_padding' );
             }
 
@@ -103,13 +102,8 @@
                         'transport' =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
-                    'date_time_border' =>  [
-                        'sanitize_callback' =>  [ $this, 'sanitize_border' ],
-                        'transport' =>  'postMessage',
-                        'default'   =>  $this->get_defaults( $id )
-                    ],
-                    'date_time_box_shadow' =>  [
-                        'sanitize_callback' =>  [ $this, 'sanitize_box_shadow' ],
+                    'date_time_border_radius' =>  [
+                        'sanitize_callback' =>  [ $this, 'sanitize_range' ],
                         'transport' =>  'postMessage',
                         'default'   =>  $this->get_defaults( $id )
                     ],
@@ -188,13 +182,9 @@
                         'type'  =>  'ian-color',
                         'color_types'   =>  [ 'solid', 'gradient' ]
                     ],
-                    'date_time_border' =>  [
-                        'label' =>  esc_html__( 'Border', 'i-am-news' ),
-                        'type'  =>  'border'
-                    ],
-                    'date_time_box_shadow' =>  [
-                        'label' =>  esc_html__( 'Box Shadow', 'i-am-news' ),
-                        'type'  =>  'box-shadow'
+                    'date_time_border_radius' =>  [
+                        'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),
+                        'type'  =>  'ian-number'
                     ],
                     'date_time_padding' =>  [
                         'label' =>  esc_html__( 'Padding', 'i-am-news' ),
@@ -218,8 +208,7 @@
                     'date_time_typography'  =>  $this->get_typography(),
                     'date_time_date_color'  =>  $this->get_color(),
                     'date_time_date_background' =>  $this->get_color(),
-                    'date_time_border'  =>  $this->get_border(),
-                    'date_time_box_shadow'  =>  $this->get_box_shadow(),
+                    'date_time_border_radius'  =>  '0px',
                     'date_time_padding' =>  $this->get_dimension(),
                 ] );
             }
@@ -249,15 +238,11 @@
                         'selector'  =>  '.date-time-section',
                         'property'  =>  'background'
                     ],
-                    'date_time_border'  =>  [
-                        'value' =>  self::get_theme_option( 'date_time_border' ),
-                        'default'   =>  $this->get_defaults( 'date_time_border' ),
-                        'selector'  =>  '.date-time-section'
-                    ],
-                    'date_time_box_shadow'  =>  [
-                        'value' =>  self::get_theme_option( 'date_time_box_shadow' ),
-                        'default'   =>  $this->get_defaults( 'date_time_box_shadow' ),
-                        'selector'  =>  '.date-time-section'
+                    'date_time_border_radius'  =>  [
+                        'value' =>  self::get_theme_option( 'date_time_border_radius' ),
+                        'default'   =>  $this->get_defaults( 'date_time_border_radius' ),
+                        'selector'  =>  '.date-time-section',
+                        'property'  =>  'border-radius'
                     ],
                     'date_time_padding' =>  [
                         'value' =>  self::get_theme_option( 'date_time_padding' ),

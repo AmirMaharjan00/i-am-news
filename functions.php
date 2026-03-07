@@ -172,66 +172,26 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 require_once get_template_directory() . '/inc/styles.php';
 
 /**
- * Section Class
+ * Utility Class
+ */
+require_once get_template_directory() . '/inc/utility.php';
+
+/**
+ * Sections Base Class
  */
 require_once get_template_directory() . '/inc/customizer/sections/sections.php';
 
 /**
- * Scroll to top section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/scroll-to-top.php';
-
-/**
- * Date time section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/date-time.php';
-
-/**
- * Time section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/time.php';
-
-/**
- * Dark mode section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/dark-mode.php';
-
-/**
- * Header top row section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/header-top-row.php';
-
-/**
- * Header middle row section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/header-middle-row.php';
-
-/**
- * Header bottom row section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/header-bottom-row.php';
-
-/**
- * Header builder section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/header-builder.php';
-
-/**
- * Site Logo section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/site-logo.php';
-
-/**
- * Primary Menu section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/primary-menu.php';
-
-/**
- * Search section
-*/
-require_once get_template_directory() . '/inc/customizer/sections/search.php';
-
-/**
- * Utility Class
+ * Autoload all files from sections folder
+ * 
+ * @since 1.0.0
  */
-require_once get_template_directory() . '/inc/utility.php';
+function ian_autoload_sections() {
+	$folder = get_template_directory() . '/inc/customizer/sections';
+	$files = glob( $folder . '/*php' );
+
+	foreach( $files as $file ) {
+		require_once $file;
+	}
+}
+ian_autoload_sections();
