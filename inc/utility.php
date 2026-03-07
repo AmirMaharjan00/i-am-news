@@ -13,6 +13,7 @@
     use IAN\Customizer\Section\Secondary_Menu as Secondary_Menu;
     use IAN\Customizer\Section\Site_Logo as Site_Logo;
     use IAN\Customizer\Section\Social_Icons as Social_Icons;
+    use IAN\Customizer\Section\Search as Search;
 
     if( ! class_exists( 'Utility' ) ) {
         /**
@@ -43,6 +44,9 @@
                         break;
                     case 'primary-menu':
                         Primary_Menu::get_instance()->render_html();
+                        break;
+                    case 'search':
+                        Search::get_instance()->render_html();
                         break;
                 }
             }

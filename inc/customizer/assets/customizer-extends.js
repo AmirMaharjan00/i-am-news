@@ -9843,17 +9843,19 @@ const NumberComponent = props => {
       description,
       setting,
       responsive,
-      input_attrs
+      input_attrs,
+      show_unit
     } = props,
     [value, setValue] = useState(setting.get()),
     [device, setDevice] = useState('desktop'),
-    currentValue = (0,_functions__WEBPACK_IMPORTED_MODULE_1__.getValue)(responsive ? value[device] : value),
-    unit = (0,_functions__WEBPACK_IMPORTED_MODULE_1__.getUnit)(responsive ? value[device] : value),
+    _thisValue = responsive ? value[device] : value,
     {
       min,
       max,
       step
     } = input_attrs;
+  let currentValue = show_unit ? (0,_functions__WEBPACK_IMPORTED_MODULE_1__.getValue)(_thisValue) : _thisValue,
+    unit = show_unit ? (0,_functions__WEBPACK_IMPORTED_MODULE_1__.getUnit)(_thisValue) : 'px';
 
   /**
    * Handle range change
@@ -9865,10 +9867,10 @@ const NumberComponent = props => {
     if (responsive) {
       newValue = {
         ...value,
-        [device]: `${val}${unit}`
+        [device]: show_unit ? `${val}${unit}` : val
       };
     } else {
-      newValue = `${val}${unit}`;
+      newValue = show_unit ? `${val}${unit}` : val;
     }
     setValue(newValue);
     setting.set(newValue);
@@ -9899,13 +9901,14 @@ const NumberComponent = props => {
       description: description,
       responsive: responsive
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      className: "content-wrapper",
+      className: `content-wrapper${show_unit ? '' : ' no-unit'}`,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(IanRangeControl, {
         min: min,
         max: max,
         step: step,
         selectValue: unit,
         rangeValue: currentValue,
+        showUnit: show_unit,
         handleRangeChange: handleRangeChange,
         handleSelectChange: handleSelectChange
       })

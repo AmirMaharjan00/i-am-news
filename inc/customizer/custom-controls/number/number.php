@@ -39,6 +39,14 @@
             public $input_attrs = [];
 
             /**
+             * Whether to show unit or not
+             * 
+             * @since 1.0.0
+             * @var array
+             */
+            public $show_unit = true;
+
+            /**
              * To json
              * 
              * @since 1.0.0
@@ -47,6 +55,7 @@
                 parent::to_json();
                 $this->json[ 'responsive' ] = $this->responsive;
                 $this->json[ 'input_attrs' ] = $this->input_attrs;
+                $this->json[ 'show_unit' ] = $this->show_unit;
             }
         }
     endif;

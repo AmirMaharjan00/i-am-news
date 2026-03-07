@@ -84,7 +84,6 @@
                     ],
                     'header_builder' =>  [
                         // 'sanitize_callback' =>  [ $this, 'sanitize_color' ],
-                        'transport' =>  'postMessage',
                         'default' =>  $this->get_defaults( $id )
                     ],
                     'header_builder_layouts' =>  [
@@ -192,7 +191,7 @@
                             ],
                             'search'  =>  [
                                 'label' =>  esc_html__( 'Search', 'i-am-news' ),
-                                'section_id' =>  'scroll_to_top_section',
+                                'section_id' =>  'search_section',
                                 'icon'  =>  'search'
                             ],
                             'primary-menu'  =>  [
@@ -310,9 +309,13 @@
                 $block_class[] = 'layout--' . self::get_theme_option( 'header_builder_layouts' );
                 ?>
                     <header id="masthead" class="<?php echo esc_attr( implode( ' ', $block_class ) ); ?>">
-                        <?php Header_Top_Row::get_instance()->render_html(); ?>
-                        <?php Header_Middle_Row::get_instance()->render_html(); ?>
-                        <?php Header_Bottom_Row::get_instance()->render_html(); ?>
+                        <div class="ian-container">
+                            <div class="row">
+                                <?php Header_Top_Row::get_instance()->render_html(); ?>
+                                <?php Header_Middle_Row::get_instance()->render_html(); ?>
+                                <?php Header_Bottom_Row::get_instance()->render_html(); ?>
+                            </div>
+                        </div>
                     </header>
                 <?php
             }

@@ -663,13 +663,17 @@ MARK: 9.0 Number
         justify-content: space-between;
         align-self: center;
     }
-
+    
     .customize-control-ian-number .content-wrapper .components-select-control.ian-range-item {
         flex: 1;
     }
 
-    .customize-control-ian-number .content-wrapper .components-range-control.ian-range-item {
+    .customize-control-ian-number .content-wrapper:not(.no-unit) .components-range-control.ian-range-item {
         width: 90%;
+    }
+
+    .customize-control-ian-number .content-wrapper.no-unit .components-range-control.ian-range-item {
+        width: 100%;
     }
 
     .customize-control-ian-number .content-wrapper .components-range-control .components-input-control .components-input-control__container {

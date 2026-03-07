@@ -12,12 +12,14 @@ import { getUnit, getValue } from '../functions'
  * @since 1.0.0
  */
 export const NumberComponent = ( props ) => {
-    const { label, description, setting, responsive, input_attrs } = props,
+    const { label, description, setting, responsive, input_attrs, show_unit } = props,
         [ value, setValue ] = useState( setting.get() ),
         [ device, setDevice ] = useState( 'desktop' ),
-        currentValue = getValue( responsive ? value[ device ] : value ),
-        unit = getUnit( responsive ? value[ device ] : value ),
+        _thisValue = responsive ? value[ device ] : value,
         { min, max, step } = input_attrs
+
+    let currentValue = show_unit ? getValue( _thisValue ) : _thisValue,
+        unit = show_unit ? getUnit( _thisValue ) : 'px'
 
     /**
      * Handle range change
@@ -29,10 +31,10 @@ export const NumberComponent = ( props ) => {
         if( responsive ) {
             newValue = {
                 ...value,
-                [ device ]: `${ val }${ unit }`
+                [ device ]: ( show_unit ? `${ val }${ unit }` : val )
             }
         } else {
-            newValue = `${ val }${ unit }`
+            newValue = ( show_unit ? `${ val }${ unit }` : val )
         }
         setValue( newValue )
         setting.set( newValue )
@@ -64,13 +66,14 @@ export const NumberComponent = ( props ) => {
             responsive = { responsive }
         />
 
-        <div className="content-wrapper">
+        <div className={ `content-wrapper${ show_unit ? '' : ' no-unit' }` }>
             <IanRangeControl
                 min = { min }
                 max = { max }
                 step = { step }
                 selectValue = { unit }
                 rangeValue = { currentValue }
+                showUnit = { show_unit }
                 handleRangeChange = { handleRangeChange }
                 handleSelectChange = { handleSelectChange }
             />

@@ -16,7 +16,7 @@ get_header();
 ?>
 
 	<div class="i-am-news-main-wrap">
-		<div class="i-am-news-container">
+		<div class="ian-container">
 			<div class="row">
 				<main id="primary" class="site-main">
 
@@ -57,7 +57,7 @@ get_header();
 
 				<?php get_sidebar(); ?>
 			</div><!-- .row -->
-		</div><!-- .i-am-news-container -->
+		</div><!-- .ian-container -->
 
 		<section class="i-am-news-category-collection-section">
 			

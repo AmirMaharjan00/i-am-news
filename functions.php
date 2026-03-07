@@ -227,6 +227,11 @@ require_once get_template_directory() . '/inc/customizer/sections/site-logo.php'
 require_once get_template_directory() . '/inc/customizer/sections/primary-menu.php';
 
 /**
+ * Search section
+*/
+require_once get_template_directory() . '/inc/customizer/sections/search.php';
+
+/**
  * Utility Class
  */
 require_once get_template_directory() . '/inc/utility.php';

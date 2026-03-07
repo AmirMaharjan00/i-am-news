@@ -444,6 +444,7 @@
                 
                 $header_builder = self::get_theme_option( 'header_builder' );
                 $bottom_row = $header_builder[ 'bottom' ];
+                if( ! array_filter( $bottom_row ) ) return;
 
                 $width_behavior[ 'first' ] = self::get_theme_option( 'header_bottom_row_first_column_width_behavior' );
                 $width_behavior[ 'second' ] = self::get_theme_option( 'header_bottom_row_second_column_width_behavior' );
