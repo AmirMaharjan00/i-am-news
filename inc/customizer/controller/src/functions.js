@@ -15,3 +15,12 @@ export const getUnit = ( value ) => {
 export const getValue = ( value ) => {
     return Number( value.match( /-?\d*\.?\d+/ )?.[ 0 ] ?? 0 );
 }
+
+/**
+ * Capitalize first letter
+ * 
+ * @since 1.0.0
+ */
+export const toCapitalizeFirstLetter = ( word ) => {
+    return word.charAt( 0 ).toUpperCase() + word.slice( 1 )
+}

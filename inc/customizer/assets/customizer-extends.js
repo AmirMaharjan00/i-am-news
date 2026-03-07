@@ -9848,12 +9848,7 @@ const NumberComponent = props => {
     } = props,
     [value, setValue] = useState(setting.get()),
     [device, setDevice] = useState('desktop'),
-    _thisValue = responsive ? value[device] : value,
-    {
-      min,
-      max,
-      step
-    } = input_attrs;
+    _thisValue = responsive ? value[device] : value;
   let currentValue = show_unit ? (0,_functions__WEBPACK_IMPORTED_MODULE_1__.getValue)(_thisValue) : _thisValue,
     unit = show_unit ? (0,_functions__WEBPACK_IMPORTED_MODULE_1__.getUnit)(_thisValue) : 'px';
 
@@ -9903,38 +9898,21 @@ const NumberComponent = props => {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: `content-wrapper${show_unit ? '' : ' no-unit'}`,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(IanRangeControl, {
-        min: min,
-        max: max,
-        step: step,
-        selectValue: unit,
+        unit: show_unit ? unit : input_attrs,
         rangeValue: currentValue,
         showUnit: show_unit,
         handleRangeChange: handleRangeChange,
-        handleSelectChange: handleSelectChange
+        handleSelectChange: handleSelectChange,
+        input_attrs: input_attrs
       })
     })]
   });
 };
 const IanRangeControl = props => {
   const {
-    min = 0,
-    max = 100,
-    step = 1,
-    options = [{
-      label: 'Px',
-      value: 'px'
-    }, {
-      label: 'Em',
-      value: 'em'
-    }, {
-      label: 'Rem',
-      value: 'rem'
-    }, {
-      label: '%',
-      value: '%'
-    }],
+    input_attrs,
     rangeValue = 0,
-    selectValue = 'px',
+    unit = 'px',
     showUnit = true,
     showRange = true
   } = props;
@@ -9963,15 +9941,18 @@ const IanRangeControl = props => {
       value: rangeValue,
       className: "ian-range-item",
       onChange: handleRangeChange,
-      min: min,
-      max: max,
-      step: step
+      min: unit.min || 0,
+      max: unit.max || 100,
+      step: unit.step || 1
     }), showUnit && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SelectControl, {
       __nextHasNoMarginBottom: true,
       __next40pxDefaultSize: true,
-      value: selectValue,
+      value: unit,
       className: "ian-range-item",
-      options: options,
+      options: Object.keys(input_attrs).map(unit => ({
+        label: (0,_functions__WEBPACK_IMPORTED_MODULE_1__.toCapitalizeFirstLetter)(unit),
+        value: __(escapeHTML(unit), 'i-am-news')
+      })),
       variant: "minimal",
       onChange: handleSelectChange
     })]
@@ -11175,7 +11156,8 @@ const TextTransform = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getUnit: () => (/* binding */ getUnit),
-/* harmony export */   getValue: () => (/* binding */ getValue)
+/* harmony export */   getValue: () => (/* binding */ getValue),
+/* harmony export */   toCapitalizeFirstLetter: () => (/* binding */ toCapitalizeFirstLetter)
 /* harmony export */ });
 /**
  * MARK: Get Unit
@@ -11193,6 +11175,15 @@ const getUnit = value => {
  */
 const getValue = value => {
   return Number(value.match(/-?\d*\.?\d+/)?.[0] ?? 0);
+};
+
+/**
+ * Capitalize first letter
+ * 
+ * @since 1.0.0
+ */
+const toCapitalizeFirstLetter = word => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
 /***/ },

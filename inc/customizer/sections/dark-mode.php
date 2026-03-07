@@ -260,9 +260,16 @@
                         'label' =>  esc_html__( 'Icon Size', 'i-am-news' ),
                         'type'  =>  'ian-number',
                         'input_attrs'   =>  [
-                            'min'   =>  0,
-                            'max'   =>  100,
-                            'step'  =>  1
+                            'px'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ],
+                            '%'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ]
                         ],
                         'conditions'    =>  [
                             'relation'  =>  'AND',
@@ -315,9 +322,16 @@
                         'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),
                         'type'  =>  'ian-number',
                         'input_attrs'   =>  [
-                            'min'   =>  0,
-                            'max'   =>  100,
-                            'step'  =>  1
+                            'px'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ],
+                            '%'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ]
                         ]
                     ],
                     'dark_mode_box_shadow' =>  [

@@ -4,7 +4,7 @@ const { RangeControl, SelectControl } = wp.components,
     { useState } = wp.element
 
 import { IanControlHead, IanResponsiveIcons } from "./components"
-import { getUnit, getValue } from '../functions'
+import { getUnit, getValue, toCapitalizeFirstLetter } from '../functions'
 
 /**
  * Number Control
@@ -15,8 +15,7 @@ export const NumberComponent = ( props ) => {
     const { label, description, setting, responsive, input_attrs, show_unit } = props,
         [ value, setValue ] = useState( setting.get() ),
         [ device, setDevice ] = useState( 'desktop' ),
-        _thisValue = responsive ? value[ device ] : value,
-        { min, max, step } = input_attrs
+        _thisValue = responsive ? value[ device ] : value
 
     let currentValue = show_unit ? getValue( _thisValue ) : _thisValue,
         unit = show_unit ? getUnit( _thisValue ) : 'px'
@@ -68,32 +67,22 @@ export const NumberComponent = ( props ) => {
 
         <div className={ `content-wrapper${ show_unit ? '' : ' no-unit' }` }>
             <IanRangeControl
-                min = { min }
-                max = { max }
-                step = { step }
-                selectValue = { unit }
+                unit = { show_unit ? unit : input_attrs }
                 rangeValue = { currentValue }
                 showUnit = { show_unit }
                 handleRangeChange = { handleRangeChange }
                 handleSelectChange = { handleSelectChange }
+                input_attrs = { input_attrs }
             />
         </div>
     </div>
 }
 
 export const IanRangeControl = ( props ) => {
-    const { 
-        min = 0,
-        max = 100,
-        step = 1,
-        options = [
-            { label: 'Px', value: 'px' },
-            { label: 'Em', value: 'em' },
-            { label: 'Rem', value: 'rem' },
-            { label: '%', value: '%' },
-        ],
+    const {
+        input_attrs,
         rangeValue = 0,
-        selectValue = 'px',
+        unit = 'px',
         showUnit = true,
         showRange = true
     } = props
@@ -124,18 +113,18 @@ export const IanRangeControl = ( props ) => {
                 value = { rangeValue }
                 className = 'ian-range-item'
                 onChange = { handleRangeChange }
-                min = { min }
-                max = { max }
-                step = { step }
+                min = { unit.min || 0 }
+                max = { unit.max || 100 }
+                step = { unit.step || 1 }
             />
         }
         {
             showUnit && <SelectControl
                 __nextHasNoMarginBottom
                 __next40pxDefaultSize
-                value = { selectValue }
+                value = { unit }
                 className = 'ian-range-item'
-                options = { options }
+                options = { Object.keys( input_attrs ).map( unit => ( { label: toCapitalizeFirstLetter( unit ), value: __( escapeHTML( unit ), 'i-am-news' ) } ) ) }
                 variant = "minimal"
                 onChange = { handleSelectChange }
             />

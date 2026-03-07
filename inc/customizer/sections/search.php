@@ -289,7 +289,14 @@
                     ],
                     'search_border_radius' =>  [
                         'label' =>  esc_html__( 'Border Radius', 'i-am-news' ),
-                        'type'  =>  'ian-number'
+                        'type'  =>  'ian-number',
+                        'input_attrs'   =>  [
+                            'px'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ]
+                        ]
                     ],
                     'search_padding' =>  [
                         'label' =>  esc_html__( 'Padding', 'i-am-news' ),

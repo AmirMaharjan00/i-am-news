@@ -251,9 +251,11 @@
                         'type'  =>  'border',
                         'tab'  =>  'design',
                         'input_attrs'   =>  [
-                            'min'   =>  1,
-                            'max'   =>  20,
-                            'step'  =>  1
+                            'px'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ]
                         ]
                     ] ),
                     'scroll_to_top_border_radius' =>  array_merge( $this->common, [
@@ -262,9 +264,11 @@
                         'tab'   =>  'design',
                         'responsive'    =>  true,
                         'input_attrs'   =>  [
-                            'min'   =>  0,
-                            'max'   =>  100,
-                            'step'  =>  1
+                            'px'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ]
                         ]
                     ] ),
                     'scroll_to_top_box_shadow' =>  array_merge( $this->common, [

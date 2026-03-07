@@ -141,9 +141,26 @@
                         'type'  =>  'ian-number',
                         'responsive'    =>  true,
                         'input_attrs'   =>  [
-                            'min'   =>  100,
-                            'max'   =>  500,
-                            'step'  =>  1
+                            'px'    =>  [
+                                'min'   =>  100,
+                                'max'   =>  500,
+                                'step'  =>  1
+                            ],
+                            '%'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  100,
+                                'step'  =>  1
+                            ],
+                            'em'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  2,
+                                'step'  =>  0.1
+                            ],
+                            'rem'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  2,
+                                'step'  =>  0.1
+                            ]
                         ]
                     ],
                 ];

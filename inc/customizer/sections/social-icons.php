@@ -195,9 +195,11 @@
                         'type'  =>  'ian-number',
                         'responsive'    =>  true,
                         'input_attrs'   =>  [
-                            'min'   =>  12,
-                            'max'   =>  40,
-                            'step'  =>  1
+                           'px'    =>  [
+                                'min'   =>  12,
+                                'max'   =>  40,
+                                'step'  =>  1
+                            ],
                         ]
                     ],
                     'social_icons_color'    =>  [
@@ -209,9 +211,11 @@
                         'label' =>  esc_html__( 'Icon Spacing', 'i-am-news' ),
                         'type'  =>  'ian-number',
                         'input_attrs'   =>  [
-                            'min'   =>  0,
-                            'max'   =>  30,
-                            'step'  =>  1
+                           'px'    =>  [
+                                'min'   =>  0,
+                                'max'   =>  30,
+                                'step'  =>  1
+                            ],
                         ]
                     ],
                     'social_icons_background'   =>  [
