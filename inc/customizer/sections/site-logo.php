@@ -160,8 +160,8 @@
                     'site_logo_section_tab' =>  'general',
                     'site_logo_dark' =>  0,
                     'site_title_color' =>  [
-                        'initial'   =>  $this->get_color(),
-                        'hover'   =>  $this->get_color(),
+                        'initial'   =>  $this->get_color( [ 'value' => '#00ADB5' ] ),
+                        'hover'   =>  $this->get_color( [ 'value' => '#EEEEEE' ] ),
                     ],
                     'site_description_color' =>  $this->get_color(),
                     'site_logo_width' =>  $this->get_responsive( '150px', '130px', '100px' ),
@@ -218,7 +218,7 @@
 
                     if( display_header_text() ) :
 
-                        echo '<a href="', esc_url( home_url() ),'" rel="home"><', $title_tag,' class="site-title">', esc_html( get_bloginfo( 'title' ) ),'</', $title_tag,'></a>';
+                        echo '<a href="', esc_url( home_url() ),'" rel="home" class="site-title-link"><', $title_tag,' class="site-title">', esc_html( get_bloginfo( 'title' ) ),'</', $title_tag,'></a>';
     
                         echo '<p class="site-description">', esc_html( get_bloginfo( 'description' ) ),'</p>';
 

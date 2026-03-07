@@ -67,7 +67,7 @@
                 $this->add_control( 'header_builder_background' );
                 $this->add_control( 'header_builder_border' );
                 $this->add_control( 'header_builder_box_shadow' );
-                $this->add_control( 'header_builder_padding' );
+                $this->add_control( 'header_builder_margin' );
             }
 
             /**
@@ -106,7 +106,7 @@
                         'transport' =>  'postMessage',
                         'default' =>  $this->get_defaults( $id )
                     ],
-                    'header_builder_padding' =>  [
+                    'header_builder_margin' =>  [
                         'sanitize_callback' =>  [ $this, 'sanitize_dimension' ],
                         'transport' =>  'postMessage',
                         'default' =>  $this->get_defaults( $id )
@@ -195,9 +195,74 @@
                                 'icon'  =>  'search'
                             ],
                             'primary-menu'  =>  [
-                                'label' =>  esc_html__( 'Menu', 'i-am-news' ),
+                                'label' =>  esc_html__( 'Menu 1', 'i-am-news' ),
                                 'section_id' =>  'primary_menu_section',
                                 'icon'  =>  'menu'
+                            ],
+                            'secondary-menu'  =>  [
+                                'label' =>  esc_html__( 'Menu 2', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'menu'
+                            ],
+                            'custom-button'  =>  [
+                                'label' =>  esc_html__( 'Button', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'button'
+                            ],
+                            'widget-area-1'  =>  [
+                                'label' =>  esc_html__( 'Widget 1', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'screenoptions'
+                            ],
+                            'widget-area-2'  =>  [
+                                'label' =>  esc_html__( 'Widget 2', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'screenoptions'
+                            ],
+                            'html-1'  =>  [
+                                'label' =>  esc_html__( 'HTML 1', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'editor-code'
+                            ],
+                            'html-2'  =>  [
+                                'label' =>  esc_html__( 'HTML 2', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'editor-code'
+                            ],
+                            'shortcode-1'  =>  [
+                                'label' =>  esc_html__( 'Shortcode 1', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'shortcode'
+                            ],
+                            'shortcode-2'  =>  [
+                                'label' =>  esc_html__( 'Shortcode 2', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'shortcode'
+                            ],
+                            'ticker-news'  =>  [
+                                'label' =>  esc_html__( 'Ticker News', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'slides'
+                            ],
+                            'random-news'  =>  [
+                                'label' =>  esc_html__( 'Random News', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'randomize'
+                            ],
+                            'divider-1'  =>  [
+                                'label' =>  esc_html__( 'Divider 1', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'minus'
+                            ],
+                            'divider-2'  =>  [
+                                'label' =>  esc_html__( 'Divider 2', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'minus'
+                            ],
+                            'divider-3'  =>  [
+                                'label' =>  esc_html__( 'Divider 3', 'i-am-news' ),
+                                'section_id' =>  'scroll_to_top_section',
+                                'icon'  =>  'minus'
                             ],
                         ]
                     ] ),
@@ -217,8 +282,8 @@
                         'type'  =>  'box-shadow',
                         'tab'   =>  'design'
                     ] ),
-                    'header_builder_padding' =>  array_merge( $this->common, [
-                        'label' =>  esc_html__( 'Padding', 'i-am-news' ),
+                    'header_builder_margin' =>  array_merge( $this->common, [
+                        'label' =>  esc_html__( 'Margin', 'i-am-news' ),
                         'type'  =>  'dimension',
                         'tab'   =>  'design'
                     ] ),
@@ -254,13 +319,13 @@
                             'third' =>  []
                         ],
                     ],
-                    'header_builder_background' =>  [
-                        'type'  =>  'solid',
-                        'value' =>  '#000'
-                    ],
+                    'header_builder_background' =>  $this->get_color( [ 'value' => '#222831' ] ),
                     'header_builder_border' =>  $this->get_border(),
                     'header_builder_box_shadow' =>  $this->get_box_shadow(),
-                    'header_builder_padding' =>  $this->get_dimension(),
+                    'header_builder_margin' =>  $this->get_dimension( [
+                        'bottom'    =>  40,
+                        'link'  =>  false
+                    ] ),
                 ] );
             }
 
@@ -287,11 +352,11 @@
                         'selector'  =>  '.ian-header',
                         'default'   =>  $this->get_defaults( 'header_builder_box_shadow' )
                     ],
-                    'header_builder_padding' =>  [
-                        'value' =>  self::get_theme_option( 'header_builder_padding' ),
+                    'header_builder_margin' =>  [
+                        'value' =>  self::get_theme_option( 'header_builder_margin' ),
                         'selector'  =>  '.ian-header',
-                        'default'   =>  $this->get_defaults( 'header_builder_padding' ),
-                        'property'  =>  'padding'
+                        'default'   =>  $this->get_defaults( 'header_builder_margin' ),
+                        'property'  =>  'margin'
                     ],
                 ];
                 return $dynamic_css_args;

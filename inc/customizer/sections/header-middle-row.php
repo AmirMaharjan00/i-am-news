@@ -372,7 +372,7 @@
                     'header_middle_row_background' =>  $this->get_color(),
                     'header_middle_row_border' =>  $this->get_border(),
                     'header_middle_row_box_shadow' =>  $this->get_box_shadow(),
-                    'header_middle_row_padding'    =>  $this->get_dimension(),
+                    'header_middle_row_padding'    =>  $this->get_dimension( [ 'top' => 20, 'bottom' => 20 ] ),
                 ] );
             }
 

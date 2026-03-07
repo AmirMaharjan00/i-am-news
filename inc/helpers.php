@@ -24,12 +24,12 @@
 
                 $type = isset( $args[ 'type' ] ) ? $args[ 'type' ] : 'icon';
                 $value = isset( $args[ 'value' ] ) ? $args[ 'value' ] : 'fa-solid fa-sun';
-                $class = isset( $args[ 'class' ] ) ? $args[ 'class' ] : '';
+                $class = isset( $args[ 'class' ] ) ? ' ' . $args[ 'class' ] : '';
                 
                 switch( $type ) {
                     case 'icon' : 
-                            $icon_class = 'icon ' . $class;
-                            $icon_html = '<span class="' . esc_attr( $icon_class ) . '"><i class="' . esc_attr( $value ) . '"></i></span>';
+                            $icon_class = 'icon' . $class;
+                            $icon_html = '<button class="' . esc_attr( $icon_class ) . '"><i class="' . esc_attr( $value ) . '"></i></button>';
                             return $icon_html;
                         break;
                     case 'image' : 

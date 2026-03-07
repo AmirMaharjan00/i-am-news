@@ -1,5 +1,135 @@
 /*
 ==================
-    1.0 Header
+    1.0  Header Builder
+        1.1 Site Identity
+        1.2 Primary Menu
+        1.3 Search
+        1.4 Dark Mode
 ==================
 */
+:root {
+    --test-color: #00ADB5;
+    --hover-color: #EEEEEE;
+}
+/* 
+================
+    1.0 Header Builder
+================
+*/
+    .site-header.ian-header {
+        margin-bottom: 20px;
+        background: #222831;
+    }
+
+    .site-header .ian-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .site-header .ian-header-row .column {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .site-header .ian-header-row .width--auto {
+        flex: 0 0 auto;
+    }
+
+    .site-header .ian-header-row .width--shrink {
+        flex: 0 1 auto;
+    }
+    
+    .site-header .ian-header-row .width--expand {
+        flex: 1 1 0;
+    }
+
+    .site-header .ian-header-row .align--left {
+        justify-content: flex-start;
+    }
+
+    .site-header .ian-header-row .align--right {
+        justify-content: flex-end;
+    }
+
+    .site-header .ian-header-row .align--center {
+        justify-content: center;
+    }
+
+    .site-header .ian-header-row.ian-header-middle-row {
+        padding: 20px 0;
+    }
+
+/* 
+================
+    MARK: 1.1 Site Identity
+================
+*/
+    .ian-header .ian-header-row .ian-site-logo .site-title-link {
+        text-decoration: none;
+        color: var(--test-color);
+    }
+
+    .ian-header .ian-header-row .ian-site-logo .site-title-link:hover {
+        color: var(--hover-color);
+    }
+
+    .ian-header .ian-header-row .ian-site-logo .site-description {
+        color: var(--hover-color);
+    }
+
+/* 
+======================
+    MARK: 1.2 Primary Menu
+======================
+*/
+    .ian-header .ian-header-row .ian-primary-menu .menu {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin: unset;
+        padding: unset;
+    }
+
+    .ian-header .ian-header-row .ian-primary-menu .menu .menu-item {
+        margin: unset;
+    }
+
+    .ian-header .ian-header-row .ian-primary-menu .menu .menu-item a {
+        color: var(--test-color);
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+/* 
+======================
+    MARK: 1.3 Search
+======================
+*/
+    .ian-header .ian-header-row .ian-search .search-form input[type="search"] {
+        border: none;
+        background: unset;
+        border-bottom: 1px solid #00ADB5;
+    }
+
+    .ian-header .ian-header-row .ian-search .search-icon {
+        padding: 5px;
+        background: #00ADB5;
+        padding: 5px;
+        color: #EEEEEE;
+        margin-left: 5px;
+    }
+
+/* 
+======================
+    MARK: 1.4 Dark Mode
+======================
+*/
+
+    .ian-header .ian-header-row .ian-dark-mode .icon {
+        color: #00ADB5;
+        padding: 5px;
+    }
